@@ -1,0 +1,43 @@
+Android
+
+NOTAS:
+
+Generales:
+
+Ver posibilidad de pantalla de inicio.
+Resolver en que pantallas habrá buscadores.
+Definir Diseño Final y Colores Básicos
+
+Tab CONTACTOS
+
+	- Botón Buscar NO VA. Es una lupa dentro del EditField. Al darle click, navega a la Activity Buscar contactos. 
+
+	- Activity Buscar Contacto: Se buscan los contactos mientras se escribe en el EditText de abajo (Ver ubicación de éste, arriba o abajo; 
+				  analizar dificultad para implementar la busqueda de esta manera).
+	
+	- Ver guardar mis contactos en SQLite.
+
+	- Ver Agregar Contactos desde Busqueda de Contactos
+
+
+Tab SITIOS
+
+	- Lista de Sitios: Idem a lista de contactos. Cada elemento navega a la activity Sitio.
+
+
+Tab NOTIFICACIONES			
+
+	Notificación Aceptar Contacto: Popup
+	Notificación Contacto Checkin Cercano: Popup
+	Notificación Evento, similar pantalla al detalle de la oferta.
+	Notificación Nuevo Sitio, se navegará al nuevo sitio.
+
+	
+Tab PERFIL
+	
+	- Radio Cercania: es la distancia máxima a la cual el usuario va recibirá las notificaciones (Sitio, Eventos, Ofertas y Contactos cercanos a su ubicación).
+	- Definir valor por defecto.
+	- Definir que datos se van a editar.				
+	- Mis Checkins: Se navegará a al sitio.
+	- Mis Compras: Idem a lista de contactos.
+
