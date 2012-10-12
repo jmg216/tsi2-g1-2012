@@ -5,6 +5,7 @@
 	<projects>
 		<project>GeoRed-Business-EJB</project>
 		<project>GeoRed-Business-JPA</project>
+		<project>GeoRed-Commons</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

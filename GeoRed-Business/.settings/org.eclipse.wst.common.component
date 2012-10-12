@@ -9,5 +9,8 @@
         <dependent-module archiveName="GeoRed-Business-JPA.jar" deploy-path="/lib" handle="module:/resource/GeoRed-Business-JPA/GeoRed-Business-JPA">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="GeoRed-Commons.jar" deploy-path="/lib" handle="module:/resource/GeoRed-Commons/GeoRed-Commons">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>
