@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="check_in")
-class CheckIn implements Serializable
+public class CheckIn implements Serializable
 {
 	/**
 	 * 
