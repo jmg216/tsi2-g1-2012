@@ -2,10 +2,10 @@ package com.geored.negocio;
 
 import javax.ejb.Local;
 
-import com.geored.dominio.Administrador;
+import com.geored.dto.AdministradorDTO;
 
 @Local
 public interface AdminService 
 {
-	public Long insertar(Administrador administrador);
+	public Long insertar(AdministradorDTO administradorDTO);
 }
