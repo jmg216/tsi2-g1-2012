@@ -9,7 +9,7 @@ import javax.ejb.TransactionManagementType;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
-import com.geored.dominio.Administrador;
+import com.geored.dto.AdministradorDTO;
 import com.geored.persistencia.AdministradorDAO;
 
 @Stateless
@@ -22,7 +22,7 @@ public class AdminServiceImpl implements AdminService
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public Long insertar(Administrador administrador)
+	public Long insertar(AdministradorDTO administradorDTO)
 	{
 		return null;
 	}

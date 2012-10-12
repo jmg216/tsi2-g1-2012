@@ -3,6 +3,7 @@
 	<name>GeoRed-Business-EJB</name>
 	<comment></comment>
 	<projects>
+		<project>GeoRed-Commons</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
