@@ -1,5 +1,7 @@
 package com.geored.negocio;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -24,6 +26,38 @@ public class AdminServiceImpl implements AdminService
 	@WebMethod
 	public Long insertar(AdministradorDTO administradorDTO)
 	{
+		return null;
+	}
+
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	@WebMethod
+	public void actualizar(AdministradorDTO administradorDTO)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	@WebMethod
+	public void eliminar(Long idAdministrador)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+	@WebMethod
+	public AdministradorDTO obtener(Long idAdministrador)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+	@WebMethod
+	public List<AdministradorDTO> obtenerListado()
+	{
+		// TODO Auto-generated method stub
 		return null;
 	}
 }
