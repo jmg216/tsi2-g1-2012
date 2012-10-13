@@ -1,0 +1,2 @@
+- obtener Usuario por nombre y pass.
+- checkin agregar fecha de creación
