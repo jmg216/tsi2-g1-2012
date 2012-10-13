@@ -5,11 +5,11 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 
 import com.geored.dominio.Oferta;
-import com.geored.persistencia.core.BaseDAO;
+import com.geored.persistencia.core.GenericDAOBase;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class OfertaDAOImpl extends BaseDAO<Oferta> implements OfertaDAO
+public class OfertaDAOImpl extends GenericDAOBase<Oferta> implements OfertaDAO
 {
 	
 }
