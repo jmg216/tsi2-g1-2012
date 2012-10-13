@@ -5,11 +5,11 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 
 import com.geored.dominio.Tematica;
-import com.geored.persistencia.core.BaseDAO;
+import com.geored.persistencia.core.GenericDAOBase;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class TematicaDAOImpl extends BaseDAO<Tematica> implements TematicaDAO
+public class TematicaDAOImpl extends GenericDAOBase<Tematica> implements TematicaDAO
 {
 	
 }

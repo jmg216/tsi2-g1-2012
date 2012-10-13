@@ -5,11 +5,11 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 
 import com.geored.dominio.TipoNotificacionUsuario;
-import com.geored.persistencia.core.BaseDAO;
+import com.geored.persistencia.core.GenericDAOBase;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class TipoNotificacionUsuarioDAOImpl extends BaseDAO<TipoNotificacionUsuario> implements TipoNotificacionUsuarioDAO
+public class TipoNotificacionUsuarioDAOImpl extends GenericDAOBase<TipoNotificacionUsuario> implements TipoNotificacionUsuarioDAO
 {
 	
 }

@@ -15,7 +15,7 @@ import com.geored.utiles.UtilesPersistencia;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public abstract class BaseDAO<E>
+public abstract class GenericDAOBase<E>
 {
 	@PersistenceContext(unitName=UtilesPersistencia.PERSISTENCE_UNIT_NAME)
 	protected EntityManager em;

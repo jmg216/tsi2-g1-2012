@@ -5,10 +5,10 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 
 import com.geored.dominio.Amistad;
-import com.geored.persistencia.core.BaseDAO;
+import com.geored.persistencia.core.GenericDAOBase;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class AmistadDAOImpl extends BaseDAO<Amistad> implements AmistadDAO
+public class AmistadDAOImpl extends GenericDAOBase<Amistad> implements AmistadDAO
 {	
 }
