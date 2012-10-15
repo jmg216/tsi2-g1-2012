@@ -1,8 +1,11 @@
 package com.geored.persistencia;
 
-import java.util.Collection;
-import com.geored.dominio.CheckIn;
+import java.util.List;
+
 import javax.ejb.Local;
+
+import com.geored.dominio.CheckIn;
+import com.geored.dto.CheckInDTO;
 
 @Local
 public interface CheckInDAO
@@ -15,5 +18,12 @@ public interface CheckInDAO
 	
 	public CheckIn obtener(Long id);
 	
-	public Collection<CheckIn> obtenerListado();
+	public List<CheckIn> obtenerListado();
+	
+	/**
+	 * OPERACIONES DE TRANSFORMACION Entity <-> DTO
+	 */
+	public void dtoToEntity(CheckInDTO source, CheckIn target);
+	
+	public void entityToDto(CheckIn source, CheckInDTO target);
 }

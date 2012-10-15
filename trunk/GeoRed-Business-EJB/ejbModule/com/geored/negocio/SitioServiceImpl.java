@@ -11,6 +11,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import com.geored.dto.SitioDTO;
+import com.geored.exceptions.NegocioException;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -19,7 +20,7 @@ public class SitioServiceImpl implements SitioService
 {
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public Long insertar(SitioDTO SitioDTO)
+	public Long insertar(SitioDTO SitioDTO) throws NegocioException
 	{
 		// TODO Auto-generated method stub
 		return null;
@@ -27,7 +28,7 @@ public class SitioServiceImpl implements SitioService
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public void actualizar(SitioDTO SitioDTO)
+	public void actualizar(SitioDTO SitioDTO) throws NegocioException
 	{
 		// TODO Auto-generated method stub
 		
@@ -35,7 +36,7 @@ public class SitioServiceImpl implements SitioService
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public void eliminar(Long idAdministrador)
+	public void eliminar(Long idAdministrador) throws NegocioException
 	{
 		// TODO Auto-generated method stub
 		
@@ -43,7 +44,7 @@ public class SitioServiceImpl implements SitioService
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
-	public SitioDTO obtener(Long idAdministrador)
+	public SitioDTO obtener(Long idAdministrador) throws NegocioException
 	{
 		// TODO Auto-generated method stub
 		return null;

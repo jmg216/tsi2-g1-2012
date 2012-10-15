@@ -1,10 +1,11 @@
 package com.geored.persistencia;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.Local;
 
 import com.geored.dominio.Tematica;
+import com.geored.dto.TematicaDTO;
 
 @Local
 public interface TematicaDAO
@@ -17,5 +18,12 @@ public interface TematicaDAO
 	
 	public Tematica obtener(Long id);
 	
-	public Collection<Tematica> obtenerListado();
+	public List<Tematica> obtenerListado();
+	
+	/**
+	 * OPERACIONES DE TRANSFORMACION Entity <-> DTO
+	 */
+	public void dtoToEntity(TematicaDTO source, Tematica target);
+	
+	public void entityToDto(Tematica source, TematicaDTO target);
 }

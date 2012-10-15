@@ -1,10 +1,11 @@
 package com.geored.persistencia;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.Local;
 
 import com.geored.dominio.CompraOferta;
+import com.geored.dto.CompraOfertaDTO;
 
 @Local
 public interface CompraOfertaDAO
@@ -17,5 +18,12 @@ public interface CompraOfertaDAO
 	
 	public CompraOferta obtener(Long id);
 	
-	public Collection<CompraOferta> obtenerListado();
+	public List<CompraOferta> obtenerListado();
+	
+	/**
+	 * OPERACIONES DE TRANSFORMACION Entity <-> DTO
+	 */
+	public void dtoToEntity(CompraOfertaDTO source, CompraOferta target);
+	
+	public void entityToDto(CompraOferta source, CompraOfertaDTO target);
 }
