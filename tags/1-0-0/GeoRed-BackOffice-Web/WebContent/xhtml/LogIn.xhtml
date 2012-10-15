@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<f:view contentType="text/html">
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Prueba</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+		<style type="text/css">
+			.ui-layout-unit{
+				background:transparent;
+				border:0px;
+				
+			}
+			.ui-widget-content{
+				background:transparent;						
+
+			}
+			.ui-panel{
+				border:0px;
+				background:transparent;
+			}
+			
+		</style>
+		
+	</h:head>
+	<p:layout fullPage="true"> 
+		<p:layoutUnit position="center" id ="centro">	
+			<p:layout>
+			<p:layoutUnit position="north" size="80"></p:layoutUnit>
+			<p:layoutUnit position="center">
+			<p:fieldset legend="Back Office GeoRed.uy">  
+			    <h:panelGrid columns="2" cellpadding="10">  
+			    	<p:graphicImage value="/Imagenes/RedGeoLogoTipo.png"></p:graphicImage>
+			        <h:outputText 
+			            value="Bienvenido a Back Office GeoRed.uy:
+			            	   GeoRed.uy es una red social basada en la ubicacion geografica de los usuarios para Uruguay.
+			            	   Aqui tendrá funcionalidades de administracion y permitirá a las empresas configurar su ofertas por medio de herramientas provistas en el sistema." />  
+			    </h:panelGrid>  
+			</p:fieldset>
+			</p:layoutUnit>
+			</p:layout>  
+		</p:layoutUnit>
+		<p:layoutUnit position="east" id="izquierda" size="480">
+			<p:layout>
+			<p:layoutUnit id="norOeste" position="north" size="102">
+			</p:layoutUnit>
+			<p:layoutUnit position="center">
+			<p:graphicImage value="/Imagenes/Logo_back.png"></p:graphicImage> 
+			<h:form>
+				<br />
+				<p:growl id="growl" showDetail="true" sticky="true" />  
+				<p:panel id="header" styleClass="myPanel">
+					<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+						<h:outputText value="Usuario: *" />   
+					    <p:inputText id ="usuario" value="#{altaMB.latitud}" required="true" label="Latitud"/>
+					    <h:outputText value="Password: *" />   
+					    <p:password  id="password" required="true" label="Password"></p:password>	
+   						<h:outputText value="Recordarme" />   	              	         
+						<p:selectBooleanCheckbox value="" />
+						<f:facet name="footer">  
+        					<p:commandButton style="float:right" value="Ingresar" actionListener="#{altaMB.altaOferta}" update="growl"/>  
+    					</f:facet>
+					</h:panelGrid>	
+			  	</p:panel>
+			</h:form>
+			</p:layoutUnit>
+			</p:layout>
+		</p:layoutUnit>
+		<p:layoutUnit position="west" id = "derecha" size="100"></p:layoutUnit>
+		<p:layoutUnit position="north" id ="arriba"></p:layoutUnit>
+		<p:layoutUnit position="south" id ="abajo" size ="150">
+			<p:layout>
+				<p:layoutUnit position="west" size="100"></p:layoutUnit>
+				<p:layoutUnit position="center">
+					<p:separator id = "separador"></p:separator>
+					<h:outputText id="texto" style="font-size:10px;text-align:right;" value="Desarrollado por grupo 1 - Tecnologo en Informatica" />
+				</p:layoutUnit>	
+				<p:layoutUnit position="east" size="90"></p:layoutUnit>
+			</p:layout>
+		</p:layoutUnit>
+	</p:layout>
+
+</f:view>
+</html>	
