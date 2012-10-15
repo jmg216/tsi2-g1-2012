@@ -1,6 +1,6 @@
 package com.geored.persistencia;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.Local;
 
@@ -18,7 +18,7 @@ public interface AdministradorDAO
 	
 	public Administrador obtener(Long id);
 	
-	public Collection<Administrador> obtenerListado();
+	public List<Administrador> obtenerListado();
 	
 	/**
 	 * OPERACIONES DE TRANSFORMACION Entity <-> DTO

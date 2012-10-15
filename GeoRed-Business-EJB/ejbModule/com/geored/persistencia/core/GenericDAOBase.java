@@ -1,6 +1,6 @@
 package com.geored.persistencia.core;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -48,10 +48,10 @@ public abstract class GenericDAOBase<E>
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
-	public Collection<E> obtenerListado()
+	public List<E> obtenerListado()
 	{
 		Query query = em.createQuery("SELECT e FROM " + entityClass.getClass().getName() + " e");
 		
-	    return (Collection<E>) query.getResultList();
+	    return (List<E>) query.getResultList();
 	}
 }

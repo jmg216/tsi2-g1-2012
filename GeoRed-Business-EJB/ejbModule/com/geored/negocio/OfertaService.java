@@ -5,17 +5,18 @@ import java.util.List;
 import javax.ejb.Local;
 
 import com.geored.dto.OfertaDTO;
+import com.geored.exceptions.NegocioException;
 
 @Local
 public interface OfertaService
 {
-	public Long insertar(OfertaDTO OfertaDTO);
+	public Long insertar(OfertaDTO OfertaDTO)  throws NegocioException;
 	
-	public void actualizar(OfertaDTO OfertaDTO);
+	public void actualizar(OfertaDTO OfertaDTO)  throws NegocioException;
 	
-	public void eliminar(Long idAdministrador);
+	public void eliminar(Long idAdministrador)  throws NegocioException;
 	
-	public OfertaDTO obtener(Long idAdministrador);
+	public OfertaDTO obtener(Long idAdministrador)  throws NegocioException;
 	
 	public List<OfertaDTO> obtenerListado();
 }

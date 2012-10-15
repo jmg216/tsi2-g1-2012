@@ -1,10 +1,11 @@
 package com.geored.persistencia;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.Local;
 
 import com.geored.dominio.Notificacion;
+import com.geored.dto.NotificacionDTO;
 
 @Local
 public interface NotificacionDAO
@@ -17,5 +18,12 @@ public interface NotificacionDAO
 	
 	public Notificacion obtener(Long id);
 	
-	public Collection<Notificacion> obtenerListado();
+	public List<Notificacion> obtenerListado();
+	
+	/**
+	 * OPERACIONES DE TRANSFORMACION Entity <-> DTO
+	 */
+	public void dtoToEntity(NotificacionDTO source, Notificacion target);
+	
+	public void entityToDto(Notificacion source, NotificacionDTO target);
 }

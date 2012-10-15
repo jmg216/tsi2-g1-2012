@@ -1,10 +1,11 @@
 package com.geored.persistencia;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.Local;
 
 import com.geored.dominio.EvaluacionOferta;
+import com.geored.dto.EvaluacionOfertaDTO;
 
 @Local
 public interface EvaluacionOfertaDAO
@@ -17,5 +18,12 @@ public interface EvaluacionOfertaDAO
 	
 	public EvaluacionOferta obtener(Long id);
 	
-	public Collection<EvaluacionOferta> obtenerListado();
+	public List<EvaluacionOferta> obtenerListado();
+	
+	/**
+	 * OPERACIONES DE TRANSFORMACION Entity <-> DTO
+	 */
+	public void dtoToEntity(EvaluacionOfertaDTO source, EvaluacionOferta target);
+	
+	public void entityToDto(EvaluacionOferta source, EvaluacionOfertaDTO target);
 }

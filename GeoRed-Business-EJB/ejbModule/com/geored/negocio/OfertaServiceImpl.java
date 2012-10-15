@@ -11,6 +11,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import com.geored.dto.OfertaDTO;
+import com.geored.exceptions.NegocioException;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -19,7 +20,7 @@ public class OfertaServiceImpl implements OfertaService
 {
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public Long insertar(OfertaDTO OfertaDTO)
+	public Long insertar(OfertaDTO OfertaDTO) throws NegocioException
 	{
 		// TODO Auto-generated method stub
 		return null;
@@ -27,7 +28,7 @@ public class OfertaServiceImpl implements OfertaService
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public void actualizar(OfertaDTO OfertaDTO)
+	public void actualizar(OfertaDTO OfertaDTO) throws NegocioException
 	{
 		// TODO Auto-generated method stub
 		
@@ -35,7 +36,7 @@ public class OfertaServiceImpl implements OfertaService
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public void eliminar(Long idAdministrador)
+	public void eliminar(Long idAdministrador) throws NegocioException
 	{
 		// TODO Auto-generated method stub
 		
@@ -43,7 +44,7 @@ public class OfertaServiceImpl implements OfertaService
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
-	public OfertaDTO obtener(Long idAdministrador)
+	public OfertaDTO obtener(Long idAdministrador) throws NegocioException
 	{
 		// TODO Auto-generated method stub
 		return null;

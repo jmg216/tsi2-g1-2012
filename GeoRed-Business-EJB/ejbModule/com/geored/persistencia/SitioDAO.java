@@ -1,10 +1,11 @@
 package com.geored.persistencia;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.Local;
 
 import com.geored.dominio.Sitio;
+import com.geored.dto.SitioDTO;
 
 @Local
 public interface SitioDAO
@@ -17,5 +18,12 @@ public interface SitioDAO
 	
 	public Sitio obtener(Long id);
 	
-	public Collection<Sitio> obtenerListado();
+	public List<Sitio> obtenerListado();
+	
+	/**
+	 * OPERACIONES DE TRANSFORMACION Entity <-> DTO
+	 */
+	public void dtoToEntity(SitioDTO source, Sitio target);
+	
+	public void entityToDto(Sitio source, SitioDTO target);
 }
