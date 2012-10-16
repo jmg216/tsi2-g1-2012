@@ -10,7 +10,7 @@ import com.geored.persistencia.core.GenericDAOBase;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class CheckInDAOImpl extends GenericDAOBase<CheckIn> implements CheckInDAO
+public class CheckInDAOImpl extends GenericDAOBase<CheckIn, CheckInDTO> implements CheckInDAO
 {
 
 	@Override

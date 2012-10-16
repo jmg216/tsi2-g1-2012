@@ -10,17 +10,15 @@ import com.geored.persistencia.core.GenericDAOBase;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class AdministradorDAOImpl extends GenericDAOBase<Administrador> implements AdministradorDAO
+public class AdministradorDAOImpl extends GenericDAOBase<Administrador, AdministradorDTO> implements AdministradorDAO
 {
 	@Override
 	public void dtoToEntity(AdministradorDTO source, Administrador target)
-	{
-		// TODO Auto-generated method stub		
+	{		
 	}
 
 	@Override
 	public void entityToDto(Administrador source, AdministradorDTO target)
-	{
-		
+	{	
 	}
 }

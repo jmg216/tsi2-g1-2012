@@ -10,7 +10,7 @@ import com.geored.persistencia.core.GenericDAOBase;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class EvaluacionOfertaDAOImpl extends GenericDAOBase<EvaluacionOferta> implements EvaluacionOfertaDAO
+public class EvaluacionOfertaDAOImpl extends GenericDAOBase<EvaluacionOferta, EvaluacionOfertaDTO> implements EvaluacionOfertaDAO
 {
 
 	@Override

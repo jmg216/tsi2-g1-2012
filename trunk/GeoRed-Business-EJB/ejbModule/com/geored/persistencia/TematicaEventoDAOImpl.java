@@ -10,7 +10,7 @@ import com.geored.persistencia.core.GenericDAOBase;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class TematicaEventoDAOImpl extends GenericDAOBase<TematicaEvento> implements TematicaEventoDAO
+public class TematicaEventoDAOImpl extends GenericDAOBase<TematicaEvento, TematicaEventoDTO> implements TematicaEventoDAO
 {
 
 	@Override

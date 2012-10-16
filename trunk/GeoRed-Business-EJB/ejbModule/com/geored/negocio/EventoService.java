@@ -10,13 +10,13 @@ import com.geored.exceptions.NegocioException;
 @Local
 public interface EventoService
 {
-	public Long insertar(EventoDTO EventoDTO)  throws NegocioException;
+	public Long insertar(EventoDTO eventoDTO)  throws NegocioException;
 	
-	public void actualizar(EventoDTO EventoDTO)  throws NegocioException;
+	public void actualizar(EventoDTO eventoDTO)  throws NegocioException;
 	
-	public void eliminar(Long idAdministrador)  throws NegocioException;
+	public void eliminar(Long idEvento)  throws NegocioException;
 	
-	public EventoDTO obtener(Long idAdministrador)  throws NegocioException;
+	public EventoDTO obtener(Long idEvento)  throws NegocioException;
 	
 	public List<EventoDTO> obtenerListado();
 }

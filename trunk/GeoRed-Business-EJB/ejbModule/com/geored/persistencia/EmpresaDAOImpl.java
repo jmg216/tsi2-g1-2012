@@ -10,7 +10,7 @@ import com.geored.persistencia.core.GenericDAOBase;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class EmpresaDAOImpl extends GenericDAOBase<Empresa> implements EmpresaDAO
+public class EmpresaDAOImpl extends GenericDAOBase<Empresa, EmpresaDTO> implements EmpresaDAO
 {
 
 	@Override

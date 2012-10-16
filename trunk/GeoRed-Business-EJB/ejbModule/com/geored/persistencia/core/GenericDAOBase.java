@@ -1,5 +1,6 @@
 package com.geored.persistencia.core;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -13,45 +14,107 @@ import javax.persistence.Query;
 
 import com.geored.utiles.UtilesPersistencia;
 
+/**
+ * Implementa las operaciones del GenericDAO de forma generica.
+ * Es padre de todos los DAOImpl.
+ */
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public abstract class GenericDAOBase<E>
+public abstract class GenericDAOBase<EntityType, DtoType>
 {
 	@PersistenceContext(unitName=UtilesPersistencia.PERSISTENCE_UNIT_NAME)
 	protected EntityManager em;
 	
-	private Class<E> entityClass;
+	private Class<EntityType> entityClass;
+	
+	private Class<DtoType> dtoClass;
+	
+	private EntityTransformer<EntityType, DtoType> entityTransformer = (EntityTransformer<EntityType, DtoType>) this;
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public E insertar(E entity)
+	public EntityType insertar(EntityType entity)
 	{
 		em.persist(entity);
 		return entity;
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void actualizar(E entity)
+	public void actualizar(EntityType entity)
 	{
 		em.refresh(entity);
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void eliminar(E entity)
+	public void eliminar(EntityType entity)
 	{
 		em.remove(entity);
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
-	public E obtener(Long id)
+	public Object obtener(Long id, boolean toDTO)
 	{
-		return em.find(entityClass, id);
+		EntityType entity = em.find(entityClass, id);
+		
+		if(toDTO)
+		{
+			try
+			{
+				DtoType dto = dtoClass.newInstance();
+				
+				entityTransformer.entityToDto(entity, dto);
+				
+				return dto;
+			} 
+			catch (InstantiationException e1)
+			{
+				throw new RuntimeException("Error transformando Entity");
+			} 
+			catch (IllegalAccessException e1)
+			{
+				throw new RuntimeException("Error transformando Entity");
+			}
+		}
+		
+		return entity;
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
-	public List<E> obtenerListado()
+	public List obtenerListado(boolean toDTO)
 	{
 		Query query = em.createQuery("SELECT e FROM " + entityClass.getClass().getName() + " e");
 		
-	    return (List<E>) query.getResultList();
+		List<EntityType> listaEntidades = new ArrayList<EntityType>();
+		
+		listaEntidades = query.getResultList();
+		
+		if(toDTO)
+		{
+			try
+			{
+				List<DtoType> listaDtos = new ArrayList<DtoType>();
+				
+				for(EntityType entity : listaEntidades)
+				{
+					DtoType dto = dtoClass.newInstance();
+					
+					entityTransformer.entityToDto(entity, dto);
+					
+					listaDtos.add(dto);
+				}
+				
+				return listaDtos;
+								
+			} 
+			catch (InstantiationException e1)
+			{
+				throw new RuntimeException("Error transformando Entity");
+			} 
+			catch (IllegalAccessException e1)
+			{
+				throw new RuntimeException("Error transformando Entity");
+			}
+		}
+		
+	    return listaEntidades;
 	}
 }

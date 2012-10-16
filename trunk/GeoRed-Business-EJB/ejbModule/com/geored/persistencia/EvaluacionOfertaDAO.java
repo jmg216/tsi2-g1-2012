@@ -1,29 +1,12 @@
 package com.geored.persistencia;
 
-import java.util.List;
-
 import javax.ejb.Local;
 
 import com.geored.dominio.EvaluacionOferta;
 import com.geored.dto.EvaluacionOfertaDTO;
+import com.geored.persistencia.core.GenericDAO;
 
 @Local
-public interface EvaluacionOfertaDAO
+public interface EvaluacionOfertaDAO extends GenericDAO<EvaluacionOferta, EvaluacionOfertaDTO>
 {
-	public EvaluacionOferta insertar(EvaluacionOferta entity);
-	
-	public void actualizar(EvaluacionOferta entity);
-	
-	public void eliminar(EvaluacionOferta entity);
-	
-	public EvaluacionOferta obtener(Long id);
-	
-	public List<EvaluacionOferta> obtenerListado();
-	
-	/**
-	 * OPERACIONES DE TRANSFORMACION Entity <-> DTO
-	 */
-	public void dtoToEntity(EvaluacionOfertaDTO source, EvaluacionOferta target);
-	
-	public void entityToDto(EvaluacionOferta source, EvaluacionOfertaDTO target);
 }

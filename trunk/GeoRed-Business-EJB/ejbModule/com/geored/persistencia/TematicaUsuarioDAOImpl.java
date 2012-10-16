@@ -10,7 +10,7 @@ import com.geored.persistencia.core.GenericDAOBase;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class TematicaUsuarioDAOImpl extends GenericDAOBase<TematicaUsuario> implements TematicaUsuarioDAO
+public class TematicaUsuarioDAOImpl extends GenericDAOBase<TematicaUsuario, TematicaUsuarioDTO> implements TematicaUsuarioDAO
 {
 
 	@Override

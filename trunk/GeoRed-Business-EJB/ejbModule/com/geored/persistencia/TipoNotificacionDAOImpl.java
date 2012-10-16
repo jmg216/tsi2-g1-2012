@@ -10,7 +10,7 @@ import com.geored.persistencia.core.GenericDAOBase;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class TipoNotificacionDAOImpl extends GenericDAOBase<TipoNotificacion> implements TipoNotificacionDAO
+public class TipoNotificacionDAOImpl extends GenericDAOBase<TipoNotificacion, TipoNotificacionDTO> implements TipoNotificacionDAO
 {
 
 	@Override
