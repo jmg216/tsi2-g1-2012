@@ -10,7 +10,7 @@ import com.geored.persistencia.core.GenericDAOBase;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class CompraOfertaDAOImpl extends GenericDAOBase<CompraOferta> implements CompraOfertaDAO
+public class CompraOfertaDAOImpl extends GenericDAOBase<CompraOferta, CompraOfertaDTO> implements CompraOfertaDAO
 {
 
 	@Override

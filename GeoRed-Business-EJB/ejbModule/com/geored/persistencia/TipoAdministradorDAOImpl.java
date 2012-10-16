@@ -10,7 +10,7 @@ import com.geored.persistencia.core.GenericDAOBase;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class TipoAdministradorDAOImpl extends GenericDAOBase<TipoAdministrador> implements TipoAdministradorDAO
+public class TipoAdministradorDAOImpl extends GenericDAOBase<TipoAdministrador, TipoAdministradorDTO> implements TipoAdministradorDAO
 {
 
 	@Override

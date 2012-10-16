@@ -4,27 +4,12 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import com.geored.dominio.Administrador;
 import com.geored.dominio.ContenidoSitio;
-import com.geored.dto.AdministradorDTO;
+import com.geored.dto.ContenidoSitioDTO;
+import com.geored.persistencia.core.EntityTransformer;
+import com.geored.persistencia.core.GenericDAO;
 
 @Local
-public interface ContenidoSitioDAO
+public interface ContenidoSitioDAO extends GenericDAO<ContenidoSitio, ContenidoSitioDTO>
 {
-	public ContenidoSitio insertar(ContenidoSitio entity);
-	
-	public void actualizar(ContenidoSitio entity);
-	
-	public void eliminar(ContenidoSitio entity);
-	
-	public ContenidoSitio obtener(Long id);
-	
-	public List<ContenidoSitio> obtenerListado();
-	
-	/**
-	 * OPERACIONES DE TRANSFORMACION Entity <-> DTO
-	 */
-	public void dtoToEntity(AdministradorDTO source, Administrador target);
-	
-	public void entityToDto(Administrador source, AdministradorDTO target);
 }

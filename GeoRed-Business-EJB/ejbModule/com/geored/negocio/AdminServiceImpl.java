@@ -1,6 +1,5 @@
 package com.geored.negocio;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -51,7 +50,12 @@ public class AdminServiceImpl implements AdminService
 	{
 		try
 		{
-			Administrador administradorEntity = new Administrador();
+			Administrador administradorEntity = (Administrador) administradorDAO.obtener(administradorDTO.getId(), false);
+			
+			if(administradorEntity == null)
+			{
+				throw new NegocioException("Administrador no encontrado");
+			}
 			
 			administradorDAO.dtoToEntity(administradorDTO, administradorEntity);
 			
@@ -69,7 +73,7 @@ public class AdminServiceImpl implements AdminService
 	{
 		try
 		{
-			Administrador administradorEntity = administradorDAO.obtener(idAdministrador);
+			Administrador administradorEntity = (Administrador) administradorDAO.obtener(idAdministrador, false);
 			
 			if(administradorEntity == null)
 			{
@@ -91,16 +95,12 @@ public class AdminServiceImpl implements AdminService
 	{
 		try
 		{
-			Administrador administradorEntity = administradorDAO.obtener(idAdministrador);
+			AdministradorDTO administradorDTO = (AdministradorDTO) administradorDAO.obtener(idAdministrador, true);
 			
-			if(administradorEntity == null)
+			if(administradorDTO == null)
 			{
 				throw new NegocioException("Administrador no encontrado");
 			}
-			
-			AdministradorDTO administradorDTO = new AdministradorDTO();
-			
-			administradorDAO.entityToDto(administradorEntity, administradorDTO);
 			
 			return administradorDTO;
 		}
@@ -114,19 +114,6 @@ public class AdminServiceImpl implements AdminService
 	@WebMethod
 	public List<AdministradorDTO> obtenerListado()
 	{
-		List<Administrador> listaAdministradores = administradorDAO.obtenerListado();
-		
-		List<AdministradorDTO> listaAdministradoresDTO = new ArrayList<AdministradorDTO>();
-		
-		for(Administrador administrador : listaAdministradores)
-		{
-			AdministradorDTO dtoAux = new AdministradorDTO();
-			
-			administradorDAO.entityToDto(administrador, dtoAux);
-			
-			listaAdministradoresDTO.add(dtoAux);
-		}
-		
-		return listaAdministradoresDTO;
+		return administradorDAO.obtenerListado(true);
 	}
 }

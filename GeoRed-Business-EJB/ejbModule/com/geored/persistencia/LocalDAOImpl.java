@@ -10,7 +10,7 @@ import com.geored.persistencia.core.GenericDAOBase;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class LocalDAOImpl extends GenericDAOBase<Local> implements LocalDAO
+public class LocalDAOImpl extends GenericDAOBase<Local, LocalDTO> implements LocalDAO
 {
 
 	@Override
