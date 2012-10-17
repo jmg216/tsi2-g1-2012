@@ -22,7 +22,7 @@ public class CheckIn implements Serializable
 	private static final long serialVersionUID = 595575847837079673L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID", nullable=false)
 	private Long id;
 	

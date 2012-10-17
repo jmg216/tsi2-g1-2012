@@ -20,7 +20,7 @@ public class TematicaSitio implements Serializable
 	private static final long serialVersionUID = -802694227417026322L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID", nullable=false)
 	private Long id;
 	

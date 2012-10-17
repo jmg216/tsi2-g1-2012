@@ -19,7 +19,7 @@ public class TipoAdministrador implements Serializable
 	private static final long serialVersionUID = -4309588452885102505L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID", nullable=false)
 	private Long id;
 	
