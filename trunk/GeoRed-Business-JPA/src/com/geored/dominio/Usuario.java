@@ -19,7 +19,7 @@ public class Usuario implements Serializable
 	private static final long serialVersionUID = -8244156161741559631L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID", nullable=false)
 	private Long id;
 	

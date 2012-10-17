@@ -23,7 +23,7 @@ public class Oferta implements Serializable
 	private static final long serialVersionUID = 4539384334155342226L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID", nullable=false)
 	private Long id;
 	

@@ -20,7 +20,7 @@ public class ContenidoSitio implements Serializable
 	private static final long serialVersionUID = -7262405870466293412L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID", nullable=false)
 	private Long id;
 

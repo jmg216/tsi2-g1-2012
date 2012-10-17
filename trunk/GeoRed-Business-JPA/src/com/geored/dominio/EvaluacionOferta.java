@@ -20,7 +20,7 @@ public class EvaluacionOferta implements Serializable
 	private static final long serialVersionUID = 7701969749727877202L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID", nullable=false)
 	private Long id;
 	

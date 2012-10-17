@@ -22,7 +22,7 @@ public class Notificacion implements Serializable
 	private static final long serialVersionUID = -8408536548407729536L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID", nullable=false)
 	private Long id;
 	

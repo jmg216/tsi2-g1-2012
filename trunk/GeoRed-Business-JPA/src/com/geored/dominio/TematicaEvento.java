@@ -22,7 +22,7 @@ public class TematicaEvento implements Serializable
 	private static final long serialVersionUID = 3194319439298569315L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID", nullable=false)
 	private Long id;
 	

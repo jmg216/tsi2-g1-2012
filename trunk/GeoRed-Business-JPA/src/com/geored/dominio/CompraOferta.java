@@ -20,7 +20,7 @@ public class CompraOferta implements Serializable
 	private static final long serialVersionUID = 3087531603052890310L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID", nullable=false)
 	private Long id;
 	

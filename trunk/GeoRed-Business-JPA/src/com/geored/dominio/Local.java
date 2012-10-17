@@ -22,7 +22,7 @@ public class Local implements Serializable
 	private static final long serialVersionUID = 3213036910497098601L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID", nullable=false)
 	private Long id;
 	
