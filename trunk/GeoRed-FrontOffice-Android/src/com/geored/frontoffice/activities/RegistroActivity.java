@@ -2,24 +2,17 @@ package com.geored.frontoffice.activities;
 
 import java.io.IOException;
 
-import org.ksoap2.SoapEnvelope;
-import org.ksoap2.serialization.PropertyInfo;
-import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapPrimitive;
-import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
-
-import com.geored.frontoffice.R;
-import com.geored.frontoffice.dto.UsuarioDTO;
-import com.geored.frontoffice.utiles.MetodosWS;
-import com.geored.frontoffice.utiles.UtilesWS;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+
+import com.geored.frontoffice.R;
+import com.geored.frontoffice.dto.UsuarioDTO;
+import com.geored.frontoffice.wsclient.UsuarioWS;
 
 public class RegistroActivity extends Activity {
 
@@ -47,26 +40,12 @@ public class RegistroActivity extends Activity {
     	usu.setEmail(email.getText().toString());
     	usu.setPass(pass.getText().toString());    	
     	
-    	SoapObject request = UtilesWS.getSoapObject(MetodosWS.INSERTAR);
-    	
-    	PropertyInfo usuarioInfo = new PropertyInfo();
-    	usuarioInfo.setName("arg0");
-    	usuarioInfo.setValue(usu);
-    	usuarioInfo.setType(usu.getClass());     	
-    	request.addProperty(usuarioInfo);
-    	
-    	SoapSerializationEnvelope envelope = UtilesWS.getEnvelope(request);
-    	
-    	envelope.addMapping(UtilesWS.NAMESPACE, MetodosWS.USUARIO_DTO , new UsuarioDTO().getClass());    	
-    	SoapObject response = UtilesWS.makeCall(envelope, MetodosWS.INSERTAR);
-		String res = response.toString();
+    	Long idUsuario = new UsuarioWS().insertar(usu);
 			
-		if(res != null)
+		if(idUsuario != null)
 		{
-		    	Intent menuActivity = new Intent (this, MenuActivity.class);
-		    	startActivity(menuActivity);
-		}
-
-    	
+	    	Intent menuActivity = new Intent (this, MenuActivity.class);
+	    	startActivity(menuActivity);
+		}	
     }
 }

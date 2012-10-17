@@ -5,69 +5,29 @@ import java.util.Hashtable;
 import org.ksoap2.serialization.KvmSerializable;
 import org.ksoap2.serialization.PropertyInfo;
 
+import com.geored.frontoffice.utiles.KvmSerializableUtil;
+
 public class UsuarioDTO extends com.geored.dto.UsuarioDTO implements KvmSerializable
 {
+	private KvmSerializableUtil kvmUtil = KvmSerializableUtil.instance(this);
+	
 	public int getPropertyCount() {
 
-		return 4;
+		return kvmUtil.getPropertyCount();
 	}
 
-	public Object getProperty(int index) {
-		
-        switch(index)
-        {
-	        case 0: return this.getId();
-	        case 1: return this.getNombre();
-	        case 2: return this.getEmail();
-	        case 3: return this.getPass();                      
-        }
-        
-        return null;
+	public Object getProperty(int index) 
+	{
+        return kvmUtil.getProperty(index);
 	}
 
 	public void setProperty(int index, Object value) 
 	{
-        switch(index)
-        {
-	        case 0:
-	            this.setId(Long.valueOf(value.toString()));
-	            break;
-	        case 1:
-	            this.setNombre(value.toString());
-	            break;
-	        case 2:
-	        	this.setEmail(value.toString());
-	        	break;
-	        case 3:
-	        	this.setPass(value.toString());
-	           
-	        default:
-	            break;
-        }
+        kvmUtil.setProperty(index, value);
 	}
 	
 	public void getPropertyInfo(int index, Hashtable arg1, PropertyInfo info) 
 	{
-        switch(index)
-        {
-	        case 0:
-	            info.type = PropertyInfo.LONG_CLASS;
-	            info.name = "id";
-	            break;
-	        case 1:
-	            info.type = PropertyInfo.STRING_CLASS;
-	            info.name = "nombre";
-	            break;
-	        case 2:
-	        	info.type = PropertyInfo.STRING_CLASS;
-	        	info.name = "email";
-	            break;
-	        case 3:
-	        	info.type = PropertyInfo.STRING_CLASS;
-	        	info.name = "pass";
-	        	break;
-	        	
-	        default:break;
-        }
+        kvmUtil.getPropertyInfo(index, arg1, info);
 	}
 }
