@@ -10,7 +10,7 @@ import java.util.Map;
 import org.ksoap2.serialization.KvmSerializable;
 import org.ksoap2.serialization.PropertyInfo;
 
-public class KvmSerializableHelper
+public class KvmSerializationHelper
 {
 	private KvmSerializable dtoObject;
 	private Class dtoClass;
@@ -22,7 +22,7 @@ public class KvmSerializableHelper
 	private Map<Integer, Type> fieldsTypes;
 	
 	// Constructor
-	public KvmSerializableHelper(KvmSerializable dtoObject)
+	public KvmSerializationHelper(KvmSerializable dtoObject)
 	{
 		this.dtoObject = dtoObject;
 		this.dtoClass = dtoObject.getClass();
