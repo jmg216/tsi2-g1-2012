@@ -10,7 +10,7 @@ import java.util.Map;
 import org.ksoap2.serialization.KvmSerializable;
 import org.ksoap2.serialization.PropertyInfo;
 
-public class KvmSerializableUtil
+public class KvmSerializableHelper
 {
 	private KvmSerializable dtoObject;
 	private Class dtoClass;
@@ -22,7 +22,7 @@ public class KvmSerializableUtil
 	private Map<Integer, Type> fieldsTypes;
 	
 	// Constructor
-	private KvmSerializableUtil(KvmSerializable dtoObject)
+	public KvmSerializableHelper(KvmSerializable dtoObject)
 	{
 		this.dtoObject = dtoObject;
 		this.dtoClass = dtoObject.getClass();
@@ -59,11 +59,6 @@ public class KvmSerializableUtil
 		}
 	}
 
-	public static KvmSerializableUtil instance(KvmSerializable dtoObject)
-	{
-		return new KvmSerializableUtil(dtoObject);
-	}
-	
 	// Operaciones utilizarias para KvmSerializable
 	public int getPropertyCount()
 	{

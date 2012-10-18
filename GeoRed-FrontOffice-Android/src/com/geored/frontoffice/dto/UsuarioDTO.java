@@ -5,29 +5,34 @@ import java.util.Hashtable;
 import org.ksoap2.serialization.KvmSerializable;
 import org.ksoap2.serialization.PropertyInfo;
 
-import com.geored.frontoffice.utiles.KvmSerializableUtil;
+import com.geored.frontoffice.utiles.KvmSerializableHelper;
 
 public class UsuarioDTO extends com.geored.dto.UsuarioDTO implements KvmSerializable
 {
-	private KvmSerializableUtil kvmUtil = KvmSerializableUtil.instance(this);
+	private KvmSerializableHelper kvmHelper;
+	
+	public UsuarioDTO()
+	{
+		kvmHelper = new KvmSerializableHelper(this);
+	}
 	
 	public int getPropertyCount() {
 
-		return kvmUtil.getPropertyCount();
+		return kvmHelper.getPropertyCount();
 	}
 
 	public Object getProperty(int index) 
 	{
-        return kvmUtil.getProperty(index);
+        return kvmHelper.getProperty(index);
 	}
 
 	public void setProperty(int index, Object value) 
 	{
-        kvmUtil.setProperty(index, value);
+		kvmHelper.setProperty(index, value);
 	}
 	
 	public void getPropertyInfo(int index, Hashtable arg1, PropertyInfo info) 
 	{
-        kvmUtil.getPropertyInfo(index, arg1, info);
+		kvmHelper.getPropertyInfo(index, arg1, info);
 	}
 }
