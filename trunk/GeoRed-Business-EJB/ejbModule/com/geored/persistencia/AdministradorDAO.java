@@ -9,4 +9,5 @@ import com.geored.persistencia.core.GenericDAO;
 @Local
 public interface AdministradorDAO extends GenericDAO<Administrador, AdministradorDTO>
 {
+	public Object obtenerAdminPorEmailYPass(String email, String pass, boolean toDTO);
 }

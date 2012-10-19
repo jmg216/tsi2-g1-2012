@@ -9,4 +9,5 @@ import com.geored.persistencia.core.GenericDAO;
 @Local
 public interface UsuarioDAO extends GenericDAO<Usuario, UsuarioDTO>
 {
+	public Object obtenerUsuarioPorEmailYPass(String email, String pass, boolean toDTO);
 }

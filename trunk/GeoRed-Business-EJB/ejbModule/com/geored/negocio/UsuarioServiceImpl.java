@@ -11,9 +11,9 @@ import javax.ejb.TransactionManagementType;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
-import com.geored.dominio.Sitio;
 import com.geored.dominio.Usuario;
 import com.geored.dto.UsuarioDTO;
+import com.geored.exceptions.DaoException;
 import com.geored.exceptions.NegocioException;
 import com.geored.persistencia.UsuarioDAO;
 
@@ -27,7 +27,7 @@ public class UsuarioServiceImpl implements UsuarioService
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public Long insertar(UsuarioDTO usuarioDTO) throws NegocioException
+	public Long insertar(UsuarioDTO usuarioDTO) throws NegocioException, DaoException
 	{
 		try
 		{
@@ -41,13 +41,13 @@ public class UsuarioServiceImpl implements UsuarioService
 		}
 		catch(Throwable e)
 		{
-			throw new NegocioException(e);
+			throw new DaoException(e);
 		}
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public void actualizar(UsuarioDTO usuarioDTO) throws NegocioException
+	public void actualizar(UsuarioDTO usuarioDTO) throws NegocioException, DaoException
 	{
 		try
 		{
@@ -64,13 +64,13 @@ public class UsuarioServiceImpl implements UsuarioService
 		}
 		catch(Throwable e)
 		{
-			throw new NegocioException(e);
+			throw new DaoException(e);
 		}
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod 
-	public void eliminar(Long idUsuario) throws NegocioException
+	public void eliminar(Long idUsuario) throws NegocioException, DaoException
 	{
 		try
 		{
@@ -85,13 +85,13 @@ public class UsuarioServiceImpl implements UsuarioService
 		}
 		catch(Throwable e)
 		{
-			throw new NegocioException(e);
+			throw new DaoException(e);
 		}
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
-	public UsuarioDTO obtener(Long idUsuario) throws NegocioException
+	public UsuarioDTO obtener(Long idUsuario) throws NegocioException, DaoException
 	{
 		try
 		{
@@ -112,9 +112,38 @@ public class UsuarioServiceImpl implements UsuarioService
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
-	public List<UsuarioDTO> obtenerListado()
+	public List<UsuarioDTO> obtenerListado() throws DaoException
 	{
-		return usuarioDAO.obtenerListado(true);
+		try
+		{
+			return usuarioDAO.obtenerListado(true);
+		}
+		catch(Throwable e)
+		{
+			throw new DaoException(e);
+		}
+		
+	}
+
+	@Override
+	public UsuarioDTO obtenerPorEmailYPass(String email, String pass) throws NegocioException, DaoException
+	{
+		try
+		{
+			UsuarioDTO usuarioDTO = (UsuarioDTO) usuarioDAO.obtenerUsuarioPorEmailYPass(email, pass, true);
+			
+			if(usuarioDTO == null)
+			{
+				throw new NegocioException("Usuario no encontrado");
+			}
+			
+			return usuarioDTO;
+		}
+		catch(Throwable e)
+		{
+			throw new DaoException();
+		}
+	
 	}
 	
 }

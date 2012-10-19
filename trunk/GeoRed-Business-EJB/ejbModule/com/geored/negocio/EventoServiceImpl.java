@@ -13,6 +13,7 @@ import javax.jws.WebService;
 
 import com.geored.dominio.Evento;
 import com.geored.dto.EventoDTO;
+import com.geored.exceptions.DaoException;
 import com.geored.exceptions.NegocioException;
 import com.geored.persistencia.EventoDAO;
 
@@ -26,7 +27,7 @@ public class EventoServiceImpl implements EventoService
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public Long insertar(EventoDTO eventoDTO)  throws NegocioException
+	public Long insertar(EventoDTO eventoDTO)  throws NegocioException, DaoException
 	{
 		try
 		{
@@ -40,13 +41,13 @@ public class EventoServiceImpl implements EventoService
 		}
 		catch(Throwable e)
 		{
-			throw new NegocioException(e);
+			throw new DaoException(e);
 		}
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public void actualizar(EventoDTO eventoDTO)  throws NegocioException
+	public void actualizar(EventoDTO eventoDTO)  throws NegocioException, DaoException
 	{
 		try
 		{
@@ -63,13 +64,13 @@ public class EventoServiceImpl implements EventoService
 		}
 		catch(Throwable e)
 		{
-			throw new NegocioException(e);
+			throw new DaoException(e);
 		}
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public void eliminar(Long idEvento)  throws NegocioException
+	public void eliminar(Long idEvento)  throws NegocioException, DaoException
 	{
 		try
 		{
@@ -84,13 +85,13 @@ public class EventoServiceImpl implements EventoService
 		}
 		catch(Throwable e)
 		{
-			throw new NegocioException(e);
+			throw new DaoException(e);
 		}
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
-	public EventoDTO obtener(Long idEvento)  throws NegocioException
+	public EventoDTO obtener(Long idEvento)  throws NegocioException, DaoException
 	{
 		try
 		{
@@ -105,15 +106,23 @@ public class EventoServiceImpl implements EventoService
 		}
 		catch(Throwable e)
 		{
-			throw new NegocioException(e);
+			throw new DaoException(e);
 		}
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
-	public List<EventoDTO> obtenerListado()
+	public List<EventoDTO> obtenerListado() throws DaoException
 	{
-		return eventoDAO.obtenerListado(true);
+		try
+		{
+			return eventoDAO.obtenerListado(true);
+		}
+		catch(Throwable e)
+		{
+			throw new DaoException(e);
+		}
+		
 	}
 	
 }
