@@ -13,6 +13,7 @@ import javax.jws.WebService;
 
 import com.geored.dominio.Oferta;
 import com.geored.dto.OfertaDTO;
+import com.geored.exceptions.DaoException;
 import com.geored.exceptions.NegocioException;
 import com.geored.persistencia.OfertaDAO;
 
@@ -26,7 +27,7 @@ public class OfertaServiceImpl implements OfertaService
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public Long insertar(OfertaDTO ofertaDTO) throws NegocioException
+	public Long insertar(OfertaDTO ofertaDTO) throws NegocioException, DaoException
 	{
 		try
 		{
@@ -46,7 +47,7 @@ public class OfertaServiceImpl implements OfertaService
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public void actualizar(OfertaDTO ofertaDTO) throws NegocioException
+	public void actualizar(OfertaDTO ofertaDTO) throws NegocioException, DaoException
 	{
 		try
 		{
@@ -69,7 +70,7 @@ public class OfertaServiceImpl implements OfertaService
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public void eliminar(Long idOferta) throws NegocioException
+	public void eliminar(Long idOferta) throws NegocioException, DaoException
 	{
 		try
 		{
@@ -90,7 +91,7 @@ public class OfertaServiceImpl implements OfertaService
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
-	public OfertaDTO obtener(Long idOferta) throws NegocioException
+	public OfertaDTO obtener(Long idOferta) throws NegocioException, DaoException
 	{
 		try
 		{
@@ -111,9 +112,16 @@ public class OfertaServiceImpl implements OfertaService
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
-	public List<OfertaDTO> obtenerListado()
+	public List<OfertaDTO> obtenerListado() throws DaoException
 	{
-		return ofertaDAO.obtenerListado(true);
+		try
+		{
+			return ofertaDAO.obtenerListado(true);
+		}
+		catch(Throwable e)
+		{
+			throw new DaoException(e);
+		}		
 	}
 	
 }

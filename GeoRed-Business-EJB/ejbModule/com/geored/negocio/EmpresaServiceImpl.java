@@ -13,6 +13,7 @@ import javax.jws.WebService;
 
 import com.geored.dominio.Empresa;
 import com.geored.dto.EmpresaDTO;
+import com.geored.exceptions.DaoException;
 import com.geored.exceptions.NegocioException;
 import com.geored.persistencia.EmpresaDAO;
 
@@ -26,7 +27,7 @@ public class EmpresaServiceImpl implements EmpresaService
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public Long insertar(EmpresaDTO empresaDTO)  throws NegocioException
+	public Long insertar(EmpresaDTO empresaDTO)  throws NegocioException, DaoException
 	{
 		try
 		{
@@ -40,13 +41,13 @@ public class EmpresaServiceImpl implements EmpresaService
 		}
 		catch(Throwable e)
 		{
-			throw new NegocioException(e);
+			throw new DaoException(e);
 		}
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public void actualizar(EmpresaDTO empresaDTO)  throws NegocioException
+	public void actualizar(EmpresaDTO empresaDTO)  throws NegocioException, DaoException
 	{
 		try
 		{
@@ -63,13 +64,13 @@ public class EmpresaServiceImpl implements EmpresaService
 		}
 		catch(Throwable e)
 		{
-			throw new NegocioException(e);
+			throw new DaoException(e);
 		}
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public void eliminar(Long idEmpresa)  throws NegocioException
+	public void eliminar(Long idEmpresa)  throws NegocioException, DaoException
 	{
 		try
 		{
@@ -84,13 +85,13 @@ public class EmpresaServiceImpl implements EmpresaService
 		}
 		catch(Throwable e)
 		{
-			throw new NegocioException(e);
+			throw new DaoException(e);
 		}
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
-	public EmpresaDTO obtener(Long idEmpresa)  throws NegocioException
+	public EmpresaDTO obtener(Long idEmpresa)  throws NegocioException, DaoException
 	{
 		try
 		{
@@ -105,15 +106,22 @@ public class EmpresaServiceImpl implements EmpresaService
 		}
 		catch(Throwable e)
 		{
-			throw new NegocioException(e);
+			throw new DaoException(e);
 		}
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
-	public List<EmpresaDTO> obtenerListado()
+	public List<EmpresaDTO> obtenerListado() throws DaoException
 	{
-		return empresaDAO.obtenerListado(true);
+		try
+		{
+			return empresaDAO.obtenerListado(true);
+		}
+		catch(Throwable e)
+		{
+			throw new DaoException(e);
+		}		
 	}
 	
 }

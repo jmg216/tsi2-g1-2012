@@ -13,6 +13,7 @@ import javax.jws.WebService;
 
 import com.geored.dominio.Sitio;
 import com.geored.dto.SitioDTO;
+import com.geored.exceptions.DaoException;
 import com.geored.exceptions.NegocioException;
 import com.geored.persistencia.SitioDAO;
 
@@ -26,7 +27,7 @@ public class SitioServiceImpl implements SitioService
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public Long insertar(SitioDTO sitioDTO) throws NegocioException
+	public Long insertar(SitioDTO sitioDTO) throws NegocioException, DaoException
 	{
 		try
 		{
@@ -40,13 +41,13 @@ public class SitioServiceImpl implements SitioService
 		}
 		catch(Throwable e)
 		{
-			throw new NegocioException(e);
+			throw new DaoException(e);
 		}
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public void actualizar(SitioDTO sitioDTO) throws NegocioException
+	public void actualizar(SitioDTO sitioDTO) throws NegocioException, DaoException
 	{
 		try
 		{
@@ -63,13 +64,13 @@ public class SitioServiceImpl implements SitioService
 		}
 		catch(Throwable e)
 		{
-			throw new NegocioException(e);
+			throw new DaoException(e);
 		}
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public void eliminar(Long idSitio) throws NegocioException
+	public void eliminar(Long idSitio) throws NegocioException, DaoException
 	{
 		try
 		{
@@ -84,13 +85,13 @@ public class SitioServiceImpl implements SitioService
 		}
 		catch(Throwable e)
 		{
-			throw new NegocioException(e);
+			throw new DaoException(e);
 		}
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
-	public SitioDTO obtener(Long idSitio) throws NegocioException
+	public SitioDTO obtener(Long idSitio) throws NegocioException, DaoException
 	{
 		try
 		{
@@ -105,15 +106,23 @@ public class SitioServiceImpl implements SitioService
 		}
 		catch(Throwable e)
 		{
-			throw new NegocioException(e);
+			throw new DaoException(e);
 		}
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
-	public List<SitioDTO> obtenerListado()
+	public List<SitioDTO> obtenerListado() throws DaoException
 	{
-		return sitioDAO.obtenerListado(true);
+		try
+		{
+			return sitioDAO.obtenerListado(true);
+		}
+		catch(Throwable e)
+		{
+			throw new DaoException(e);
+		}
+		
 	}
 	
 }
