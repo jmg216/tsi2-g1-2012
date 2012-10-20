@@ -20,7 +20,12 @@ public class AdministradorDAOImpl extends GenericDAOBase<Administrador, Administ
 
 	@Override
 	public void entityToDto(Administrador source, AdministradorDTO target)
-	{	
+	{
+		target.setId(source.getId());
+		target.setNombre(source.getEmail());
+		target.setNombreTipoAdministrador(target.getNombreTipoAdministrador());
+		target.setPass(source.getPass());
+		
 	}
 
 	@Override
