@@ -9,10 +9,12 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.swing.text.StyledEditorKit.BoldAction;
 import javax.xml.rpc.ServiceException;
 
 import com.geored.negocio.AdminServiceImpl;
 import com.geored.negocio.AdminServiceImplService;
+import com.geored.negocio.AdminServiceImplServiceLocator;
 import com.geored.negocio.AdministradorDTO;
 import com.geored.negocio.DaoException;
 import com.geored.negocio.NegocioException;
@@ -30,8 +32,9 @@ public class LoginBean implements Serializable
 	
 	private String usuario;
 	private String password;
-	private AdminServiceImplService service;
+	private Boolean recordar;
 	private AdminServiceImpl admiWs;
+	private AdminServiceImplServiceLocator locator;
 	
 	
 	public LoginBean() {
@@ -44,24 +47,30 @@ public class LoginBean implements Serializable
 		password = "";
 	}
 	
-	public void LogIn() throws ServiceException, NegocioException, DaoException, RemoteException {
+	public void LogIn() throws ServiceException {
 		
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
 		
-		admiWs = service.getAdminServiceImplPort();
-		AdministradorDTO admin = admiWs.obtenerAdminPorEmailYPass(usuario, password);
+		locator = new AdminServiceImplServiceLocator();
+		admiWs = locator.getAdminServiceImplPort();
 		
-		if(admin != null) {
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("", usuario);
-			try {
-				FacesContext.getCurrentInstance().getExternalContext().redirect("Registro.xhtml");
-			} catch (IOException e) {
-				
-				e.printStackTrace();
-			}
-		} else {
+		AdministradorDTO admin;
+		
+		try {
+			
+			admin = admiWs.obtenerAdminPorEmailYPass(usuario, password);
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("Usuario", usuario);
+			FacesContext.getCurrentInstance().getExternalContext().redirect("IndexAdmin.xhtml");
+			
+		} catch (RemoteException e1) {
+			
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Datos incorrectos"));
+		
+		} catch (IOException e) {
+			
+			e.printStackTrace();
 		}
+		
 	}
 	
 	public String getUsuario() {
@@ -77,5 +86,12 @@ public class LoginBean implements Serializable
 		this.password = password;
 	}
 	
-	
+	public Boolean getRecordar() {
+		return recordar;
+	}
+
+	public void setRecordar(Boolean recordar) {
+		this.recordar = recordar;
+	}
+
 }
