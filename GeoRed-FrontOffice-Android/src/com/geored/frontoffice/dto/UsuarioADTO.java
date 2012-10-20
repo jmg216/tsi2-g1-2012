@@ -11,13 +11,6 @@ public class UsuarioADTO extends com.geored.dto.UsuarioDTO implements KvmSeriali
 {
 	private KvmSerializationHelper kvmHelper;
 	
-	public UsuarioADTO()
-	{
-		super();
-		
-		kvmHelper = new KvmSerializationHelper(this);
-	}
-	
 	private KvmSerializationHelper getKvmSerializationHelper()
 	{
 		if(kvmHelper == null)
