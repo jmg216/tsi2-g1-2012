@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.geored.frontoffice.R;
-import com.geored.frontoffice.dto.UsuarioDTO;
+import com.geored.frontoffice.dto.UsuarioADTO;
 import com.geored.frontoffice.wsclient.UsuarioWS;
 
 public class RegistroActivity extends Activity {
@@ -34,13 +34,9 @@ public class RegistroActivity extends Activity {
     	EditText email = (EditText) this.findViewById(R.id.txtEmail);
     	EditText pass = (EditText) this.findViewById(R.id.txtPassword);   	
     	
-    	UsuarioDTO usu = new UsuarioDTO();
-    	usu.setId(0L);
-    	usu.setNombre(usuario.getText().toString());
-    	usu.setEmail(email.getText().toString());
-    	usu.setPass(pass.getText().toString());    	
+    	UsuarioADTO usuarioADTO = new UsuarioADTO();
     	
-    	Long idUsuario = new UsuarioWS().insertar(usu);
+    	Long idUsuario = new UsuarioWS().insertar(usuarioADTO);
 			
 		if(idUsuario != null)
 		{

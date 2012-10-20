@@ -25,9 +25,9 @@ public class KvmSerializationHelper
 	public KvmSerializationHelper(KvmSerializable dtoObject)
 	{
 		this.dtoObject = dtoObject;
-		this.dtoClass = dtoObject.getClass();
+		this.dtoClass = dtoObject.getClass().getSuperclass();
 		
-		Field[] fieldsArray = dtoClass.getFields();
+		Field[] fieldsArray = dtoClass.getDeclaredFields();
 		Method[] methodsArray  = dtoClass.getMethods();
 		
 		// Para cada field busco su nombre, getter, setter y type. Los agrego al Map correspondiente
