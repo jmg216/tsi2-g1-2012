@@ -14,7 +14,7 @@
 		<style type="text/css">
 			.ui-layout-unit{
 				background:transparent;
-				border:0px;
+				border: 0px;
 				
 			}
 			.ui-widget-content{
@@ -29,47 +29,47 @@
 		</style>
 		
 	</h:head>
+	<h:body>
 	<p:layout fullPage="true"> 
 		<p:layoutUnit position="center" id ="centro">	
 			<p:layout>
-			<p:layoutUnit position="north" size="80"></p:layoutUnit>
-			<p:layoutUnit position="center">
-			<p:fieldset legend="Back Office GeoRed.uy">  
-			    <h:panelGrid columns="2" cellpadding="10">  
-			    	<p:graphicImage value="/imagenes/RedGeoLogoTipo.png"></p:graphicImage>
-			        <h:outputText 
-			            value="Bienvenido a Back Office GeoRed.uy:
-			            	   GeoRed.uy es una red social basada en la ubicacion geografica de los usuarios para Uruguay.
-			            	   Aqui tendrá funcionalidades de administracion y permitirá a las empresas configurar su ofertas por medio de herramientas provistas en el sistema." />  
-			    </h:panelGrid>  
-			</p:fieldset>
-			</p:layoutUnit>
-			</p:layout>  
+				<p:layoutUnit position="north" size="80"></p:layoutUnit>
+				<p:layoutUnit position="center">
+					<p:fieldset legend="BackOffice GeoRed.uy">
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:graphicImage value="/imagenes/RedGeoLogoTipo.png"></p:graphicImage>
+							 <h:outputText value="Bienvenido a Back Office GeoRed.uy:
+                                           GeoRed.uy es una red social basada en la ubicacion geografica de los usuarios para Uruguay.
+                                           Aqui tendrá funcionalidades de administracion y permitirá a las empresas configurar su ofertas por medio de herramientas provistas en el sistema." />  
+						</h:panelGrid>				
+					</p:fieldset>
+				</p:layoutUnit>
+			
+			</p:layout>
 		</p:layoutUnit>
 		<p:layoutUnit position="east" id="izquierda" size="480">
 			<p:layout>
-			<p:layoutUnit id="norOeste" position="north" size="102">
-			</p:layoutUnit>
-			<p:layoutUnit position="center">
-			<p:graphicImage value="/imagenes/Logo_back.png"></p:graphicImage> 
-			<h:form>
-				<br />
-				<p:growl id="growl" showDetail="true" sticky="true" />  
-				<p:panel id="header" styleClass="myPanel">
-					<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-						<h:outputText value="Usuario: *" />   
-					    <p:inputText id ="usuario" value="#{loginBean.usuario}" required="true" label="Latitud"/>
-					    <h:outputText value="Password: *" />   
-					    <p:password  id="password" value="#{loginBean.password}" required="true" label="Password"></p:password>	
-   						<h:outputText value="Recordarme" />   	              	         
-						<p:selectBooleanCheckbox value="" />
-						<f:facet name="footer">  
-        					<p:commandButton style="float:right" value="Ingresar" action="#{loginBean.LogIn()}" update="growl"/>  
-    					</f:facet>
-					</h:panelGrid>	
-			  	</p:panel>
-			</h:form>
-			</p:layoutUnit>
+				<p:layoutUnit position="north" size="102"></p:layoutUnit>
+				<p:layoutUnit position="center">
+					 <p:graphicImage value="/imagenes/Logo_back.png"></p:graphicImage> 
+					 <h:form>
+					 <br />
+					 	<p:growl id="growl" showDetail="true" sticky="true" />  
+					 	<p:panel>
+							<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+								<h:outputText value="Usuario: *" />
+								<p:inputText value="#{loginBean.usuario}"/>
+								<h:outputText value="Password: *" />
+								<p:password value="#{loginBean.password}"/>
+								<h:outputText value="Recordarme:" />
+								<p:selectBooleanCheckbox value="#{loginBean.recordar}"></p:selectBooleanCheckbox>
+								<f:facet name="footer">
+									<p:commandButton value="Ingresar" action="#{loginBean.LogIn()}" style="float:right" update="growl"/>
+								</f:facet>
+							</h:panelGrid>
+					 	</p:panel>
+					 </h:form>
+				</p:layoutUnit>
 			</p:layout>
 		</p:layoutUnit>
 		<p:layoutUnit position="west" id = "derecha" size="100"></p:layoutUnit>
@@ -78,13 +78,13 @@
 			<p:layout>
 				<p:layoutUnit position="west" size="100"></p:layoutUnit>
 				<p:layoutUnit position="center">
-					<p:separator id = "separador"></p:separator>
+					<p:separator id="separador"></p:separator>
 					<h:outputText id="texto" style="font-size:10px;text-align:right;" value="Desarrollado por grupo 1 - Tecnologo en Informatica" />
-				</p:layoutUnit>	
+				</p:layoutUnit>
 				<p:layoutUnit position="east" size="90"></p:layoutUnit>
 			</p:layout>
 		</p:layoutUnit>
 	</p:layout>
-
+	</h:body>
 </f:view>
 </html>	
