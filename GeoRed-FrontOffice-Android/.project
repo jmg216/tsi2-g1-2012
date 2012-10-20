@@ -3,6 +3,7 @@
 	<name>GeoRed-FrontOffice-Android</name>
 	<comment></comment>
 	<projects>
+		<project>GeoRed-Commons</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

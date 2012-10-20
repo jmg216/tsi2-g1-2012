@@ -7,9 +7,16 @@ import org.ksoap2.serialization.PropertyInfo;
 
 import com.geored.frontoffice.utiles.KvmSerializationHelper;
 
-public class UsuarioDTO extends com.geored.dto.UsuarioDTO implements KvmSerializable
+public class UsuarioADTO extends com.geored.dto.UsuarioDTO implements KvmSerializable
 {
 	private KvmSerializationHelper kvmHelper;
+	
+	public UsuarioADTO()
+	{
+		super();
+		
+		kvmHelper = new KvmSerializationHelper(this);
+	}
 	
 	private KvmSerializationHelper getKvmSerializationHelper()
 	{
