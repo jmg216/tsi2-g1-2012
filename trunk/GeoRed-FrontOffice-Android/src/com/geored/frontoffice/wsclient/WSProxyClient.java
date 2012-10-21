@@ -28,6 +28,7 @@ public class WSProxyClient
     	SoapSerializationEnvelope envelope = getEnvelope(soapObject);
     	
     	// Seteo los parametros del soapObject y los mapeos del envelope
+    	int argIndex = 0;
     	for(Object param : params)
     	{
     		// Nombre del objeto en el wsdl
@@ -36,7 +37,7 @@ public class WSProxyClient
         	
         	// Creo el contenedor del DTO
         	PropertyInfo usuarioInfo = new PropertyInfo();
-        	usuarioInfo.setName("arg0");
+        	usuarioInfo.setName("arg" + argIndex++);
         	usuarioInfo.setValue(param);
         	usuarioInfo.setType(param.getClass());
         	
