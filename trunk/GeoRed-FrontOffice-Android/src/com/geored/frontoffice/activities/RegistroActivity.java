@@ -7,20 +7,19 @@ import org.xmlpull.v1.XmlPullParserException;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.geored.frontoffice.R;
 import com.geored.frontoffice.dto.UsuarioADTO;
 import com.geored.frontoffice.wsclient.UsuarioWS;
 
 public class RegistroActivity extends Activity {
-
-	//Constantes para la invocacion del web service
-	private static final String NAMESPACE = "http://negocio.geored.com/";
-//	private static String URL="http://10.0.2.2:8080/GeoRed-Business-EJB/UsuarioServiceImpl?wsdl";
-//	private static final String METHOD_NAME_INSERTAR = "insertar";
-	private static final String SOAP_ACTION ="";
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,12 +35,39 @@ public class RegistroActivity extends Activity {
     	
     	UsuarioADTO usuarioADTO = new UsuarioADTO();
     	
+    	usuarioADTO.setNombre(usuario.getText().toString());
+    	usuarioADTO.setEmail(email.getText().toString());
+    	usuarioADTO.setPass(pass.getText().toString());
+    	
     	Long idUsuario = new UsuarioWS().insertar(usuarioADTO);
 			
+    	//Si se registra correctamente lo redirecciona al menu, sino
+    	//envia mensaje de error.
 		if(idUsuario != null)
 		{
 	    	Intent menuActivity = new Intent (this, MenuActivity.class);
 	    	startActivity(menuActivity);
 		}	
+		else
+		{
+			messageToast(R.layout.custom_toast_message, Toast.LENGTH_SHORT);
+		}
+    }
+    
+    private void messageToast(int layout, int duration) {
+
+    	
+		LayoutInflater inflater = getLayoutInflater();		 
+		View layoutView = inflater.inflate(layout, null);
+		// set a message
+		TextView text = (TextView) layoutView.findViewById(R.id.text);
+		text.setText("Button is clicked!");    	
+    	//Toast
+    	Toast toast = new Toast(getApplicationContext()); 
+    	toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+    	toast.setDuration(duration);
+    	toast.setView(layoutView);
+    	toast.show();
+
     }
 }

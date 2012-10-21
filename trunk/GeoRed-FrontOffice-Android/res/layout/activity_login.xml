@@ -13,7 +13,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_marginTop="20dp"
 	        android:text="@string/usuario"
-	        android:textColor="#252DCC"/>
+	        android:textColor="@color/azul"/>
 	<EditText
 	        android:id="@+id/txtUsuario"
 	        android:inputType="text"
@@ -24,7 +24,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_marginTop="20dp"
-	        android:textColor="#252DCC" />	            
+	        android:textColor="@color/azul" />	            
 	        
 	<EditText 
 			android:id="@+id/txtPass"
@@ -46,7 +46,7 @@
          	android:layout_width="match_parent"
          	android:layout_height="wrap_content"
          	android:layout_marginTop="20dp"
-         	android:textColor="@color/azul_letras"
+         	android:textColor="@color/azul"
          	android:gravity="right"
          	android:onClick="registrarUsuario"/>
 </LinearLayout>

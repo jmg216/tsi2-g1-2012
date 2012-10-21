@@ -3,10 +3,14 @@ package com.geored.frontoffice.activities;
 import com.geored.frontoffice.R;
 
 import android.app.TabActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.TabHost;
+import android.widget.TextView;
 
 public class MenuActivity  extends TabActivity{
 	
@@ -18,43 +22,81 @@ public class MenuActivity  extends TabActivity{
        // tabHost.setup();
         
         Resources res = getResources();
-        TabHost tabHost = getTabHost();
-        TabHost.TabSpec spec; //Coleccion de tab a setear
-        Intent intent;		//Intent reusable par instanciar cada uno de los tabs
+        TabHost tabHost = getTabHost(); //Guarda la collection de tabs
+        TabHost.TabSpec spec; //Cada tab
+        Intent intent;		//Intent reusable para instanciar cada uno de los tabs
 
-        //Tab Contactos
+        
+        
+        //TAB CONTACTOS **********************************************
+        
+        // Creo la vista customizada. 
+        View tabView = createTabView(this,res.getString(R.string.contactos));
+        
         intent = new Intent().setClass(this, ContactosActivity.class);
-        spec = tabHost.newTabSpec("Contactos")
-        				.setIndicator("Contactos", res.getDrawable(R.drawable.ic_action_search))
+        
+        //Inicializo el TabSpec por cada tab y lo agrego al tabHost
+        spec = tabHost.newTabSpec(res.getString(R.string.contactos))
+        				.setIndicator(tabView)
         				.setContent(intent);
+        
         tabHost.addTab(spec);
         
-        //Tab Sitios
+        //TAB SITIOS **************************************************
+        
+        tabView = createTabView(this, res.getString(R.string.sitios));
+        
         intent = new Intent().setClass(this, SitioActivity.class);
-        spec = tabHost.newTabSpec("Sitios")
-        				.setIndicator("Sitios", res.getDrawable(R.drawable.ic_action_search))
+        
+        spec = tabHost.newTabSpec(res.getString(R.string.sitios))
+        				.setIndicator(tabView)
         				.setContent(intent);
         tabHost.addTab(spec);
         
-        //Tab Notificaciones
+        //TAB NOTIFICACIONES ********************************************
+        
+        tabView = createTabView(this, res.getString(R.string.notificaciones));
+        
         intent = new Intent().setClass(this, NotificacionesActivity.class);
-        spec = tabHost.newTabSpec("Notificaciones")
-        				.setIndicator("Notificaciones", res.getDrawable(R.drawable.ic_action_search))
+        
+        spec = tabHost.newTabSpec(res.getString(R.string.notificaciones))
+        				.setIndicator(tabView)
         				.setContent(intent);
+        
         tabHost.addTab(spec);
         
-        //Tab Perfil
+        //TAB PERFIL *******************************************************
+        
+        tabView = createTabView(this, res.getString(R.string.perfil));
+        
         intent = new Intent().setClass(this, PerfilActivity.class);
-        spec = tabHost.newTabSpec("Perfil")
-        				.setIndicator("Perfil", res.getDrawable(R.drawable.ic_action_search))
+        
+        spec = tabHost.newTabSpec(res.getString(R.string.perfil))
+        				.setIndicator(tabView)
         				.setContent(intent);
+        
         tabHost.addTab(spec);        
         
-        //Tab Chat
+        //TAB CHAT *********************************************************
+        
+        tabView = createTabView(this, res.getString(R.string.chat));
+        
         intent = new Intent().setClass(this, ChatActivity.class);
-        spec = tabHost.newTabSpec("Chat")
-        				.setIndicator("Chat", res.getDrawable(R.drawable.ic_action_search))
+        
+        spec = tabHost.newTabSpec(res.getString(R.string.chat))
+        				.setIndicator(tabView)
         				.setContent(intent);
+        
         tabHost.addTab(spec);        
     }
+    
+    /**
+     * Crea la vista customizada para cada uno de los tab. 
+     * */
+    private static View createTabView(Context context, String tabText) {
+        View view = LayoutInflater.from(context).inflate(R.layout.custom_tab, null, false);
+        TextView tv = (TextView) view.findViewById(R.id.tabTitle);
+        tv.setText(tabText);
+        return view;
+    }    
 }
