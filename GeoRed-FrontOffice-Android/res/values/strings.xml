@@ -13,4 +13,13 @@
 	<string name="registro">Registrar</string>
 	<string name="title_activity_menu">Menú GeoRedUy</string>
 	
+	<string name="contactos">Contactos</string>
+	<string name="sitios">Sitios</string>
+	<string name="perfil">Perfil</string>
+	<string name="notificaciones">Notificaciones</string>
+	<string name="chat">Chat</string>
+	
+	<!-- ERRORES -->
+	<string name="error_registro">Ocurrió un error al procesar el registro. Intente mas tarde.</string>
+	
 </resources>

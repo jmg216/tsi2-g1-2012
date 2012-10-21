@@ -4,14 +4,13 @@ import java.util.List;
 
 import org.ksoap2.serialization.SoapObject;
 
-import com.geored.dto.UsuarioDTO;
 import com.geored.frontoffice.dto.UsuarioADTO;
 
 public class UsuarioWS
 {
 	public Long insertar(UsuarioADTO usuarioADTO)
 	{
-		String wsdlMethodName = Thread.currentThread().getStackTrace()[1].getMethodName();
+		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		
     	SoapObject response = WSProxyClient.call(wsdlMethodName, usuarioADTO);
     	
@@ -20,7 +19,9 @@ public class UsuarioWS
 	
 	public void actualizar(UsuarioADTO usuarioADTO)
 	{
+		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		
+    	WSProxyClient.call(wsdlMethodName, usuarioADTO);		
 	}
 	
 	public void eliminar(Long idUsuario)
@@ -28,13 +29,30 @@ public class UsuarioWS
 		
 	}
 	
-	public UsuarioDTO obtener(Long idUsuario)
+	public UsuarioADTO obtener(Long idUsuario)
 	{
 		return null;
 	}
 	
-	public List<UsuarioDTO> obtenerListado()
+	public List<UsuarioADTO> obtenerListado()
 	{
+		return null;
+	}
+	
+	public UsuarioADTO obtenerPorEmailYPass(String email, String pass)
+	{
+		/*String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
+		
+    	SoapObject response = WSProxyClient.call(wsdlMethodName, email, pass);
+    	
+    	UsuarioADTO usuarioADTO = new UsuarioADTO();
+    	
+    	usuarioADTO.setId(Long.parseLong(response.getProperty(0).toString()));
+    	usuarioADTO.setNombre(response.getProperty(1).toString());
+    	usuarioADTO.setEmail(response.getProperty(2).toString());
+    	usuarioADTO.setPass(response.getProperty(3).toString());   			
+    			
+		return usuarioADTO;	*/	
 		return null;
 	}
 }

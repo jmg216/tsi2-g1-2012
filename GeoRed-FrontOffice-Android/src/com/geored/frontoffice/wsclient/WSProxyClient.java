@@ -23,7 +23,7 @@ public class WSProxyClient
     {
     	// Nombre del objeto en el wsdl
     	String wsdlObjectName = objectDTO.getClass().getSimpleName().substring(0, 1).toLowerCase() + 
-    						    objectDTO.getClass().getSimpleName().substring(2);
+    						    objectDTO.getClass().getSimpleName().substring(1);
     	
     	// Creo el contenedor del DTO
     	PropertyInfo usuarioInfo = new PropertyInfo();

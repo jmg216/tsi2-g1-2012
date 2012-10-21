@@ -12,7 +12,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_marginTop="20dp"
 	        android:text="@string/nombreUsuario"
-	        android:textColor="@color/azul_letras"/>
+	        android:textColor="@color/azul"/>
 	<EditText
 	        android:id="@+id/txtNombreUsuario"
 	        android:inputType="text"
@@ -25,7 +25,7 @@
 	    	android:layout_height="wrap_content"
 	    	android:layout_marginTop="10dp"
 	    	android:text="@string/email"
-	    	android:textColor="@color/azul_letras" />
+	    	android:textColor="@color/azul" />
     
 	<EditText
 	        android:id="@+id/txtEmail"
@@ -39,7 +39,7 @@
 	    	android:layout_height="wrap_content"
 	    	android:layout_marginTop="10dp"
 	    	android:text="@string/password"
-	    	android:textColor="@color/azul_letras" />
+	    	android:textColor="@color/azul" />
     
 	<EditText
 	        android:id="@+id/txtPassword"
@@ -48,7 +48,7 @@
 	        android:layout_height="wrap_content"
 	        android:ems="10"/>	
 	        
-	     <Button
+	<Button
          android:id="@+id/registro"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
