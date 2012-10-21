@@ -19,25 +19,30 @@ public class WSProxyClient
 	/**
      * Metodo que hace el transporte de los datos por los webservices retornando la respuesta del servidor.
      * */
-    public static SoapObject call(String methodName, Object objectDTO)
+    public static SoapObject call(String methodName, Object... params)
     {
-    	// Nombre del objeto en el wsdl
-    	String wsdlObjectName = objectDTO.getClass().getSimpleName().substring(0, 1).toLowerCase() + 
-    						    objectDTO.getClass().getSimpleName().substring(1);
-    	
-    	// Creo el contenedor del DTO
-    	PropertyInfo usuarioInfo = new PropertyInfo();
-    	usuarioInfo.setName("arg0");
-    	usuarioInfo.setValue(objectDTO);
-    	usuarioInfo.setType(objectDTO.getClass());
-    	
     	// Objeto a ser transportado con el contenedor
     	SoapObject soapObject = new SoapObject(NAMESPACE, methodName);
-    	soapObject.addProperty(usuarioInfo);
     	
     	// Sobre del soapObject, indica como mapear el DTO local con el del WebService
     	SoapSerializationEnvelope envelope = getEnvelope(soapObject);
-    	envelope.addMapping(NAMESPACE, wsdlObjectName, objectDTO.getClass());
+    	
+    	// Seteo los parametros del soapObject y los mapeos del envelope
+    	for(Object param : params)
+    	{
+    		// Nombre del objeto en el wsdl
+        	String wsdlObjectName = param.getClass().getSimpleName().substring(0, 1).toLowerCase() + 
+        						    param.getClass().getSimpleName().substring(1);
+        	
+        	// Creo el contenedor del DTO
+        	PropertyInfo usuarioInfo = new PropertyInfo();
+        	usuarioInfo.setName("arg0");
+        	usuarioInfo.setValue(param);
+        	usuarioInfo.setType(param.getClass());
+        	
+        	soapObject.addProperty(usuarioInfo);
+        	envelope.addMapping(NAMESPACE, wsdlObjectName, param.getClass());
+    	}
     	
     	// Ejecuto la llamada
     	try
