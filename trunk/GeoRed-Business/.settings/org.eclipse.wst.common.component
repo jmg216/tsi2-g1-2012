@@ -12,9 +12,5 @@
         <dependent-module archiveName="GeoRed-Commons.jar" deploy-path="/lib" handle="module:/resource/GeoRed-Commons/GeoRed-Commons">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="GeoRed-BackOffice-Web.war" deploy-path="/" handle="module:/resource/GeoRed-BackOffice-Web/GeoRed-BackOffice-Web">
-            <dependent-object/>
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
     </wb-module>
 </project-modules>

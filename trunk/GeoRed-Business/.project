@@ -6,7 +6,6 @@
 		<project>GeoRed-Business-EJB</project>
 		<project>GeoRed-Business-JPA</project>
 		<project>GeoRed-Commons</project>
-		<project>GeoRed-BackOffice-Web</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
