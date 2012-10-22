@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 
@@ -16,10 +17,10 @@ public class KvmSerializationHelper
 	private Class dtoClass;
 	
 	// Diccionarios de fields
-	private Map<Integer, String> fieldsNames;
-	private Map<Integer, Method> fieldsGetters;
-	private Map<Integer, Method> fieldsSetters;
-	private Map<Integer, Type> fieldsTypes;
+	private Map<Integer, String> fieldsNames = new HashMap<Integer, String>();
+	private Map<Integer, Method> fieldsGetters = new HashMap<Integer, Method>();
+	private Map<Integer, Method> fieldsSetters = new HashMap<Integer, Method>();
+	private Map<Integer, Type> fieldsTypes = new HashMap<Integer, Type>();
 	
 	// Constructor
 	public KvmSerializationHelper(KvmSerializable dtoObject)
@@ -34,7 +35,7 @@ public class KvmSerializationHelper
 		int index = 0;
 		for(Field field : fieldsArray)
 		{
-			String capitalizedFieldName = field.getName().substring(0, 1).toUpperCase() + field.getName().substring(2);
+			String capitalizedFieldName = field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1);
 			
 			for(Method method : methodsArray)
 			{

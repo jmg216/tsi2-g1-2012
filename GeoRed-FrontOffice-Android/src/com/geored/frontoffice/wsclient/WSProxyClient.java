@@ -42,7 +42,11 @@ public class WSProxyClient
         	usuarioInfo.setType(param.getClass());
         	
         	soapObject.addProperty(usuarioInfo);
-        	envelope.addMapping(NAMESPACE, wsdlObjectName, param.getClass());
+        	
+        	if (wsdlObjectName.contains("ADTO"))
+        	{
+        		envelope.addMapping(NAMESPACE, wsdlObjectName, param.getClass());
+        	}
     	}
     	
     	// Ejecuto la llamada
