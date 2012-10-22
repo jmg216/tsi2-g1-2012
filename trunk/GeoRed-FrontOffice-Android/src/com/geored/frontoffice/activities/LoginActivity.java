@@ -9,12 +9,17 @@ import org.xmlpull.v1.XmlPullParserException;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.geored.frontoffice.R;
+import com.geored.frontoffice.dto.UsuarioADTO;
+import com.geored.frontoffice.wsclient.UsuarioWS;
 
 public class LoginActivity extends Activity implements OnClickListener  {
 
@@ -30,41 +35,29 @@ public class LoginActivity extends Activity implements OnClickListener  {
     
     public void loginUsuario (View v) throws IOException, XmlPullParserException
     {    	
-    	EditText txtUsu = (EditText) this.findViewById(R.id.txtUsuario);
+    	EditText txtEmail = (EditText) this.findViewById(R.id.txtUsuario);
     	EditText txtPass = (EditText) this.findViewById(R.id.txtPass);
 
-    	String usuario = txtUsu.getText().toString();
+    	String email = txtEmail.getText().toString();
     	String pass = txtPass.getText().toString();
     	
-//    	SoapObject request = UtilesWS.getSoapObject(MetodosWS.EXISTE_USUARIO);
+//    	email = "jmg216@hotmail.com";
+//    	pass = "juanma";
     	
-//    	PropertyInfo usuInfo = new PropertyInfo();
-//    	usuInfo.setName("arg0");
-//    	usuInfo.setValue(usuario);
-//    	usuInfo.setType(String.class);
-//        request.addProperty(usuInfo);
-//        
-//        PropertyInfo passInfo = new PropertyInfo();
-//        passInfo.setName("arg1");
-//        passInfo.setValue(pass);
-//        passInfo.setType(String.class);
-//        request.addProperty(passInfo);
-        
-//        SoapSerializationEnvelope envelope = UtilesWS.getEnvelope(request);
-//        SoapObject response = UtilesWS.makeCall(envelope, MetodosWS.EXISTE_USUARIO);
-//        
-//        boolean existe = response.toString().equals("true");        
-//    	
-//    	if (existe)
-//    	{
-//	    	Intent menuActivity = new Intent (this, MenuActivity.class);
-//	    	startActivity(menuActivity);
-//    	}
-//    	else
-//    	{
-//        	Intent registroActivity = new Intent (this, RegistroActivity.class);
-//        	startActivity(registroActivity);
-//    	}
+    	UsuarioADTO usuarioADTO = new UsuarioWS().obtenerPorEmailYPass(email, pass);
+    	
+    	if (usuarioADTO != null)
+    	{
+	    	Intent menuActivity = new Intent (this, MenuActivity.class);
+	    	startActivity(menuActivity);
+    	}
+    	else
+    	{
+    		messageToast(R.layout.custom_toast_message, Toast.LENGTH_SHORT);
+    		
+        	Intent registroActivity = new Intent (this, RegistroActivity.class);
+        	startActivity(registroActivity);
+    	}
     	
     }    
     
@@ -74,5 +67,23 @@ public class LoginActivity extends Activity implements OnClickListener  {
     	startActivity(registroActivity);	
 		
 	}
+	
+	
+    private void messageToast(int layout, int duration) {
+
+    	
+		LayoutInflater inflater = getLayoutInflater();		 
+		View layoutView = inflater.inflate(layout, null);
+		// set a message
+		TextView text = (TextView) layoutView.findViewById(R.id.text);
+		text.setText("Usuario no registrado");    	
+    	//Toast
+    	Toast toast = new Toast(getApplicationContext()); 
+    	toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+    	toast.setDuration(duration);
+    	toast.setView(layoutView);
+    	toast.show();
+
+    }	
 
 }

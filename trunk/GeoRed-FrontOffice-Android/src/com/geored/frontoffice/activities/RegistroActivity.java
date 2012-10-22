@@ -39,6 +39,10 @@ public class RegistroActivity extends Activity {
     	usuarioADTO.setEmail(email.getText().toString());
     	usuarioADTO.setPass(pass.getText().toString());
     	
+//    	usuarioADTO.setNombre("Carlos");
+//    	usuarioADTO.setEmail("carlos@hotmail.com");
+//    	usuarioADTO.setPass("carlosPass");
+    	
     	Long idUsuario = new UsuarioWS().insertar(usuarioADTO);
 			
     	//Si se registra correctamente lo redirecciona al menu, sino

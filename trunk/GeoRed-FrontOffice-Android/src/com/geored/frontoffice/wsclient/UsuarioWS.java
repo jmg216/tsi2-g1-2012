@@ -41,18 +41,24 @@ public class UsuarioWS
 	
 	public UsuarioADTO obtenerPorEmailYPass(String email, String pass)
 	{
-		/*String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
+		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		
     	SoapObject response = WSProxyClient.call(wsdlMethodName, email, pass);
     	
     	UsuarioADTO usuarioADTO = new UsuarioADTO();
     	
-    	usuarioADTO.setId(Long.parseLong(response.getProperty(0).toString()));
-    	usuarioADTO.setNombre(response.getProperty(1).toString());
-    	usuarioADTO.setEmail(response.getProperty(2).toString());
-    	usuarioADTO.setPass(response.getProperty(3).toString());   			
+    	if (response == null)
+    	{
+    		return null;
+    	}
+    	else
+    	{        	
+        	usuarioADTO.setEmail((response.getProperty(0).toString()));
+        	usuarioADTO.setId(Long.parseLong(response.getProperty(1).toString()));
+        	usuarioADTO.setNombre(response.getProperty(2).toString());
+        	usuarioADTO.setPass(response.getProperty(3).toString());   	
+    	}	
     			
-		return usuarioADTO;	*/	
-		return null;
+		return usuarioADTO;
 	}
 }

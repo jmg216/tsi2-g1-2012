@@ -12,7 +12,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_marginTop="20dp"
-	        android:text="@string/usuario"
+	        android:text="@string/email"
 	        android:textColor="@color/azul"/>
 	<EditText
 	        android:id="@+id/txtUsuario"
@@ -24,6 +24,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_marginTop="20dp"
+	        android:text="@string/password"
 	        android:textColor="@color/azul" />	            
 	        
 	<EditText 
