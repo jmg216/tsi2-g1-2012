@@ -15,15 +15,24 @@ public class AmistadDAOImpl extends GenericDAOBase<Amistad, AmistadDTO> implemen
 
 	@Override
 	public void dtoToEntity(AmistadDTO source, Amistad target)
-	{
-		// TODO Auto-generated method stub
-		
+	{		
 	}
 
 	@Override
 	public void entityToDto(Amistad source, AmistadDTO target)
 	{
-		// TODO Auto-generated method stub
+		target.setId(source.getId());
 		
+		if(source.getUsuarioA() != null)
+		{
+			target.setIdUsuarioA(source.getUsuarioA().getId());
+			target.setNombreUsuarioA(source.getUsuarioA().getNombre());
+		}
+		
+		if(source.getUsuarioB() != null)
+		{
+			target.setIdUsuarioB(source.getUsuarioB().getId());
+			target.setNombreUsuarioB(source.getUsuarioB().getNombre());
+		}			
 	}	
 }

@@ -26,7 +26,13 @@ public class Sitio implements Serializable
 	
 	@Column(name="NOMBRE", nullable=false)
 	private String nombre;
+	
+	@Column(name="DESCRIPCION", nullable=false)
+	private String descripcion;
 
+	@Column(name="UBICACION_GEOGRAFICA", nullable=false)
+	private String ubicacionGeografica;
+	
 	@JoinColumn(name="ADMINISTRADOR_FK", nullable=false)
 	private Administrador administrador;
 	
@@ -58,5 +64,25 @@ public class Sitio implements Serializable
 	public void setAdministrador(Administrador administrador)
 	{
 		this.administrador = administrador;
+	}
+
+	public String getDescripcion()
+	{
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion)
+	{
+		this.descripcion = descripcion;
+	}
+
+	public String getUbicacionGeografica()
+	{
+		return ubicacionGeografica;
+	}
+
+	public void setUbicacionGeografica(String ubicacionGeografica)
+	{
+		this.ubicacionGeografica = ubicacionGeografica;
 	}
 }

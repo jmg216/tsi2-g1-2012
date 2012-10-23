@@ -16,15 +16,20 @@ public class NotificacionDAOImpl extends GenericDAOBase<Notificacion, Notificaci
 	@Override
 	public void dtoToEntity(NotificacionDTO source, Notificacion target)
 	{
-		// TODO Auto-generated method stub
-		
+		target.setNombre(source.getNombre());
 	}
 
 	@Override
 	public void entityToDto(Notificacion source, NotificacionDTO target)
 	{
-		// TODO Auto-generated method stub
+		target.setId(source.getId());
+		target.setNombre(source.getNombre());
 		
+		if(source.getUsuario() != null)
+		{
+			target.setIdUsuario(source.getUsuario().getId());
+			target.setNombreUsuario(source.getUsuario().getNombre());
+		}
 	}
 	
 }

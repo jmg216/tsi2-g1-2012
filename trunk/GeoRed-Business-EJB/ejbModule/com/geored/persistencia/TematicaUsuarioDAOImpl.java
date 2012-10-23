@@ -16,15 +16,25 @@ public class TematicaUsuarioDAOImpl extends GenericDAOBase<TematicaUsuario, Tema
 	@Override
 	public void dtoToEntity(TematicaUsuarioDTO source, TematicaUsuario target)
 	{
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void entityToDto(TematicaUsuario source, TematicaUsuarioDTO target)
 	{
-		// TODO Auto-generated method stub
+		target.setId(source.getId());
 		
+		if(source.getTematica() != null)
+		{
+			target.setIdTematica(source.getTematica().getId());
+			target.setNombreTematica(source.getTematica().getNombre());			
+		}
+		
+		if(source.getUsuario() != null)
+		{
+			target.setIdUsuario(source.getUsuario().getId());
+			target.setNombreUsuario(source.getUsuario().getNombre());
+		}
+			
 	}
 	
 }

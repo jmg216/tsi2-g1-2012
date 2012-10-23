@@ -6,6 +6,8 @@ public class LocalDTO
 	
 	private String nombre;
 	
+	private String ubicacionGeografica;
+	
 	private Long idEmpresa;
 	
 	private String nombreEmpresa;
@@ -48,5 +50,15 @@ public class LocalDTO
 	public void setNombreEmpresa(String nombreEmpresa)
 	{
 		this.nombreEmpresa = nombreEmpresa;
+	}
+
+	public String getUbicacionGeografica()
+	{
+		return ubicacionGeografica;
+	}
+
+	public void setUbicacionGeografica(String ubicacionGeografica)
+	{
+		this.ubicacionGeografica = ubicacionGeografica;
 	}
 }

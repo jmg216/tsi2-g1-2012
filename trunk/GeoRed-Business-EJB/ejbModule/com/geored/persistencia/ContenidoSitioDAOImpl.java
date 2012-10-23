@@ -16,15 +16,24 @@ public class ContenidoSitioDAOImpl extends GenericDAOBase<ContenidoSitio, Conten
 	@Override
 	public void dtoToEntity(ContenidoSitioDTO source, ContenidoSitio target)
 	{
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void entityToDto(ContenidoSitio source, ContenidoSitioDTO target)
 	{
-		// TODO Auto-generated method stub
+		target.setId(source.getId());
 		
+		if(source.getSitio() != null)
+		{
+			target.setIdSitio(source.getSitio().getId());
+			target.setNombreSitio(source.getSitio().getNombre());
+		}
+		
+		if(source.getUsuario() != null)
+		{
+			target.setIdUsuario(source.getUsuario().getId());
+			target.setNombreUsuario(source.getUsuario().getNombre());
+		}
 	}
 	
 }

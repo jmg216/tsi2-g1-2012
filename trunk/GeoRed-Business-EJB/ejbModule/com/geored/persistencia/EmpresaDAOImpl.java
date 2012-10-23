@@ -1,5 +1,7 @@
 package com.geored.persistencia;
 
+import java.sql.Timestamp;
+
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
@@ -16,15 +18,25 @@ public class EmpresaDAOImpl extends GenericDAOBase<Empresa, EmpresaDTO> implemen
 	@Override
 	public void dtoToEntity(EmpresaDTO source, Empresa target)
 	{
-		// TODO Auto-generated method stub
-		
+		target.setNombre(source.getNombre());
+		target.setDescripcion(source.getDescripcion());
+		target.setFechaCreacion(new Timestamp(source.getFechaCreacion().getTime()));
+		target.setLogoUrl(source.getLogoUrl());
 	}
 
 	@Override
 	public void entityToDto(Empresa source, EmpresaDTO target)
 	{
-		// TODO Auto-generated method stub
+		target.setId(source.getId());
+		target.setNombre(source.getNombre());
+		target.setDescripcion(source.getDescripcion());
+		target.setFechaCreacion(source.getFechaCreacion());
+		target.setLogoUrl(source.getLogoUrl());
 		
-	}
-	
+		if(source.getAdministrador() != null)
+		{
+			target.setIdAministrador(source.getAdministrador().getId());
+			target.setNombreAdministrador(source.getAdministrador().getNombre());
+		}		
+	}	
 }

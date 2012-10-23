@@ -16,15 +16,24 @@ public class TematicaOfertaDAOImpl extends GenericDAOBase<TematicaOferta, Temati
 	@Override
 	public void dtoToEntity(TematicaOfertaDTO source, TematicaOferta target)
 	{
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void entityToDto(TematicaOferta source, TematicaOfertaDTO target)
 	{
-		// TODO Auto-generated method stub
+		target.setId(source.getId());
 		
+		if(source.getTematica() != null)
+		{
+			target.setIdTematica(source.getTematica().getId());
+			target.setNombreTematica(source.getTematica().getNombre());
+		}
+		
+		if(source.getOferta() != null)
+		{
+			target.setIdOferta(source.getOferta().getId());
+			target.setNombreOferta(source.getOferta().getNombre());
+		}
 	}
 	
 }

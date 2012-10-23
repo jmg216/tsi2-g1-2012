@@ -12,20 +12,28 @@ import com.geored.persistencia.core.GenericDAOBase;
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class AdministradorDAOImpl extends GenericDAOBase<Administrador, AdministradorDTO> implements AdministradorDAO
-{
+{	
 	@Override
 	public void dtoToEntity(AdministradorDTO source, Administrador target)
-	{		
+	{
+		target.setEmail(source.getEmail());
+		target.setPass(source.getPass());
+		target.setNombre(source.getNombre());		
 	}
 
 	@Override
 	public void entityToDto(Administrador source, AdministradorDTO target)
 	{
-		target.setId(source.getId());
-		target.setNombre(source.getEmail());
-		target.setNombreTipoAdministrador(target.getNombreTipoAdministrador());
+		target.setId(source.getId());		
+		target.setEmail(source.getEmail());
 		target.setPass(source.getPass());
+		target.setNombre(source.getEmail());
 		
+		if(source.getTipoAdministrador() != null)
+		{
+			target.setIdTipoAdministrador(source.getTipoAdministrador().getId());
+			target.setNombreTipoAdministrador(source.getTipoAdministrador().getNombre());
+		}
 	}
 
 	@Override

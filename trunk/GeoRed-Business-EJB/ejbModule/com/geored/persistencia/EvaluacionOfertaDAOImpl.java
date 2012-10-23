@@ -16,15 +16,25 @@ public class EvaluacionOfertaDAOImpl extends GenericDAOBase<EvaluacionOferta, Ev
 	@Override
 	public void dtoToEntity(EvaluacionOfertaDTO source, EvaluacionOferta target)
 	{
-		// TODO Auto-generated method stub
-		
+		target.setEvaluacion(source.getEvaluacion());
 	}
 
 	@Override
 	public void entityToDto(EvaluacionOferta source, EvaluacionOfertaDTO target)
 	{
-		// TODO Auto-generated method stub
+		target.setId(source.getId());
+		target.setEvaluacion(source.getEvaluacion());
 		
-	}
-	
+		if(source.getUsuario() != null)
+		{
+			target.setIdUsuario(source.getUsuario().getId());
+			target.setNombreUsuario(source.getUsuario().getNombre());
+		}
+		
+		if(source.getOferta() != null)
+		{
+			target.setIdOferta(source.getOferta().getId());
+			target.setNombreOferta(source.getOferta().getNombre());
+		}
+	}	
 }

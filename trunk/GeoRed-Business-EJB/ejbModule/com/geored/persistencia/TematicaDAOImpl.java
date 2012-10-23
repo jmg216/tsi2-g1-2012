@@ -16,15 +16,15 @@ public class TematicaDAOImpl extends GenericDAOBase<Tematica, TematicaDTO> imple
 	@Override
 	public void dtoToEntity(TematicaDTO source, Tematica target)
 	{
-		// TODO Auto-generated method stub
-		
+		target.setNombre(source.getNombre());
+		target.setDescripcion(source.getDescripcion());
 	}
 
 	@Override
 	public void entityToDto(Tematica source, TematicaDTO target)
 	{
-		// TODO Auto-generated method stub
-		
-	}
-	
+		target.setId(source.getId());
+		target.setNombre(source.getNombre());
+		target.setDescripcion(source.getDescripcion());
+	}	
 }

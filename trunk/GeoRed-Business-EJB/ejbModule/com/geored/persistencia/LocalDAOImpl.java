@@ -16,15 +16,21 @@ public class LocalDAOImpl extends GenericDAOBase<Local, LocalDTO> implements Loc
 	@Override
 	public void dtoToEntity(LocalDTO source, Local target)
 	{
-		// TODO Auto-generated method stub
-		
+		target.setNombre(source.getNombre());
+		target.setUbicacionGeografica(source.getUbicacionGeografica());
 	}
 
 	@Override
 	public void entityToDto(Local source, LocalDTO target)
 	{
-		// TODO Auto-generated method stub
+		target.setId(source.getId());
+		target.setNombre(source.getNombre());
+		target.setUbicacionGeografica(source.getUbicacionGeografica());
 		
+		if(source.getEmpresa() != null)
+		{
+			target.setIdEmpresa(source.getEmpresa().getId());
+			target.setNombreEmpresa(source.getEmpresa().getNombre());
+		}		
 	}
-	
 }

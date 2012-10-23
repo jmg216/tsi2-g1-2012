@@ -1,6 +1,8 @@
 package com.geored.dominio;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,7 +30,10 @@ public class CheckIn implements Serializable
 	
 	@Column(name="NOMBRE", nullable=false)
 	private String nombre;
-
+	
+	@Column(name="FECHA_CREACION", nullable=false)
+	private Timestamp fechaCreacion;
+	
 	@JoinColumn(name="USUARIO_FK", nullable=false)
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Usuario usuario;
@@ -75,5 +80,15 @@ public class CheckIn implements Serializable
 	public void setSitio(Sitio sitio)
 	{
 		this.sitio = sitio;
+	}
+
+	public Timestamp getFechaCreacion()
+	{
+		return fechaCreacion;
+	}
+
+	public void setFechaCreacion(Timestamp fechaCreacion)
+	{
+		this.fechaCreacion = fechaCreacion;
 	}
 }

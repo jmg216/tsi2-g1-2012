@@ -16,15 +16,24 @@ public class TematicaEventoDAOImpl extends GenericDAOBase<TematicaEvento, Temati
 	@Override
 	public void dtoToEntity(TematicaEventoDTO source, TematicaEvento target)
 	{
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void entityToDto(TematicaEvento source, TematicaEventoDTO target)
 	{
-		// TODO Auto-generated method stub
+		target.setId(source.getId());
 		
+		if(source.getTematica() != null)
+		{
+			target.setIdTematica(source.getTematica().getId());
+			target.setNombreTematica(source.getTematica().getNombre());
+		}
+		
+		if(source.getEvento() != null)
+		{
+			target.setIdEvento(source.getEvento().getId());
+			target.setNombreEvento(source.getEvento().getNombre());
+		}
 	}
 	
 }
