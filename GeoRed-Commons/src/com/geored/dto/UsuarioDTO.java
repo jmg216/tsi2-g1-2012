@@ -4,12 +4,12 @@ public class UsuarioDTO
 {
 	private Long id;
 	
-	private String nombre;
-	
 	private String email;
 	
 	private String pass;
 
+	private String nombre;
+	
 	public Long getId()
 	{
 		return id;
@@ -49,6 +49,4 @@ public class UsuarioDTO
 	{
 		this.pass = pass;
 	}
-	
-	
 }

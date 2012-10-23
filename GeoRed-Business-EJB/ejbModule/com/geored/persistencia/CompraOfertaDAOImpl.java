@@ -15,16 +15,25 @@ public class CompraOfertaDAOImpl extends GenericDAOBase<CompraOferta, CompraOfer
 
 	@Override
 	public void dtoToEntity(CompraOfertaDTO source, CompraOferta target)
-	{
-		// TODO Auto-generated method stub
-		
+	{		
 	}
 
 	@Override
 	public void entityToDto(CompraOferta source, CompraOfertaDTO target)
 	{
-		// TODO Auto-generated method stub
+		target.setId(source.getId());
 		
+		if(source.getUsuario() != null)
+		{
+			target.setIdUsuario(source.getUsuario().getId());
+			target.setNombreUsuario(source.getUsuario().getNombre());
+		}
+		
+		if(source.getOferta() != null)
+		{
+			target.setIdOferta(source.getOferta().getId());
+			target.setNombreOferta(source.getOferta().getNombre());
+		}
 	}
 	
 }

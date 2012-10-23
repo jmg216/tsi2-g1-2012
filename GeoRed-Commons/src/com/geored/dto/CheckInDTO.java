@@ -1,10 +1,14 @@
 package com.geored.dto;
 
+import java.util.Date;
+
 public class CheckInDTO
 {
 	private Long id;
 	
 	private String nombre;
+	
+	private Date fechaCreacion;
 
 	private Long idUsuario;
 	
@@ -72,5 +76,15 @@ public class CheckInDTO
 	public void setNombreSitio(String nombreSitio)
 	{
 		this.nombreSitio = nombreSitio;
+	}
+
+	public Date getFechaCreacion()
+	{
+		return fechaCreacion;
+	}
+
+	public void setFechaCreacion(Date fechaCreacion)
+	{
+		this.fechaCreacion = fechaCreacion;
 	}
 }

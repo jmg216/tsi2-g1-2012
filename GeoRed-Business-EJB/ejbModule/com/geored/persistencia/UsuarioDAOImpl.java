@@ -16,19 +16,18 @@ public class UsuarioDAOImpl extends GenericDAOBase<Usuario, UsuarioDTO> implemen
 	@Override
 	public void dtoToEntity(UsuarioDTO source, Usuario target)
 	{
-		target.setId(source.getId());
 		target.setEmail(source.getEmail());
-		target.setNombre(source.getNombre());
 		target.setPass(source.getPass());
+		target.setNombre(source.getNombre());
 	}
 
 	@Override
 	public void entityToDto(Usuario source, UsuarioDTO target)
 	{
-		target.setEmail(source.getEmail());
 		target.setId(source.getId());
-		target.setNombre(source.getNombre());
+		target.setEmail(source.getEmail());
 		target.setPass(source.getPass());
+		target.setNombre(source.getNombre());
 	}
 	
 	public Object obtenerUsuarioPorEmailYPass(String email, String pass, boolean toDTO)

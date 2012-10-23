@@ -1,5 +1,7 @@
 package com.geored.persistencia;
 
+import java.sql.Timestamp;
+
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
@@ -15,15 +17,28 @@ public class CheckInDAOImpl extends GenericDAOBase<CheckIn, CheckInDTO> implemen
 
 	@Override
 	public void dtoToEntity(CheckInDTO source, CheckIn target)
-	{
-		// TODO Auto-generated method stub
-		
+	{		
+		target.setNombre(source.getNombre());
+		target.setFechaCreacion(new Timestamp(source.getFechaCreacion().getTime()));
 	}
 
 	@Override
 	public void entityToDto(CheckIn source, CheckInDTO target)
 	{
-		// TODO Auto-generated method stub
+		target.setId(source.getId());
+		target.setNombre(source.getNombre());
+		target.setFechaCreacion(source.getFechaCreacion());
 		
+		if(source.getUsuario() != null)
+		{
+			target.setIdUsuario(source.getUsuario().getId());
+			target.setNombreUsuario(source.getUsuario().getNombre());
+		}
+		
+		if(source.getSitio() != null)
+		{
+			target.setIdSitio(source.getSitio().getId());
+			target.setNombreSitio(source.getSitio().getNombre());
+		}	
 	}	
 }

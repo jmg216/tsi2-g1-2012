@@ -16,15 +16,24 @@ public class TematicaSitioDAOImpl extends GenericDAOBase<TematicaSitio, Tematica
 	@Override
 	public void dtoToEntity(TematicaSitioDTO source, TematicaSitio target)
 	{
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void entityToDto(TematicaSitio source, TematicaSitioDTO target)
 	{
-		// TODO Auto-generated method stub
+		target.setId(source.getId());
+	
+		if(source.getTematica() != null)
+		{
+			target.setIdTematica(source.getTematica().getId());
+			target.setNombreTematica(source.getTematica().getNombre());			
+		}
 		
+		if(source.getSitio() != null)
+		{
+			target.setIdSitio(source.getSitio().getId());
+			target.setNombreSitio(source.getSitio().getNombre());
+		}
 	}
 	
 }

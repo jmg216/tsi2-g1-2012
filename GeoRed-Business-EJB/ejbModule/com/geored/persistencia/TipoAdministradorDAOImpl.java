@@ -16,15 +16,13 @@ public class TipoAdministradorDAOImpl extends GenericDAOBase<TipoAdministrador, 
 	@Override
 	public void dtoToEntity(TipoAdministradorDTO source, TipoAdministrador target)
 	{
-		// TODO Auto-generated method stub
-		
+		target.setNombre(source.getNombre());
 	}
 
 	@Override
 	public void entityToDto(TipoAdministrador source, TipoAdministradorDTO target)
 	{
-		// TODO Auto-generated method stub
-		
-	}
-	
+		target.setId(source.getId());
+		target.setNombre(source.getNombre());
+	}	
 }
