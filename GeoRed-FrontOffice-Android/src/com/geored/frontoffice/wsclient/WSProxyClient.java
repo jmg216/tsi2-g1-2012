@@ -31,21 +31,28 @@ public class WSProxyClient
     	int argIndex = 0;
     	for(Object param : params)
     	{
+    		Class paramClass = param.getClass();    
+    		
+    		if(isDTOClass(paramClass))
+    		{
+    			paramClass = paramClass.getSuperclass();
+    		}
+    		
     		// Nombre del objeto en el wsdl
-        	String wsdlObjectName = param.getClass().getSimpleName().substring(0, 1).toLowerCase() + 
-        						    param.getClass().getSimpleName().substring(1);
+        	String wsdlObjectName = paramClass.getSimpleName().substring(0, 1).toLowerCase() + 
+        							paramClass.getSimpleName().substring(1);
         	
         	// Creo el contenedor del DTO
         	PropertyInfo usuarioInfo = new PropertyInfo();
         	usuarioInfo.setName("arg" + argIndex++);
         	usuarioInfo.setValue(param);
-        	usuarioInfo.setType(param.getClass());
+        	usuarioInfo.setType(paramClass);
         	
         	soapObject.addProperty(usuarioInfo);
         	
-        	if (wsdlObjectName.contains("ADTO"))
+        	if(isDTOClass(paramClass))
         	{
-        		envelope.addMapping(NAMESPACE, wsdlObjectName, param.getClass());
+        		envelope.addMapping(NAMESPACE, wsdlObjectName, paramClass);
         	}
     	}
     	
@@ -74,5 +81,16 @@ public class WSProxyClient
         envelope.dotNet = false;
         envelope.setOutputSoapObject(Soap);
         return envelope;
+    }
+    
+    /**
+     * Indica si la clazz recibida como parametro es un DTO o no
+     * 
+     * @param clazz
+     * @return
+     */
+    private static boolean isDTOClass(Class clazz)
+    {
+    	return clazz.getName().contains("DTO");
     }
 }
