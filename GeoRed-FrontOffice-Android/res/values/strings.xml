@@ -19,6 +19,9 @@
 	<string name="notificaciones">Notificaciones</string>
 	<string name="chat">Chat</string>
 	
+	<string name="perolataImagen">Ingrese la URL de su foto de Perfil</string>
+	<string name="perolataImagenBoton">Click Aqui para cargar Foto</string>
+	
 	<!-- ERRORES -->
 	<string name="error_registro">Ocurrió un error al procesar el registro. Intente mas tarde.</string>
 	
