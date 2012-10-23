@@ -7,6 +7,7 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.Vector;
 
 import org.ksoap2.serialization.KvmSerializable;
 import org.ksoap2.serialization.PropertyInfo;
@@ -35,13 +36,16 @@ public class KvmSerializationHelper
 		int index = 0;
 		for(Field field : fieldsArray)
 		{
+			// Nombre
+			fieldsNames.put(index, field.getName());
+			
+			// Field Type
+			fieldsTypes.put(index, field.getType());
+			
 			String capitalizedFieldName = field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1);
 			
 			for(Method method : methodsArray)
 			{
-				// Nombre
-				fieldsNames.put(index, field.getName());
-				
 				// Getters y Setters methods
 				if(method.getName().equals("get" + capitalizedFieldName))
 				{
@@ -51,9 +55,6 @@ public class KvmSerializationHelper
 				{
 					fieldsSetters.put(index, method);
 				}
-				
-				// Field Type
-				fieldsTypes.put(index, field.getType());
 			}
 			
 			index++;
@@ -63,7 +64,7 @@ public class KvmSerializationHelper
 	// Operaciones utilizarias para KvmSerializable
 	public int getPropertyCount()
 	{
-		return dtoClass.getFields().length;
+		return dtoClass.getDeclaredFields().length;
 	}
 	
 	public Object getProperty(int index) 
@@ -73,22 +74,33 @@ public class KvmSerializationHelper
         
         try
 		{
-			return getter.invoke(dtoObject, new Object[]{});
+			Object getterValue = getter.invoke(dtoObject, new Object[]{});
+			
+			if(fieldsTypes.get(index).equals(Long.class) && getterValue == null)
+			{
+				return new Long(0L);
+			}
+			
+			return getterValue;
 		} 
         catch (IllegalArgumentException e)
 		{
 			e.printStackTrace();
+			
+			return null;
 		} 
         catch (IllegalAccessException e)
 		{
 			e.printStackTrace();
+			
+			return null;
 		} 
         catch (InvocationTargetException e)
 		{
 			e.printStackTrace();
-		}
-        
-        return null;
+			
+			return null;
+		}         
 	}
 
 	public void setProperty(int index, Object value) 
@@ -134,8 +146,14 @@ public class KvmSerializationHelper
 		{
 			return PropertyInfo.LONG_CLASS;
 		}
-		
-		// TODO Faltan varios tipos fijarse en PropertyInfo
+		else if(type.equals(Boolean.class))
+		{
+			return PropertyInfo.BOOLEAN_CLASS;
+		}
+		else if(type.equals(Vector.class))
+		{
+			return PropertyInfo.VECTOR_CLASS;
+		}
 		
 		return PropertyInfo.OBJECT_CLASS;
 			
