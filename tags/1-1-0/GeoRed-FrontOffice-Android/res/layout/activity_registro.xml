@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="#C9D0D6"
+    android:orientation="vertical">
+    
+	<TextView 
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="20dp"
+	        android:text="@string/nombreUsuario"
+	        android:textColor="@color/azul"/>
+	<EditText
+	        android:id="@+id/txtNombreUsuario"
+	        android:inputType="text"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:ems="10"/>
+	
+	<TextView 
+	    	android:layout_width="match_parent"
+	    	android:layout_height="wrap_content"
+	    	android:layout_marginTop="10dp"
+	    	android:text="@string/email"
+	    	android:textColor="@color/azul" />
+    
+	<EditText
+	        android:id="@+id/txtEmail"
+	        android:inputType="textEmailAddress"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:ems="10"/>
+	
+	<TextView 
+	    	android:layout_width="match_parent"
+	    	android:layout_height="wrap_content"
+	    	android:layout_marginTop="10dp"
+	    	android:text="@string/password"
+	    	android:textColor="@color/azul" />
+    
+	<EditText
+	        android:id="@+id/txtPassword"
+	        android:inputType="textPassword"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:ems="10"/>	
+	        
+	<Button
+         android:id="@+id/registro"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="30dp"
+         android:text="@string/registro"
+         android:onClick="registroUsuario"/>
+</LinearLayout>
