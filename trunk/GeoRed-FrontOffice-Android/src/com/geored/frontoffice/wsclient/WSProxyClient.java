@@ -19,7 +19,7 @@ public class WSProxyClient
 	/**
      * Metodo que hace el transporte de los datos por los webservices retornando la respuesta del servidor.
      * */
-    public static SoapObject call(String methodName, Object... params)
+    public static Object call(String methodName, Object... params)
     {
     	// Objeto a ser transportado con el contenedor
     	SoapObject soapObject = new SoapObject(NAMESPACE, methodName);
@@ -62,8 +62,7 @@ public class WSProxyClient
     		HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
     		androidHttpTransport.call(SOAP_ACTION, envelope);
     		
-            SoapObject response = (SoapObject) envelope.getResponse();            
-            return response;
+    		return envelope.getResponse();
          }
          catch(Exception e)
          {
