@@ -64,11 +64,9 @@ public class RegistroActivity extends Activity {
     	usuarioADTO.setPass(pass.getText().toString());
     	//aca hay que hacer un set de la url
     	
-    	//Aca no se por que le hacen un doble seteo arriba lo optienen por los EditText
-    	//y aca abajo lo pisan con carlos??
-    	usuarioADTO.setNombre("Carlos");
-    	usuarioADTO.setEmail("carlos@hotmail.com");
-    	usuarioADTO.setPass("carlosPass");
+//    	usuarioADTO.setNombre("Carlos");
+//    	usuarioADTO.setEmail("carlos@hotmail.com");
+//    	usuarioADTO.setPass("carlosPass");
     	
     	
     	Long idUsuario = new UsuarioWS().insertar(usuarioADTO);

@@ -1,6 +1,7 @@
 package com.geored.frontoffice.activities;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.serialization.SoapObject;
@@ -41,10 +42,12 @@ public class LoginActivity extends Activity implements OnClickListener  {
     	String email = txtEmail.getText().toString();
     	String pass = txtPass.getText().toString();
     	
-    	email = "jmg216@hotmail.com";
-    	pass = "juanma";
+//    	email = "jmg216@hotmail.com";
+//    	pass = "juanma";
     	
     	UsuarioADTO usuarioADTO = new UsuarioWS().obtenerPorEmailYPass(email, pass);
+    	
+    	//List <UsuarioADTO> usuariosADTO = new UsuarioWS().obtenerListado();
     	
     	if (usuarioADTO != null)
     	{
