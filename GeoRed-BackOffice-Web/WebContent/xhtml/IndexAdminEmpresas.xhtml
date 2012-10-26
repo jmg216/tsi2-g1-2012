@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+<f:view contentType="text/html">
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>GeoRed-BackOffice</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+		<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+		<style type="text/css">
+			.ui-layout-unit{
+				border:0px;
+			}
+			
+			.ui-widget-content{
+				background: white;
+			}
+			
+			.ui-layout-north {
+                z-index:20 !important;
+                overflow:visible !important;;
+            }    
+			.ui-layout-north .ui-layout-unit-content {
+                overflow:visible !important;
+            }
+            
+            .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+                font-size: 14px;
+           	}
+           	
+           .ui-menu {
+           		width: 315px;
+           }
+		</style>
+	</h:head>
+	
+	<h:form>
+	
+	<h:body>	  
+		<p:layout fullPage="true">	
+			
+			<p:layoutUnit position="north" size="45" >
+			
+			</p:layoutUnit>
+			
+			<p:layoutUnit position="center">
+				<h:form>
+					<p:panel header="Informacion">
+						<h:panelGrid columns="2" cellpadding="5" style="width:575px;" columnClasses="column">
+							<h:outputText value="Bienvenido #{indexAdminEmpresas.usuario}!" /> <br />
+							<p:graphicImage value="/imagenes/Logo_back.png" />
+							<h:outputText value="Como me cago!"/>
+	
+							<h:outputText value="Nombre de la Empresa:" />
+							
+							<p:inputText value="#{indexAdminEmpresas.usuario}"></p:inputText>
+
+							<h:outputText value="Administrado por:" />
+							<h:outputText value="#{indexAdminEmpresas.usuario}" />
+							<f:facet name="footer">
+							<p:separator/>
+								<p:commandButton value="Cambiar Password..." onclick="cambioPass.show()" />	
+								<p:commandButton value="Modificar..." type="submit" action="#{indexAdminEmpresas.Hola()}" style="float:right;"/>		
+							</f:facet>	
+						</h:panelGrid>
+					
+					</p:panel>
+				
+				
+				</h:form>
+				
+			</p:layoutUnit>	
+		    
+			<p:layoutUnit position="east" size="615">	
+				Aca voy a mandar el mapa con los locales de la empresa!
+            </p:layoutUnit>
+			
+			<p:layoutUnit position="south" size="77">
+				<p:layout>
+					<p:layoutUnit position="west" size="20"></p:layoutUnit>
+					<p:layoutUnit position="center" >
+						<p:separator id = "separador_abajo"></p:separator>
+						<p:graphicImage value="/imagenes/Logo_back.png"></p:graphicImage>
+						<h:outputText id="texto" style="font-size:10px;text-align:right;float:right;" value="Desarrollado por grupo 1 - Tecnologo en Informatica" />
+					</p:layoutUnit>
+					<p:layoutUnit position="east" size="19"></p:layoutUnit>
+				</p:layout>
+			</p:layoutUnit>	
+			
+			<p:layoutUnit position="west" size="20">
+			
+			</p:layoutUnit>
+			
+		</p:layout>	 		
+		
+		<p:dialog widgetVar="cambioPass" modal="true">
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputText value="Password Actual:" />
+				<p:password value="#{indexAdminEmpresas.password}"/>
+				<h:outputText value="Password Nueva:" />
+				<p:password value="" feedback="true" match="passNueva"/>
+				<h:outputText value="Reescriba su Password:" />
+				<p:password id="passNueva" value="#{indexAdminEmpresas.passwordNueva}"/>
+				<f:facet name="footer">
+					<p:commandButton type="submit" value="fijate!" action="#{indexAdminEmpresas.Hola()}" oncomplete="cambioPass.hide()"></p:commandButton>	
+				</f:facet>
+			</h:panelGrid>
+		</p:dialog>
+		
+	</h:body>
+	</h:form>
+</f:view>
+</html>

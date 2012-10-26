@@ -60,7 +60,7 @@ public class LoginBean implements Serializable
 			
 			admin = admiWs.obtenerAdminPorEmailYPass(usuario, password);
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("Usuario", usuario);
-			FacesContext.getCurrentInstance().getExternalContext().redirect("IndexAdmin.xhtml");
+			FacesContext.getCurrentInstance().getExternalContext().redirect("IndexAdminEmpresas.xhtml");
 			
 		} catch (RemoteException e1) {
 			
