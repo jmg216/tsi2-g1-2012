@@ -6,7 +6,7 @@
 	<!-- Template to Use -->
 	<context-param>   
 		<param-name>primefaces.THEME</param-name>
-     	<param-value>start</param-value>
+     	<param-value>excite-bike</param-value>
     </context-param>
     
 	
@@ -25,6 +25,6 @@
     <servlet-mapping>
     	<servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>    
     
 </web-app>
