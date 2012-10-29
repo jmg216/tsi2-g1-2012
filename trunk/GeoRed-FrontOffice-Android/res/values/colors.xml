@@ -6,5 +6,7 @@
     <color name="azul_claro">#0066FF</color>
     <color name="anaranjado">#FF9966</color>
     <color name="celeste">#09ADB9</color>
-    
+    <color name="negro">#000000</color>
+    <color name="gris">#E0F0FF</color>
+    <color name="hedear">#0066FF</color>
 </resources>

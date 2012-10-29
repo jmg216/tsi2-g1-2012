@@ -19,10 +19,14 @@
 	<string name="notificaciones">Notificaciones</string>
 	<string name="chat">Chat</string>
 	
+	<string name="Buscar">Buscar&#8230;</string>
+	
 	<string name="perolataImagen">Ingrese la URL de su foto de Perfil</string>
 	<string name="perolataImagenBoton">Click Aqui para cargar Foto</string>
 	
-	<!-- ERRORES -->
+	<!-- ERRORES y MENSAJES-->
 	<string name="error_registro">Ocurrió un error al procesar el registro. Intente mas tarde.</string>
-	
+	<string name="error_login">Debes registrarte para utilizar esta aplicación. Registrate ahora!</string>
+	<string name="cargando">Cargando(&#8230;)</string>
+	<string name="obteniendo_datos">Obteniendo datos&#8230;</string>
 </resources>
