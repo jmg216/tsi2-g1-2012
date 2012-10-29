@@ -9,6 +9,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ import com.geored.frontoffice.wsclient.UsuarioWS;
 
 public class LoginActivity extends Activity implements OnClickListener  {
 
+	private static final int TIEMPO_MENSAJE = 300000;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +44,8 @@ public class LoginActivity extends Activity implements OnClickListener  {
     	String email = txtEmail.getText().toString();
     	String pass = txtPass.getText().toString();
     	
-//    	email = "jmg216@hotmail.com";
-//    	pass = "juanma";
+    	email = "jmg216@hotmail.com";
+    	pass = "juanma";
     	
     	UsuarioADTO usuarioADTO = new UsuarioWS().obtenerPorEmailYPass(email, pass);
     	
@@ -56,7 +58,7 @@ public class LoginActivity extends Activity implements OnClickListener  {
     	}
     	else
     	{
-    		messageToast(R.layout.custom_toast_message, Toast.LENGTH_SHORT);
+    		messageToast(R.layout.custom_toast_message, TIEMPO_MENSAJE);
     		
         	Intent registroActivity = new Intent (this, RegistroActivity.class);
         	startActivity(registroActivity);
@@ -64,29 +66,26 @@ public class LoginActivity extends Activity implements OnClickListener  {
     	
     }    
     
-	public void onClick(View v) {
-		
+	public void onClick(View v) 
+	{		
     	Intent registroActivity = new Intent (this, RegistroActivity.class);
-    	startActivity(registroActivity);	
-		
+    	startActivity(registroActivity);			
 	}
 	
-	
-    private void messageToast(int layout, int duration) {
-
-    	
+    private void messageToast(int layout, int duration) 
+    {
+    	Resources res = getResources();
 		LayoutInflater inflater = getLayoutInflater();		 
 		View layoutView = inflater.inflate(layout, null);
 		// set a message
 		TextView text = (TextView) layoutView.findViewById(R.id.text);
-		text.setText("Usuario no registrado");    	
+		text.setText(res.getString(R.string.error_login));    	
     	//Toast
     	Toast toast = new Toast(getApplicationContext()); 
     	toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
     	toast.setDuration(duration);
     	toast.setView(layoutView);
     	toast.show();
-
     }	
 
 }

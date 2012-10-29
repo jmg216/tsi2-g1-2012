@@ -39,7 +39,6 @@ public class MenuActivity  extends TabActivity{
         spec = tabHost.newTabSpec(res.getString(R.string.contactos))
         				.setIndicator(tabView)
         				.setContent(intent);
-        
         tabHost.addTab(spec);
         
         //TAB SITIOS **************************************************
