@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">	
+	
+	<h:body>
+		<ui:composition template="/xhtml/templates/layout.xhtml">
+			<ui:define name="content">
+					<p:panel header="Informacion y Locales de la Empresa">
+						<h:panelGrid id="panelInfo" columns="2" style="margin-left:44px;margin-bottom:53px;">
+
+							<h:panelGrid id="panelInfoEmpresa" columns="2" cellpadding="5" style="margin-top:-132px;margin-right:-62px;">
+							
+									<p:graphicImage value="/imagenes/Logo_back.png" />
+									<h:outputText value="" />
+									
+									<h:outputText value="Descripcion:" />
+									<h:outputText value="Como me cago!"/>
+			
+									<h:outputText value="Nombre de la Empresa:" />
+									<h:outputText value="Hola D:" />
+									
+									<h:outputText value="Administrado por:" />
+									<h:outputText value="Nick del admin o Nombre" />
+									<f:facet name="footer">
+									<p:separator/>
+										<p:commandButton value="Modificar..." type="submit" action="#" icon="ui-icon-arrowrefresh-1-w" style="float:right;"/>		
+									</f:facet>								
+							</h:panelGrid>
+		
+							<h:panelGrid id="panelMapa" style="margin-left:87px;">
+									<p:gmap center="41.381542, 2.122893" zoom="15" type="TERRAIN" style="width:430px;height:350px" />							
+							</h:panelGrid>
+							
+						</h:panelGrid>							
+					</p:panel>			
+			</ui:define>
+		</ui:composition>
+	</h:body>	
+</html>
+	
+	
