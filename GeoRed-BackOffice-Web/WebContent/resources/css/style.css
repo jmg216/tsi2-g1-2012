@@ -2,7 +2,7 @@ body
 {
     font-size: 12px;
     font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif !important;
-    color: #163F9E;
+    color: #03415D;
     text-align: justify;
     margin: 0px;    
 }
@@ -50,4 +50,11 @@ input, select, textarea
 	position: absolute;
 	right: 15%;
 	top: 50px;
+}
+
+.simple-link
+{
+	text-decoration: none;
+	color: #03415D;
+	font-weight: bold;
 }
