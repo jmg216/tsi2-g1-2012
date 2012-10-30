@@ -1,23 +1,23 @@
 package com.geored.frontoffice.activities;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.geored.frontoffice.R;
 import com.geored.frontoffice.dto.UsuarioADTO;
+import com.geored.frontoffice.utiles.BitMapImageConverter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.app.Activity;
 
 public class ContactosAdapter extends ArrayAdapter<UsuarioADTO> {
 	
     private List<UsuarioADTO> items;
-    //private static LayoutInflater inflater = null;
 
     public ContactosAdapter(Context context, int textViewResourceId, List<UsuarioADTO> items) {
             super(context, textViewResourceId, items);
@@ -35,14 +35,20 @@ public class ContactosAdapter extends ArrayAdapter<UsuarioADTO> {
             }
             
             UsuarioADTO usuario = items.get(position);
+            
             if (usuario != null) 
             {
                     TextView tt = (TextView) v.findViewById(R.id.toptext);
                     TextView bt = (TextView) v.findViewById(R.id.bottomtext);
+                    ImageView iv = (ImageView) v.findViewById(R.id.icon);
+                    
                     tt.setText(usuario.getNombre());                            
                     bt.setText(usuario.getEmail());
+                    
+                    Bitmap bm = BitMapImageConverter.getImageBitmap("http://www.veryicon.com/icon/png/Application/iPhonica%20Vol.%202/Contact.png");
+                    iv.setImageBitmap(bm);
             }
             
             return v;
-    }
+    }      
 }

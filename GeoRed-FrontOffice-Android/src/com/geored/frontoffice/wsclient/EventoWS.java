@@ -8,6 +8,7 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 
 import com.geored.frontoffice.dto.EventoADTO;
+import com.geored.frontoffice.utiles.UtilesAndorid;
 
 public class EventoWS 
 {
@@ -16,7 +17,7 @@ public class EventoWS
 	{
 		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		
-		SoapPrimitive response = (SoapPrimitive) WSProxyClient.call(wsdlMethodName, eventoADTO);
+		SoapPrimitive response = (SoapPrimitive) WSProxyClient.call(UtilesAndorid.URL_WS_EVENTO, wsdlMethodName, eventoADTO);
     	
 		return Long.valueOf(response.toString());
 	}
@@ -25,21 +26,21 @@ public class EventoWS
 	{
 		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		
-    	WSProxyClient.call(wsdlMethodName, eventoADTO);		
+    	WSProxyClient.call(UtilesAndorid.URL_WS_EVENTO, wsdlMethodName, eventoADTO);		
 	}
 	
 	public void eliminar(Long idEvento)
 	{
 		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		
-    	WSProxyClient.call(wsdlMethodName, idEvento);			
+    	WSProxyClient.call(UtilesAndorid.URL_WS_EVENTO, wsdlMethodName, idEvento);			
 	}
 	
 	public EventoADTO obtener(Long idEvento)
 	{
 		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		
-		SoapObject response = (SoapObject) WSProxyClient.call(wsdlMethodName, idEvento);
+		SoapObject response = (SoapObject) WSProxyClient.call(UtilesAndorid.URL_WS_EVENTO, wsdlMethodName, idEvento);
 		
 		EventoADTO eventoADTO = new EventoADTO();
 		
@@ -70,7 +71,7 @@ public class EventoWS
 	{
 		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		
-		Vector  response = (Vector) WSProxyClient.call(wsdlMethodName);
+		Vector  response = (Vector) WSProxyClient.call(UtilesAndorid.URL_WS_EVENTO, wsdlMethodName);
 				
 		EventoADTO[] eventosADTO = new EventoADTO[response.size()];
 		

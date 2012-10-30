@@ -10,6 +10,7 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 
 import com.geored.frontoffice.dto.UsuarioADTO;
+import com.geored.frontoffice.utiles.UtilesAndorid;
 
 public class UsuarioWS
 {
@@ -17,7 +18,7 @@ public class UsuarioWS
 	{
 		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		
-		SoapPrimitive response = (SoapPrimitive) WSProxyClient.call(wsdlMethodName, usuarioADTO);
+		SoapPrimitive response = (SoapPrimitive) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, wsdlMethodName, usuarioADTO);
     	
 		return Long.valueOf(response.toString());
 	}
@@ -26,21 +27,21 @@ public class UsuarioWS
 	{
 		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		
-    	WSProxyClient.call(wsdlMethodName, usuarioADTO);		
+    	WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, wsdlMethodName, usuarioADTO);		
 	}
 	
 	public void eliminar(Long idUsuario)
 	{
 		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		
-		WSProxyClient.call(wsdlMethodName, idUsuario);
+		WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, wsdlMethodName, idUsuario);
 	}
 	
 	public UsuarioADTO obtener(Long idUsuario)
 	{
 		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		
-		SoapObject response = (SoapObject) WSProxyClient.call(wsdlMethodName, idUsuario);
+		SoapObject response = (SoapObject) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, wsdlMethodName, idUsuario);
 		
 		UsuarioADTO usuarioADTO = new UsuarioADTO();
 		
@@ -63,7 +64,7 @@ public class UsuarioWS
 	{
 		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		
-		Vector  response = (Vector) WSProxyClient.call(wsdlMethodName);
+		Vector  response = (Vector) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, wsdlMethodName);
 				
 		UsuarioADTO[] usuariosADTO = new UsuarioADTO[response.size()];
 		
@@ -91,7 +92,7 @@ public class UsuarioWS
 	{
 		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		
-    	SoapObject response = (SoapObject) WSProxyClient.call(wsdlMethodName, email, pass);
+    	SoapObject response = (SoapObject) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, wsdlMethodName, email, pass);
     	
     	UsuarioADTO usuarioADTO = new UsuarioADTO();
     	
