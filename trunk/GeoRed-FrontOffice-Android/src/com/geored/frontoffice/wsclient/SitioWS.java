@@ -8,6 +8,7 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 
 import com.geored.frontoffice.dto.SitioADTO;
+import com.geored.frontoffice.utiles.UtilesAndorid;
 
 public class SitioWS 
 {
@@ -16,7 +17,7 @@ public class SitioWS
 	{
 		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		
-		SoapPrimitive response = (SoapPrimitive) WSProxyClient.call(wsdlMethodName, sitioADTO);
+		SoapPrimitive response = (SoapPrimitive) WSProxyClient.call(UtilesAndorid.URL_WS_SITIO, wsdlMethodName, sitioADTO);
     	
 		return Long.valueOf(response.toString());
 	}
@@ -25,21 +26,21 @@ public class SitioWS
 	{
 		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		
-    	WSProxyClient.call(wsdlMethodName, sitioADTO);		
+    	WSProxyClient.call(UtilesAndorid.URL_WS_SITIO, wsdlMethodName, sitioADTO);		
 	}
 	
 	public void eliminar(Long idSitio)
 	{
 		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		
-    	WSProxyClient.call(wsdlMethodName, idSitio);			
+    	WSProxyClient.call(UtilesAndorid.URL_WS_SITIO, wsdlMethodName, idSitio);			
 	}
 	
 	public SitioADTO obtener(Long idSitio)
 	{
 		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		
-		SoapObject response = (SoapObject) WSProxyClient.call(wsdlMethodName, idSitio);
+		SoapObject response = (SoapObject) WSProxyClient.call(UtilesAndorid.URL_WS_SITIO, wsdlMethodName, idSitio);
 		
 		SitioADTO sitioADTO = new SitioADTO();
 		
@@ -53,9 +54,10 @@ public class SitioWS
 			
         	sitioADTO.setDescripcion(response.getProperty(0).toString());
         	sitioADTO.setId(Long.parseLong(response.getProperty(1).toString()));
-        	sitioADTO.setNombre(response.getProperty(2).toString());
-        	sitioADTO.setNombreAdministrador(response.getProperty(3).toString());
-        	sitioADTO.setUbicacionGeografica(response.getProperty(4).toString());
+        	sitioADTO.setIdAdministrador(Long.parseLong(response.getProperty(2).toString()));
+        	sitioADTO.setNombre(response.getProperty(3).toString());
+        	sitioADTO.setNombreAdministrador(response.getProperty(4).toString());
+        	sitioADTO.setUbicacionGeografica(response.getProperty(5).toString());
 		}
 		
 		return sitioADTO;
@@ -65,7 +67,7 @@ public class SitioWS
 	{
 		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		
-		Vector  response = (Vector) WSProxyClient.call(wsdlMethodName);
+		Vector  response = (Vector) WSProxyClient.call(UtilesAndorid.URL_WS_SITIO, wsdlMethodName);
 				
 		SitioADTO[] sitiosADTO = new SitioADTO[response.size()];
 		
@@ -79,9 +81,10 @@ public class SitioWS
 			
         	sitio.setDescripcion(info.getProperty(0).toString());
         	sitio.setId(Long.parseLong(info.getProperty(1).toString()));
-        	sitio.setNombre(info.getProperty(2).toString());
-        	sitio.setNombreAdministrador(info.getProperty(3).toString());
-        	sitio.setUbicacionGeografica(info.getProperty(4).toString());
+        	sitio.setIdAdministrador(Long.parseLong(info.getProperty(2).toString()));
+        	sitio.setNombre(info.getProperty(3).toString());
+        	sitio.setNombreAdministrador(info.getProperty(4).toString());
+        	sitio.setUbicacionGeografica(info.getProperty(5).toString());
         	
             sitiosADTO[i] = sitio;			
 		}

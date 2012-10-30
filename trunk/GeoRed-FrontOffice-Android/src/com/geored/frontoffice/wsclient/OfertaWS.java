@@ -8,6 +8,7 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 
 import com.geored.frontoffice.dto.OfertaADTO;
+import com.geored.frontoffice.utiles.UtilesAndorid;
 
 public class OfertaWS 
 {
@@ -16,7 +17,7 @@ public class OfertaWS
 	{
 		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		
-		SoapPrimitive response = (SoapPrimitive) WSProxyClient.call(wsdlMethodName, ofertaADTO);
+		SoapPrimitive response = (SoapPrimitive) WSProxyClient.call(UtilesAndorid.URL_WS_OFERTA, wsdlMethodName, ofertaADTO);
     	
 		return Long.valueOf(response.toString());
 	}
@@ -25,21 +26,21 @@ public class OfertaWS
 	{
 		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		
-    	WSProxyClient.call(wsdlMethodName, ofertaADTO);
+    	WSProxyClient.call(UtilesAndorid.URL_WS_OFERTA, wsdlMethodName, ofertaADTO);
 	}
 	
 	public void eliminar(Long idOferta)
 	{
 		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		
-    	WSProxyClient.call(wsdlMethodName, idOferta);		
+    	WSProxyClient.call(UtilesAndorid.URL_WS_OFERTA, wsdlMethodName, idOferta);		
 	}
 	
 	public OfertaADTO obtener(Long idOferta)
 	{
 		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		
-		SoapObject response = (SoapObject) WSProxyClient.call(wsdlMethodName, idOferta);
+		SoapObject response = (SoapObject) WSProxyClient.call(UtilesAndorid.URL_WS_OFERTA, wsdlMethodName, idOferta);
 		
 		OfertaADTO ofertaADTO = new OfertaADTO();
 		
@@ -71,7 +72,7 @@ public class OfertaWS
 	{
 		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		
-		Vector  response = (Vector) WSProxyClient.call(wsdlMethodName);
+		Vector  response = (Vector) WSProxyClient.call(UtilesAndorid.URL_WS_OFERTA, wsdlMethodName);
 				
 		OfertaADTO[] ofertasADTO = new OfertaADTO[response.size()];
 		

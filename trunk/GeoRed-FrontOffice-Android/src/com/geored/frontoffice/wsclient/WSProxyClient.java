@@ -13,13 +13,13 @@ import org.ksoap2.transport.HttpTransportSE;
 public class WSProxyClient
 {
 	public static final String NAMESPACE = "http://negocio.geored.com/";
-	public static final String URL = "http://10.0.2.2:8080/GeoRed-Business-EJB/UsuarioServiceImpl?wsdl";
+//	public static final String URL = "http://10.0.2.2:8080/GeoRed-Business-EJB/UsuarioServiceImpl?wsdl";
 	public static final String SOAP_ACTION = "";	
 	
 	/**
      * Metodo que hace el transporte de los datos por los webservices retornando la respuesta del servidor.
      * */
-    public static Object call(String methodName, Object... params)
+    public static Object call(String url, String methodName, Object... params)
     {
     	// Objeto a ser transportado con el contenedor
     	SoapObject soapObject = new SoapObject(NAMESPACE, methodName);
@@ -59,7 +59,7 @@ public class WSProxyClient
     	// Ejecuto la llamada
     	try
         {
-    		HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
+    		HttpTransportSE androidHttpTransport = new HttpTransportSE(url);
     		androidHttpTransport.call(SOAP_ACTION, envelope);
     		
     		return envelope.getResponse();

@@ -6,6 +6,7 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 
 import com.geored.frontoffice.dto.AdministradorADTO;
+import com.geored.frontoffice.utiles.UtilesAndorid;
 
 public class AdminWS
 {
@@ -13,7 +14,7 @@ public class AdminWS
 	{
 		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		
-		SoapPrimitive response = (SoapPrimitive) WSProxyClient.call(wsdlMethodName, administradorADTO);
+		SoapPrimitive response = (SoapPrimitive) WSProxyClient.call(UtilesAndorid.URL_WS_ADMIN, wsdlMethodName, administradorADTO);
     	
 		return Long.valueOf(response.toString());
 	}
@@ -22,21 +23,21 @@ public class AdminWS
 	{
 		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		
-    	WSProxyClient.call(wsdlMethodName, administradorADTO);		
+    	WSProxyClient.call(UtilesAndorid.URL_WS_ADMIN, wsdlMethodName, administradorADTO);		
 	}
 	
 	public void eliminar(Long idAdministrador)
 	{
 		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		
-    	WSProxyClient.call(wsdlMethodName, idAdministrador);		
+    	WSProxyClient.call(UtilesAndorid.URL_WS_ADMIN, wsdlMethodName, idAdministrador);		
 	}
 	
 	public AdministradorADTO obtener(Long idAdministrador)
 	{
 		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		
-		SoapObject response = (SoapObject) WSProxyClient.call(wsdlMethodName, idAdministrador);
+		SoapObject response = (SoapObject) WSProxyClient.call(UtilesAndorid.URL_WS_ADMIN, wsdlMethodName, idAdministrador);
 		
 		AdministradorADTO administradorADTO = new AdministradorADTO();
 		
