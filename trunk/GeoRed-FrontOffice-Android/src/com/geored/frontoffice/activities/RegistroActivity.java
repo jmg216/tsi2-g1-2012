@@ -24,9 +24,12 @@ import android.widget.Toast;
 
 import com.geored.frontoffice.R;
 import com.geored.frontoffice.dto.UsuarioADTO;
+import com.geored.frontoffice.wsclient.UIProcessFactory;
 import com.geored.frontoffice.wsclient.UsuarioWS;
 
 public class RegistroActivity extends Activity {
+	
+	private UsuarioWS usuarioWS = UIProcessFactory.getInstancia().getUsuarioWS();
 	
 	private ImageView imageView;
     private Bitmap loadedImage;
@@ -64,12 +67,12 @@ public class RegistroActivity extends Activity {
     	usuarioADTO.setPass(pass.getText().toString());
     	//aca hay que hacer un set de la url
     	
-//    	usuarioADTO.setNombre("Carlos");
-//    	usuarioADTO.setEmail("carlos@hotmail.com");
-//    	usuarioADTO.setPass("carlosPass");
+    	usuarioADTO.setNombre("Juan");
+    	usuarioADTO.setEmail("juan@hotmail.com");
+    	usuarioADTO.setPass("juanPass");
     	
     	
-    	Long idUsuario = new UsuarioWS().insertar(usuarioADTO);
+    	Long idUsuario = usuarioWS.insertar(usuarioADTO);
 			
     	//Si se registra correctamente lo redirecciona al menu, sino
     	//envia mensaje de error.
