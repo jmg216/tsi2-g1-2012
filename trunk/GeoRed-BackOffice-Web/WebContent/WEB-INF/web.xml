@@ -27,4 +27,22 @@
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>    
     
+    <!-- JSTL Config -->
+    <jsp-config>
+        <taglib>
+            <taglib-uri>http://java.sun.com/jstl/core_rt</taglib-uri>
+            <taglib-location>/WEB-INF/tlds/jstl/c-1_0-rt.tld</taglib-location>
+        </taglib>
+        
+        <taglib>
+            <taglib-uri>http://java.sun.com/jsp/jstl/functions</taglib-uri>
+            <taglib-location>/WEB-INF/tlds/jstl/fn.tld</taglib-location>
+        </taglib>
+        
+        <taglib>
+            <taglib-uri>http://java.sun.com/jstl/fmt</taglib-uri>
+            <taglib-location>/WEB-INF/tlds/jstl/fmt-1_0-rt.tld</taglib-location>
+        </taglib>
+    </jsp-config>
+    
 </web-app>
