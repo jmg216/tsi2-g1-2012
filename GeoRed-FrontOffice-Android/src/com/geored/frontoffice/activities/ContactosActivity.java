@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.geored.frontoffice.R;
 import com.geored.frontoffice.dto.UsuarioADTO;
+import com.geored.frontoffice.wsclient.UIProcessFactory;
 import com.geored.frontoffice.wsclient.UsuarioWS;
 
 import android.app.Activity;
@@ -22,6 +23,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class ContactosActivity extends ListActivity {
+	
+	private UsuarioWS usuarioWS = UIProcessFactory.getInstancia().getUsuarioWS();
 	
     private ProgressDialog m_ProgressDialog = null; 
     private List<UsuarioADTO> usuarios = null;
@@ -93,7 +96,7 @@ public class ContactosActivity extends ListActivity {
         {
             public void run() 
             {
-            	usuarios = new UsuarioWS().obtenerListado();
+            	usuarios = usuarioWS.obtenerListado();
                 runOnUiThread(returnRes);
             }	        
 	  };

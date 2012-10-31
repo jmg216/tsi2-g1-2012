@@ -21,11 +21,16 @@ import android.widget.Toast;
 
 import com.geored.frontoffice.R;
 import com.geored.frontoffice.dto.UsuarioADTO;
+import com.geored.frontoffice.wsclient.UIProcessFactory;
 import com.geored.frontoffice.wsclient.UsuarioWS;
 
 public class LoginActivity extends Activity implements OnClickListener  {
 
+	
+	private UsuarioWS usuarioWS = UIProcessFactory.getInstancia().getUsuarioWS();
+	
 	private static final int TIEMPO_MENSAJE = 300000;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,9 +52,7 @@ public class LoginActivity extends Activity implements OnClickListener  {
     	email = "jmg216@hotmail.com";
     	pass = "juanma";
     	
-    	UsuarioADTO usuarioADTO = new UsuarioWS().obtenerPorEmailYPass(email, pass);
-    	
-    	//List <UsuarioADTO> usuariosADTO = new UsuarioWS().obtenerListado();
+    	UsuarioADTO usuarioADTO = usuarioWS.obtenerPorEmailYPass(email, pass);
     	
     	if (usuarioADTO != null)
     	{

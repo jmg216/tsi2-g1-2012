@@ -7,6 +7,7 @@ import java.util.List;
 import com.geored.frontoffice.R;
 import com.geored.frontoffice.dto.SitioADTO;
 import com.geored.frontoffice.wsclient.SitioWS;
+import com.geored.frontoffice.wsclient.UIProcessFactory;
 import com.geored.frontoffice.wsclient.UsuarioWS;
 
 import android.app.Activity;
@@ -20,6 +21,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class SitioActivity extends ListActivity {
+	
+	private SitioWS sitioWS = UIProcessFactory.getInstancia().getSitioWS();
 	
     private List<SitioADTO> sitios = null;
     private List<SitioADTO> sitios_aux = null;
@@ -83,7 +86,7 @@ public class SitioActivity extends ListActivity {
 			}
 		});	 
         
-        sitios = new SitioWS().obtenerListado();
+        sitios = sitioWS.obtenerListado();
         
         if(sitios != null && sitios.size() > 0)
         {
