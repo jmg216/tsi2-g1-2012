@@ -67,9 +67,9 @@ public class RegistroActivity extends Activity {
     	usuarioADTO.setPass(pass.getText().toString());
     	//aca hay que hacer un set de la url
     	
-    	usuarioADTO.setNombre("Juan");
-    	usuarioADTO.setEmail("juan@hotmail.com");
-    	usuarioADTO.setPass("juanPass");
+//    	usuarioADTO.setNombre("Juan");
+//    	usuarioADTO.setEmail("juan@hotmail.com");
+//    	usuarioADTO.setPass("juanPass");
     	
     	
     	Long idUsuario = usuarioWS.insertar(usuarioADTO);

@@ -78,11 +78,11 @@ public class MenuActivity  extends TabActivity{
         
         //TAB CHAT *********************************************************
         
-        tabView = createTabView(this, res.getString(R.string.chat));
+        tabView = createTabView(this, res.getString(R.string.mapa));
         
-        intent = new Intent().setClass(this, ChatActivity.class);
+        intent = new Intent().setClass(this, mapActivity.class);
         
-        spec = tabHost.newTabSpec(res.getString(R.string.chat))
+        spec = tabHost.newTabSpec(res.getString(R.string.mapa))
         				.setIndicator(tabView)
         				.setContent(intent);
         
