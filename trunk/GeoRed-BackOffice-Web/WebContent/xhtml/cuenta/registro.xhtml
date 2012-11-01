@@ -5,20 +5,19 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-	
+
 	<h:body>
 		<ui:composition template="/xhtml/templates/layout.xhtml">
 			<ui:define name="content">	
-				<p:panel header="Gestión de Ofertas">
-					<p:commandButton value="Crear Oferta" style="float:right;margin-bottom:1%;"/><br />
-					<p:dataTable>
-						<f:facet name="header">
-							Listado de Ofertas
-						</f:facet>
-					</p:dataTable>
-				</p:panel>
-			</ui:define> 
+				<h:form>
+					<h1 class="titulo-content">Registro</h1>
+					
+					<p:inputText value="#{loginBean.administradorDTO.email}" title="Email:"/>
+					<p:password value="#{loginBean.administradorDTO.pass}" title="Passwrod:"/>
+					
+					<p:commandButton value="Ingresar" action="#{loginBean.autenticar()}"/>
+				</h:form>
+			</ui:define>
 		</ui:composition>
 	</h:body>
-	
-</html>
+</html>	

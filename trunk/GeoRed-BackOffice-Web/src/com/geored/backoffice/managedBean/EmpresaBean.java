@@ -1,5 +1,7 @@
 package com.geored.backoffice.managedBean;
 
+import java.io.Serializable;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -12,9 +14,14 @@ import com.geored.negocio.EmpresaServiceImpl;
 import com.geored.negocio.EmpresaServiceImplServiceLocator;
 
 
-@ManagedBean(name="indexAdminEmpresas")
+@ManagedBean(name="empresaBean")
 @SessionScoped
-public class IndexAdminEmpresasBean {
+public class EmpresaBean implements Serializable
+{	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private String usuario;
 	private String passwordUsuario;
@@ -24,10 +31,6 @@ public class IndexAdminEmpresasBean {
 	private AdminServiceImpl adminWS;
 	private EmpresaServiceImplServiceLocator locatorEmp;
 	private EmpresaServiceImpl empWS;
-	
-	public IndexAdminEmpresasBean() {
-	
-	}
 	
 	@PostConstruct
 	public void init() throws ServiceException{

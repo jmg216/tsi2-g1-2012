@@ -9,14 +9,18 @@
 	<h:body>
 		<ui:composition template="/xhtml/templates/layout.xhtml">
 			<ui:define name="content">	
-				<p:fieldset>
-					<h:panelGrid columns="2" cellpadding="10">
-						<p:graphicImage value="/resources/images/logo-geored.png"/>
-						 <h:outputText value="Bienvenido a Back Office GeoRed.uy:
-                                GeoRed.uy es una red social basada en la ubicacion geografica de los usuarios para Uruguay.
-                                Aqui tendrá funcionalidades de administracion y permitirá a las empresas configurar su ofertas por medio de herramientas provistas en el sistema." />  
-					</h:panelGrid>				
-				</p:fieldset>
+				<table cellpadding="10px">
+					<tr>
+						<td>
+							<p:graphicImage value="/resources/images/logo-geored.png"/>
+						</td>
+						<td style="vertical-align: top;">						
+							<h:outputText value="Bienvenido a Back Office GeoRed.uy ..." style="font-size: 18px; font-weight: bold;"/> <br/><br/>
+							<h:outputText value="GeoRed.uy es una red social basada en la ubicacion geografica de los usuarios para Uruguay.
+                            					 Aqui tendrá funcionalidades de administracion y permitirá a las empresas configurar su ofertas por medio de herramientas provistas en el sistema." />  
+                        </td>
+                    </tr>
+                </table>
 			</ui:define> 
 		</ui:composition>
 	</h:body>
