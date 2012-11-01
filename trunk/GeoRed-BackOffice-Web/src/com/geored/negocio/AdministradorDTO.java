@@ -7,7 +7,8 @@
 
 package com.geored.negocio;
 
-public class AdministradorDTO  implements java.io.Serializable {
+public class AdministradorDTO  implements java.io.Serializable 
+{
     private java.lang.String email;
 
     private java.lang.Long id;

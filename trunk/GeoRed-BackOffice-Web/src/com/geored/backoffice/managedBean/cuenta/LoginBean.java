@@ -1,6 +1,5 @@
 package com.geored.backoffice.managedBean.cuenta;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 
@@ -11,10 +10,10 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.xml.rpc.ServiceException;
 
-import com.geored.backoffice.managedBean.utiles.UtilesSeguridad;
 import com.geored.negocio.AdminServiceImpl;
 import com.geored.negocio.AdminServiceImplServiceLocator;
 import com.geored.negocio.AdministradorDTO;
+import com.geored.utiles.UtilesSeguridadWeb;
 
 @ManagedBean(name = "loginBean")
 @SessionScoped
@@ -25,45 +24,71 @@ public class LoginBean implements Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private AdministradorDTO administradorDTO;
+	private static final String SUCCESS = "success";
+	
+	private String email;
+	
+	private String pass;
 
 	@PostConstruct
 	public void init()
 	{
 	}
 
-	public void autenticar() throws ServiceException
+	public String iniciarSesion()
 	{
 		try
 		{
 			AdminServiceImpl admiWs = new AdminServiceImplServiceLocator().getAdminServiceImplPort();
 			
-			administradorDTO = admiWs.obtenerAdminPorEmailYPass(administradorDTO.getEmail(), administradorDTO.getPass());
+			AdministradorDTO administradorDTO = admiWs.obtenerAdminPorEmailYPass(getEmail(), getPass());
 			
 			if(administradorDTO != null)
 			{
-				UtilesSeguridad.guardarUsuarioAutenticado(administradorDTO);
-				
-				FacesContext.getCurrentInstance().getExternalContext().redirect("IndexAdminEmpresas.xhtml");
+				UtilesSeguridadWeb.guardarUsuarioAutenticado(administradorDTO);
 			}
 		} 
 		catch (RemoteException e1)
 		{
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error logueando usuario"));
-		} 
-		catch (IOException e)
+		}
+		catch (ServiceException e)
 		{
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error logueando usuario"));
-		}
+		} 
+		
+		return SUCCESS;
 	}
 
-	public AdministradorDTO getAdministradorDTO()
+	public String cerrarSesion()
 	{
-		return administradorDTO;
+		UtilesSeguridadWeb.borrarUsuarioAutenticado();
+		
+		return SUCCESS;
+	}
+	
+	public boolean hayUsuarioAutenticado()
+	{
+		return UtilesSeguridadWeb.hayUsuarioAutenticado();
+	}
+	
+	public String getEmail()
+	{
+		return email;
 	}
 
-	public void setAdministradorDTO(AdministradorDTO administradorDTO)
+	public void setEmail(String email)
 	{
-		this.administradorDTO = administradorDTO;
+		this.email = email;
+	}
+
+	public String getPass()
+	{
+		return pass;
+	}
+
+	public void setPass(String pass)
+	{
+		this.pass = pass;
 	}
 }

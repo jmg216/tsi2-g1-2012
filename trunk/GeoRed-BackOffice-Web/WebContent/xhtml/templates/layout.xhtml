@@ -25,18 +25,26 @@
 				
 				<!-- Aca se va a poner un if preguntando si el iusuario esta logueado -->
 				<div class="session-status-container">
-					<span>
-						<h:link outcome="/xhtml/cuenta/login.xhtml" styleClass="simple-link" value="Iniciar sesión" />					
-					</span>
-					<span style="margin-left: 10px;">  
-						<h:link outcome="/xhtml/cuenta/registro.xhtml" styleClass="simple-link" value="Registrarme" />
-					</span>
+					<c:choose>
+						<c:when test="#{loginBean.hayUsuarioAutenticado() == false}">
+							<span>
+								<h:link outcome="/xhtml/cuenta/login.xhtml" styleClass="simple-link" value="Iniciar sesión" />					
+							</span>
+						</c:when>
+						<c:otherwise>
+							<span>
+								<h:form>
+									<h:commandLink action="#{loginBean.cerrarSesion()}" styleClass="simple-link" value="Cerrar sesión" />	
+								</h:form>
+							</span>
+						</c:otherwise>
+					</c:choose>											
 				</div>				
 				<p:separator />	
 			</div>
 			
 			<!-- Menu -->
-			<c:if test="#{utilesSeguridadBean.hayUsuarioAutenticado()}">
+			<c:if test="#{loginBean.hayUsuarioAutenticado()}">
 				<div id="menu">
 					<ui:include src="menu.xhtml" />
 				</div>
