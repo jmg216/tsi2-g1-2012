@@ -4,7 +4,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 	
 	<h:head>
 		<h:outputStylesheet name="style.css" library="css" />
@@ -30,13 +31,17 @@
 					<span style="margin-left: 10px;">  
 						<h:link outcome="/xhtml/cuenta/registro.xhtml" styleClass="simple-link" value="Registrarme" />
 					</span>
-				</div>
-				
-				<!-- Menu -->
-				<p:separator />				
-				<ui:include src="menu.xhtml" />
+				</div>				
+				<p:separator />	
 			</div>
-
+			
+			<!-- Menu -->
+			<c:if test="#{utilesSeguridadBean.hayUsuarioAutenticado()}">
+				<div id="menu">
+					<ui:include src="menu.xhtml" />
+				</div>
+			</c:if>
+			
 			<!-- Content -->
 			<div id="content">
 				<ui:insert name="content"></ui:insert>				
