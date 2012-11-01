@@ -1,12 +1,10 @@
-package com.geored.backoffice.managedBean.utiles;
+package com.geored.utiles;
 
-import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
 import com.geored.negocio.AdministradorDTO;
 
-@ManagedBean(name="utilesSeguridadBean")
-public class UtilesSeguridad
+public class UtilesSeguridadWeb
 {
 	// Constantes seguridad
 	private static final String KEY_ADMIN_AUTENTICADO = "com.geored.utiles.UtilesSeguridad.KEY_ADMIN_AUTENTICADO";
