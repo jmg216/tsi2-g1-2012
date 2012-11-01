@@ -5,17 +5,27 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-
 	<h:body>
 		<ui:composition template="/xhtml/templates/layout.xhtml">
 			<ui:define name="content">	
 				<h:form>
 					<h1 class="titulo-content">Reporte de Check-in</h1>
-					
-					<p:inputText value="#{loginBean.administradorDTO.email}" title="Email:"/>
-					<p:password value="#{loginBean.administradorDTO.pass}" title="Passwrod:"/>
-					
-					<p:commandButton value="Ingresar" action="#{loginBean.autenticar()}"/>
+					<p:panel header="Ubicaciones">
+						<p:panelGrid styleClass="hola">
+							<p:row>
+								<p:column>
+									<h:outputText value="Fecha Inicial:" /> 
+									<p:calendar value="#{reporteCheckInBean.fechaInicial}" />
+								</p:column>
+								<p:column>
+									<h:outputText value="Fecha Final:" /> 
+									<p:calendar value="#{reporteCheckInBean.fechaFinal}"/>
+								</p:column>
+							</p:row>
+						</p:panelGrid>									
+						<p:commandButton value="Ver Reporte" style="margin-top:-4%;margin-left:87%;"/>
+						<p:gmap id="mapaCheckIn" center="41.381542, 2.122893" zoom="15" type="TERRAIN" style="width:862px;height:390px;margin-top:1%;"/>
+					</p:panel>
 				</h:form>
 			</ui:define>
 		</ui:composition>
