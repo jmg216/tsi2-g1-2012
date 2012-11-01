@@ -1,4 +1,4 @@
-package com.geored.backoffice.managedBean;
+package com.geored.backoffice.managedBean.cuenta;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -11,14 +11,14 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.xml.rpc.ServiceException;
 
+import com.geored.backoffice.managedBean.utiles.UtilesSeguridad;
 import com.geored.negocio.AdminServiceImpl;
 import com.geored.negocio.AdminServiceImplServiceLocator;
 import com.geored.negocio.AdministradorDTO;
-import com.geored.utiles.UtilesSeguridad;
 
-@ManagedBean(name = "cuentaBean")
+@ManagedBean(name = "loginBean")
 @SessionScoped
-public class CuentaBean implements Serializable
+public class LoginBean implements Serializable
 {
 	/**
 	 * 
@@ -30,7 +30,6 @@ public class CuentaBean implements Serializable
 	@PostConstruct
 	public void init()
 	{
-		// FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
 	}
 
 	public void autenticar() throws ServiceException
@@ -43,7 +42,7 @@ public class CuentaBean implements Serializable
 			
 			if(administradorDTO != null)
 			{
-				UtilesSeguridad.almacenarAdminAutenticado(administradorDTO);
+				UtilesSeguridad.guardarUsuarioAutenticado(administradorDTO);
 				
 				FacesContext.getCurrentInstance().getExternalContext().redirect("IndexAdminEmpresas.xhtml");
 			}
