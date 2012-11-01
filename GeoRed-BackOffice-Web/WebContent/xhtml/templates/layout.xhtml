@@ -4,10 +4,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:c="http://java.sun.com/jstl/core_rt"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	xmlns:fmt="http://java.sun.com/jstl/fmt">
+	xmlns:p="http://primefaces.org/ui">
 	
 	<h:head>
 		<h:outputStylesheet name="style.css" library="css" />
@@ -21,13 +18,18 @@
 
 			<!-- Head -->
 			<div id="header">
-				<p:graphicImage style="margin-top: 25px;" value="/resources/images/logo-geored-min.png"/>	
+				<h:link outcome="/index.xhtml">
+					<p:graphicImage style="margin-top: 25px;" value="/resources/images/logo-geored-min.png"/>	
+				</h:link>
+				
 				<!-- Aca se va a poner un if preguntando si el iusuario esta logueado -->
 				<div class="session-status-container">
-					<c:url var="urlLogin" value="/xhtml/login.xhtml" scope="page"/>
-					<a href="${pageScope.urlLogin}" class="simple-link">Iniciar sesión</a>
-					
-					<a href="#" class="simple-link">Mis datos</a>
+					<span>
+						<h:link outcome="/xhtml/cuenta/login.xhtml" styleClass="simple-link" value="Iniciar sesión" />					
+					</span>
+					<span style="margin-left: 10px;">  
+						<h:link outcome="/xhtml/cuenta/registro.xhtml" styleClass="simple-link" value="Registrarme" />
+					</span>
 				</div>
 				
 				<!-- Menu -->
@@ -39,7 +41,7 @@
 			<div id="content">
 				<ui:insert name="content"></ui:insert>				
 			</div>
-
+			
 			<!-- Footer -->			
 			<div id="footer">				
 				<p:separator />						

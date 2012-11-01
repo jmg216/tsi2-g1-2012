@@ -7,23 +7,23 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<h:form>
-		<p:menubar>    
+		<p:menubar>    			
 			<p:submenu label="Administración">
-				<p:menuitem value="Sitios de interes" url="#" />  	         
-    	        <p:menuitem value="Eventos" url="#" />  
-	            <p:menuitem value="Empresas" url="#" /> 
-	            <p:menuitem value="Datos de Empresas" url="#" />
-	            <p:menuitem value="Ofertas" url="#" /> 
+				<p:menuitem value="Sitios de interes" url="/xhtml/sitiosInteres/listadoSitiosInteres.xhtml" />  	         
+    	        <p:menuitem value="Eventos" url="/xhtml/eventos/listadoEventos.xhtml" />  
+	            <p:menuitem value="Empresas" url="/xhtml/empresas/listadoEmpresas.xhtml" /> 
+	            <p:menuitem value="Ofertas" url="/xhtml/ofertas/listadoOfertas.xhtml" /> 
 			</p:submenu>
 			
 			<p:submenu label="Reportes">
-				<p:menuitem value="Uno" url="#" />  	         
-    	        <p:menuitem value="Dos" url="#" />  
+				<p:menuitem value="Check-In" url="/xhtml/reportes/reporteCheckIn.xhtml" />  	         
+    	        <p:menuitem value="Compras" url="/xhtml/reportes/reporteCompras.xhtml" />  
 			</p:submenu>
-
-	        <p:submenu label="Ayuda">  
-	            <p:menuitem value="Acerca de..." onclick="javascript(alert('Acerca de...'));" />  
-	        </p:submenu>  
+			
+			<p:submenu label="Perfil" style="float:right;">
+				<p:menuitem value="Mis datos" url="/xhtml/cuenta/perfil.xhtml" />			
+	            <p:menuitem value="Mis empresas" url="/xhtml/empresas/misEmpresas.xhtml" />
+			</p:submenu>
 	    </p:menubar>
 	</h:form> 
 </html>

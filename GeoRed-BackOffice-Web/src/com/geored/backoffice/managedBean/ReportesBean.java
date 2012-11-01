@@ -1,5 +1,7 @@
 package com.geored.backoffice.managedBean;
 
+import java.io.Serializable;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -10,7 +12,12 @@ import org.primefaces.model.map.Marker;
 
 @ManagedBean(name="reportesBean")
 @SessionScoped
-public class ReportesBean {
+public class ReportesBean implements Serializable
+{	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private MapModel checkInModel;
 	private Marker marker;

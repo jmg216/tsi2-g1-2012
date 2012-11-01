@@ -1,7 +1,7 @@
 body
 {
     font-size: 12px;
-    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif !important;
+    font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif !important;
     color: #000000;
     text-align: justify;
     margin: 0px;    
@@ -11,7 +11,7 @@ input, select, textarea
 {
     font-size: 12px;
     border: 1px #000000 solid;
-    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif !important;
+    font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif !important;
 }
 
 #page
@@ -30,12 +30,13 @@ input, select, textarea
 #content
 {
 	width: 100%;
-	min-height: 600px;
-	margin-top: 10px;
+	min-height: 300px;
+	margin: 10px 5px 0px 5px;
 }
 
 #footer
 {
+	background-color: #FFFFFF;
 	width: 70%;
 	height: 40px;	
 	position: fixed;
@@ -43,6 +44,11 @@ input, select, textarea
 	text-align: right;
 	font-size: 11px;
 	margin-top: 10px;
+}
+
+.ui-menuitem-text
+{
+	font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif !important;
 }
 
 .session-status-container
@@ -55,6 +61,13 @@ input, select, textarea
 .simple-link
 {
 	text-decoration: none;
-	color: #03415D;
+	color: #000000;
 	font-weight: bold;
+}
+
+.titulo-content
+{
+	font-size: 18px;
+	font-weight: bold;
+	font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif !important;
 }

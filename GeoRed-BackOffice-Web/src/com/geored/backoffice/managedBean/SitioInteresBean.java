@@ -4,27 +4,21 @@ package com.geored.backoffice.managedBean;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 
-import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.xml.rpc.ServiceException;
 
-
-import com.geored.negocio.AdminServiceImplServiceLocator;
-import com.geored.negocio.AdministradorDTO;
-import com.geored.negocio.DaoException;
-import com.geored.negocio.NegocioException;
 import com.geored.negocio.SitioDTO;
 import com.geored.negocio.SitioServiceImpl;
-import com.geored.negocio.SitioServiceImplService;
 import com.geored.negocio.SitioServiceImplServiceLocator;
 
 
 @ManagedBean(name="sitioInteresBean")
 @SessionScoped
-public class SitioInteresBean implements Serializable {
+public class SitioInteresBean implements Serializable 
+{
 
 	private static final long serialVersionUID = 1L;
 	
