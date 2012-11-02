@@ -12,6 +12,7 @@ input, select, textarea
     font-size: 12px;
     border: 1px #000000 solid;
     font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif !important;
+	width: 250px;     
 }
 
 #page
@@ -70,4 +71,32 @@ input, select, textarea
 	font-size: 18px;
 	font-weight: bold;
 	font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif !important;
+}
+
+.areaBotones
+{
+	margin-top: 30px;
+	margin-bottom: 10px;
+	background-color: #DEEDF8;
+	width: 100%;
+	text-align: right;
+	border-radius: 5px 5px 5px 5px;
+	box-shadow: 0px 0px 10px #4A8EC6;
+   -webkit-box-shadow: 0px 0px 10px #4A8EC6;
+   -moz-box-shadow: 0px 5px 10px #4A8EC6;
+}
+
+.areaBotones ul
+{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	padding-top: 5px;
+	padding-bottom: 5px;		
+}
+
+.areaBotones ul li
+{
+	display: inline;
+	padding: 5px 15px 5px 0px;
 }

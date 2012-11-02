@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import com.geored.dto.CheckInDTO;
 import com.geored.dto.UsuarioDTO;
 import com.geored.exceptions.DaoException;
 import com.geored.exceptions.NegocioException;
@@ -22,4 +23,6 @@ public interface UsuarioService
 	public List<UsuarioDTO> obtenerListado() throws DaoException;
 	
 	public UsuarioDTO obtenerPorEmailYPass(String email, String pass) throws NegocioException, DaoException;
+	
+	public List<CheckInDTO> obtenerListadoCheckIns() throws DaoException;
 }

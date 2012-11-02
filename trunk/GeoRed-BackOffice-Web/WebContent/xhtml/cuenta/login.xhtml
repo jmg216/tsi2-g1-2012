@@ -30,13 +30,15 @@
 								<p:password value="#{loginBean.pass}" required="true"/>
 							</td>
 						</tr>
-						
-						<tr>
-							<td colspan="2" style="text-align: right;">
-								<p:commandButton value="Ingresar" action="#{loginBean.iniciarSesion()}"/>	
-							</td>
-						</tr>
 					</table>
+					
+					<div class="areaBotones">
+						<ul>
+							<li>
+								<p:commandButton value="Ingresar" action="#{loginBean.iniciarSesion()}"/>	
+							</li>
+						</ul>									
+					</div>								
 				</h:form>
 			</ui:define>
 		</ui:composition>

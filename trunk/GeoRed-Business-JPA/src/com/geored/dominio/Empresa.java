@@ -40,7 +40,7 @@ public class Empresa implements Serializable
 	private Timestamp fechaCreacion;
 
 	@JoinColumn(name="ADMINISTRADOR_FK", nullable=false)
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Administrador administrador;
 	
 	public Long getId()
