@@ -12,9 +12,11 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import com.geored.dominio.Usuario;
+import com.geored.dto.CheckInDTO;
 import com.geored.dto.UsuarioDTO;
 import com.geored.exceptions.DaoException;
 import com.geored.exceptions.NegocioException;
+import com.geored.persistencia.CheckInDAO;
 import com.geored.persistencia.UsuarioDAO;
 
 @Stateless
@@ -24,6 +26,9 @@ public class UsuarioServiceImpl implements UsuarioService
 {
 	@EJB
 	private UsuarioDAO usuarioDAO;
+	
+	@EJB
+	private CheckInDAO checkInDAO;
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
@@ -125,7 +130,8 @@ public class UsuarioServiceImpl implements UsuarioService
 		
 	}
 
-	@Override
+	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+	@WebMethod
 	public UsuarioDTO obtenerPorEmailYPass(String email, String pass) throws NegocioException, DaoException
 	{
 		try
@@ -144,6 +150,20 @@ public class UsuarioServiceImpl implements UsuarioService
 			throw new DaoException();
 		}
 	
+	}
+
+	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+	@WebMethod
+	public List<CheckInDTO> obtenerListadoCheckIns() throws DaoException
+	{
+		try
+		{
+			return checkInDAO.obtenerListado(true);
+		}
+		catch(Throwable e)
+		{
+			throw new DaoException(e);
+		}
 	}
 	
 }

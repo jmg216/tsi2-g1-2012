@@ -12,10 +12,40 @@
 				<h:form>
 					<h1 class="titulo-content">Listado de Empresas</h1>
 					
-					<p:inputText value="#{loginBean.administradorDTO.email}" title="Email:"/>
-					<p:password value="#{loginBean.administradorDTO.pass}" title="Passwrod:"/>
+					<div class="areaBotones">
+						<ul>
+							<li>
+								<p:commandButton value="Crear" action="#{listadoEmpresasBean.crearEmpresa()}"/>
+							</li>
+						</ul>
+					</div>
 					
-					<p:commandButton value="Ingresar" action="#{loginBean.autenticar()}"/>
+					<p:dataTable id="dataTableEmpresas" var="empresa" value="#{listadoEmpresasBean.listaEmpresas}"  
+				                 paginator="true" rows="10"  
+				                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+				                 rowsPerPageTemplate="5,10,15">  
+				  
+				  		<p:column>  
+				            <f:facet name="header">  
+				                <h:outputText value="ID" />  
+				            </f:facet>  
+				            <h:outputText value="#{empresa.id}" />  
+				        </p:column>
+				        
+				        <p:column>  
+				            <f:facet name="header">  
+				                <h:outputText value="Nombre" />  
+				            </f:facet>  
+				            <h:outputText value="#{empresa.nombre}" />  
+				        </p:column>  
+				  
+				        <p:column>  
+				            <f:facet name="header">  
+				                <h:outputText value="Descripcion" />  
+				            </f:facet>  
+				            <h:outputText value="#{empresa.descripcion}" />  
+				        </p:column>  				  
+				    </p:dataTable> 
 				</h:form>
 			</ui:define>
 		</ui:composition>

@@ -44,6 +44,12 @@ public class UsuarioServiceImplProxy implements com.geored.negocio.UsuarioServic
     return usuarioServiceImpl;
   }
   
+  public com.geored.negocio.CheckInDTO[] obtenerListadoCheckIns() throws java.rmi.RemoteException, com.geored.negocio.DaoException{
+    if (usuarioServiceImpl == null)
+      _initUsuarioServiceImplProxy();
+    return usuarioServiceImpl.obtenerListadoCheckIns();
+  }
+  
   public void actualizar(com.geored.negocio.UsuarioDTO arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
     if (usuarioServiceImpl == null)
       _initUsuarioServiceImplProxy();

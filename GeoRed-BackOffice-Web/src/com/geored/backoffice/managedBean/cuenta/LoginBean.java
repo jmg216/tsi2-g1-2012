@@ -10,6 +10,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.xml.rpc.ServiceException;
 
+import com.geored.backoffice.managedBean.BaseBean;
 import com.geored.negocio.AdminServiceImpl;
 import com.geored.negocio.AdminServiceImplServiceLocator;
 import com.geored.negocio.AdministradorDTO;
@@ -17,7 +18,7 @@ import com.geored.utiles.UtilesSeguridadWeb;
 
 @ManagedBean(name = "loginBean")
 @SessionScoped
-public class LoginBean implements Serializable
+public class LoginBean extends BaseBean implements Serializable
 {
 	/**
 	 * 
@@ -50,11 +51,11 @@ public class LoginBean implements Serializable
 		} 
 		catch (RemoteException e1)
 		{
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error logueando usuario"));
+			addMessage(MSJ_ERROR_COMUNICACION_WS);
 		}
 		catch (ServiceException e)
 		{
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error logueando usuario"));
+			addMessage(MSJ_ERROR_COMUNICACION_WS);
 		} 
 		
 		return SUCCESS;

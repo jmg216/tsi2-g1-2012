@@ -1,5 +1,6 @@
 package com.geored.persistencia.core;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,11 +26,12 @@ public abstract class GenericDAOBase<EntityType, DtoType>
 	@PersistenceContext(unitName=UtilesPersistencia.PERSISTENCE_UNIT_NAME)
 	protected EntityManager em;
 	
-	private Class<EntityType> entityClass;
+	private Class<EntityType> entityClass = getEntityClass();
 	
-	private Class<DtoType> dtoClass;
+	private Class<DtoType> dtoClass = getDtoClass();
 	
 	private EntityTransformer<EntityType, DtoType> entityTransformer = (EntityTransformer<EntityType, DtoType>) this;
+	
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public EntityType insertar(EntityType entity)
@@ -81,7 +83,7 @@ public abstract class GenericDAOBase<EntityType, DtoType>
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	public List obtenerListado(boolean toDTO)
 	{
-		Query query = em.createQuery("SELECT e FROM " + entityClass.getClass().getName() + " e");
+		Query query = em.createQuery("SELECT e FROM " + entityClass.getName() + " e");
 		
 		List<EntityType> listaEntidades = new ArrayList<EntityType>();
 		
@@ -116,5 +118,37 @@ public abstract class GenericDAOBase<EntityType, DtoType>
 		}
 		
 	    return listaEntidades;
+	}
+	
+	// Utilidades de la clase Generica
+	
+	/**
+	 * Recupera la clase del EntityType
+	 * @return
+	 */
+	private Class getEntityClass() 
+	{
+	 	if (entityClass == null) 
+	 	{
+			ParameterizedType thisType = (ParameterizedType) getClass().getGenericSuperclass();
+			entityClass = (Class) thisType.getActualTypeArguments()[0];
+	 	}
+	 	
+		return entityClass;
+	}
+	
+	/**
+	 * Recupera la clase del DtoType
+	 * @return
+	 */
+	private Class getDtoClass() 
+	{
+	 	if (dtoClass == null) 
+	 	{
+			ParameterizedType thisType = (ParameterizedType) getClass().getGenericSuperclass();
+			dtoClass = (Class) thisType.getActualTypeArguments()[1];
+	 	}
+	 	
+		return dtoClass;
 	}
 }
