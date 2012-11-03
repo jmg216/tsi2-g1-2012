@@ -9,4 +9,6 @@
     <color name="negro">#000000</color>
     <color name="gris">#E0F0FF</color>
     <color name="hedear">#0066FF</color>
+    <color name="letras_oscuras">#272727</color>
+    <color name="letras_claras">#525252</color>
 </resources>
