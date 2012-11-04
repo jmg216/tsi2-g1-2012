@@ -24,7 +24,7 @@
 							</p:row>
 						</p:panelGrid>									
 						<p:commandButton value="Ver Reporte" style="margin-top:-4%;margin-left:87%;" action="#{reporteCheckInBean.mostrarReporte()}" update="mapaCheckIn"/>
-						<p:gmap id="mapaCheckIn" model="#{reporteCheckInBean.listadoCheckIns}" center="41.381542, 2.122893" zoom="15" type="TERRAIN" style="width:862px;height:390px;margin-top:1%;"/>
+						<p:gmap id="mapaCheckIn" model="#{reporteCheckInBean.checkinMap}" center="-34.904375,-56.166414" zoom="13" type="TERRAIN" style="width:862px;height:390px;margin-top:1%;"/>
 					</p:panel>
 				</h:form>
 			</ui:define>
