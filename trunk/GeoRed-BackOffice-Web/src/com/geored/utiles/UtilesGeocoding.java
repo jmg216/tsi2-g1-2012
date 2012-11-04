@@ -21,11 +21,6 @@ public class UtilesGeocoding {
 		GeocodeResponse geocoderResponse = geocoder.geocode(geocoderRequest);
 		List<GeocoderResult> resultados = geocoderResponse.getResults();
 		
-		/*
-		String latitud = resultados.get(0).getGeometry().getLocation().getLat().toString();
-		String longitud = resultados.get(0).getGeometry().getLocation().getLng().toString();
-		*/
-		
 		return resultados.get(0).getGeometry().getLocation();
 	}
 	

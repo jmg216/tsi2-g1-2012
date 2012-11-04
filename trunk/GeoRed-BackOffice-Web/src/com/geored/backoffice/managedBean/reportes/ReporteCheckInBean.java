@@ -3,6 +3,7 @@ package com.geored.backoffice.managedBean.reportes;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -61,10 +62,16 @@ public class ReporteCheckInBean extends BaseBean implements Serializable
 			listadoCheckIns = Arrays.asList(arrayCheckIn);
 			checkinMap = new DefaultMapModel();
 			
+			//Conversion de Date To Calendar
+			Calendar fechaIni = Calendar.getInstance();
+			Calendar fechaFi = Calendar.getInstance();
+			fechaIni.setTime(fechaInicial);
+			fechaFi.setTime(fechaFinal);
+			
 			for (CheckInDTO check: listadoCheckIns)
 			{
-				if(check.getFechaCreacion().after(fechaInicial) && check.getFechaCreacion().before(fechaFinal))
-				{
+				if(check.getFechaCreacion().after(fechaIni) && check.getFechaCreacion().before(fechaFi)) { 
+					
 						String direccion = sitioWS.obtener(check.getIdSitio()).getUbicacionGeografica();
 						com.google.code.geocoder.model.LatLng coordenadas = UtilesGeocoding.geocoding(direccion);
 						
