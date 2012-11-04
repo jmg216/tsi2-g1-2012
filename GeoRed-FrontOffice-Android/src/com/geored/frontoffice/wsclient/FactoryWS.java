@@ -1,17 +1,17 @@
 package com.geored.frontoffice.wsclient;
 
-public class UIProcessFactory {
+public class FactoryWS {
 
 	//Singleton de la clase para obtener una unica instancia de la misma.
-	private static UIProcessFactory instancia = null;
+	private static FactoryWS instancia = null;
 	
-	private UIProcessFactory(){}
+	private FactoryWS(){}
 
-	public static UIProcessFactory getInstancia()
+	public static FactoryWS getInstancia()
 	{
 		if (instancia == null)
 		{
-			instancia = new UIProcessFactory();
+			instancia = new FactoryWS();
 		}
 		return instancia;
 	}
