@@ -4,10 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,9 +27,11 @@ public class TematicaSitio implements Serializable
 	private Long id;
 	
 	@JoinColumn(name="TEMATICA_FK", nullable=false)
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Tematica tematica;
 	
 	@JoinColumn(name="SITIO_FK", nullable=false)
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Sitio sitio;
 
 	public Long getId()

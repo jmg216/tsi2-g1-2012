@@ -42,7 +42,7 @@ public class Evento implements Serializable
 	private Timestamp fechaFin;
 	
 	@JoinColumn(name="ADMINISTRADOR_FK", nullable=false)
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Administrador administrador;
 
 	public Long getId()

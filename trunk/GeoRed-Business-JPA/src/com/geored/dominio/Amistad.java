@@ -27,11 +27,11 @@ public class Amistad implements Serializable
 	private Long id;
 	
 	@JoinColumn(name="USUARIO_A_FK", nullable=false)
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Usuario usuarioA;
 
 	@JoinColumn(name="USUARIO_B_FK", nullable=false)
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Usuario usuarioB;
 
 	public Long getId()

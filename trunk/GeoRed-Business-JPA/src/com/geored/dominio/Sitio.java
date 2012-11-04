@@ -4,10 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -34,6 +36,7 @@ public class Sitio implements Serializable
 	private String ubicacionGeografica;
 	
 	@JoinColumn(name="ADMINISTRADOR_FK", nullable=false)
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Administrador administrador;
 	
 	public Long getId()
