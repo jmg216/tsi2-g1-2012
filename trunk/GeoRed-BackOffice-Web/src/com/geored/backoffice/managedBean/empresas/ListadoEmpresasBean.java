@@ -5,19 +5,18 @@ import java.rmi.RemoteException;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.xml.rpc.ServiceException;
 
 import com.geored.backoffice.managedBean.BaseBean;
 import com.geored.negocio.DaoException;
 import com.geored.negocio.EmpresaDTO;
-import com.geored.negocio.EmpresaServiceImpl;
-import com.geored.negocio.EmpresaServiceImplServiceLocator;
 
 
 @ManagedBean(name="listadoEmpresasBean")
-@SessionScoped
+@RequestScoped
 public class ListadoEmpresasBean extends BaseBean implements Serializable
 {	
 	/**
@@ -25,15 +24,16 @@ public class ListadoEmpresasBean extends BaseBean implements Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private Long idEmpresa;
+	
 	private List<EmpresaDTO> listaEmpresas;
 	
-	public ListadoEmpresasBean()
+	@PostConstruct
+	public void init()
 	{
 		try
 		{
-			EmpresaServiceImpl empresaWS = new EmpresaServiceImplServiceLocator().getEmpresaServiceImplPort();
-			
-			EmpresaDTO[] arrayEmpresaDTO = empresaWS.obtenerListado();
+			EmpresaDTO[] arrayEmpresaDTO = getEmpresaPort().obtenerListado();
 			
 			listaEmpresas = Arrays.asList(arrayEmpresaDTO);
 		} 
@@ -48,17 +48,7 @@ public class ListadoEmpresasBean extends BaseBean implements Serializable
 		catch (RemoteException e)
 		{
 			addMessage(MSJ_ERROR_COMUNICACION_WS);
-		}	
-	}
-
-	public String crearEmpresa()
-	{
-		return null;
-	}
-	
-	public String editarEmpresa()
-	{
-		return null;
+		}
 	}
 	
 	public List<EmpresaDTO> getListaEmpresas()
@@ -69,5 +59,15 @@ public class ListadoEmpresasBean extends BaseBean implements Serializable
 	public void setListaEmpresas(List<EmpresaDTO> listaEmpresas)
 	{
 		this.listaEmpresas = listaEmpresas;
+	}
+
+	public Long getIdEmpresa()
+	{
+		return idEmpresa;
+	}
+
+	public void setIdEmpresa(Long idEmpresa)
+	{
+		this.idEmpresa = idEmpresa;
 	}
 }
