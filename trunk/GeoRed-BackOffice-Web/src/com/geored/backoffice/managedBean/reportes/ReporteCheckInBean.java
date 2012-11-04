@@ -24,6 +24,7 @@ import com.geored.negocio.SitioServiceImpl;
 import com.geored.negocio.SitioServiceImplServiceLocator;
 import com.geored.negocio.UsuarioServiceImpl;
 import com.geored.negocio.UsuarioServiceImplServiceLocator;
+import com.geored.utiles.UtilesGeocoding;
 
 @ManagedBean(name="reporteCheckInBean")
 @SessionScoped
@@ -64,13 +65,11 @@ public class ReporteCheckInBean extends BaseBean implements Serializable
 			{
 				if(check.getFechaCreacion().after(fechaInicial) && check.getFechaCreacion().before(fechaFinal))
 				{
-						String coordenadas = sitioWS.obtener(check.getIdSitio()).getUbicacionGeografica();
-						String limitador = "[/]";
-						String[] token = coordenadas.split(limitador);
-						Double latitud = Double.parseDouble(token[0]);
-						Double longitud = Double.parseDouble(token[0]);
+						String direccion = sitioWS.obtener(check.getIdSitio()).getUbicacionGeografica();
+						com.google.code.geocoder.model.LatLng coordenadas = UtilesGeocoding.geocoding(direccion);
 						
-						LatLng coord = new LatLng(latitud,longitud);
+						LatLng coord = new LatLng(coordenadas.getLat().floatValue(),coordenadas.getLng().floatValue());
+						
 						checkinMap.addOverlay(new Marker(coord));
 				}
 			}
