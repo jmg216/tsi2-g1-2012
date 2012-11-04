@@ -30,7 +30,7 @@ public class Notificacion implements Serializable
 	private String nombre;
 	
 	@JoinColumn(name="USUARIO_FK", nullable=false)
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Usuario usuario;
 
 	public Long getId()

@@ -33,7 +33,7 @@ public class Local implements Serializable
 	private String ubicacionGeografica; 
 	
 	@JoinColumn(name="EMPRESA_FK", nullable=false)
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Empresa empresa;
 
 	public Long getId()

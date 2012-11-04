@@ -36,7 +36,7 @@ public class Administrador implements Serializable
 	private String nombre;
 
 	@JoinColumn(name="TIPO_ADMINISTRADOR_FK", nullable=false)
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	private TipoAdministrador tipoAdministrador;
 
 	public Long getId()

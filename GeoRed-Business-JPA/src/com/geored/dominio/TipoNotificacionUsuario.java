@@ -27,11 +27,11 @@ public class TipoNotificacionUsuario implements Serializable
 	private Long id;
 	
 	@JoinColumn(name="TIPO_NOTIFICACION_FK", nullable=false)
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	private TipoNotificacion tipoNotificacion;
 	
 	@JoinColumn(name="USUARIO_FK", nullable=false)
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Usuario usuario;
 
 	public Long getId()

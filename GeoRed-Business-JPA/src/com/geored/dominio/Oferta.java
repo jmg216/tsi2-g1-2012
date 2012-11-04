@@ -46,7 +46,7 @@ public class Oferta implements Serializable
 	private Timestamp fechaFin;
 	
 	@JoinColumn(name="LOCAL_FK", nullable=false)
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Local local;
 
 	public Long getId()

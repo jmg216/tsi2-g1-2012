@@ -27,11 +27,11 @@ public class TematicaOferta implements Serializable
 	private Long id;
 	
 	@JoinColumn(name="TEMATICA_FK", nullable=false)
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Tematica tematica;
 	
 	@JoinColumn(name="OFERTA_FK", nullable=false)
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Oferta oferta;
 
 	public Long getId()
