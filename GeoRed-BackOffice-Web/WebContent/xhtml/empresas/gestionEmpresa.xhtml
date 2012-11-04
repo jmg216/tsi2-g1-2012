@@ -12,10 +12,7 @@
 				<h:form>
 					<h1 class="titulo-content">Gestión de Empresas</h1>
 					
-					<p:inputText value="#{loginBean.administradorDTO.email}" title="Email:"/>
-					<p:password value="#{loginBean.administradorDTO.pass}" title="Passwrod:"/>
-					
-					<p:commandButton value="Ingresar" action="#{loginBean.autenticar()}"/>
+					<h:outputText value="#{gestionEmpresaBean.empresaDTO.descripcion}" />
 				</h:form>
 			</ui:define>
 		</ui:composition>

@@ -10,6 +10,8 @@
 		<ui:composition template="/xhtml/templates/layout.xhtml">
 			<ui:define name="content">	
 				<h:form>
+					<input type="hidden" name="idEmpresa" id="idEmpresa"/>
+				
 					<h1 class="titulo-content">Listado de Empresas</h1>
 					
 					<div class="areaBotones">
@@ -29,7 +31,9 @@
 				            <f:facet name="header">  
 				                <h:outputText value="ID" />  
 				            </f:facet>  
-				            <h:outputText value="#{empresa.id}" />  
+				           	<h:commandLink action="#{gestionEmpresaBean.gestionar()}" value="#{empresa.id}">
+				           		 <f:setPropertyActionListener target="#{gestionEmpresaBean.idEmpresa}" value="#{empresa.id}"/>
+				           	</h:commandLink>
 				        </p:column>
 				        
 				        <p:column>  

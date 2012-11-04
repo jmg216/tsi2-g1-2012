@@ -4,10 +4,8 @@ import java.io.Serializable;
 import java.rmi.RemoteException;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
+import javax.faces.bean.RequestScoped;
 import javax.xml.rpc.ServiceException;
 
 import com.geored.backoffice.managedBean.BaseBean;
@@ -17,7 +15,7 @@ import com.geored.negocio.AdministradorDTO;
 import com.geored.utiles.UtilesSeguridadWeb;
 
 @ManagedBean(name = "loginBean")
-@SessionScoped
+@RequestScoped
 public class LoginBean extends BaseBean implements Serializable
 {
 	/**
@@ -25,16 +23,8 @@ public class LoginBean extends BaseBean implements Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private static final String SUCCESS = "success";
-	
 	private String email;
-	
 	private String pass;
-
-	@PostConstruct
-	public void init()
-	{
-	}
 
 	public String iniciarSesion()
 	{
