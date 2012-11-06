@@ -21,9 +21,10 @@ public class Evento implements Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = 7607595252285552941L;
-
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ID", nullable=false)
 	private Long id;
 	
 	@Column(name="NOMBRE", nullable=false)
