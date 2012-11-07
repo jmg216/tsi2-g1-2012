@@ -1,13 +1,17 @@
 package com.geored.persistencia;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 
 import com.geored.dominio.Evento;
+import com.geored.dominio.Tematica;
 import com.geored.dto.EventoDTO;
+import com.geored.dto.TematicaDTO;
 import com.geored.persistencia.core.GenericDAOBase;
 
 @Stateless
@@ -15,6 +19,9 @@ import com.geored.persistencia.core.GenericDAOBase;
 public class EventoDAOImpl extends GenericDAOBase<Evento, EventoDTO> implements EventoDAO
 {
 
+	@EJB
+	private TematicaDAO tematicaDAO;
+	
 	@Override
 	public Evento toEntity(EventoDTO source)
 	{
@@ -39,6 +46,12 @@ public class EventoDAOImpl extends GenericDAOBase<Evento, EventoDTO> implements 
 		target.setDescripcion(source.getDescripcion());
 		target.setFechaInicio(source.getFechaInicio());
 		target.setFechaFin(source.getFechaFin());
+		
+		target.setListaTematicasDTO(new ArrayList<TematicaDTO>());
+		if(source.getListaTematicas() != null)
+		{			
+			target.setListaTematicasDTO(tematicaDAO.toDtoList(source.getListaTematicas()));
+		}
 		
 		return target;
 	}

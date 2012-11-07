@@ -2,6 +2,7 @@ package com.geored.dominio;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -33,15 +35,18 @@ public class Empresa implements Serializable
 	@Column(name="DESCRIPCION", nullable=false)
 	private String descripcion;
 	
-	@Column(name="LOGO_URL", nullable=false)
-	private String logoUrl;
+	@Column(name="URL_IMAGEN", nullable=false)
+	private String urlImagen;
 	
 	@Column(name="FECHA_CREACION", nullable=false)
 	private Timestamp fechaCreacion;
 
 	@JoinColumn(name="ADMINISTRADOR_FK", nullable=false)
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Administrador administrador;
+	
+	@OneToMany(mappedBy="empresa", fetch=FetchType.LAZY)
+	private List<Local> listaLocales;
 	
 	public Long getId()
 	{
@@ -83,14 +88,14 @@ public class Empresa implements Serializable
 		this.descripcion = descripcion;
 	}
 
-	public String getLogoUrl()
+	public String getUrlImagen()
 	{
-		return logoUrl;
+		return urlImagen;
 	}
 
-	public void setLogoUrl(String logoUrl)
+	public void setUrlImagen(String urlImagen)
 	{
-		this.logoUrl = logoUrl;
+		this.urlImagen = urlImagen;
 	}
 
 	public Timestamp getFechaCreacion()
@@ -101,5 +106,15 @@ public class Empresa implements Serializable
 	public void setFechaCreacion(Timestamp fechaCreacion)
 	{
 		this.fechaCreacion = fechaCreacion;
+	}
+
+	public List<Local> getListaLocales()
+	{
+		return listaLocales;
+	}
+
+	public void setListaLocales(List<Local> listaLocales)
+	{
+		this.listaLocales = listaLocales;
 	}
 }

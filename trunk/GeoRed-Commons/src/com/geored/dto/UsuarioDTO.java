@@ -1,5 +1,7 @@
 package com.geored.dto;
 
+import java.util.List;
+
 public class UsuarioDTO
 {
 	private Long id;
@@ -10,7 +12,11 @@ public class UsuarioDTO
 
 	private String nombre;
 	
-	private String imagen;
+	private String urlImagen;
+	
+	private List<TematicaDTO> listaTematicasDTO;
+	
+	private List<OfertaDTO> listaComprasDTO;
 	
 	public Long getId()
 	{
@@ -51,14 +57,35 @@ public class UsuarioDTO
 	{
 		this.pass = pass;
 	}
-	
-	public String getImagen()
+
+
+	public String getUrlImagen()
 	{
-		return imagen;
+		return urlImagen;
 	}
 
-	public void setImagen(String imagen)
+	public void setUrlImagen(String urlImagen)
 	{
-		this.imagen = imagen;
+		this.urlImagen = urlImagen;
+	}
+
+	public List<TematicaDTO> getListaTematicasDTO()
+	{
+		return listaTematicasDTO;
+	}
+
+	public void setListaTematicasDTO(List<TematicaDTO> listaTematicasDTO)
+	{
+		this.listaTematicasDTO = listaTematicasDTO;
+	}
+
+	public List<OfertaDTO> getListaComprasDTO()
+	{
+		return listaComprasDTO;
+	}
+
+	public void setListaComprasDTO(List<OfertaDTO> listaComprasDTO)
+	{
+		this.listaComprasDTO = listaComprasDTO;
 	}
 }

@@ -18,6 +18,9 @@ public class ContenidoSitioDAOImpl extends GenericDAOBase<ContenidoSitio, Conten
 	{
 		ContenidoSitio target = new ContenidoSitio();
 		
+		target.setComentario(source.getComentario());
+		target.setUrlImagen(source.getUrlImagen());
+		
 		return target;
 	}
 
@@ -27,6 +30,8 @@ public class ContenidoSitioDAOImpl extends GenericDAOBase<ContenidoSitio, Conten
 		ContenidoSitioDTO target = new ContenidoSitioDTO();
 		
 		target.setId(source.getId());
+		target.setComentario(source.getComentario());
+		target.setUrlImagen(source.getUrlImagen());
 		
 		if(source.getSitio() != null)
 		{

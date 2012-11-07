@@ -1,6 +1,7 @@
 package com.geored.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class EmpresaDTO
 {
@@ -10,13 +11,15 @@ public class EmpresaDTO
 	
 	private String descripcion;
 	
-	private String logoUrl;
+	private String urlImagen;
 	
 	private Date fechaCreacion;
 
 	private Long idAministrador;
 	
 	private String nombreAdministrador;
+	
+	private List<LocalDTO> listaLocalesDTO;
 	
 	public Long getId()
 	{
@@ -68,14 +71,14 @@ public class EmpresaDTO
 		this.descripcion = descripcion;
 	}
 
-	public String getLogoUrl()
+	public String getUrlImagen()
 	{
-		return logoUrl;
+		return urlImagen;
 	}
 
-	public void setLogoUrl(String logoUrl)
+	public void setUrlImagen(String urlImagen)
 	{
-		this.logoUrl = logoUrl;
+		this.urlImagen = urlImagen;
 	}
 
 	public Date getFechaCreacion()
@@ -86,5 +89,15 @@ public class EmpresaDTO
 	public void setFechaCreacion(Date fechaCreacion)
 	{
 		this.fechaCreacion = fechaCreacion;
+	}
+
+	public List<LocalDTO> getListaLocalesDTO()
+	{
+		return listaLocalesDTO;
+	}
+
+	public void setListaLocalesDTO(List<LocalDTO> listaLocalesDTO)
+	{
+		this.listaLocalesDTO = listaLocalesDTO;
 	}
 }

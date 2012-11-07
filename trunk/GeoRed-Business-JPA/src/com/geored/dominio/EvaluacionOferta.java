@@ -27,11 +27,11 @@ public class EvaluacionOferta implements Serializable
 	private Long id;
 	
 	@JoinColumn(name="USUARIO_FK", nullable=false)
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Usuario usuario;
 	
 	@JoinColumn(name="OFERTA_FK", nullable=false)
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Oferta oferta;
 
 	@Column(name="EVALUACION", nullable=false)

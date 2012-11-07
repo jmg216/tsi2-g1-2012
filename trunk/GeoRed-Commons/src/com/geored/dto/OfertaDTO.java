@@ -1,6 +1,7 @@
 package com.geored.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class OfertaDTO
 {
@@ -12,7 +13,7 @@ public class OfertaDTO
 	
 	private Double costo;
 	
-	private String logoUrl;
+	private String urlImagen;
 	
 	private Date fechaInicio;
 	
@@ -22,6 +23,9 @@ public class OfertaDTO
 	
 	private String nombreLocal;
 
+	private List<TematicaDTO> listaTematicasDTO;
+	
+	private List<UsuarioDTO> listaCompradoresDTO;
 	public Long getId()
 	{
 		return id;
@@ -82,14 +86,14 @@ public class OfertaDTO
 		this.costo = costo;
 	}
 
-	public String getLogoUrl()
+	public String getUrlImagen()
 	{
-		return logoUrl;
+		return urlImagen;
 	}
 
-	public void setLogoUrl(String logoUrl)
+	public void setUrlImagen(String urlImagen)
 	{
-		this.logoUrl = logoUrl;
+		this.urlImagen = urlImagen;
 	}
 
 	public Date getFechaInicio()
@@ -110,5 +114,25 @@ public class OfertaDTO
 	public void setFechaFin(Date fechaFin)
 	{
 		this.fechaFin = fechaFin;
+	}
+
+	public List<TematicaDTO> getListaTematicasDTO()
+	{
+		return listaTematicasDTO;
+	}
+
+	public void setListaTematicasDTO(List<TematicaDTO> listaTematicasDTO)
+	{
+		this.listaTematicasDTO = listaTematicasDTO;
+	}
+
+	public List<UsuarioDTO> getListaCompradoresDTO()
+	{
+		return listaCompradoresDTO;
+	}
+
+	public void setListaCompradoresDTO(List<UsuarioDTO> listaCompradoresDTO)
+	{
+		this.listaCompradoresDTO = listaCompradoresDTO;
 	}
 }

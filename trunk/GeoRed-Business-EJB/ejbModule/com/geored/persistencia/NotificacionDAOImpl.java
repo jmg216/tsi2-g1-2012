@@ -37,6 +37,12 @@ public class NotificacionDAOImpl extends GenericDAOBase<Notificacion, Notificaci
 			target.setNombreUsuario(source.getUsuario().getNombre());
 		}
 		
+		if(source.getTipoNotificacion() != null)
+		{
+			target.setIdTipoNotificacion(source.getTipoNotificacion().getId());
+			target.setNombreTipoNotificacion(source.getTipoNotificacion().getNombre());
+		}
+		
 		return target;
 	}
 }

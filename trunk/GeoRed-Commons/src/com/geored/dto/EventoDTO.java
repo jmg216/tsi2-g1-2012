@@ -1,6 +1,7 @@
 package com.geored.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class EventoDTO
 {
@@ -16,6 +17,8 @@ public class EventoDTO
 	
 	private Date fechaFin;
 
+	private List<TematicaDTO> listaTematicasDTO;
+	
 	public Long getId()
 	{
 		return id;
@@ -74,5 +77,15 @@ public class EventoDTO
 	public void setFechaFin(Date fechaFin)
 	{
 		this.fechaFin = fechaFin;
+	}
+
+	public List<TematicaDTO> getListaTematicasDTO()
+	{
+		return listaTematicasDTO;
+	}
+
+	public void setListaTematicasDTO(List<TematicaDTO> listaTematicasDTO)
+	{
+		this.listaTematicasDTO = listaTematicasDTO;
 	}
 }

@@ -3,9 +3,9 @@ package com.geored.dominio;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,10 +37,10 @@ public class Usuario implements Serializable
 	@Column(name="NOMBRE", nullable=false)
 	private String nombre;
 	
-	@Column(name="IMAGEN", nullable=false)
-	private String imagen;
+	@Column(name="URL_IMAGEN", nullable=false)
+	private String urlImagen;
 	
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="usuario_tematica",
 	joinColumns =
 	{
@@ -52,7 +52,7 @@ public class Usuario implements Serializable
 	})
 	private List<Tematica> listaTematicas;
 	
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="usuario_oferta",
 	joinColumns =
 	{
@@ -104,14 +104,14 @@ public class Usuario implements Serializable
 		this.nombre = nombre;
 	}
 
-	public String getImagen()
+	public String getUrlImagen()
 	{
-		return imagen;
+		return urlImagen;
 	}
 
-	public void setImagen(String imagen)
+	public void setUrlImagen(String urlImagen)
 	{
-		this.imagen = imagen;
+		this.urlImagen = urlImagen;
 	}
 
 	public List<Tematica> getListaTematicas()

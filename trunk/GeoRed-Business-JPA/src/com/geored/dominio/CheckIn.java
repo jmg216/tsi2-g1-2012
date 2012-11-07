@@ -34,11 +34,11 @@ public class CheckIn implements Serializable
 	private Timestamp fechaCreacion;
 	
 	@JoinColumn(name="USUARIO_FK", nullable=false)
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Usuario usuario;
 	
 	@JoinColumn(name="SITIO_FK", nullable=false)
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Sitio sitio;
 	
 	public Long getId()
