@@ -111,7 +111,7 @@ public class SitioActivity extends ListActivity {
         SitioADTO sitioSeleccionado = (SitioADTO) getListAdapter().getItem(position);
         
         i.putExtra("nombreSitio", sitioSeleccionado.getNombre());  
-        i.putExtra("imagenSitio", sitioSeleccionado.getImagen());
+        i.putExtra("imagenSitio", sitioSeleccionado.getUrlImagen());
         i.putExtra("descSitio", sitioSeleccionado.getDescripcion());
         
         // Creo la vista usando LocalActivityManager del SitioGroupActivity

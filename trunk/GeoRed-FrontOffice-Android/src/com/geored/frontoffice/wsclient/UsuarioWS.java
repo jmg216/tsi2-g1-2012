@@ -77,7 +77,8 @@ public class UsuarioWS
         	usuario.setEmail(info.getProperty(0).toString());
         	usuario.setId(Long.parseLong(info.getProperty(1).toString()));
         	usuario.setNombre(info.getProperty(2).toString());
-        	usuario.setPass(info.getProperty(3).toString()); 
+        	usuario.setPass(info.getProperty(3).toString());
+        	usuario.setUrlImagen(info.getProperty(4).toString());
         	
             usuariosADTO[i] = usuario;			
 		}

@@ -45,7 +45,7 @@ public class SitioAdapter extends ArrayAdapter<SitioADTO>  {
                     tt.setText(sitio.getNombre());                            
                     bt.setText(sitio.getDescripcion());
                     //iv.setImageResource(R.drawable.marker3);
-                    Bitmap bm = BitMapImageConverter.getImageBitmap(sitio.getImagen());                    
+                    Bitmap bm = BitMapImageConverter.getImageBitmap(sitio.getUrlImagen());                    
                     iv.setImageBitmap(bm);
             }
             

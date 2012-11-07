@@ -57,7 +57,7 @@ public class OfertaWS
         	ofertaADTO.setIdLocal(Long.parseLong(response.getProperty(2).toString()));
         	ofertaADTO.setNombre(response.getProperty(3).toString());
         	ofertaADTO.setNombreLocal(response.getProperty(4).toString());
-        	ofertaADTO.setLogoUrl(response.getProperty(5).toString());
+        	ofertaADTO.setUrlImagen(response.getProperty(5).toString());
         	
         	// TODO ofertaADTO.setCosto(Double)
         	// TODO ofertaADTO.setFechaFin(fechaFin)
@@ -89,7 +89,7 @@ public class OfertaWS
         	oferta.setIdLocal(Long.parseLong(info.getProperty(2).toString()));
         	oferta.setNombre(info.getProperty(3).toString());
         	oferta.setNombreLocal(info.getProperty(4).toString());
-        	oferta.setLogoUrl(info.getProperty(5).toString());
+        	oferta.setUrlImagen(info.getProperty(5).toString());
         	
         	// TODO ofertaADTO.setCosto(Double)
         	// TODO ofertaADTO.setFechaFin(fechaFin)
