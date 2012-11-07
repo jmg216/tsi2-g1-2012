@@ -2,6 +2,7 @@ package com.geored.dominio;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -48,6 +50,9 @@ public class Oferta implements Serializable
 	@JoinColumn(name="LOCAL_FK", nullable=false)
 	@ManyToOne(fetch=FetchType.EAGER)
 	private Local local;
+	
+	@OneToMany(mappedBy ="oferta")
+	private List<TematicaOferta> tematicas;
 
 	public Long getId()
 	{
@@ -127,5 +132,15 @@ public class Oferta implements Serializable
 	public void setFechaFin(Timestamp fechaFin)
 	{
 		this.fechaFin = fechaFin;
+	}
+	
+	public List<TematicaOferta> getTematicas()
+	{
+		return tematicas;
+	}
+
+	public void setTematica(List<TematicaOferta> tematicas)
+	{
+		this.tematicas = tematicas;
 	}
 }

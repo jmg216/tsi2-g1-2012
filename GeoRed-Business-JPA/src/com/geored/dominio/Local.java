@@ -75,4 +75,25 @@ public class Local implements Serializable
 	{
 		this.ubicacionGeografica = ubicacionGeografica;
 	}
+    
+	public String GetLatitud()
+    {
+        //String cleanCoord = ubicacionGeografica.replace("(", "").replace(")", "");
+
+		String delims = "[,]";
+		
+		String[] array = ubicacionGeografica.split(delims);
+  
+        return array[0];
+    }
+
+    public String GetLongitud()
+    {
+        //String cleanCoord = ubicacionGeografica.replace("(", "").replace(")", "");
+    	String delims = "[,]";
+		
+		String[] array = ubicacionGeografica.split(delims);
+  
+        return array[1];
+    }
 }
