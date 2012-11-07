@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -40,8 +39,8 @@ public class Oferta implements Serializable
 	@Column(name="COSTO", nullable=false)
 	private Double costo;
 	
-	@Column(name="LOGO_URL")
-	private String logoUrl;
+	@Column(name="URL_IMAGEN")
+	private String urlImagen;
 	
 	@Column(name="FECHA_INICIO", nullable=false)
 	private Timestamp fechaInicio;
@@ -50,10 +49,10 @@ public class Oferta implements Serializable
 	private Timestamp fechaFin;
 	
 	@JoinColumn(name="LOCAL_FK", nullable=false)
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Local local;
 	
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="oferta_tematica",
 	joinColumns =
 	{
@@ -65,7 +64,7 @@ public class Oferta implements Serializable
 	})
 	private List<Tematica> listaTematicas;
 
-	@ManyToMany(mappedBy="listaCompras")
+	@ManyToMany(mappedBy="listaCompras", fetch=FetchType.LAZY)
 	private List<Usuario> listaCompradores;
 	
 	public Long getId()
@@ -118,14 +117,14 @@ public class Oferta implements Serializable
 		this.costo = costo;
 	}
 
-	public String getLogoUrl()
+	public String getUrlImagen()
 	{
-		return logoUrl;
+		return urlImagen;
 	}
 
-	public void setLogoUrl(String logoUrl)
+	public void setUrlImagen(String urlImagen)
 	{
-		this.logoUrl = logoUrl;
+		this.urlImagen = urlImagen;
 	}
 
 	public Timestamp getFechaInicio()

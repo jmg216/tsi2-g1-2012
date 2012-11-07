@@ -1,5 +1,7 @@
 package com.geored.dto;
 
+import java.util.List;
+
 public class SitioDTO 
 {
 	private Long id;
@@ -12,9 +14,7 @@ public class SitioDTO
 	
 	private String ubicacionGeografica;
 
-	private Long idAdministrador;
-	
-	private String nombreAdministrador;
+	private List<TematicaDTO> listaTematicasDTO;
 	
 	public Long getId()
 	{
@@ -46,26 +46,6 @@ public class SitioDTO
 		this.urlImagen = urlImagen;
 	}
 
-	public Long getIdAdministrador()
-	{
-		return idAdministrador;
-	}
-
-	public void setIdAdministrador(Long idAdministrador)
-	{
-		this.idAdministrador = idAdministrador;
-	}
-
-	public String getNombreAdministrador()
-	{
-		return nombreAdministrador;
-	}
-
-	public void setNombreAdministrador(String nombreAdministrador)
-	{
-		this.nombreAdministrador = nombreAdministrador;
-	}
-
 	public String getDescripcion()
 	{
 		return descripcion;
@@ -84,5 +64,15 @@ public class SitioDTO
 	public void setUbicacionGeografica(String ubicacionGeografica)
 	{
 		this.ubicacionGeografica = ubicacionGeografica;
+	}
+
+	public List<TematicaDTO> getListaTematicasDTO()
+	{
+		return listaTematicasDTO;
+	}
+
+	public void setListaTematicasDTO(List<TematicaDTO> listaTematicasDTO)
+	{
+		this.listaTematicasDTO = listaTematicasDTO;
 	}
 }

@@ -10,6 +10,10 @@ public class NotificacionDTO
 	
 	private String nombreUsuario;
 
+	private Long idTipoNotificacion;
+	
+	private String nombreTipoNotificacion;
+	
 	public Long getId()
 	{
 		return id;
@@ -48,5 +52,25 @@ public class NotificacionDTO
 	public void setNombreUsuario(String nombreUsuario)
 	{
 		this.nombreUsuario = nombreUsuario;
+	}
+
+	public Long getIdTipoNotificacion()
+	{
+		return idTipoNotificacion;
+	}
+
+	public void setIdTipoNotificacion(Long idTipoNotificacion)
+	{
+		this.idTipoNotificacion = idTipoNotificacion;
+	}
+
+	public String getNombreTipoNotificacion()
+	{
+		return nombreTipoNotificacion;
+	}
+
+	public void setNombreTipoNotificacion(String nombreTipoNotificacion)
+	{
+		this.nombreTipoNotificacion = nombreTipoNotificacion;
 	}
 }

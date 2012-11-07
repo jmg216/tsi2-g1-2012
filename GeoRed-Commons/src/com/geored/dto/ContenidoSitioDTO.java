@@ -4,6 +4,10 @@ public class ContenidoSitioDTO
 {
 	private Long id;
 
+	private String comentario;
+	
+	private String urlImagen;
+	
 	private Long idUsuario;
 	
 	private String nombreUsuario;
@@ -60,5 +64,25 @@ public class ContenidoSitioDTO
 	public void setNombreSitio(String nombreSitio)
 	{
 		this.nombreSitio = nombreSitio;
+	}
+
+	public String getComentario()
+	{
+		return comentario;
+	}
+
+	public void setComentario(String comentario)
+	{
+		this.comentario = comentario;
+	}
+
+	public String getUrlImagen()
+	{
+		return urlImagen;
+	}
+
+	public void setUrlImagen(String urlImagen)
+	{
+		this.urlImagen = urlImagen;
 	}
 }

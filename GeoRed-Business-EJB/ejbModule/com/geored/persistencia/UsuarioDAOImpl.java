@@ -1,11 +1,16 @@
 package com.geored.persistencia;
 
+import java.util.ArrayList;
+
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.persistence.Query;
 
 import com.geored.dominio.Usuario;
+import com.geored.dto.OfertaDTO;
+import com.geored.dto.TematicaDTO;
 import com.geored.dto.UsuarioDTO;
 import com.geored.persistencia.core.GenericDAOBase;
 
@@ -13,6 +18,12 @@ import com.geored.persistencia.core.GenericDAOBase;
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class UsuarioDAOImpl extends GenericDAOBase<Usuario, UsuarioDTO> implements UsuarioDAO
 {
+	@EJB
+	private TematicaDAO tematicaDAO;
+	
+	@EJB
+	private OfertaDAO ofertaDAO;
+	
 	@Override
 	public Usuario toEntity(UsuarioDTO source)
 	{
@@ -21,7 +32,7 @@ public class UsuarioDAOImpl extends GenericDAOBase<Usuario, UsuarioDTO> implemen
 		target.setEmail(source.getEmail());
 		target.setPass(source.getPass());
 		target.setNombre(source.getNombre());
-		target.setNombre(source.getImagen());
+		target.setUrlImagen(source.getUrlImagen());
 		
 		return target;
 	}
@@ -35,8 +46,20 @@ public class UsuarioDAOImpl extends GenericDAOBase<Usuario, UsuarioDTO> implemen
 		target.setEmail(source.getEmail());
 		target.setPass(source.getPass());
 		target.setNombre(source.getNombre());
-		target.setNombre(source.getImagen());
+		target.setUrlImagen(source.getUrlImagen());
 		
+		target.setListaTematicasDTO(new ArrayList<TematicaDTO>());
+		if(source.getListaTematicas() != null)
+		{
+			target.setListaTematicasDTO(tematicaDAO.toDtoList(source.getListaTematicas()));
+		}
+		
+		target.setListaComprasDTO(new ArrayList<OfertaDTO>());
+		if(source.getListaCompras() != null)
+		{
+			target.setListaComprasDTO(ofertaDAO.toDtoList(source.getListaCompras()));
+		}
+			
 		return target;
 	}
 	
