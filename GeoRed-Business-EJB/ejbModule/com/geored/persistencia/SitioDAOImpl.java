@@ -18,6 +18,7 @@ public class SitioDAOImpl extends GenericDAOBase<Sitio, SitioDTO> implements Sit
 	{
 		target.setNombre(source.getNombre());
 		target.setDescripcion(source.getDescripcion());
+		target.setImagen(source.getImagen());
 		target.setUbicacionGeografica(source.getUbicacionGeografica());
 	}
 
@@ -26,6 +27,7 @@ public class SitioDAOImpl extends GenericDAOBase<Sitio, SitioDTO> implements Sit
 	{
 		target.setId(source.getId());
 		target.setNombre(source.getNombre());
+		target.setImagen(source.getImagen());
 		target.setDescripcion(source.getDescripcion());
 		target.setUbicacionGeografica(source.getUbicacionGeografica());
 		
