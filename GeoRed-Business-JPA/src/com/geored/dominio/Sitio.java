@@ -1,15 +1,17 @@
 package com.geored.dominio;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,8 +28,8 @@ public class Sitio implements Serializable
 	@Column(name="ID", nullable=false)
 	private Long id;
 	
-	@Column(name="IMAGEN", nullable=false)
-	private String imagen;
+	@Column(name="URL_IMAGEN", nullable=false)
+	private String urlImagen;
 	
 	@Column(name="NOMBRE", nullable=false)
 	private String nombre;
@@ -38,9 +40,17 @@ public class Sitio implements Serializable
 	@Column(name="UBICACION_GEOGRAFICA", nullable=false)
 	private String ubicacionGeografica;
 	
-	@JoinColumn(name="ADMINISTRADOR_FK", nullable=false)
-	@ManyToOne(fetch=FetchType.EAGER)
-	private Administrador administrador;
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(name="sitio_tematica",
+	joinColumns =
+	{
+	    @JoinColumn(name = "TEMATICA_FK")
+	},
+	inverseJoinColumns =
+	{
+	    @JoinColumn(name = "SITIO_FK")
+	})
+	private List<Tematica> listaTematicas;
 	
 	public Long getId()
 	{
@@ -62,24 +72,14 @@ public class Sitio implements Serializable
 		this.nombre = nombre;
 	}
 
-	public Administrador getAdministrador()
+	public String getUrlImagen()
 	{
-		return administrador;
-	}
-	
-	public String getImagen() 
-	{
-		return imagen;
+		return urlImagen;
 	}
 
-	public void setImagen(String imagen) 
+	public void setUrlImagen(String urlImagen)
 	{
-		this.imagen = imagen;
-	}
-
-	public void setAdministrador(Administrador administrador)
-	{
-		this.administrador = administrador;
+		this.urlImagen = urlImagen;
 	}
 
 	public String getDescripcion()
@@ -100,5 +100,15 @@ public class Sitio implements Serializable
 	public void setUbicacionGeografica(String ubicacionGeografica)
 	{
 		this.ubicacionGeografica = ubicacionGeografica;
+	}
+
+	public List<Tematica> getListaTematicas()
+	{
+		return listaTematicas;
+	}
+
+	public void setListaTematicas(List<Tematica> listaTematicas)
+	{
+		this.listaTematicas = listaTematicas;
 	}
 }

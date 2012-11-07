@@ -76,24 +76,23 @@ public class Local implements Serializable
 		this.ubicacionGeografica = ubicacionGeografica;
 	}
     
-	public String GetLatitud()
+	public String getLatitud()
     {
-        //String cleanCoord = ubicacionGeografica.replace("(", "").replace(")", "");
+        String cleanCoord = ubicacionGeografica.replace("(", "").replace(")", "");
 
-		String delims = "[,]";
-		
-		String[] array = ubicacionGeografica.split(delims);
+		String[] array = cleanCoord.split(",");
   
         return array[0];
     }
 
-    public String GetLongitud()
+    public String getLongitud()
     {
-        //String cleanCoord = ubicacionGeografica.replace("(", "").replace(")", "");
-    	String delims = "[,]";
-		
-		String[] array = ubicacionGeografica.split(delims);
+        String cleanCoord = ubicacionGeografica.replace("(", "").replace(")", "");
+    	
+		String[] array = cleanCoord.split(",");
   
         return array[1];
     }
+    
+    
 }

@@ -45,5 +45,4 @@ public class TipoNotificacion implements Serializable
 	{
 		this.nombre = nombre;
 	}
-
 }

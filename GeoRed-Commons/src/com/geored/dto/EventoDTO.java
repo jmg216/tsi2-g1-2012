@@ -15,10 +15,6 @@ public class EventoDTO
 	private Date fechaInicio;
 	
 	private Date fechaFin;
-	
-	private Long idAministrador;
-	
-	private String nombreAdministrador;
 
 	public Long getId()
 	{
@@ -38,26 +34,6 @@ public class EventoDTO
 	public void setNombre(String nombre)
 	{
 		this.nombre = nombre;
-	}
-
-	public Long getIdAministrador()
-	{
-		return idAministrador;
-	}
-
-	public void setIdAministrador(Long idAministrador)
-	{
-		this.idAministrador = idAministrador;
-	}
-
-	public String getNombreAdministrador()
-	{
-		return nombreAdministrador;
-	}
-
-	public void setNombreAdministrador(String nombreAdministrador)
-	{
-		this.nombreAdministrador = nombreAdministrador;
 	}
 
 	public String getDescripcion()

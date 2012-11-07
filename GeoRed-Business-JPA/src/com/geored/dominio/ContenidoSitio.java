@@ -26,6 +26,12 @@ public class ContenidoSitio implements Serializable
 	@Column(name="ID", nullable=false)
 	private Long id;
 
+	@Column(name="COMENTARIO")
+	private String comentario;
+	
+	@Column(name="URL_IMAGEN")
+	private String urlImagen;
+	
 	@JoinColumn(name="USUARIO_FK", nullable=false)
 	@ManyToOne(fetch=FetchType.EAGER)
 	private Usuario usuario;
@@ -63,4 +69,26 @@ public class ContenidoSitio implements Serializable
 	{
 		this.sitio = sitio;
 	}
+
+	public String getComentario()
+	{
+		return comentario;
+	}
+
+	public void setComentario(String comentario)
+	{
+		this.comentario = comentario;
+	}
+
+	public String getUrlImagen()
+	{
+		return urlImagen;
+	}
+
+	public void setUrlImagen(String urlImagen)
+	{
+		this.urlImagen = urlImagen;
+	}
+	
+	
 }

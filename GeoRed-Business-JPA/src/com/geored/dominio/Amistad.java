@@ -63,4 +63,6 @@ public class Amistad implements Serializable
 	{
 		this.usuarioB = usuarioB;
 	}
+	
+	
 }

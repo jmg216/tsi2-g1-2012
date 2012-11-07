@@ -33,6 +33,10 @@ public class Notificacion implements Serializable
 	@ManyToOne(fetch=FetchType.EAGER)
 	private Usuario usuario;
 
+	@JoinColumn(name="TIPO_NOTIFICACION_FK", nullable=false)
+	@ManyToOne(fetch=FetchType.EAGER)
+	private TipoNotificacion tipoNotificacion;
+	
 	public Long getId()
 	{
 		return id;
@@ -61,5 +65,15 @@ public class Notificacion implements Serializable
 	public void setUsuario(Usuario usuario)
 	{
 		this.usuario = usuario;
+	}
+
+	public TipoNotificacion getTipoNotificacion()
+	{
+		return tipoNotificacion;
+	}
+
+	public void setTipoNotificacion(TipoNotificacion tipoNotificacion)
+	{
+		this.tipoNotificacion = tipoNotificacion;
 	}
 }

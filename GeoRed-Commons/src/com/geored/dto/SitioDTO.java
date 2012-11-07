@@ -6,7 +6,7 @@ public class SitioDTO
 	
 	private String nombre;
 	
-	private String imagen;
+	private String urlImagen;
 	
 	private String descripcion;
 	
@@ -35,15 +35,15 @@ public class SitioDTO
 	{
 		this.nombre = nombre;
 	}
-	
-	public String getImagen() 
+
+	public String getUrlImagen()
 	{
-		return imagen;
+		return urlImagen;
 	}
 
-	public void setImagen(String imagen) 
+	public void setUrlImagen(String urlImagen)
 	{
-		this.imagen = imagen;
+		this.urlImagen = urlImagen;
 	}
 
 	public Long getIdAdministrador()

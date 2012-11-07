@@ -5,23 +5,17 @@
 		<class>com.geored.dominio.Amistad</class>
 		<class>com.geored.dominio.CheckIn</class>
 		<class>com.geored.dominio.Usuario</class>
-		<class>com.geored.dominio.TipoNotificacionUsuario</class>
 		<class>com.geored.dominio.Administrador</class>
 		<class>com.geored.dominio.Oferta</class>
 		<class>com.geored.dominio.Sitio</class>
-		<class>com.geored.dominio.TematicaOferta</class>
 		<class>com.geored.dominio.Evento</class>
-		<class>com.geored.dominio.TematicaEvento</class>
 		<class>com.geored.dominio.TipoAdministrador</class>
 		<class>com.geored.dominio.EvaluacionOferta</class>
 		<class>com.geored.dominio.Notificacion</class>
 		<class>com.geored.dominio.Tematica</class>
 		<class>com.geored.dominio.ContenidoSitio</class>
 		<class>com.geored.dominio.Local</class>
-		<class>com.geored.dominio.CompraOferta</class>
 		<class>com.geored.dominio.TipoNotificacion</class>
-		<class>com.geored.dominio.TematicaUsuario</class>
 		<class>com.geored.dominio.Empresa</class>
-		<class>com.geored.dominio.TematicaSitio</class>
 	</persistence-unit>
 </persistence>
