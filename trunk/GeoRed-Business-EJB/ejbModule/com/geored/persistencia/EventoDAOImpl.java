@@ -16,29 +16,31 @@ public class EventoDAOImpl extends GenericDAOBase<Evento, EventoDTO> implements 
 {
 
 	@Override
-	public void dtoToEntity(EventoDTO source, Evento target)
+	public Evento toEntity(EventoDTO source)
 	{
+		Evento target = new Evento();
+		
 		target.setNombre(source.getNombre());
 		target.setDescripcion(source.getDescripcion());
 		target.setFechaInicio(new Timestamp(source.getFechaInicio().getTime()));
 		target.setFechaFin(new Timestamp(source.getFechaFin().getTime()));
 		target.setUbicacionGeografica(source.getUbicacionGeogrica());
+		
+		return target;
 	}
 
 	@Override
-	public void entityToDto(Evento source, EventoDTO target)
+	public EventoDTO toDto(Evento source)
 	{
+		EventoDTO target = new EventoDTO();
+		
 		target.setId(source.getId());
 		target.setNombre(source.getNombre());
 		target.setDescripcion(source.getDescripcion());
 		target.setFechaInicio(source.getFechaInicio());
 		target.setFechaFin(source.getFechaFin());
 		
-		if(source.getAdministrador() != null)
-		{
-			target.setIdAministrador(source.getAdministrador().getId());
-			target.setNombreAdministrador(source.getAdministrador().getNombre());
-		}
+		return target;
 	}
 	
 }

@@ -14,14 +14,20 @@ public class EvaluacionOfertaDAOImpl extends GenericDAOBase<EvaluacionOferta, Ev
 {
 
 	@Override
-	public void dtoToEntity(EvaluacionOfertaDTO source, EvaluacionOferta target)
+	public EvaluacionOferta toEntity(EvaluacionOfertaDTO source)
 	{
+		EvaluacionOferta target = new EvaluacionOferta();
+		
 		target.setEvaluacion(source.getEvaluacion());
+		
+		return target;
 	}
 
 	@Override
-	public void entityToDto(EvaluacionOferta source, EvaluacionOfertaDTO target)
+	public EvaluacionOfertaDTO toDto(EvaluacionOferta source)
 	{
+		EvaluacionOfertaDTO target = new EvaluacionOfertaDTO();
+		
 		target.setId(source.getId());
 		target.setEvaluacion(source.getEvaluacion());
 		
@@ -36,5 +42,7 @@ public class EvaluacionOfertaDAOImpl extends GenericDAOBase<EvaluacionOferta, Ev
 			target.setIdOferta(source.getOferta().getId());
 			target.setNombreOferta(source.getOferta().getNombre());
 		}
+		
+		return target;
 	}	
 }

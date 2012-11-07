@@ -14,17 +14,25 @@ public class TematicaDAOImpl extends GenericDAOBase<Tematica, TematicaDTO> imple
 {
 
 	@Override
-	public void dtoToEntity(TematicaDTO source, Tematica target)
+	public Tematica toEntity(TematicaDTO source)
 	{
+		Tematica target = new Tematica();
+		
 		target.setNombre(source.getNombre());
 		target.setDescripcion(source.getDescripcion());
+		
+		return target;
 	}
 
 	@Override
-	public void entityToDto(Tematica source, TematicaDTO target)
+	public TematicaDTO toDto(Tematica source)
 	{
+		TematicaDTO target = new TematicaDTO();
+		
 		target.setId(source.getId());
 		target.setNombre(source.getNombre());
 		target.setDescripcion(source.getDescripcion());
+		
+		return target;
 	}	
 }

@@ -1,7 +1,6 @@
 package com.geored.persistencia;
 
 import java.sql.Timestamp;
-
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -9,11 +8,9 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.persistence.Query;
 
-
 import com.geored.dominio.Oferta;
-import com.geored.dominio.TematicaUsuario;
+import com.geored.dominio.Tematica;
 import com.geored.dominio.Usuario;
-
 import com.geored.dto.OfertaDTO;
 import com.geored.persistencia.core.GenericDAOBase;
 
@@ -23,19 +20,25 @@ public class OfertaDAOImpl extends GenericDAOBase<Oferta, OfertaDTO> implements 
 {
 
 	@Override
-	public void dtoToEntity(OfertaDTO source, Oferta target)
+	public Oferta toEntity(OfertaDTO source)
 	{
+		Oferta target = new Oferta();
+		
 		target.setNombre(source.getNombre());
 		target.setDescripcion(source.getDescripcion());
 		target.setCosto(source.getCosto());
 		target.setLogoUrl(source.getLogoUrl());
 		target.setFechaInicio(new Timestamp(source.getFechaInicio().getTime()));
 		target.setFechaFin(new Timestamp(source.getFechaFin().getTime()));
+		
+		return target;
 	}
 
 	@Override
-	public void entityToDto(Oferta source, OfertaDTO target)
+	public OfertaDTO toDto(Oferta source)
 	{
+		OfertaDTO target = new OfertaDTO();
+		
 		target.setId(source.getId());
 		target.setNombre(source.getNombre());
 		target.setDescripcion(source.getDescripcion());
@@ -49,26 +52,23 @@ public class OfertaDAOImpl extends GenericDAOBase<Oferta, OfertaDTO> implements 
 			target.setIdLocal(source.getLocal().getId());
 			target.setNombreLocal(source.getLocal().getNombre());
 		}
+		
+		return target;
 	}
 	
-	public Object buscarOfertasPorTematicas(List<TematicaUsuario> tematicas, Usuario u,  boolean toDTO)
+	public List buscarOfertasPorTematicas(List<Tematica> tematicas, Usuario u,  boolean toDTO)
 	{
-		Query query = em.createQuery("select o from Oferta o JOIN o.tematicas where o.tematicas in ?1");        
+		Query query = em.createQuery("select o from Oferta oferta where o.listaTematicas in ?1");
+		
         query.setParameter(1, tematicas);       
         
-        
-        Oferta ofertaEntity = (Oferta) query.getSingleResult();
+        List<Oferta> listaOfertas = query.getResultList();
         
         if(toDTO)
         {
-        	OfertaDTO ofertaDTO = new OfertaDTO();
-        	
-        	entityToDto(ofertaEntity, ofertaDTO);
-        	
-        	return ofertaDTO;
+        	return toDtoList(listaOfertas);
         }
-        
-        return ofertaEntity;
-	
-    }
+     
+        return listaOfertas;
+    }	
 }

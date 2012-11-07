@@ -14,13 +14,18 @@ public class ContenidoSitioDAOImpl extends GenericDAOBase<ContenidoSitio, Conten
 {
 
 	@Override
-	public void dtoToEntity(ContenidoSitioDTO source, ContenidoSitio target)
+	public ContenidoSitio toEntity(ContenidoSitioDTO source)
 	{
+		ContenidoSitio target = new ContenidoSitio();
+		
+		return target;
 	}
 
 	@Override
-	public void entityToDto(ContenidoSitio source, ContenidoSitioDTO target)
+	public ContenidoSitioDTO toDto(ContenidoSitio source)
 	{
+		ContenidoSitioDTO target = new ContenidoSitioDTO();
+		
 		target.setId(source.getId());
 		
 		if(source.getSitio() != null)
@@ -34,6 +39,7 @@ public class ContenidoSitioDAOImpl extends GenericDAOBase<ContenidoSitio, Conten
 			target.setIdUsuario(source.getUsuario().getId());
 			target.setNombreUsuario(source.getUsuario().getNombre());
 		}
+		
+		return target;
 	}
-	
 }

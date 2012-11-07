@@ -14,15 +14,23 @@ public class TipoAdministradorDAOImpl extends GenericDAOBase<TipoAdministrador, 
 {
 
 	@Override
-	public void dtoToEntity(TipoAdministradorDTO source, TipoAdministrador target)
+	public TipoAdministrador toEntity(TipoAdministradorDTO source)
 	{
+		TipoAdministrador target = new TipoAdministrador();
+		
 		target.setNombre(source.getNombre());
+		
+		return target;
 	}
 
 	@Override
-	public void entityToDto(TipoAdministrador source, TipoAdministradorDTO target)
+	public TipoAdministradorDTO toDto(TipoAdministrador source)
 	{
+		TipoAdministradorDTO target = new TipoAdministradorDTO();
+		
 		target.setId(source.getId());
 		target.setNombre(source.getNombre());
+		
+		return target;
 	}	
 }

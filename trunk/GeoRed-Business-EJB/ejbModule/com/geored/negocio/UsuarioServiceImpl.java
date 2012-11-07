@@ -36,9 +36,7 @@ public class UsuarioServiceImpl implements UsuarioService
 	{
 		try
 		{
-			Usuario usuarioEntity = new Usuario();
-			
-			usuarioDAO.dtoToEntity(usuarioDTO, usuarioEntity);
+			Usuario usuarioEntity = usuarioDAO.toEntity(usuarioDTO);
 			
 			usuarioDAO.insertar(usuarioEntity);
 			
@@ -63,7 +61,7 @@ public class UsuarioServiceImpl implements UsuarioService
 				throw new NegocioException("Oferta no encontrada");
 			}
 			
-			usuarioDAO.dtoToEntity(usuarioDTO, usuarioEntity);
+			usuarioEntity = usuarioDAO.toEntity(usuarioDTO);
 			
 			usuarioDAO.actualizar(usuarioEntity);			
 		}

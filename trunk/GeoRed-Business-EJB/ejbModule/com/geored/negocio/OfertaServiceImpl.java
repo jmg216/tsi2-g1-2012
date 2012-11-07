@@ -31,9 +31,7 @@ public class OfertaServiceImpl implements OfertaService
 	{
 		try
 		{
-			Oferta ofertaEntity = new Oferta();
-			
-			ofertaDAO.dtoToEntity(ofertaDTO, ofertaEntity);
+			Oferta ofertaEntity = ofertaDAO.toEntity(ofertaDTO);
 			
 			ofertaDAO.insertar(ofertaEntity);
 			
@@ -58,7 +56,7 @@ public class OfertaServiceImpl implements OfertaService
 				throw new NegocioException("Oferta no encontrada");
 			}
 			
-			ofertaDAO.dtoToEntity(ofertaDTO, eventoEntity);
+			eventoEntity = ofertaDAO.toEntity(ofertaDTO);
 			
 			ofertaDAO.actualizar(eventoEntity);			
 		}

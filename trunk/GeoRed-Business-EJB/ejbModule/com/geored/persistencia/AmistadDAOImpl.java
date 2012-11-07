@@ -14,13 +14,18 @@ public class AmistadDAOImpl extends GenericDAOBase<Amistad, AmistadDTO> implemen
 {
 
 	@Override
-	public void dtoToEntity(AmistadDTO source, Amistad target)
+	public Amistad toEntity(AmistadDTO source)
 	{		
+		Amistad target = new Amistad();
+		
+		return target;
 	}
 
 	@Override
-	public void entityToDto(Amistad source, AmistadDTO target)
+	public AmistadDTO toDto(Amistad source)
 	{
+		AmistadDTO target = new AmistadDTO();
+		
 		target.setId(source.getId());
 		
 		if(source.getUsuarioA() != null)
@@ -33,6 +38,8 @@ public class AmistadDAOImpl extends GenericDAOBase<Amistad, AmistadDTO> implemen
 		{
 			target.setIdUsuarioB(source.getUsuarioB().getId());
 			target.setNombreUsuarioB(source.getUsuarioB().getNombre());
-		}			
+		}	
+		
+		return target;
 	}	
 }

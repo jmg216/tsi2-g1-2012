@@ -1,12 +1,21 @@
 package com.geored.persistencia.core;
 
+import java.util.List;
+
 /**
  * Define las operaciones genéricas de transformacion DTO <-> Entity.
  * Sera implementada por cada DAOImpl en particular.
  */
 public interface EntityTransformer<EntityType, DtoType>
 {
-	public void dtoToEntity(DtoType source, EntityType target);
+	public EntityType toEntity(DtoType source);
 	
-	public void entityToDto(EntityType source, DtoType target);
+	public DtoType toDto(EntityType source);
+	
+	// TRANSFORMACION DE COLECCIONES
+	public List<EntityType> toEntityList(List<DtoType> listaDtos);
+	
+	public List<DtoType> toDtoList(List<EntityType> listaEntities);
+
+	
 }

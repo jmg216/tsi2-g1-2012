@@ -31,9 +31,7 @@ public class SitioServiceImpl implements SitioService
 	{
 		try
 		{
-			Sitio sitioEntity = new Sitio();
-			
-			sitioDAO.dtoToEntity(sitioDTO, sitioEntity);
+			Sitio sitioEntity = sitioDAO.toEntity(sitioDTO);
 			
 			sitioDAO.insertar(sitioEntity);
 			
@@ -58,7 +56,7 @@ public class SitioServiceImpl implements SitioService
 				throw new NegocioException("Sitio no encontrado");
 			}
 			
-			sitioDAO.dtoToEntity(sitioDTO, sitioEntity);
+			sitioEntity = sitioDAO.toEntity(sitioDTO);
 			
 			sitioDAO.actualizar(sitioEntity);			
 		}
