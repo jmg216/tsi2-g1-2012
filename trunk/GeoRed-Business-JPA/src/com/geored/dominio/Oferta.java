@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,8 +12,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -51,9 +53,21 @@ public class Oferta implements Serializable
 	@ManyToOne(fetch=FetchType.EAGER)
 	private Local local;
 	
-	@OneToMany(mappedBy ="oferta")
-	private List<TematicaOferta> tematicas;
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(name="oferta_tematica",
+	joinColumns =
+	{
+	    @JoinColumn(name = "TEMATICA_FK")
+	},
+	inverseJoinColumns =
+	{
+	    @JoinColumn(name = "OFERTA_FK")
+	})
+	private List<Tematica> listaTematicas;
 
+	@ManyToMany(mappedBy="listaCompras")
+	private List<Usuario> listaCompradores;
+	
 	public Long getId()
 	{
 		return id;
@@ -133,14 +147,26 @@ public class Oferta implements Serializable
 	{
 		this.fechaFin = fechaFin;
 	}
-	
-	public List<TematicaOferta> getTematicas()
+
+	public List<Tematica> getListaTematicas()
 	{
-		return tematicas;
+		return listaTematicas;
 	}
 
-	public void setTematica(List<TematicaOferta> tematicas)
+	public void setListaTematicas(List<Tematica> listaTematicas)
 	{
-		this.tematicas = tematicas;
+		this.listaTematicas = listaTematicas;
 	}
+
+	public List<Usuario> getListaCompradores()
+	{
+		return listaCompradores;
+	}
+
+	public void setListaCompradores(List<Usuario> listaCompradores)
+	{
+		this.listaCompradores = listaCompradores;
+	}
+	
+	
 }

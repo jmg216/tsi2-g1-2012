@@ -2,15 +2,17 @@ package com.geored.dominio;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -42,9 +44,17 @@ public class Evento implements Serializable
 	@Column(name="FECHA_FIN", nullable=false)
 	private Timestamp fechaFin;
 	
-	@JoinColumn(name="ADMINISTRADOR_FK", nullable=false)
-	@ManyToOne(fetch=FetchType.EAGER)
-	private Administrador administrador;
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(name="evento_tematica",
+	joinColumns =
+	{
+	    @JoinColumn(name = "TEMATICA_FK")
+	},
+	inverseJoinColumns =
+	{
+	    @JoinColumn(name = "EVENTO_FK")
+	})
+	private List<Tematica> listaTematicas;
 
 	public Long getId()
 	{
@@ -106,13 +116,15 @@ public class Evento implements Serializable
 		this.fechaFin = fechaFin;
 	}
 
-	public Administrador getAdministrador()
+	public List<Tematica> getListaTematicas()
 	{
-		return administrador;
+		return listaTematicas;
 	}
 
-	public void setAdministrador(Administrador administrador)
+	public void setListaTematicas(List<Tematica> listaTematicas)
 	{
-		this.administrador = administrador;
+		this.listaTematicas = listaTematicas;
 	}
+
+	
 }

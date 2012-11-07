@@ -12,7 +12,7 @@ public class EvaluacionOfertaDTO
 	
 	private String nombreOferta;
 
-	private String evaluacion;
+	private Integer evaluacion;
 	
 	public Long getId()
 	{
@@ -64,12 +64,12 @@ public class EvaluacionOfertaDTO
 		this.nombreOferta = nombreOferta;
 	}
 
-	public String getEvaluacion()
+	public Integer getEvaluacion()
 	{
 		return evaluacion;
 	}
 
-	public void setEvaluacion(String evaluacion)
+	public void setEvaluacion(Integer evaluacion)
 	{
 		this.evaluacion = evaluacion;
 	}

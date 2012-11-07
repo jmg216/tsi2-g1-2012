@@ -3,12 +3,15 @@ package com.geored.dominio;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -37,8 +40,29 @@ public class Usuario implements Serializable
 	@Column(name="IMAGEN", nullable=false)
 	private String imagen;
 	
-	@OneToMany(mappedBy ="usuario")
-	private List<TematicaUsuario> tematicas;
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(name="usuario_tematica",
+	joinColumns =
+	{
+	    @JoinColumn(name = "TEMATICA_FK")
+	},
+	inverseJoinColumns =
+	{
+	    @JoinColumn(name = "USUARIO_FK")
+	})
+	private List<Tematica> listaTematicas;
+	
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(name="usuario_oferta",
+	joinColumns =
+	{
+	    @JoinColumn(name = "OFERTA_FK")
+	},
+	inverseJoinColumns =
+	{
+	    @JoinColumn(name = "USUARIO_FK")
+	})
+	private List<Oferta> listaCompras;
 	
 	public Long getId()
 	{
@@ -79,17 +103,7 @@ public class Usuario implements Serializable
 	{
 		this.nombre = nombre;
 	}
-	
-	public List<TematicaUsuario> getTematicas()
-	{
-		return tematicas;
-	}
 
-	public void setTematica(List<TematicaUsuario> tematicas)
-	{
-		this.tematicas = tematicas;
-	}
-	
 	public String getImagen()
 	{
 		return imagen;
@@ -98,5 +112,25 @@ public class Usuario implements Serializable
 	public void setImagen(String imagen)
 	{
 		this.imagen = imagen;
+	}
+
+	public List<Tematica> getListaTematicas()
+	{
+		return listaTematicas;
+	}
+
+	public void setListaTematicas(List<Tematica> listaTematicas)
+	{
+		this.listaTematicas = listaTematicas;
+	}
+
+	public List<Oferta> getListaCompras()
+	{
+		return listaCompras;
+	}
+
+	public void setListaCompras(List<Oferta> listaCompras)
+	{
+		this.listaCompras = listaCompras;
 	}
 }

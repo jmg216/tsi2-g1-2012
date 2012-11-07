@@ -35,7 +35,7 @@ public class EvaluacionOferta implements Serializable
 	private Oferta oferta;
 
 	@Column(name="EVALUACION", nullable=false)
-	private String evaluacion;
+	private Integer evaluacion;
 	
 	public Long getId()
 	{
@@ -67,12 +67,12 @@ public class EvaluacionOferta implements Serializable
 		this.oferta = oferta;
 	}
 
-	public String getEvaluacion()
+	public Integer getEvaluacion()
 	{
 		return evaluacion;
 	}
 
-	public void setEvaluacion(String evaluacion)
+	public void setEvaluacion(Integer evaluacion)
 	{
 		this.evaluacion = evaluacion;
 	}
