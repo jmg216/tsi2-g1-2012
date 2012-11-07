@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.xml.rpc.ServiceException;
 
 import com.geored.backoffice.managedBean.BaseBean;
@@ -14,13 +15,14 @@ import com.geored.negocio.DaoException;
 import com.geored.negocio.OfertaDTO;
 
 @ManagedBean(name="listadoOfertaBean")
+@RequestScoped
 public class ListadoOfertasBean extends BaseBean implements Serializable
-{
+{	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 4689434236912827528L;
+
 	private static final String TO_GESTION = "to_gestion";
 	
 	private List<OfertaDTO> ofertas;

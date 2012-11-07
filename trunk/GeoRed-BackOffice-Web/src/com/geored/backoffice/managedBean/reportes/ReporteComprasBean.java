@@ -4,19 +4,21 @@ import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
+
+import com.geored.backoffice.managedBean.BaseBean;
 
 @ManagedBean(name="reporteComprasBean")
-@SessionScoped
-public class ReporteComprasBean implements Serializable
+@RequestScoped
+public class ReporteComprasBean extends BaseBean implements Serializable
 {	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	
-	@PostConstruct
-	public void init() 
+	private static final long serialVersionUID = -4370175574249396986L;
+
+	public ReporteComprasBean()
 	{
-	}	
+		
+	}
 }

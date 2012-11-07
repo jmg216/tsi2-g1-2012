@@ -22,8 +22,8 @@ public class ListadoEmpresasBean extends BaseBean implements Serializable
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 794033666609815070L;
+
 	private static final String TO_GESTION = "to_gestion";
 	
 	private Long idEmpresa;

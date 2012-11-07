@@ -13,14 +13,14 @@ import com.geored.negocio.AdminServiceImpl;
 import com.geored.negocio.AdminServiceImplServiceLocator;
 import com.geored.negocio.AdministradorDTO;
 
-@ManagedBean(name = "loginBean")
+@ManagedBean(name="loginBean")
 @RequestScoped
 public class LoginBean extends BaseBean implements Serializable
 {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1070740152270054906L;
 	
 	private String email;
 	private String pass;

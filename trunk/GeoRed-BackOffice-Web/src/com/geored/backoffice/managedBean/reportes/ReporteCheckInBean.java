@@ -9,7 +9,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.xml.rpc.ServiceException;
 
 import org.primefaces.model.map.DefaultMapModel;
@@ -28,13 +28,14 @@ import com.geored.negocio.UsuarioServiceImpl;
 import com.geored.negocio.UsuarioServiceImplServiceLocator;
 
 @ManagedBean(name="reporteCheckInBean")
-@SessionScoped
+@RequestScoped
 public class ReporteCheckInBean extends BaseBean implements Serializable
-{	
+{		
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 4395706490596718928L;
+	
 	private Date fechaInicial;
 	private Date fechaFinal;
 	private List<CheckInDTO> listadoCheckIns;
