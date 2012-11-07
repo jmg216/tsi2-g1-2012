@@ -58,23 +58,8 @@ public abstract class GenericDAOBase<EntityType, DtoType>
 		EntityType entity = em.find(entityClass, id);
 		
 		if(toDTO)
-		{
-			try
-			{
-				DtoType dto = dtoClass.newInstance();
-				
-				entityTransformer.entityToDto(entity, dto);
-				
-				return dto;
-			} 
-			catch (InstantiationException e1)
-			{
-				throw new RuntimeException("Error transformando Entity");
-			} 
-			catch (IllegalAccessException e1)
-			{
-				throw new RuntimeException("Error transformando Entity");
-			}
+		{							
+			return entityTransformer.toDto(entity);			
 		}
 		
 		return entity;
@@ -85,43 +70,43 @@ public abstract class GenericDAOBase<EntityType, DtoType>
 	{
 		Query query = em.createQuery("SELECT e FROM " + entityClass.getName() + " e");
 		
-		List<EntityType> listaEntidades = new ArrayList<EntityType>();
-		
-		listaEntidades = query.getResultList();
+		List<EntityType> listaEntidades = query.getResultList();
 		
 		if(toDTO)
-		{
-			try
-			{
-				List<DtoType> listaDtos = new ArrayList<DtoType>();
-				
-				for(EntityType entity : listaEntidades)
-				{
-					DtoType dto = dtoClass.newInstance();
-					
-					entityTransformer.entityToDto(entity, dto);
-					
-					listaDtos.add(dto);
-				}
-				
-				return listaDtos;
-								
-			} 
-			catch (InstantiationException e1)
-			{
-				throw new RuntimeException("Error transformando Entity");
-			} 
-			catch (IllegalAccessException e1)
-			{
-				throw new RuntimeException("Error transformando Entity");
-			}
+		{			
+			entityTransformer.toDtoList(listaEntidades);			
 		}
 		
 	    return listaEntidades;
 	}
 	
-	// Utilidades de la clase Generica
+	// TRANSFORMACION DE COLECCIONES
+	public List<EntityType> toEntityList(List<DtoType> listaDtos)
+	{
+		List<EntityType> listaEntities = new ArrayList<EntityType>();
+		
+		for(DtoType dto : listaDtos)
+		{
+			listaEntities.add(entityTransformer.toEntity(dto));
+		}
+		
+		return listaEntities;
+	}
 	
+	public List<DtoType> toDtoList(List<EntityType> listaEntities)
+	{
+		List<DtoType> listaDtos = new ArrayList<DtoType>();
+		
+		for(EntityType entity : listaEntities)
+		{
+			listaDtos.add(entityTransformer.toDto(entity));
+		}
+		
+		return listaDtos;
+	}
+	
+	
+	// ************* OPERACIONES AUXILIARES PARA LA CLASE GENERICA *************
 	/**
 	 * Recupera la clase del EntityType
 	 * @return

@@ -31,9 +31,7 @@ public class EventoServiceImpl implements EventoService
 	{
 		try
 		{
-			Evento eventoEntity = new Evento();
-			
-			eventoDAO.dtoToEntity(eventoDTO, eventoEntity);
+			Evento eventoEntity = eventoDAO.toEntity(eventoDTO);
 			
 			eventoDAO.insertar(eventoEntity);
 			
@@ -58,7 +56,7 @@ public class EventoServiceImpl implements EventoService
 				throw new NegocioException("Evento no encontrado");
 			}
 			
-			eventoDAO.dtoToEntity(eventoDTO, eventoEntity);
+			eventoEntity = eventoDAO.toEntity(eventoDTO);
 			
 			eventoDAO.actualizar(eventoEntity);			
 		}

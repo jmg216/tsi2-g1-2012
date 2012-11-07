@@ -14,28 +14,30 @@ public class SitioDAOImpl extends GenericDAOBase<Sitio, SitioDTO> implements Sit
 {
 
 	@Override
-	public void dtoToEntity(SitioDTO source, Sitio target)
+	public Sitio toEntity(SitioDTO source)
 	{
+		Sitio target = new Sitio();
+		
 		target.setNombre(source.getNombre());
 		target.setDescripcion(source.getDescripcion());
-		target.setImagen(source.getImagen());
+		target.setUrlImagen(source.getUrlImagen());
 		target.setUbicacionGeografica(source.getUbicacionGeografica());
+		
+		return target;
 	}
 
 	@Override
-	public void entityToDto(Sitio source, SitioDTO target)
+	public SitioDTO toDto(Sitio source)
 	{
+		SitioDTO target = new SitioDTO();
+		
 		target.setId(source.getId());
 		target.setNombre(source.getNombre());
-		target.setImagen(source.getImagen());
+		target.setUrlImagen(source.getUrlImagen());
 		target.setDescripcion(source.getDescripcion());
 		target.setUbicacionGeografica(source.getUbicacionGeografica());
 		
-		if(source.getAdministrador() != null)
-		{
-			target.setIdAdministrador(source.getAdministrador().getId());
-			target.setNombreAdministrador(source.getAdministrador().getNombre());
-		}
+		return target;
 	}
 	
 }

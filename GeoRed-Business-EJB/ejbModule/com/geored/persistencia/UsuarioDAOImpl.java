@@ -14,22 +14,30 @@ import com.geored.persistencia.core.GenericDAOBase;
 public class UsuarioDAOImpl extends GenericDAOBase<Usuario, UsuarioDTO> implements UsuarioDAO
 {
 	@Override
-	public void dtoToEntity(UsuarioDTO source, Usuario target)
+	public Usuario toEntity(UsuarioDTO source)
 	{
+		Usuario target = new Usuario();
+		
 		target.setEmail(source.getEmail());
 		target.setPass(source.getPass());
 		target.setNombre(source.getNombre());
 		target.setNombre(source.getImagen());
+		
+		return target;
 	}
 
 	@Override
-	public void entityToDto(Usuario source, UsuarioDTO target)
+	public UsuarioDTO toDto(Usuario source)
 	{
+		UsuarioDTO target = new UsuarioDTO();
+		
 		target.setId(source.getId());
 		target.setEmail(source.getEmail());
 		target.setPass(source.getPass());
 		target.setNombre(source.getNombre());
 		target.setNombre(source.getImagen());
+		
+		return target;
 	}
 	
 	public Object obtenerUsuarioPorEmailYPass(String email, String pass, boolean toDTO)
@@ -42,11 +50,7 @@ public class UsuarioDAOImpl extends GenericDAOBase<Usuario, UsuarioDTO> implemen
         
         if(toDTO)
         {
-        	 UsuarioDTO usuarioDTO = new UsuarioDTO();
-        	 
-             entityToDto(usuarioEntity, usuarioDTO);
-             
-             return usuarioDTO;
+             return toDto(usuarioEntity);
         }
        
         return usuarioEntity;

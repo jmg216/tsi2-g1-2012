@@ -36,9 +36,7 @@ public class AdminServiceImpl implements AdminService
 	{
 		try
 		{
-			Administrador administradorEntity = new Administrador();
-			
-			administradorDAO.dtoToEntity(administradorDTO, administradorEntity);
+			Administrador administradorEntity = administradorDAO.toEntity(administradorDTO);;
 			
 			TipoAdministrador tipoAdministradorEntity = (TipoAdministrador) tipoAdministradorDAO.obtener(administradorDTO.getIdTipoAdministrador(), false);
 			
@@ -72,7 +70,7 @@ public class AdminServiceImpl implements AdminService
 				throw new NegocioException("Administrador no encontrado");
 			}
 			
-			administradorDAO.dtoToEntity(administradorDTO, administradorEntity);
+			administradorEntity = administradorDAO.toEntity(administradorDTO);
 			
 			administradorDAO.actualizar(administradorEntity);			
 		}
