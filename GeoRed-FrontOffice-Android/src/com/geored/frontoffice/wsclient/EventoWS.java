@@ -54,10 +54,8 @@ public class EventoWS
 			
         	eventoADTO.setDescripcion(response.getProperty(0).toString());
         	eventoADTO.setId(Long.parseLong(response.getProperty(1).toString()));
-        	eventoADTO.setIdAministrador(Long.parseLong(response.getProperty(2).toString()));
-        	eventoADTO.setUbicacionGeogrica(response.getProperty(3).toString());
-        	eventoADTO.setNombre(response.getProperty(4).toString());
-        	eventoADTO.setNombreAdministrador(response.getProperty(5).toString());
+        	eventoADTO.setUbicacionGeogrica(response.getProperty(2).toString());
+        	eventoADTO.setNombre(response.getProperty(3).toString());
         	
         	// TODO eventoADTO.setFechaFin(fechaFin)
         	// TODO eventoADTO.setFechaInicio(fechaInicio)
@@ -84,10 +82,8 @@ public class EventoWS
 			//TODO ver orden de las properies
         	evento.setDescripcion(info.getProperty(0).toString());
         	evento.setId(Long.parseLong(info.getProperty(1).toString()));
-        	evento.setIdAministrador(Long.parseLong(info.getProperty(2).toString()));
-        	evento.setUbicacionGeogrica(info.getProperty(3).toString());
-        	evento.setNombre(info.getProperty(4).toString());
-        	evento.setNombreAdministrador(info.getProperty(5).toString());
+        	evento.setUbicacionGeogrica(info.getProperty(2).toString());
+        	evento.setNombre(info.getProperty(3).toString());
         	
         	// TODO eventoADTO.setFechaFin(fechaFin)
         	// TODO eventoADTO.setFechaInicio(fechaInicio)
