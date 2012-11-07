@@ -1,19 +1,14 @@
 package com.geored.frontoffice.activities.usuario;
 
 import java.io.IOException;
-import java.util.List;
 
-import org.ksoap2.serialization.PropertyInfo;
-import org.ksoap2.serialization.SoapObject;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
-import android.content.Context;
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +21,7 @@ import com.geored.frontoffice.activities.R;
 import com.geored.frontoffice.activities.usuario.RegistroActivity;
 import com.geored.frontoffice.activities.menu.MenuActivity;
 import com.geored.frontoffice.dto.UsuarioADTO;
+import com.geored.frontoffice.utiles.UtilesSeguridadAndroid;
 import com.geored.frontoffice.wsclient.FactoryWS;
 import com.geored.frontoffice.wsclient.UsuarioWS;
 
@@ -36,6 +32,11 @@ public class LoginActivity extends Activity implements OnClickListener  {
 	
 	private static final int TIEMPO_MENSAJE = 300000;
 	
+	private ProgressDialog m_ProgressDialog = null; 
+	private Runnable viewMenu;
+	
+	private Resources res;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,11 +44,13 @@ public class LoginActivity extends Activity implements OnClickListener  {
         
         TextView registro = (TextView) findViewById(R.id.linkRegistro);
         registro.setOnClickListener(this);
+        res = getResources();
         
     }
     
     public void loginUsuario (View v) throws IOException, XmlPullParserException
-    {    	
+    {   
+    	
     	EditText txtEmail = (EditText) this.findViewById(R.id.txtUsuario);
     	EditText txtPass = (EditText) this.findViewById(R.id.txtPass);
 
@@ -61,12 +64,7 @@ public class LoginActivity extends Activity implements OnClickListener  {
     	
     	if (usuarioADTO != null)
     	{
-    		SharedPreferences prefs = getSharedPreferences("UserPreference",Context.MODE_PRIVATE);
-    		SharedPreferences.Editor editor = prefs.edit();
-    		editor.putString("nombreUser", usuarioADTO.getNombre());
-    		editor.putString("emailUser", usuarioADTO.getEmail());
-    		editor.commit();
-    		//editor.putString("user", usuarioADTO);
+    		UtilesSeguridadAndroid.setUsuarioAutenticado(getApplicationContext(), usuarioADTO);	
     		
 	    	Intent menuActivity = new Intent (this, MenuActivity.class);
 	    	startActivity(menuActivity);

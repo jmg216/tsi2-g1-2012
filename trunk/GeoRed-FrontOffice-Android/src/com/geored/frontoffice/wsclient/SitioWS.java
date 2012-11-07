@@ -55,9 +55,10 @@ public class SitioWS
         	sitioADTO.setDescripcion(response.getProperty(0).toString());
         	sitioADTO.setId(Long.parseLong(response.getProperty(1).toString()));
         	sitioADTO.setIdAdministrador(Long.parseLong(response.getProperty(2).toString()));
-        	sitioADTO.setNombre(response.getProperty(3).toString());
-        	sitioADTO.setNombreAdministrador(response.getProperty(4).toString());
-        	sitioADTO.setUbicacionGeografica(response.getProperty(5).toString());
+        	sitioADTO.setImagen(response.getProperty(3).toString());        	
+        	sitioADTO.setNombre(response.getProperty(4).toString());
+        	sitioADTO.setNombreAdministrador(response.getProperty(5).toString());
+        	sitioADTO.setUbicacionGeografica(response.getProperty(6).toString());
 		}
 		
 		return sitioADTO;
@@ -82,9 +83,10 @@ public class SitioWS
         	sitio.setDescripcion(info.getProperty(0).toString());
         	sitio.setId(Long.parseLong(info.getProperty(1).toString()));
         	sitio.setIdAdministrador(Long.parseLong(info.getProperty(2).toString()));
-        	sitio.setNombre(info.getProperty(3).toString());
-        	sitio.setNombreAdministrador(info.getProperty(4).toString());
-        	sitio.setUbicacionGeografica(info.getProperty(5).toString());
+        	sitio.setImagen(info.getProperty(3).toString());        	
+        	sitio.setNombre(info.getProperty(4).toString());
+        	sitio.setNombreAdministrador(info.getProperty(5).toString());
+        	sitio.setUbicacionGeografica(info.getProperty(6).toString());
         	
             sitiosADTO[i] = sitio;			
 		}

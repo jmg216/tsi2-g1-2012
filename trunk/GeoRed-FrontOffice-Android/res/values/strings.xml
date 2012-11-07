@@ -20,11 +20,12 @@
 	<string name="mapa">Mapa</string>
 	
 	<string name="Buscar">Buscar&#8230;</string>
+	<string name="checkin">Checkin</string>
 	
 	<string name="perolataImagen">Ingrese la URL de su foto de Perfil</string>
 	<string name="perolataImagenBoton">Click Aqui para cargar Foto</string>
 	
-	<string name="DEVELOPKEYMAPS">0zDrXhknxlXAB_Omo-5avA6t9VfFPGuT4pSvn1Q</string>
+	<string name="DEVELOPKEYMAPS">06iiXbjK95bcFIBrqWtjn_Hc3LQoOdN7AMhYLBg</string>
     <string name="ACTIVAR">Activar</string>
 	
 	<!-- ERRORES y MENSAJES-->

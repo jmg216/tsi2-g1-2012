@@ -61,13 +61,13 @@ public class SitioActivity extends ListActivity {
 				
 				while (it.hasNext())
 				{
-					SitioADTO usu = (SitioADTO) it.next();
+					SitioADTO sitio = (SitioADTO) it.next();
 					
-					if (largo_texto <= usu.getNombre().length())
+					if (largo_texto <= sitio.getNombre().length())
 					{
-						if (edit_search_text.getText().toString().equalsIgnoreCase((String) usu.getNombre().subSequence(0, largo_texto)))
+						if (edit_search_text.getText().toString().equalsIgnoreCase((String) sitio.getNombre().subSequence(0, largo_texto)))
 						{
-							sitios_aux.add(usu);
+							sitios_aux.add(sitio);
 						}
 					}
 				}
@@ -102,12 +102,26 @@ public class SitioActivity extends ListActivity {
     }
     
     @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-        // TODO Auto-generated method stub
+    protected void onListItemClick(ListView l, View v, int position, long id) 
+    {
         super.onListItemClick(l, v, position, id);
         
-        Intent detalleSitio = new Intent(this, SitioDetalleActivity.class);
-        startActivity(detalleSitio);
+        Intent i = new Intent(this, SitioDetalleActivity.class);
+        
+        SitioADTO sitioSeleccionado = (SitioADTO) getListAdapter().getItem(position);
+        
+        i.putExtra("nombreSitio", sitioSeleccionado.getNombre());  
+        i.putExtra("imagenSitio", sitioSeleccionado.getImagen());
+        i.putExtra("descSitio", sitioSeleccionado.getDescripcion());
+        
+        // Creo la vista usando LocalActivityManager del SitioGroupActivity
+        View view = SitioGroupActivity.group.getLocalActivityManager()
+		        .startActivity("detalle_sitio", i
+		        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+		        .getDecorView();
+
+        // Remplazo la vista por la actual a cargar
+        SitioGroupActivity.group.replaceView(view);       
 
     }	    
 }
