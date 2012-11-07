@@ -4,6 +4,9 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.xml.rpc.ServiceException;
 
+import com.geored.negocio.AdminServiceImpl;
+import com.geored.negocio.AdminServiceImplServiceLocator;
+import com.geored.negocio.AdministradorDTO;
 import com.geored.negocio.EmpresaServiceImpl;
 import com.geored.negocio.EmpresaServiceImplServiceLocator;
 
@@ -18,6 +21,11 @@ public abstract class BaseBean
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(message));
 	}
 	
+	protected String getParameter(String key)
+	{
+		return FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get(key);
+	}
+	
 	// Ports WS
 	private EmpresaServiceImpl empresaPort;
 	protected EmpresaServiceImpl getEmpresaPort() throws ServiceException
@@ -28,5 +36,16 @@ public abstract class BaseBean
 		}
 		
 		return empresaPort;
+	}
+	
+	private AdminServiceImpl administradorPort;
+	protected AdminServiceImpl getAdministradorPort() throws ServiceException
+	{
+		if(administradorPort == null)
+		{
+			administradorPort = new AdminServiceImplServiceLocator().getAdminServiceImplPort();
+		}
+		
+		return administradorPort;
 	}
 }

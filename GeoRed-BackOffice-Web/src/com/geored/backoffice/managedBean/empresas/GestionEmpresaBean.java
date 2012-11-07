@@ -2,12 +2,17 @@ package com.geored.backoffice.managedBean.empresas;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.xml.rpc.ServiceException;
 
 import com.geored.backoffice.managedBean.BaseBean;
+import com.geored.negocio.AdministradorDTO;
 import com.geored.negocio.DaoException;
 import com.geored.negocio.EmpresaDTO;
 import com.geored.negocio.NegocioException;
@@ -22,12 +27,17 @@ public class GestionEmpresaBean extends BaseBean implements Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Long idEmpresa;
+	private static final String TO_LISTADO = "to_listado";
 	
-	private EmpresaDTO empresaDTO;
+	private EmpresaDTO empresaDTO = new EmpresaDTO();
 	
-	public String gestionar()
-	{
+	private List<AdministradorDTO> listaAdministradores = new ArrayList<AdministradorDTO>();
+	
+	@PostConstruct
+	public void init()
+	{	
+		String idEmpresa = getParameter("idEmpresa");                
+		
 		if(idEmpresa == null)
 		{
 			empresaDTO = new EmpresaDTO();
@@ -36,7 +46,7 @@ public class GestionEmpresaBean extends BaseBean implements Serializable
 		{
 			try
 			{
-				empresaDTO = getEmpresaPort().obtener(idEmpresa);
+				empresaDTO = getEmpresaPort().obtener(Long.valueOf(idEmpresa));
 			} 
 			catch (NegocioException e)
 			{
@@ -55,8 +65,27 @@ public class GestionEmpresaBean extends BaseBean implements Serializable
 				addMessage(MSJ_ERROR_COMUNICACION_WS);
 			}
 		}
-		
-		return SUCCESS;
+	}
+	
+	@PostConstruct
+	private void cargarDatosIniciales()
+	{
+		try
+		{
+			listaAdministradores = Arrays.asList(getAdministradorPort().obtenerListado());
+		}
+		catch (DaoException e)
+		{
+			addMessage(e.getMessage());
+		} 
+		catch (RemoteException e)
+		{
+			addMessage(MSJ_ERROR_COMUNICACION_WS);
+		} 
+		catch (ServiceException e)
+		{
+			addMessage(MSJ_ERROR_COMUNICACION_WS);
+		}
 	}
 	
 	public String guardarEmpresa()
@@ -93,14 +122,9 @@ public class GestionEmpresaBean extends BaseBean implements Serializable
 		return SUCCESS;
 	}
 
-	public Long getIdEmpresa()
+	public String toListado()
 	{
-		return idEmpresa;
-	}
-
-	public void setIdEmpresa(Long idEmpresa)
-	{
-		this.idEmpresa = idEmpresa;
+		return TO_LISTADO;
 	}
 
 	public EmpresaDTO getEmpresaDTO()
@@ -111,5 +135,15 @@ public class GestionEmpresaBean extends BaseBean implements Serializable
 	public void setEmpresaDTO(EmpresaDTO empresaDTO)
 	{
 		this.empresaDTO = empresaDTO;
+	}
+
+	public List<AdministradorDTO> getListaAdministradores()
+	{
+		return listaAdministradores;
+	}
+
+	public void setListaAdministradores(List<AdministradorDTO> listaAdministradores)
+	{
+		this.listaAdministradores = listaAdministradores;
 	}
 }

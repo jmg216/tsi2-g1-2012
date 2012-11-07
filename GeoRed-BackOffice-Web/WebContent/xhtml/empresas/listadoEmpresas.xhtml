@@ -17,7 +17,7 @@
 					<div class="areaBotones">
 						<ul>
 							<li>
-								<p:commandButton value="Crear" action="#{listadoEmpresasBean.crearEmpresa()}"/>
+								<p:commandButton value="Crear" action="#{listadoEmpresasBean.toGestion()}"/>
 							</li>
 						</ul>
 					</div>
@@ -31,8 +31,8 @@
 				            <f:facet name="header">  
 				                <h:outputText value="ID" />  
 				            </f:facet>  
-				           	<h:commandLink action="#{gestionEmpresaBean.gestionar()}" value="#{empresa.id}">
-				           		 <f:setPropertyActionListener target="#{gestionEmpresaBean.idEmpresa}" value="#{empresa.id}"/>
+				           	<h:commandLink action="#{listadoEmpresasBean.toGestion()}" value="#{empresa.id}">
+				           		 <f:setPropertyActionListener target="#{listadoEmpresasBean.idEmpresa}" value="#{empresa.id}"/>
 				           	</h:commandLink>
 				        </p:column>
 				        

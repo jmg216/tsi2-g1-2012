@@ -88,7 +88,7 @@ input, select, textarea
 
 .areaBotones ul
 {
-	margin: 0px;
+	margin: 0px 10px 0px 0px;
 	padding: 0px;
 	list-style: none;
 	padding-top: 5px;
@@ -98,5 +98,5 @@ input, select, textarea
 .areaBotones ul li
 {
 	display: inline;
-	padding: 5px 15px 5px 0px;
+	padding: 5px 0px 5px 0px;
 }

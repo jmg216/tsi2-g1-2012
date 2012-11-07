@@ -4,7 +4,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 	<h:body>
 		<ui:composition template="/xhtml/templates/layout.xhtml">
@@ -13,28 +14,46 @@
 					<h1 class="titulo-content">Gestión de Empresas</h1>
 					
 					<table>
-						<tr>
-							<td><h:outputText value="Id:" /></td>
-							<td><p:inputText value="${gestionEmpresaBean.empresaDTO.id}" readonly="readonly"/></td>
-						</tr>						
+						<h:inputHidden value="#{gestionEmpresaBean.empresaDTO.id}"/>
+						<c:if test="#{gestionEmpresaBean.empresaDTO.id != null}">
+							<tr>
+								<td><h:outputText value="Id:" /></td>
+								<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.id}" disabled="true"/></td>
+							</tr>
+						</c:if>												
 						<tr>
 							<td><h:outputText value="Nombre:" /></td>
-							<td><p:inputText value="${gestionEmpresaBean.empresaDTO.nombre}"/></td>
+							<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.nombre}"/></td>
 						</tr>
 						<tr>
 							<td><h:outputText value="Descripción:" /></td>
-							<td><p:inputText value="${gestionEmpresaBean.empresaDTO.descripcion}"/></td>
+							<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.descripcion}"/></td>
 						</tr>
 						<tr>
 							<td><h:outputText value="Logo:" /></td>
-							<td><p:inputText value="${gestionEmpresaBean.empresaDTO.logoUrl}"/></td>
+							<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.logoUrl}"/></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Administrador:" /></td>
+							<td>
+								<p:selectOneMenu value="#{gestionEmpresaBean.empresaDTO.idAministrador}">
+									<f:selectItems value="#{gestionEmpresaBean.listaAdministradores}" 
+										var="administrador" itemValue="#{administrador.id}" itemLabel="#{administrador.nombre}"/>
+								</p:selectOneMenu> 								
+							</td>
+							<td>
+								<p:commandLink value="Crear administrador" styleClass="simple-link"/>								
+							</td>
 						</tr>
 					</table>
 					
 					<div class="areaBotones">
 						<ul>
 							<li>
-								<p:commandButton value="Guardar" action="#{gestionEmpresaBean.crearEmpresa()}"/>	
+								<p:commandButton value="Volver" action="#{gestionEmpresaBean.toListado()}"/>	
+							</li>
+							<li>
+								<p:commandButton value="Guardar" action="#{gestionEmpresaBean.guardarEmpresa()}"/>	
 							</li>
 						</ul>									
 					</div>

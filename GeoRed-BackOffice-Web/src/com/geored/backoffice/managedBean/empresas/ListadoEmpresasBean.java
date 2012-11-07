@@ -2,6 +2,7 @@ package com.geored.backoffice.managedBean.empresas;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,9 +25,11 @@ public class ListadoEmpresasBean extends BaseBean implements Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private static final String TO_GESTION = "to_gestion";
+	
 	private Long idEmpresa;
 	
-	private List<EmpresaDTO> listaEmpresas;
+	private List<EmpresaDTO> listaEmpresas = new ArrayList<EmpresaDTO>();
 	
 	@PostConstruct
 	public void init()
@@ -49,6 +52,11 @@ public class ListadoEmpresasBean extends BaseBean implements Serializable
 		{
 			addMessage(MSJ_ERROR_COMUNICACION_WS);
 		}
+	}
+	
+	public String toGestion()
+	{
+		return TO_GESTION;
 	}
 	
 	public List<EmpresaDTO> getListaEmpresas()
