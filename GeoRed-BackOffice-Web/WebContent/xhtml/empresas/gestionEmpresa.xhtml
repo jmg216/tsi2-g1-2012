@@ -12,7 +12,32 @@
 				<h:form>
 					<h1 class="titulo-content">Gestión de Empresas</h1>
 					
-					<h:outputText value="#{gestionEmpresaBean.empresaDTO.descripcion}" />
+					<table>
+						<tr>
+							<td><h:outputText value="Id:" /></td>
+							<td><p:inputText value="${gestionEmpresaBean.empresaDTO.id}" readonly="readonly"/></td>
+						</tr>						
+						<tr>
+							<td><h:outputText value="Nombre:" /></td>
+							<td><p:inputText value="${gestionEmpresaBean.empresaDTO.nombre}"/></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Descripción:" /></td>
+							<td><p:inputText value="${gestionEmpresaBean.empresaDTO.descripcion}"/></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Logo:" /></td>
+							<td><p:inputText value="${gestionEmpresaBean.empresaDTO.logoUrl}"/></td>
+						</tr>
+					</table>
+					
+					<div class="areaBotones">
+						<ul>
+							<li>
+								<p:commandButton value="Guardar" action="#{gestionEmpresaBean.crearEmpresa()}"/>	
+							</li>
+						</ul>									
+					</div>
 				</h:form>
 			</ui:define>
 		</ui:composition>
