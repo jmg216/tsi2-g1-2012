@@ -10,6 +10,8 @@ public class UsuarioDTO
 
 	private String nombre;
 	
+	private String imagen;
+	
 	public Long getId()
 	{
 		return id;
@@ -48,5 +50,15 @@ public class UsuarioDTO
 	public void setPass(String pass)
 	{
 		this.pass = pass;
+	}
+	
+	public String getImagen()
+	{
+		return imagen;
+	}
+
+	public void setImagen(String imagen)
+	{
+		this.imagen = imagen;
 	}
 }
