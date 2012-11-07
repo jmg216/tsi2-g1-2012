@@ -9,15 +9,13 @@
 	<h:body>
 		<ui:composition template="/xhtml/templates/layout.xhtml">
 			<ui:define name="content">	
-				<h:form>
-					<input type="hidden" name="idEmpresa" id="idEmpresa"/>
-				
+				<h:form>				
 					<h1 class="titulo-content">Listado de Empresas</h1>
 					
 					<div class="areaBotones">
 						<ul>
 							<li>
-								<p:commandButton value="Crear" action="#{listadoEmpresasBean.toGestion()}"/>
+								<p:commandButton value="Crear" action="#{listadoEmpresasBean.toGestionEmpresa()}"/>
 							</li>
 						</ul>
 					</div>
@@ -31,7 +29,7 @@
 				            <f:facet name="header">  
 				                <h:outputText value="ID" />  
 				            </f:facet>  
-				           	<h:commandLink action="#{listadoEmpresasBean.toGestion()}" value="#{empresa.id}">
+				           	<h:commandLink action="#{listadoEmpresasBean.toGestionEmpresa()}" value="#{empresa.id}">
 				           		 <f:setPropertyActionListener target="#{listadoEmpresasBean.idEmpresa}" value="#{empresa.id}"/>
 				           	</h:commandLink>
 				        </p:column>
