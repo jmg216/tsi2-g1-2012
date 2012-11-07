@@ -6,7 +6,6 @@ import javax.xml.rpc.ServiceException;
 
 import com.geored.negocio.AdminServiceImpl;
 import com.geored.negocio.AdminServiceImplServiceLocator;
-import com.geored.negocio.AdministradorDTO;
 import com.geored.negocio.EmpresaServiceImpl;
 import com.geored.negocio.EmpresaServiceImplServiceLocator;
 
@@ -16,9 +15,14 @@ public abstract class BaseBean
 	
 	protected static final String SUCCESS = "success";
 	
+	protected void addError(String message)
+	{
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
+	}
+	
 	protected void addMessage(String message)
 	{
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(message));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
 	}
 	
 	protected String getParameter(String key)

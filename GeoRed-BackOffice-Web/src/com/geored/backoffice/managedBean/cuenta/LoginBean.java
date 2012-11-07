@@ -3,16 +3,15 @@ package com.geored.backoffice.managedBean.cuenta;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.xml.rpc.ServiceException;
 
 import com.geored.backoffice.managedBean.BaseBean;
+import com.geored.backoffice.utiles.UtilesSeguridadWeb;
 import com.geored.negocio.AdminServiceImpl;
 import com.geored.negocio.AdminServiceImplServiceLocator;
 import com.geored.negocio.AdministradorDTO;
-import com.geored.utiles.UtilesSeguridadWeb;
 
 @ManagedBean(name = "loginBean")
 @RequestScoped

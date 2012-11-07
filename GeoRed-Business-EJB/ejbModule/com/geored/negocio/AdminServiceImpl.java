@@ -12,10 +12,12 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import com.geored.dominio.Administrador;
+import com.geored.dominio.TipoAdministrador;
 import com.geored.dto.AdministradorDTO;
 import com.geored.exceptions.DaoException;
 import com.geored.exceptions.NegocioException;
 import com.geored.persistencia.AdministradorDAO;
+import com.geored.persistencia.TipoAdministradorDAO;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -24,6 +26,9 @@ public class AdminServiceImpl implements AdminService
 {
 	@EJB
 	private AdministradorDAO administradorDAO;
+	
+	@EJB
+	private TipoAdministradorDAO tipoAdministradorDAO;
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
@@ -34,6 +39,15 @@ public class AdminServiceImpl implements AdminService
 			Administrador administradorEntity = new Administrador();
 			
 			administradorDAO.dtoToEntity(administradorDTO, administradorEntity);
+			
+			TipoAdministrador tipoAdministradorEntity = (TipoAdministrador) tipoAdministradorDAO.obtener(administradorDTO.getIdTipoAdministrador(), false);
+			
+			if(tipoAdministradorEntity == null)
+			{
+				throw new NegocioException("Tipo administrador no encontrado");
+			}
+			
+			administradorEntity.setTipoAdministrador(tipoAdministradorEntity);				
 			
 			administradorDAO.insertar(administradorEntity);
 			

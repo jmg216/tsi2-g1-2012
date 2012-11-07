@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.xml.rpc.ServiceException;
@@ -31,8 +30,7 @@ public class ListadoEmpresasBean extends BaseBean implements Serializable
 	
 	private List<EmpresaDTO> listaEmpresas = new ArrayList<EmpresaDTO>();
 	
-	@PostConstruct
-	public void init()
+	public ListadoEmpresasBean()
 	{
 		try
 		{

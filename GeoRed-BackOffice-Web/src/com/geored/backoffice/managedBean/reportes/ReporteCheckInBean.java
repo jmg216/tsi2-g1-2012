@@ -18,6 +18,7 @@ import org.primefaces.model.map.MapModel;
 import org.primefaces.model.map.Marker;
 
 import com.geored.backoffice.managedBean.BaseBean;
+import com.geored.backoffice.utiles.UtilesGeocoding;
 import com.geored.negocio.CheckInDTO;
 import com.geored.negocio.DaoException;
 import com.geored.negocio.NegocioException;
@@ -25,7 +26,6 @@ import com.geored.negocio.SitioServiceImpl;
 import com.geored.negocio.SitioServiceImplServiceLocator;
 import com.geored.negocio.UsuarioServiceImpl;
 import com.geored.negocio.UsuarioServiceImplServiceLocator;
-import com.geored.utiles.UtilesGeocoding;
 
 @ManagedBean(name="reporteCheckInBean")
 @SessionScoped
