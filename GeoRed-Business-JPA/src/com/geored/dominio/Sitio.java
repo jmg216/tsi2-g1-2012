@@ -26,6 +26,9 @@ public class Sitio implements Serializable
 	@Column(name="ID", nullable=false)
 	private Long id;
 	
+	@Column(name="IMAGEN", nullable=false)
+	private String imagen;
+	
 	@Column(name="NOMBRE", nullable=false)
 	private String nombre;
 	
@@ -62,6 +65,16 @@ public class Sitio implements Serializable
 	public Administrador getAdministrador()
 	{
 		return administrador;
+	}
+	
+	public String getImagen() 
+	{
+		return imagen;
+	}
+
+	public void setImagen(String imagen) 
+	{
+		this.imagen = imagen;
 	}
 
 	public void setAdministrador(Administrador administrador)
