@@ -6,6 +6,8 @@ public class SitioDTO
 	
 	private String nombre;
 	
+	private String imagen;
+	
 	private String descripcion;
 	
 	private String ubicacionGeografica;
@@ -32,6 +34,16 @@ public class SitioDTO
 	public void setNombre(String nombre)
 	{
 		this.nombre = nombre;
+	}
+	
+	public String getImagen() 
+	{
+		return imagen;
+	}
+
+	public void setImagen(String imagen) 
+	{
+		this.imagen = imagen;
 	}
 
 	public Long getIdAdministrador()
