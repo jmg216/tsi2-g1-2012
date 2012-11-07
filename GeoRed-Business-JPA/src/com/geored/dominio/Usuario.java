@@ -89,4 +89,14 @@ public class Usuario implements Serializable
 	{
 		this.tematicas = tematicas;
 	}
+	
+	public String getImagen()
+	{
+		return imagen;
+	}
+
+	public void setImagen(String imagen)
+	{
+		this.imagen = imagen;
+	}
 }
