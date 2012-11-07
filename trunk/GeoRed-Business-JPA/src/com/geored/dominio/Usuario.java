@@ -34,6 +34,9 @@ public class Usuario implements Serializable
 	@Column(name="NOMBRE", nullable=false)
 	private String nombre;
 	
+	@Column(name="IMAGEN", nullable=false)
+	private String imagen;
+	
 	@OneToMany(mappedBy ="usuario")
 	private List<TematicaUsuario> tematicas;
 	
