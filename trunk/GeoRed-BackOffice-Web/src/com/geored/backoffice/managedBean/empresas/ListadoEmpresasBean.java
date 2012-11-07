@@ -24,7 +24,7 @@ public class ListadoEmpresasBean extends BaseBean implements Serializable
 	 */
 	private static final long serialVersionUID = 794033666609815070L;
 
-	private static final String TO_GESTION = "to_gestion";
+	private static final String TO_GESTION_EMPRESA = "to_gestion_empresa";
 	
 	private Long idEmpresa;
 	
@@ -33,28 +33,26 @@ public class ListadoEmpresasBean extends BaseBean implements Serializable
 	public ListadoEmpresasBean()
 	{
 		try
-		{
-			EmpresaDTO[] arrayEmpresaDTO = getEmpresaPort().obtenerListado();
-			
-			listaEmpresas = Arrays.asList(arrayEmpresaDTO);
+		{	
+			listaEmpresas = Arrays.asList(getEmpresaPort().obtenerListado());
 		} 
 		catch (ServiceException e)
 		{
-			addMessage(MSJ_ERROR_COMUNICACION_WS);
+			addBeanError(MSJ_ERROR_COMUNICACION_WS);
 		} 
 		catch (DaoException e)
 		{
-			addMessage(e.getMessage());
+			addBeanError(e.getMessage());
 		} 
 		catch (RemoteException e)
 		{
-			addMessage(MSJ_ERROR_COMUNICACION_WS);
+			addBeanError(MSJ_ERROR_COMUNICACION_WS);
 		}
 	}
 	
-	public String toGestion()
+	public String toGestionEmpresa()
 	{
-		return TO_GESTION;
+		return TO_GESTION_EMPRESA;
 	}
 	
 	public List<EmpresaDTO> getListaEmpresas()
