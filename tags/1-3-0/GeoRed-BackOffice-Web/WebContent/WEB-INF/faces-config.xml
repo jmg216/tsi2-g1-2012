@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
+    version="2.1">
+
+    <!-- LOGIN -->
+    <navigation-rule>       
+        <from-view-id>/xhtml/cuenta/login.xhtml</from-view-id>
+           
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+   
+    <!-- EMPRESA -->
+    <navigation-rule>
+        <from-view-id>/xhtml/empresas/listadoEmpresas.xhtml</from-view-id>
+        
+        <navigation-case>
+            <from-outcome>to_gestion</from-outcome>
+            <to-view-id>/xhtml/empresas/gestionEmpresa.xhtml</to-view-id>
+            <redirect>
+                <view-param>
+                    <name>idEmpresa</name>
+                    <value>#{listadoEmpresasBean.idEmpresa}</value>
+                </view-param>
+            </redirect>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/xhtml/empresas/gestionEmpresa.xhtml</from-view-id>
+        
+        <navigation-case>
+            <from-outcome>to_listado</from-outcome>
+            <to-view-id>/xhtml/empresas/listadoEmpresas.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+</faces-config>
