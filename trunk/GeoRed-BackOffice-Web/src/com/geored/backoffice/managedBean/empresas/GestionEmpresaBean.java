@@ -58,6 +58,40 @@ public class GestionEmpresaBean extends BaseBean implements Serializable
 		
 		return SUCCESS;
 	}
+	
+	public String guardarEmpresa()
+	{
+		try
+		{
+			// Si estoy creando 
+			if(empresaDTO.getId() == null)
+			{
+				getEmpresaPort().insertar(empresaDTO);
+			}
+			else // Si estoy modificando
+			{
+				getEmpresaPort().actualizar(empresaDTO);
+			}
+		}
+		catch(NegocioException e)
+		{
+			addMessage(e.getMessage());
+		} 
+		catch (DaoException e)
+		{
+			addMessage(e.getMessage());
+		} 
+		catch (RemoteException e)
+		{
+			addMessage(MSJ_ERROR_COMUNICACION_WS);
+		} 
+		catch (ServiceException e)
+		{
+			addMessage(MSJ_ERROR_COMUNICACION_WS);
+		}
+		
+		return SUCCESS;
+	}
 
 	public Long getIdEmpresa()
 	{
