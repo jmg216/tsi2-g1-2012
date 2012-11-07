@@ -58,15 +58,15 @@ insert into geored.tematica_sitio (ID, SITIO_FK, TEMATICA_FK) values (6, 6, 3);
 
 /*FRONTOFFICE*/
 /* Usuarios de la aplicación */
-insert into geored.usuario (ID, EMAIL, NOMBRE, PASS) values (1, 'vanessa@gmail.com', 'Vanessa Revetria', 'Vanessa');
+insert into geored.usuario (ID, EMAIL, NOMBRE, PASS, IMAGEN) values (1, 'vanessa@gmail.com', 'Vanessa Revetria', 'Vanessa', 'https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-ash4/405360_10151190370950526_1747813305_n.jpg');
 
-insert into geored.usuario (ID, EMAIL, NOMBRE, PASS) values (2, 'juan@gmail.com', 'Juan Miraballes', 'Juan');
+insert into geored.usuario (ID, EMAIL, NOMBRE, PASS, IMAGEN) values (2, 'juan@gmail.com', 'Juan Miraballes', 'Juan', 'https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-snc7/399982_285605288159727_192778982_n.jpg');
 
-insert into geored.usuario (ID, EMAIL, NOMBRE, PASS) values (3, 'maximiliano@gmail.com', 'Maximiliano Silvera', 'Maximiliano');
+insert into geored.usuario (ID, EMAIL, NOMBRE, PASS, IMAGEN) values (3, 'maximiliano@gmail.com', 'Maximiliano Silvera', 'Maximiliano', 'https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-ash3/576335_3810865271033_638128563_n.jpg');
 
-insert into geored.usuario (ID, EMAIL, NOMBRE, PASS) values (4, 'marcelo@gmail.com', 'Marcelo Basan', 'Marcelo');
+insert into geored.usuario (ID, EMAIL, NOMBRE, PASS, IMAGEN) values (4, 'marcelo@gmail.com', 'Marcelo Basan', 'Marcelo', 'https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-ash4/431186_3072919616909_1477253359_n.jpg');
 
-insert into geored.usuario (ID, EMAIL, NOMBRE, PASS) values (5, 'javier@gmail.com', 'Javier Dominguez', 'Javier');
+insert into geored.usuario (ID, EMAIL, NOMBRE, PASS, IMAGEN) values (5, 'javier@gmail.com', 'Javier Dominguez', 'Javier', 'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-prn1/s480x480/542861_10151281688040851_465206331_n.jpg');
 
 /*Ingreso amistades*/
 /*Vanessa amiga de todos*/
