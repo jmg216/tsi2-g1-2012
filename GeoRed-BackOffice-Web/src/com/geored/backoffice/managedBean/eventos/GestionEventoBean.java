@@ -3,12 +3,21 @@ package com.geored.backoffice.managedBean.eventos;
 import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
+
+import com.geored.backoffice.managedBean.BaseBean;
 
 @ManagedBean(name="gestionEventoBean")
-@SessionScoped
-public class GestionEventoBean implements Serializable 
+@RequestScoped
+public class GestionEventoBean extends BaseBean implements Serializable 
 {
-	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5348254664595085666L;
 	
+	public GestionEventoBean()
+	{
+		
+	}
 }

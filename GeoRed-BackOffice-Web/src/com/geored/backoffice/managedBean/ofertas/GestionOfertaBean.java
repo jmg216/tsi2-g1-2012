@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.rmi.RemoteException;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.xml.rpc.ServiceException;
 
 import com.geored.backoffice.managedBean.BaseBean;
@@ -13,13 +14,14 @@ import com.geored.negocio.NegocioException;
 import com.geored.negocio.OfertaDTO;
 
 @ManagedBean(name="gestionOfertaBean")
+@RequestScoped
 public class GestionOfertaBean extends BaseBean implements Serializable
 {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = -6757255144084899088L;
+
 	private static final String TO_LISTADO = "to_listado";
 	
 	//private AdministradorDTO administradorDTO = new AdministradorDTO();

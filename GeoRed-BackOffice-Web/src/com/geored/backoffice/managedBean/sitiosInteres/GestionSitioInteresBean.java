@@ -3,35 +3,21 @@ package com.geored.backoffice.managedBean.sitiosInteres;
 import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
+
+import com.geored.backoffice.managedBean.BaseBean;
 
 @ManagedBean(name="gestionSitioInteresBean")
-@SessionScoped
-public class GestionSitioInteresBean implements Serializable 
+@RequestScoped
+public class GestionSitioInteresBean extends BaseBean implements Serializable 
 {
-	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8834025396990537040L;
 	
-//	public void crearSitio() throws ServiceException
-//	{
-//		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
-//		
-//		locator = new SitioServiceImplServiceLocator ();
-//		sitioWS = locator.getSitioServiceImplPort();
-//		
-//		SitioDTO sitio = null;
-//		
-//		sitio.setDescripcion(descripcion);
-//		sitio.setNombre(nombre);
-//		sitio.setUbicacionGeografica(ubicacion);
-//		
-//		try
-//		{
-//			sitioWS.insertar(sitio);
-//		
-//		} catch(RemoteException e1)
-//		{
-//			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("No es posible Salvar el sitio."));
-//		}
-//	}
-	
+	public GestionSitioInteresBean()
+	{
+		
+	}
 }

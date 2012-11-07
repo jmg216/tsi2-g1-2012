@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.xml.rpc.ServiceException;
@@ -26,8 +25,8 @@ public class GestionEmpresaBean extends BaseBean implements Serializable
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = -904426109389600335L;
+
 	private static final String TO_LISTADO = "to_listado";
 	
 	private AdministradorDTO administradorDTO = new AdministradorDTO();
