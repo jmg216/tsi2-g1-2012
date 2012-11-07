@@ -6,7 +6,7 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
     version="2.1">
 
-    <!-- LOGIN -->
+    <!-- CUENTA -->
     <navigation-rule>       
         <from-view-id>/xhtml/cuenta/login.xhtml</from-view-id>
            
@@ -15,13 +15,38 @@
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    
+    <!-- ADMINISTRADORES -->
+    <navigation-rule>
+        <from-view-id>/xhtml/administradores/listadoAdministradores.xhtml</from-view-id>
+        
+        <navigation-case>
+            <from-outcome>to_gestion_administrador</from-outcome>
+            <to-view-id>/xhtml/administradores/gestionAdministrador.xhtml</to-view-id>
+            <redirect>
+                <view-param>
+                    <name>idAdministrador</name>
+                    <value>#{listadoAdministradoresBean.idAdministrador}</value>
+                </view-param>
+            </redirect>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/xhtml/administradores/gestionAdministrador.xhtml</from-view-id>
+        
+        <navigation-case>
+            <from-outcome>to_listado_administradores</from-outcome>
+            <to-view-id>/xhtml/administradores/listadoAdministradores.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
    
     <!-- EMPRESA -->
     <navigation-rule>
         <from-view-id>/xhtml/empresas/listadoEmpresas.xhtml</from-view-id>
         
         <navigation-case>
-            <from-outcome>to_gestion</from-outcome>
+            <from-outcome>to_gestion_empresa</from-outcome>
             <to-view-id>/xhtml/empresas/gestionEmpresa.xhtml</to-view-id>
             <redirect>
                 <view-param>
@@ -36,8 +61,86 @@
         <from-view-id>/xhtml/empresas/gestionEmpresa.xhtml</from-view-id>
         
         <navigation-case>
-            <from-outcome>to_listado</from-outcome>
+            <from-outcome>to_listado_empresas</from-outcome>
             <to-view-id>/xhtml/empresas/listadoEmpresas.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    
+    <!-- EVENTOS -->
+    <navigation-rule>
+        <from-view-id>/xhtml/eventos/listadoEventos.xhtml</from-view-id>
+        
+        <navigation-case>
+            <from-outcome>to_gestion_evento</from-outcome>
+            <to-view-id>/xhtml/eventos/gestionEvento.xhtml</to-view-id>
+            <redirect>
+                <view-param>
+                    <name>idEvento</name>
+                    <value>#{listadoEventosBean.idEvento}</value>
+                </view-param>
+            </redirect>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/xhtml/eventos/gestionEvento.xhtml</from-view-id>
+        
+        <navigation-case>
+            <from-outcome>to_listado_eventos</from-outcome>
+            <to-view-id>/xhtml/eventos/listadoEventos.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- OFERTAS -->
+    <navigation-rule>
+        <from-view-id>/xhtml/ofertas/listadoOfetas.xhtml</from-view-id>
+        
+        <navigation-case>
+            <from-outcome>to_gestion_oferta</from-outcome>
+            <to-view-id>/xhtml/ofertas/gestionOferta.xhtml</to-view-id>
+            <redirect>
+                <view-param>
+                    <name>idOferta</name>
+                    <value>#{listadoOfertasBean.idOferta}</value>
+                </view-param>
+            </redirect>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/xhtml/ofertas/gestionOferta.xhtml</from-view-id>
+        
+        <navigation-case>
+            <from-outcome>to_listado_ofertas</from-outcome>
+            <to-view-id>/xhtml/ofertas/listadoOfertas.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- REPORTES -->
+    
+    <!-- SITIOS -->
+    <navigation-rule>
+        <from-view-id>/xhtml/sitios/listadoSitios.xhtml</from-view-id>
+        
+        <navigation-case>
+            <from-outcome>to_gestion_sitio</from-outcome>
+            <to-view-id>/xhtml/sitios/gestionSitio.xhtml</to-view-id>
+            <redirect>
+                <view-param>
+                    <name>idSitio</name>
+                    <value>#{listadoSitiosBean.idSitio}</value>
+                </view-param>
+            </redirect>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/xhtml/sitios/gestionSitio.xhtml</from-view-id>
+        
+        <navigation-case>
+            <from-outcome>to_listado_sitios</from-outcome>
+            <to-view-id>/xhtml/sitios/listadoSitios.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
 </faces-config>

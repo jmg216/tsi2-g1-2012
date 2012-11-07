@@ -85,22 +85,22 @@ public class ReporteCheckInBean extends BaseBean implements Serializable
 		} catch (ServiceException e) 
 		
 		{
-			addMessage(MSJ_ERROR_COMUNICACION_WS);
+			addBeanError(MSJ_ERROR_COMUNICACION_WS);
 			
 		} catch (NegocioException e)
 		
 		{
-			addMessage(MSJ_ERROR_COMUNICACION_WS);
+			addBeanError(MSJ_ERROR_COMUNICACION_WS);
 			
 		} catch (DaoException e) 
 		
 		{
-			addMessage(e.getMessage());
+			addBeanError(e.getMessage());
 			
 		} catch (RemoteException e) 
 		
 		{
-			addMessage(MSJ_ERROR_COMUNICACION_WS);
+			addBeanError(MSJ_ERROR_COMUNICACION_WS);
 		}
 	}
 

@@ -27,9 +27,7 @@ public class GestionEmpresaBean extends BaseBean implements Serializable
 	 */
 	private static final long serialVersionUID = -904426109389600335L;
 
-	private static final String TO_LISTADO = "to_listado";
-	
-	private AdministradorDTO administradorDTO = new AdministradorDTO();
+	private static final String TO_LISTADO_EMPRESAS = "to_listado_empresas";
 	
 	private EmpresaDTO empresaDTO = new EmpresaDTO();
 	
@@ -37,7 +35,7 @@ public class GestionEmpresaBean extends BaseBean implements Serializable
 	
 	public GestionEmpresaBean()
 	{	
-		String idEmpresa = getParameter("idEmpresa");                
+		String idEmpresa = getRequestParameter("idEmpresa");                
 		
 		if(UtilesWeb.isNullOrEmpty(idEmpresa))
 		{
@@ -51,19 +49,19 @@ public class GestionEmpresaBean extends BaseBean implements Serializable
 			} 
 			catch (NegocioException e)
 			{
-				addError(e.getMessage());
+				addBeanError(e.getMessage());
 			} 
 			catch (DaoException e)
 			{
-				addError(e.getMessage());
+				addBeanError(e.getMessage());
 			} 
 			catch (RemoteException e)
 			{
-				addError(MSJ_ERROR_COMUNICACION_WS);
+				addBeanError(MSJ_ERROR_COMUNICACION_WS);
 			} 
 			catch (ServiceException e)
 			{
-				addError(MSJ_ERROR_COMUNICACION_WS);
+				addBeanError(MSJ_ERROR_COMUNICACION_WS);
 			}
 		}
 		
@@ -78,19 +76,19 @@ public class GestionEmpresaBean extends BaseBean implements Serializable
 		}
 		catch (DaoException e)
 		{
-			addError(e.getMessage());
+			addBeanError(e.getMessage());
 		} 
 		catch (RemoteException e)
 		{
-			addError(MSJ_ERROR_COMUNICACION_WS);
+			addBeanError(MSJ_ERROR_COMUNICACION_WS);
 		} 
 		catch (ServiceException e)
 		{
-			addError(MSJ_ERROR_COMUNICACION_WS);
+			addBeanError(MSJ_ERROR_COMUNICACION_WS);
 		}
 	}
 	
-	public String guardarEmpresa()
+	public void guardarEmpresa()
 	{
 		try
 		{
@@ -106,65 +104,25 @@ public class GestionEmpresaBean extends BaseBean implements Serializable
 		}
 		catch(NegocioException e)
 		{
-			addError(e.getMessage());
+			addBeanError(e.getMessage());
 		} 
 		catch (DaoException e)
 		{
-			addError(e.getMessage());
+			addBeanError(e.getMessage());
 		} 
 		catch (RemoteException e)
 		{
-			addError(MSJ_ERROR_COMUNICACION_WS);
+			addBeanError(MSJ_ERROR_COMUNICACION_WS);
 		} 
 		catch (ServiceException e)
 		{
-			addError(MSJ_ERROR_COMUNICACION_WS);
+			addBeanError(MSJ_ERROR_COMUNICACION_WS);
 		}
-		
-		return SUCCESS;
-	}
-	
-	public void guardarAdministrador()
-	{
-		try
-		{
-			if(getAdministradorDTO() != null)
-			{
-				if(UtilesWeb.isNullOrEmpty(getAdministradorDTO().getEmail()))
-				{
-					addError("Email es obligatorio");
-				}
-				
-				getAdministradorDTO().setIdTipoAdministrador(UtilesWeb.ID_TIPO_ADMIN_EMPRESA);
-				
-				getAdministradorDTO().setPass(UtilesWeb.encriptarMD5(UtilesWeb.DEFAULT_PASS));
-				
-				getAdministradorPort().insertar(getAdministradorDTO());
-			}
-		} 
-		catch (NegocioException e)
-		{
-			addError(e.getMessage());
-		} 
-		catch (DaoException e)
-		{
-			addError(e.getMessage());
-		} 
-		catch (RemoteException e)
-		{
-			addError(MSJ_ERROR_COMUNICACION_WS);
-		} 
-		catch (ServiceException e)
-		{
-			addError(MSJ_ERROR_COMUNICACION_WS);
-		}
-		
-		cargarDatosIniciales();
 	}
 
-	public String toListado()
+	public String toListadoEmpresas()
 	{
-		return TO_LISTADO;
+		return TO_LISTADO_EMPRESAS;
 	}
 
 	public EmpresaDTO getEmpresaDTO()
@@ -185,15 +143,5 @@ public class GestionEmpresaBean extends BaseBean implements Serializable
 	public void setListaAdministradores(List<AdministradorDTO> listaAdministradores)
 	{
 		this.listaAdministradores = listaAdministradores;
-	}
-
-	public AdministradorDTO getAdministradorDTO()
-	{
-		return administradorDTO;
-	}
-
-	public void setAdministradorDTO(AdministradorDTO administradorDTO)
-	{
-		this.administradorDTO = administradorDTO;
 	}
 }

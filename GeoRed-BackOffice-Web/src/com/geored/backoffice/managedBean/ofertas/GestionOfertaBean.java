@@ -32,7 +32,7 @@ public class GestionOfertaBean extends BaseBean implements Serializable
 	
 	public GestionOfertaBean() 
 	{
-		String idOferta = getParameter("idOferta");                
+		String idOferta = getRequestParameter("idOferta");                
 				
 		if(UtilesWeb.isNullOrEmpty(idOferta))
 		{
@@ -46,19 +46,19 @@ public class GestionOfertaBean extends BaseBean implements Serializable
 			} 
 			catch (NegocioException e)
 			{
-				addError(e.getMessage());
+				addBeanError(e.getMessage());
 			} 
 			catch (DaoException e)
 			{
-				addError(e.getMessage());
+				addBeanError(e.getMessage());
 			} 
 			catch (RemoteException e)
 			{
-				addError(MSJ_ERROR_COMUNICACION_WS);
+				addBeanError(MSJ_ERROR_COMUNICACION_WS);
 			} 
 			catch (ServiceException e)
 			{
-				addError(MSJ_ERROR_COMUNICACION_WS);
+				addBeanError(MSJ_ERROR_COMUNICACION_WS);
 			}
 		}
 		
@@ -86,7 +86,7 @@ public class GestionOfertaBean extends BaseBean implements Serializable
 		}
 	}*/
 	
-	public String guardarOferta()
+	public void guardarOferta()
 	{
 		try
 		{
@@ -102,22 +102,20 @@ public class GestionOfertaBean extends BaseBean implements Serializable
 		}
 		catch(NegocioException e)
 		{
-			addError(e.getMessage());
+			addBeanError(e.getMessage());
 		} 
 		catch (DaoException e)
 		{
-			addError(e.getMessage());
+			addBeanError(e.getMessage());
 		} 
 		catch (RemoteException e)
 		{
-			addError(MSJ_ERROR_COMUNICACION_WS);
+			addBeanError(MSJ_ERROR_COMUNICACION_WS);
 		} 
 		catch (ServiceException e)
 		{
-			addError(MSJ_ERROR_COMUNICACION_WS);
+			addBeanError(MSJ_ERROR_COMUNICACION_WS);
 		}
-		
-		return SUCCESS;
 	}
 	
 	public String toListado()

@@ -22,6 +22,8 @@ public class LoginBean extends BaseBean implements Serializable
 	 */
 	private static final long serialVersionUID = 1070740152270054906L;
 	
+	private static final String SUCCESS = "success";
+	
 	private String email;
 	private String pass;
 
@@ -40,11 +42,11 @@ public class LoginBean extends BaseBean implements Serializable
 		} 
 		catch (RemoteException e1)
 		{
-			addMessage(MSJ_ERROR_COMUNICACION_WS);
+			addBeanError(MSJ_ERROR_COMUNICACION_WS);
 		}
 		catch (ServiceException e)
 		{
-			addMessage(MSJ_ERROR_COMUNICACION_WS);
+			addBeanError(MSJ_ERROR_COMUNICACION_WS);
 		} 
 		
 		return SUCCESS;

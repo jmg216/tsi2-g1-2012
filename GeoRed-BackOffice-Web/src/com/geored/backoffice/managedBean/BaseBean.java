@@ -8,26 +8,28 @@ import com.geored.negocio.AdminServiceImpl;
 import com.geored.negocio.AdminServiceImplServiceLocator;
 import com.geored.negocio.EmpresaServiceImpl;
 import com.geored.negocio.EmpresaServiceImplServiceLocator;
+import com.geored.negocio.EventoServiceImpl;
+import com.geored.negocio.EventoServiceImplServiceLocator;
 import com.geored.negocio.OfertaServiceImpl;
 import com.geored.negocio.OfertaServiceImplServiceLocator;
+import com.geored.negocio.SitioServiceImpl;
+import com.geored.negocio.SitioServiceImplServiceLocator;
 
 public abstract class BaseBean
 {
 	protected static final String MSJ_ERROR_COMUNICACION_WS = "Error de comunicación con el WS";
 	
-	protected static final String SUCCESS = "success";
-	
-	protected void addError(String message)
+	protected void addBeanError(String message)
 	{
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
 	}
 	
-	protected void addMessage(String message)
+	protected void addBeanMessage(String message)
 	{
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
 	}
 	
-	protected String getParameter(String key)
+	protected String getRequestParameter(String key)
 	{
 		return FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get(key);
 	}
@@ -65,5 +67,27 @@ public abstract class BaseBean
 		
 		return ofertaPort;
 	} 
+	
+	private EventoServiceImpl eventoPort;
+	protected EventoServiceImpl getEventoPort() throws ServiceException
+	{
+		if(eventoPort == null)
+		{
+			eventoPort = new EventoServiceImplServiceLocator().getEventoServiceImplPort();
+		}
+		
+		return eventoPort;			
+	}
+	
+	private SitioServiceImpl sitioPort;
+	protected SitioServiceImpl getSitioPort() throws ServiceException
+	{
+		if(sitioPort == null)
+		{
+			sitioPort = new SitioServiceImplServiceLocator().getSitioServiceImplPort();
+		}
+		
+		return sitioPort;
+	}
 	
 }

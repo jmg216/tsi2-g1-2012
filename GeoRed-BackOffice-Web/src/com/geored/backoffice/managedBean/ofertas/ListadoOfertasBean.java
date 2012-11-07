@@ -2,10 +2,10 @@ package com.geored.backoffice.managedBean.ofertas;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.xml.rpc.ServiceException;
@@ -14,7 +14,7 @@ import com.geored.backoffice.managedBean.BaseBean;
 import com.geored.negocio.DaoException;
 import com.geored.negocio.OfertaDTO;
 
-@ManagedBean(name="listadoOfertaBean")
+@ManagedBean(name="listadoOfertasBean")
 @RequestScoped
 public class ListadoOfertasBean extends BaseBean implements Serializable
 {	
@@ -23,61 +23,57 @@ public class ListadoOfertasBean extends BaseBean implements Serializable
 	 */
 	private static final long serialVersionUID = 4689434236912827528L;
 
-	private static final String TO_GESTION = "to_gestion";
-	
-	private List<OfertaDTO> ofertas;
+	private static final String TO_GESTION_OFERTA = "to_gestion_oferta";
 	
 	private Long idOferta;
-
-	public ListadoOfertasBean() {
-		// TODO Auto-generated constructor stub
-	}
 	
-	@PostConstruct
-	public void init() 
-	{	
-		
+	private List<OfertaDTO> listaOfertas = new ArrayList<OfertaDTO>();
+
+	public ListadoOfertasBean() 
+	{
 		try 
 		{
-			OfertaDTO[] ofertasN = getOfertaPort().obtenerListado();
-			ofertas = Arrays.asList(ofertasN);
+			listaOfertas = Arrays.asList(getOfertaPort().obtenerListado());
 			
-		} catch (ServiceException e) 
+		} 
+		catch (ServiceException e) 
 		{
-			addMessage(MSJ_ERROR_COMUNICACION_WS);
+			addBeanError(MSJ_ERROR_COMUNICACION_WS);
 			
-		} catch (DaoException e) 
+		} 
+		catch (DaoException e) 
 		{
-			addMessage(e.getMessage());
+			addBeanError(e.getMessage());
 			
-		} catch (RemoteException e) 
-		
-		{
-			addMessage(MSJ_ERROR_COMUNICACION_WS);
 		}
-		
+		catch (RemoteException e) 
+		{
+			addBeanError(MSJ_ERROR_COMUNICACION_WS);
+		}
 	}
 	
-	public String toGestion()
+	public String toGestionOferta()
 	{
-		return TO_GESTION;
+		return TO_GESTION_OFERTA;
 	}
 
-	public Long getIdOferta() {
+	public Long getIdOferta()
+	{
 		return idOferta;
 	}
 
-	public void setIdOferta(Long idOferta) {
+	public void setIdOferta(Long idOferta)
+	{
 		this.idOferta = idOferta;
 	}
 
-	public List<OfertaDTO> getOfertas() {
-		return ofertas;
+	public List<OfertaDTO> getListaOfertas()
+	{
+		return listaOfertas;
 	}
 
-	public void setOfertas(List<OfertaDTO> ofertas) {
-		this.ofertas = ofertas;
+	public void setListaOfertas(List<OfertaDTO> listaOfertas)
+	{
+		this.listaOfertas = listaOfertas;
 	}
-	
-	
 }
