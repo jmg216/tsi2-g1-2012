@@ -2,11 +2,18 @@ package com.geored.persistencia;
 
 import java.sql.Timestamp;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
+import javax.persistence.Query;
+
 
 import com.geored.dominio.Oferta;
+import com.geored.dominio.TematicaUsuario;
+import com.geored.dominio.Usuario;
+
 import com.geored.dto.OfertaDTO;
 import com.geored.persistencia.core.GenericDAOBase;
 
@@ -44,4 +51,24 @@ public class OfertaDAOImpl extends GenericDAOBase<Oferta, OfertaDTO> implements 
 		}
 	}
 	
+	public Object buscarOfertasPorTematicas(List<TematicaUsuario> tematicas, Usuario u,  boolean toDTO)
+	{
+		Query query = em.createQuery("select o from Oferta o JOIN o.tematicas where o.tematicas in ?1");        
+        query.setParameter(1, tematicas);       
+        
+        
+        Oferta ofertaEntity = (Oferta) query.getSingleResult();
+        
+        if(toDTO)
+        {
+        	OfertaDTO ofertaDTO = new OfertaDTO();
+        	
+        	entityToDto(ofertaEntity, ofertaDTO);
+        	
+        	return ofertaDTO;
+        }
+        
+        return ofertaEntity;
+	
+    }
 }
