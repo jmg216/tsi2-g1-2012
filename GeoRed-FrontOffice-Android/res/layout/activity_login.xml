@@ -12,6 +12,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_marginTop="20dp"
 	        android:text="@string/email"
+	        android:typeface="sans"
 	        android:textColor="@color/azul"/>
 	<EditText
 	        android:id="@+id/txtUsuario"
@@ -22,6 +23,7 @@
 	<TextView
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
+	        android:typeface="sans"
 	        android:layout_marginTop="20dp"
 	        android:text="@string/password"
 	        android:textColor="@color/azul" />	            
@@ -36,6 +38,7 @@
          	android:id="@+id/login"
          	android:layout_width="match_parent"
          	android:layout_height="wrap_content"
+         	android:typeface="sans"
         	android:layout_marginTop="30dp"
          	android:text="@string/ingresar"
          	android:onClick="loginUsuario"/>
@@ -44,6 +47,7 @@
          	android:id="@+id/linkRegistro"
          	android:text="@string/registrarse"
          	android:layout_width="match_parent"
+         	android:typeface="sans"
          	android:layout_height="wrap_content"
          	android:layout_marginTop="20dp"
          	android:textColor="@color/azul"

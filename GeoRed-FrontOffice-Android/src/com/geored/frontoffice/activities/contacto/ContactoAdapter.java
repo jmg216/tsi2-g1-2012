@@ -15,11 +15,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ContactosAdapter extends ArrayAdapter<UsuarioADTO> {
+public class ContactoAdapter extends ArrayAdapter<UsuarioADTO> {
 	
     private List<UsuarioADTO> items;
 
-    public ContactosAdapter(Context context, int textViewResourceId, List<UsuarioADTO> items) {
+    public ContactoAdapter(Context context, int textViewResourceId, List<UsuarioADTO> items) {
             super(context, textViewResourceId, items);
             this.items = items;
     }

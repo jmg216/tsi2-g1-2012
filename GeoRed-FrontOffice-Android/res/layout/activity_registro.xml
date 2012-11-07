@@ -18,6 +18,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_marginTop="20dp"
+	        android:typeface="sans"
 	        android:text="@string/nombreUsuario"
 	        android:textColor="@color/azul"/>
 	<EditText
@@ -30,6 +31,7 @@
 	<TextView 
 	    	android:layout_width="match_parent"
 	    	android:layout_height="wrap_content"
+	    	android:typeface="sans"
 	    	android:layout_marginTop="10dp"
 	    	android:text="@string/email"
 	    	android:textColor="@color/azul" />
@@ -44,6 +46,7 @@
 	<TextView 
 	    	android:layout_width="match_parent"
 	    	android:layout_height="wrap_content"
+	    	android:typeface="sans"
 	    	android:layout_marginTop="10dp"
 	    	android:text="@string/password"
 	    	android:textColor="@color/azul" />
@@ -60,6 +63,7 @@
  	<TextView
  	    android:layout_width="match_parent"
  	    android:layout_height="wrap_content"
+ 	    android:typeface="sans"
  	    android:layout_marginTop="20dp"
  	    android:text="@string/perolataImagen"
  	    android:textColor="@color/azul" />
@@ -77,6 +81,7 @@
 	 	    android:id="@+id/txtCarga"
 	 	    android:layout_width="wrap_content"
 	 	    android:layout_height="wrap_content"
+	 	    android:typeface="sans"
 	 	    android:layout_marginTop="20dp"
 	 	    android:text="@string/perolataImagenBoton"
 	 	    android:textColor="@color/azul" />

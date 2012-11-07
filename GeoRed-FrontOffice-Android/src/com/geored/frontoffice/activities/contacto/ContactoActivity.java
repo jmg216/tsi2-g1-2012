@@ -14,6 +14,7 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
@@ -24,14 +25,14 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class ContactosActivity extends ListActivity {
+public class ContactoActivity extends ListActivity {
 	
 	private UsuarioWS usuarioWS = FactoryWS.getInstancia().getUsuarioWS();
 	
     private ProgressDialog m_ProgressDialog = null; 
     private List<UsuarioADTO> usuarios = null;
     private List<UsuarioADTO> usuarios_aux = null;
-    private ContactosAdapter c_adapter;
+    private ContactoAdapter c_adapter;
     private Runnable viewUsuarios;
     private EditText edit_search_text;
     private Context context;
@@ -46,7 +47,7 @@ public class ContactosActivity extends ListActivity {
         
 	    usuarios = new ArrayList<UsuarioADTO>();
         
-	    c_adapter = new ContactosAdapter(this, R.layout.row_contact_list, usuarios);
+	    c_adapter = new ContactoAdapter(this, R.layout.row_contact_list, usuarios);
         
 	    setListAdapter(c_adapter);
         
@@ -77,7 +78,7 @@ public class ContactosActivity extends ListActivity {
 					}
 				}
 				
-				c_adapter = new ContactosAdapter(context, R.layout.row_contact_list, usuarios_aux);
+				c_adapter = new ContactoAdapter(context, R.layout.row_contact_list, usuarios_aux);
 				setListAdapter(c_adapter);
 				
 			}
@@ -94,25 +95,24 @@ public class ContactosActivity extends ListActivity {
 			}
 		});
         
-        viewUsuarios = new Runnable()
-        {
-            public void run() 
-            {
+//        viewUsuarios = new Runnable()
+//        {
+//            public void run() 
+//            {
             	usuarios = usuarioWS.obtenerListado();
-                runOnUiThread(returnRes);
-            }	        
-	  };
+//                runOnUiThread(returnRes);
+//            }	        
+//	  };
 	  
-      Thread thread =  new Thread(null, viewUsuarios, "MagentoBackground");
-      thread.start();
-      m_ProgressDialog = ProgressDialog.show(ContactosActivity.this,    
-            res.getString(R.string.cargando), res.getString(R.string.obteniendo_datos), true);	  
-	}
+//      Thread thread =  new Thread(null, viewUsuarios, "MagentoBackground");
+//      thread.start();
+//      m_ProgressDialog = ProgressDialog.show(this, res.getString(R.string.cargando), res.getString(R.string.obteniendo_datos), true);	  
+//	}
 	 
-	 private Runnable returnRes = new Runnable() 
-	 {
-	        public void run() 
-	        {
+//	 private Runnable returnRes = new Runnable() 
+//	 {
+//	        public void run() 
+//	        {
 	            if(usuarios != null && usuarios.size() > 0)
 	            {
 	                c_adapter.notifyDataSetChanged();
@@ -122,20 +122,31 @@ public class ContactosActivity extends ListActivity {
 	                	c_adapter.add(usuarios.get(i));
 	                }
 	            }
-	            m_ProgressDialog.dismiss();
+//	            m_ProgressDialog.dismiss();
 	            c_adapter.notifyDataSetChanged();
 	        }
-	    };	
+//	    };	
 	    
 	    @Override
 	    protected void onListItemClick(ListView l, View v, int position, long id) {
 	        // TODO Auto-generated method stub
-	        super.onListItemClick(l, v, position, id);
+	    	
+	    	super.onListItemClick(l, v, position, id);
+	    	
+	        Intent i = new Intent(this, ContactoDetalleActivity.class);
+	        
+	        UsuarioADTO contactoSeleccionado = (UsuarioADTO) getListAdapter().getItem(position);
+	        
+	        i.putExtra("nombreContacto", contactoSeleccionado.getNombre());  
+	        
+	        // Creo la vista usando LocalActivityManager del SitioGroupActivity
+	        View view = ContactoGroupActivity.group.getLocalActivityManager()
+			        .startActivity("detalle_contacto", i
+			        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+			        .getDecorView();
 
-	        AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
-
-	        // set the message to display
-	          alertbox.setMessage("Please Get Ready").show();
+	        // Remplazo la vista por la actual a cargar
+	        ContactoGroupActivity.group.replaceView(view);  
 
 	    }	    
 }

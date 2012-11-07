@@ -39,7 +39,7 @@ public class MapGeoRedActivity extends MapActivity {
 	private LocationManager locManager;
 	private LocationListener locListener;
 	private MapView mapView;
-	private MapController myMapController;
+//	private MapController myMapController;
 	//para agregar los overlays
 	private List<Overlay> mOverlays;
 	//mi ubicacion
@@ -51,7 +51,7 @@ public class MapGeoRedActivity extends MapActivity {
         setContentView(R.layout.activity_mapa);
         MapView mapView = (MapView) findViewById(R.id.mapview);
         mapView.setBuiltInZoomControls(true);
-        myMapController = mapView.getController();
+//        myMapController = mapView.getController();
         mOverlays = mapView.getOverlays();
         mOverlayLocation = new MyLocationOverlay(this, mapView);
         
@@ -156,8 +156,8 @@ public class MapGeoRedActivity extends MapActivity {
 
 	  //me centra en mi hubicacion por GPS
 	  GeoPoint centro = new GeoPoint((int) (loc.getLatitude() * 1E6), (int) (loc.getLongitude() * 1E6));
-	  myMapController.setCenter(centro);
-	  myMapController.setZoom(14); 
+//	  myMapController.setCenter(centro);
+//	  myMapController.setZoom(14); 
 	  
 	  //OverlayItem overlayMiUbicacion = new OverlayItem(centro, "woopa", "Estoy en mi posicion");
 	  mOverlayLocation.enableMyLocation();

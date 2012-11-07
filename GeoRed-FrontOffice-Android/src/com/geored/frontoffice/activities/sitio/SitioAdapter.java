@@ -7,6 +7,7 @@ import com.geored.frontoffice.dto.SitioADTO;
 import com.geored.frontoffice.utiles.BitMapImageConverter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,11 +44,13 @@ public class SitioAdapter extends ArrayAdapter<SitioADTO>  {
                     
                     tt.setText(sitio.getNombre());                            
                     bt.setText(sitio.getDescripcion());
-                    iv.setImageResource(R.drawable.marker3);
-                    //Bitmap bm = BitMapImageConverter.getImageBitmap("http://www.veryicon.com/icon/png/Application/iPhonica%20Vol.%202/Contact.png");                    
-                    //iv.setImageBitmap(bm);
+                    //iv.setImageResource(R.drawable.marker3);
+                    Bitmap bm = BitMapImageConverter.getImageBitmap(sitio.getImagen());                    
+                    iv.setImageBitmap(bm);
             }
             
             return v;	
     }
+    
+ 
 }
