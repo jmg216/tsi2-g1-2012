@@ -19,6 +19,7 @@ public class UsuarioDAOImpl extends GenericDAOBase<Usuario, UsuarioDTO> implemen
 		target.setEmail(source.getEmail());
 		target.setPass(source.getPass());
 		target.setNombre(source.getNombre());
+		target.setNombre(source.getImagen());
 	}
 
 	@Override
@@ -28,6 +29,7 @@ public class UsuarioDAOImpl extends GenericDAOBase<Usuario, UsuarioDTO> implemen
 		target.setEmail(source.getEmail());
 		target.setPass(source.getPass());
 		target.setNombre(source.getNombre());
+		target.setNombre(source.getImagen());
 	}
 	
 	public Object obtenerUsuarioPorEmailYPass(String email, String pass, boolean toDTO)
