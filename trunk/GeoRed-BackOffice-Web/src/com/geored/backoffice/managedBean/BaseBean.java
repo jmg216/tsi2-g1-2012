@@ -8,6 +8,8 @@ import com.geored.negocio.AdminServiceImpl;
 import com.geored.negocio.AdminServiceImplServiceLocator;
 import com.geored.negocio.EmpresaServiceImpl;
 import com.geored.negocio.EmpresaServiceImplServiceLocator;
+import com.geored.negocio.OfertaServiceImpl;
+import com.geored.negocio.OfertaServiceImplServiceLocator;
 
 public abstract class BaseBean
 {
@@ -52,4 +54,16 @@ public abstract class BaseBean
 		
 		return administradorPort;
 	}
+	
+	private OfertaServiceImpl ofertaPort;
+	protected OfertaServiceImpl getOfertaPort() throws ServiceException 
+	{
+		if(ofertaPort == null) 
+		{
+			ofertaPort = new OfertaServiceImplServiceLocator().getOfertaServiceImplPort();
+		}
+		
+		return ofertaPort;
+	} 
+	
 }

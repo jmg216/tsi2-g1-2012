@@ -9,19 +9,23 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.xml.rpc.ServiceException;
 
+import com.geored.backoffice.managedBean.BaseBean;
 import com.geored.negocio.DaoException;
 import com.geored.negocio.OfertaDTO;
-import com.geored.negocio.OfertaServiceImpl;
-import com.geored.negocio.OfertaServiceImplServiceLocator;
 
 @ManagedBean(name="listadoOfertaBean")
-public class ListadoOfertasBean implements Serializable
+public class ListadoOfertasBean extends BaseBean implements Serializable
 {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private static final String TO_GESTION = "to_gestion";
+	
 	private List<OfertaDTO> ofertas;
+	
+	private Long idOferta;
 
 	public ListadoOfertasBean() {
 		// TODO Auto-generated constructor stub
@@ -33,21 +37,36 @@ public class ListadoOfertasBean implements Serializable
 		
 		try 
 		{
-			OfertaServiceImpl ofertaWS = new OfertaServiceImplServiceLocator().getOfertaServiceImplPort();
-			OfertaDTO[] ofertasN = ofertaWS.obtenerListado();
+			OfertaDTO[] ofertasN = getOfertaPort().obtenerListado();
 			ofertas = Arrays.asList(ofertasN);
 			
-		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (DaoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (ServiceException e) 
+		{
+			addMessage(MSJ_ERROR_COMUNICACION_WS);
+			
+		} catch (DaoException e) 
+		{
+			addMessage(e.getMessage());
+			
+		} catch (RemoteException e) 
+		
+		{
+			addMessage(MSJ_ERROR_COMUNICACION_WS);
 		}
 		
+	}
+	
+	public String toGestion()
+	{
+		return TO_GESTION;
+	}
+
+	public Long getIdOferta() {
+		return idOferta;
+	}
+
+	public void setIdOferta(Long idOferta) {
+		this.idOferta = idOferta;
 	}
 
 	public List<OfertaDTO> getOfertas() {
