@@ -21,8 +21,23 @@
         <from-view-id>/xhtml/empresas/listadoEmpresas.xhtml</from-view-id>
         
         <navigation-case>
-            <from-outcome>success</from-outcome>
+            <from-outcome>to_gestion</from-outcome>
             <to-view-id>/xhtml/empresas/gestionEmpresa.xhtml</to-view-id>
+            <redirect>
+                <view-param>
+                    <name>idEmpresa</name>
+                    <value>#{listadoEmpresasBean.idEmpresa}</value>
+                </view-param>
+            </redirect>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/xhtml/empresas/gestionEmpresa.xhtml</from-view-id>
+        
+        <navigation-case>
+            <from-outcome>to_listado</from-outcome>
+            <to-view-id>/xhtml/empresas/listadoEmpresas.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 </faces-config>
