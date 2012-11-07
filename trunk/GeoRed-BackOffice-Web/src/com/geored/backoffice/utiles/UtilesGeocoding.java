@@ -1,4 +1,4 @@
-package com.geored.utiles;
+package com.geored.backoffice.utiles;
 
 import java.util.List;
 

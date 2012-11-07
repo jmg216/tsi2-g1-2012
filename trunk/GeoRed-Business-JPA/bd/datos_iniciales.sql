@@ -5,14 +5,14 @@ insert into geored.tipo_administrador (ID, NOMBRE) values (1, 'Aplicación');
 insert into geored.tipo_administrador (ID, NOMBRE) values (2, 'Empresa');
 
 /* Administrador aplicacion */
-insert into geored.administrador (ID, EMAIL, NOMBRE, PASS, TIPO_ADMINISTRADOR_FK) values (1, 'admin@geored.com', 'admin', 'admin', 1);
+insert into geored.administrador (ID, EMAIL, NOMBRE, PASS, TIPO_ADMINISTRADOR_FK) values (1, 'admin@geored.com', 'admin', '21232f297a57a5a743894a0e4a801fc3', 1);
 
 /* Administrador de Empresa Beauty */
-insert into geored.administrador (ID, EMAIL, NOMBRE, PASS, TIPO_ADMINISTRADOR_FK) values (2, 'beauty@geored.com', 'beauty', 'beauty', 2);
+insert into geored.administrador (ID, EMAIL, NOMBRE, PASS, TIPO_ADMINISTRADOR_FK) values (2, 'beauty@geored.com', 'beauty', '21232f297a57a5a743894a0e4a801fc3', 2);
 
 /*Empresa con administrador */
 insert into geored.empresa (ID, DESCRIPCION, FECHA_CREACION, LOGO_URL, NOMBRE, ADMINISTRADOR_FK)
-values (1, 'Empresa de cosmeticos', '2012-12-12', 'http://3.bp.blogspot.com/_jJXpVP_ML4I/SwL_OT1Nx6I/AAAAAAAAABw/OW8tlgJeN2U/S660/beauty.jpg', 'Beauty', 2);
+values (1, 'Empresa de cosmeticos', '2012-12-22', 'http://3.bp.blogspot.com/_jJXpVP_ML4I/SwL_OT1Nx6I/AAAAAAAAABw/OW8tlgJeN2U/S660/beauty.jpg', 'Beauty', 2);
 
 /*Sitio de interés*/
 insert into geored.sitio (ID, DESCRIPCION, IMAGEN, NOMBRE, UBICACION_GEOGRAFICA, ADMINISTRADOR_FK) values (1, 'Buen lugar para hacer ejercicio', 'http://theawkwardpint.files.wordpress.com/2012/05/93_1.jpeg', 'Gym Astro', '-34.883611, -56.181944', 1);
