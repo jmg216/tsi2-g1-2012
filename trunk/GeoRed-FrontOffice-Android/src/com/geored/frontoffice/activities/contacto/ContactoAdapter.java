@@ -44,7 +44,7 @@ public class ContactoAdapter extends ArrayAdapter<UsuarioADTO> {
                     
                     tt.setText(usuario.getNombre());                            
                     bt.setText(usuario.getEmail());
-                    
+                    //iv.setImageResource(R.drawable.contact);
                     Bitmap bm = BitMapImageConverter.getImageBitmap(usuario.getUrlImagen());
                     iv.setImageBitmap(bm);
             }

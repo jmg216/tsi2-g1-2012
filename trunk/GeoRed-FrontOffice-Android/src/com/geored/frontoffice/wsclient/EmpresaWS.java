@@ -53,7 +53,6 @@ public class EmpresaWS
 			
         	empresaADTO.setDescripcion(response.getProperty(0).toString());
         	empresaADTO.setId(Long.parseLong(response.getProperty(1).toString()));
-        	empresaADTO.setIdAministrador(Long.parseLong(response.getProperty(2).toString()));
         	empresaADTO.setUrlImagen(response.getProperty(3).toString());
         	empresaADTO.setNombre(response.getProperty(4).toString());
         	empresaADTO.setNombreAdministrador(response.getProperty(5).toString());
@@ -82,7 +81,6 @@ public class EmpresaWS
 			
         	empresa.setDescripcion(info.getProperty(0).toString());
         	empresa.setId(Long.parseLong(info.getProperty(1).toString()));
-        	empresa.setIdAministrador(Long.parseLong(info.getProperty(2).toString()));
         	empresa.setUrlImagen(info.getProperty(3).toString());
         	empresa.setNombre(info.getProperty(4).toString());
         	
