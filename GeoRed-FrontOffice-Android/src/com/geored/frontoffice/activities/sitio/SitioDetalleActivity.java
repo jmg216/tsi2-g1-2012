@@ -8,8 +8,12 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SitioDetalleActivity extends Activity {
 
@@ -34,7 +38,17 @@ public class SitioDetalleActivity extends Activity {
     	nombreSitio.setText(nombre_sitio);
     	descSitio.setText(desc_sitio);
     	
-    	//setContentView(imagen);        
+    	Gallery g = (Gallery) this.findViewById(R.id.galeria_sitio);
+    	g.setAdapter(new ImageAdapter(this));
+    	
+    	g.setOnItemClickListener(new OnItemClickListener() 
+    	{
+    	       public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
+    	       {
+    	           Toast.makeText(SitioDetalleActivity.this, "" + position,
+    	               Toast.LENGTH_SHORT).show();
+    	       }
+    	   });    	       
     }
     
     /**
