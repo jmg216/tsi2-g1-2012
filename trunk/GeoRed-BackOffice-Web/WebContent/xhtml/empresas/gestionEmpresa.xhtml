@@ -31,7 +31,7 @@
 						</tr>
 						<tr>
 							<td><h:outputText value="Logo:" /></td>
-							<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.logoUrl}"/></td>
+							<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.urlImagen}"/></td>
 						</tr>
 						<tr>
 							<td><h:outputText value="Administrador:" /></td>
@@ -40,49 +40,21 @@
 									<f:selectItems value="#{gestionEmpresaBean.listaAdministradores}" 
 										var="administrador" itemValue="#{administrador.id}" itemLabel="#{administrador.nombre}"/>
 								</p:selectOneMenu> 								
-							</td>
-							<td>
-								<p:commandLink value="Crear administrador" onclick="dlgCrearAdministrador.show();" styleClass="simple-link"/>								
-							</td>
+							</td>						
 						</tr>
 					</table>
 					
 					<div class="areaBotones">
 						<ul>
 							<li>
-								<p:commandButton value="Volver" action="#{gestionEmpresaBean.toListado()}"/>	
+								<p:commandButton value="Volver" action="#{gestionEmpresaBean.toListadoEmpresas()}"/>	
 							</li>
 							<li>
-								<p:commandButton value="Guardar" action="#{gestionEmpresaBean.guardarEmpresa()}"/>	
+								<p:commandButton value="Guardar" action="#{gestionEmpresaBean.guardarEmpresa()}" onclick="refreshView();"/>	
 							</li>
 						</ul>									
-					</div>
-					
-					<p:dialog id="dlgCrearAdministrador" header="Crear administrador" widgetVar="dlgCrearAdministrador" resizable="false" modal="true" height="130">  
-						<table>							
-							<tr>
-								<td><h:outputText value="E-mail:" /></td>
-								<td>
-									<p:inputText id="emailAdministrador" value="#{gestionEmpresaBean.administradorDTO.email}"/>
-								</td>
-							</tr>
-							<tr>
-								<td><h:outputText value="Nombre:" /></td>
-								<td><p:inputText value="#{gestionEmpresaBean.administradorDTO.nombre}"/></td>
-							</tr>							
-							<tr>
-								<td colspan="2">
-									<p:commandButton value="Guardar" onclick="refreshView();" 
-										action="#{gestionEmpresaBean.guardarAdministrador()}" style="float:right;"/>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2"><h:outputText value="El password del usuario será: 'admin'." style="font-style: italic;" /></td>
-							</tr>
-						</table>
-					</p:dialog>
-				</h:form>
-				
+					</div>				
+				</h:form>				
 			</ui:define>
 		</ui:composition>
 	</h:body>

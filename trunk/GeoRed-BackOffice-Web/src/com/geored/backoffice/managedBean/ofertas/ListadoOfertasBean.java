@@ -33,8 +33,16 @@ public class ListadoOfertasBean extends BaseBean implements Serializable
 	{
 		try 
 		{
-			listaOfertas = Arrays.asList(getOfertaPort().obtenerListado());
+			OfertaDTO[] arrayOfertas = getOfertaPort().obtenerListado();
 			
+			if(arrayOfertas != null)
+			{
+				listaOfertas = Arrays.asList(arrayOfertas);
+			}
+			else
+			{
+				listaOfertas = new ArrayList<OfertaDTO>();
+			}
 		} 
 		catch (ServiceException e) 
 		{

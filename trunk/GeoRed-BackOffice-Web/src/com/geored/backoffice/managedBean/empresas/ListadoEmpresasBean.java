@@ -34,7 +34,17 @@ public class ListadoEmpresasBean extends BaseBean implements Serializable
 	{
 		try
 		{	
-			listaEmpresas = Arrays.asList(getEmpresaPort().obtenerListado());
+			EmpresaDTO[] arrayEmpresas = getEmpresaPort().obtenerListado();
+			
+			if(arrayEmpresas != null)
+			{
+				listaEmpresas = Arrays.asList(arrayEmpresas);
+			}
+			else
+			{
+				listaEmpresas = new ArrayList<EmpresaDTO>();
+			}
+			
 		} 
 		catch (ServiceException e)
 		{

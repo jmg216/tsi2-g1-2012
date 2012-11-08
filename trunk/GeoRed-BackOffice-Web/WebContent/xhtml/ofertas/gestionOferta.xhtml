@@ -11,29 +11,29 @@
 		<ui:composition template="/xhtml/templates/layout.xhtml">
 			<ui:define name="content">	
 				<h:form>					
-					<h1 class="titulo-content">Gestión de Eventos</h1>
+					<h1 class="titulo-content">Gestión de Ofertas</h1>
 					
 					<table>
-						<h:inputHidden value="#{gestionEventoBean.eventoDTO.id}"/>
-						<c:if test="#{gestionEventoBean.eventoDTO.id > 0}">
+						<h:inputHidden value="#{gestionOfertaBean.ofertaDTO.id}"/>
+						<c:if test="#{gestionOfertaBean.ofertaDTO.id > 0}">
 							<tr>
 								<td><h:outputText value="Id:" /></td>
-								<td><p:inputText value="#{gestionEventoBean.eventoDTO.id}" disabled="true"/></td>
+								<td><p:inputText value="#{gestionOfertaBean.ofertaDTO.id}" disabled="true"/></td>
 							</tr>
 						</c:if>																		
 						<tr>
 							<td><h:outputText value="Nombre:" /></td>
-							<td><p:inputText value="#{gestionEventoBean.eventoDTO.nombre}"/></td>
+							<td><p:inputText value="#{gestionOfertaBean.ofertaDTO.nombre}"/></td>
 						</tr>																
 					</table>
 					
 					<div class="areaBotones">
 						<ul>
 							<li>
-								<p:commandButton value="Volver" action="#{gestionEventoBean.toListadoEventos()}"/>	
+								<p:commandButton value="Volver" action="#{gestionOfertaBean.toListadoOfertas()}"/>	
 							</li>
 							<li>
-								<p:commandButton value="Guardar" action="#{gestionEventoBean.guardarEvento()}" onclick="refreshView();"/>	
+								<p:commandButton value="Guardar" action="#{gestionOfertaBean.guardarOferta()}" onclick="refreshView();"/>	
 							</li>
 						</ul>									
 					</div>					

@@ -10,6 +10,8 @@ import com.geored.negocio.EmpresaServiceImpl;
 import com.geored.negocio.EmpresaServiceImplServiceLocator;
 import com.geored.negocio.EventoServiceImpl;
 import com.geored.negocio.EventoServiceImplServiceLocator;
+import com.geored.negocio.GlobalServiceImpl;
+import com.geored.negocio.GlobalServiceImplServiceLocator;
 import com.geored.negocio.OfertaServiceImpl;
 import com.geored.negocio.OfertaServiceImplServiceLocator;
 import com.geored.negocio.SitioServiceImpl;
@@ -46,15 +48,15 @@ public abstract class BaseBean
 		return empresaPort;
 	}
 	
-	private AdminServiceImpl administradorPort;
-	protected AdminServiceImpl getAdministradorPort() throws ServiceException
+	private AdminServiceImpl adminPort;
+	protected AdminServiceImpl getAdminPort() throws ServiceException
 	{
-		if(administradorPort == null)
+		if(adminPort == null)
 		{
-			administradorPort = new AdminServiceImplServiceLocator().getAdminServiceImplPort();
+			adminPort = new AdminServiceImplServiceLocator().getAdminServiceImplPort();
 		}
 		
-		return administradorPort;
+		return adminPort;
 	}
 	
 	private OfertaServiceImpl ofertaPort;
@@ -90,4 +92,14 @@ public abstract class BaseBean
 		return sitioPort;
 	}
 	
+	private GlobalServiceImpl globalPort;
+	protected GlobalServiceImpl getGlobalPort() throws ServiceException
+	{
+		if(globalPort == null)
+		{
+			globalPort = new GlobalServiceImplServiceLocator().getGlobalServiceImplPort();
+		}
+		
+		return globalPort;
+	}
 }

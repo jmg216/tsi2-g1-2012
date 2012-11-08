@@ -93,7 +93,7 @@
     
     <!-- OFERTAS -->
     <navigation-rule>
-        <from-view-id>/xhtml/ofertas/listadoOfetas.xhtml</from-view-id>
+        <from-view-id>/xhtml/ofertas/listadoOfertas.xhtml</from-view-id>
         
         <navigation-case>
             <from-outcome>to_gestion_oferta</from-outcome>

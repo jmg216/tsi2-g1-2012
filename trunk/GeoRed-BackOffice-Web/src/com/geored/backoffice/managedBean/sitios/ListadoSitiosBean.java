@@ -33,8 +33,16 @@ public class ListadoSitiosBean extends BaseBean implements Serializable
 	{
 		try 
 		{
-			listaSitios = Arrays.asList(getSitioPort().obtenerListado());
+			SitioDTO[] arraySitios = getSitioPort().obtenerListado();
 			
+			if(arraySitios != null)
+			{
+				listaSitios = Arrays.asList(arraySitios);
+			}
+			else
+			{
+				listaSitios = new ArrayList<SitioDTO>();
+			}
 		} 
 		catch (ServiceException e) 
 		{

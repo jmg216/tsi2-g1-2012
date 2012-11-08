@@ -11,78 +11,39 @@
 		<ui:composition template="/xhtml/templates/layout.xhtml">
 			<ui:define name="content">	
 				<h:form>					
-					<h1 class="titulo-content">Gestión de Empresas</h1>
+					<h1 class="titulo-content">Gestión de Administradores</h1>
 					
 					<table>
-						<h:inputHidden value="#{gestionEmpresaBean.empresaDTO.id}"/>
-						<c:if test="#{gestionEmpresaBean.empresaDTO.id > 0}">
+						<h:inputHidden value="#{gestionAdministradorBean.administradorDTO.id}"/>
+						<c:if test="#{gestionAdministradorBean.administradorDTO.id > 0}">
 							<tr>
 								<td><h:outputText value="Id:" /></td>
-								<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.id}" disabled="true"/></td>
+								<td><p:inputText value="#{gestionAdministradorBean.administradorDTO.id}" disabled="true"/></td>
 							</tr>
 						</c:if>												
 						<tr>
+							<td><h:outputText value="E-mail:" /></td>
+							<td>
+								<p:inputText value="#{gestionAdministradorBean.administradorDTO.email}"/>
+							</td>
+						</tr>
+						<tr>
 							<td><h:outputText value="Nombre:" /></td>
-							<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.nombre}"/></td>
-						</tr>
-						<tr>
-							<td><h:outputText value="Descripción:" /></td>
-							<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.descripcion}"/></td>
-						</tr>
-						<tr>
-							<td><h:outputText value="Logo:" /></td>
-							<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.logoUrl}"/></td>
-						</tr>
-						<tr>
-							<td><h:outputText value="Administrador:" /></td>
-							<td>
-								<p:selectOneMenu value="#{gestionEmpresaBean.empresaDTO.idAministrador}">
-									<f:selectItems value="#{gestionEmpresaBean.listaAdministradores}" 
-										var="administrador" itemValue="#{administrador.id}" itemLabel="#{administrador.nombre}"/>
-								</p:selectOneMenu> 								
-							</td>
-							<td>
-								<p:commandLink value="Crear administrador" onclick="dlgCrearAdministrador.show();" styleClass="simple-link"/>								
-							</td>
-						</tr>
+							<td><p:inputText value="#{gestionAdministradorBean.administradorDTO.nombre}"/></td>
+						</tr>																
 					</table>
 					
 					<div class="areaBotones">
 						<ul>
 							<li>
-								<p:commandButton value="Volver" action="#{gestionEmpresaBean.toListado()}"/>	
+								<p:commandButton value="Volver" action="#{gestionAdministradorBean.toListadoAdministradores()}"/>	
 							</li>
 							<li>
-								<p:commandButton value="Guardar" action="#{gestionEmpresaBean.guardarEmpresa()}"/>	
+								<p:commandButton value="Guardar" action="#{gestionAdministradorBean.guardarAdministrador()}" onclick="refreshView();"/>	
 							</li>
 						</ul>									
-					</div>
-					
-					<p:dialog id="dlgCrearAdministrador" header="Crear administrador" widgetVar="dlgCrearAdministrador" resizable="false" modal="true" height="130">  
-						<table>							
-							<tr>
-								<td><h:outputText value="E-mail:" /></td>
-								<td>
-									<p:inputText id="emailAdministrador" value="#{gestionEmpresaBean.administradorDTO.email}"/>
-								</td>
-							</tr>
-							<tr>
-								<td><h:outputText value="Nombre:" /></td>
-								<td><p:inputText value="#{gestionEmpresaBean.administradorDTO.nombre}"/></td>
-							</tr>							
-							<tr>
-								<td colspan="2">
-									<p:commandButton value="Guardar" onclick="refreshView();" 
-										action="#{gestionEmpresaBean.guardarAdministrador()}" style="float:right;"/>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2"><h:outputText value="El password del usuario será: 'admin'." style="font-style: italic;" /></td>
-							</tr>
-						</table>
-					</p:dialog>
-				</h:form>
-				
+					</div>					
+				</h:form>				
 			</ui:define>
 		</ui:composition>
 	</h:body>
