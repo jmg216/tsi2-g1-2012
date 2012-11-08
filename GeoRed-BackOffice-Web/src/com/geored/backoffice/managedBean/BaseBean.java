@@ -23,12 +23,12 @@ public abstract class BaseBean
 	
 	protected void addBeanError(String message)
 	{
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, "asdasd"));
 	}
 	
 	protected void addBeanMessage(String message)
 	{
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, "asdasd"));
 	}
 	
 	protected String getRequestParameter(String key)

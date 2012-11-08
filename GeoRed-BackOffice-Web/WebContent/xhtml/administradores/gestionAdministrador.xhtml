@@ -32,11 +32,12 @@
 							<td><p:inputText value="#{gestionAdministradorBean.administradorDTO.nombre}"/></td>
 						</tr>
 						<tr>
-							<td><p:outputLabel value="Tipo administrador:"/></td>
+							<td><h:outputText value="Tipo administrador:"/></td>
 							<td>
 								<p:selectOneMenu value="#{gestionAdministradorBean.administradorDTO.idTipoAdministrador}">
-									<f:selectItems value="#{gestionEmpresaBean.listaAdministradores}" 
-										var="administrador" itemValue="#{administrador.id}" itemLabel="#{administrador.nombre}"/>
+									<f:selectItem itemLabel="Seleccione uno..." itemValue="" />
+									<f:selectItems value="#{gestionAdministradorBean.listaTiposAdministradores}" 
+										var="tipoAdministrador" itemValue="#{tipoAdministrador.id}" itemLabel="#{tipoAdministrador.nombre}"/>
 								</p:selectOneMenu> 		
 							</td>
 						</tr>																
