@@ -1,5 +1,6 @@
 package com.geored.backoffice.utiles;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.google.code.geocoder.Geocoder;
@@ -25,9 +26,23 @@ public class UtilesGeocoding {
 	}
 	
 	// En caso de que se llegue a precisas, el metodo inverso.
-	public static String inverseGeocoding(LatLng coordenadas) {
+	public static String inverseGeocoding(String coordenadas) {
 		
-		return null;
+		Geocoder geocoder = new Geocoder();
+		
+		String limitador = "[,]";
+		String[] token = coordenadas.split(limitador);
+		Double latitud = Double.parseDouble(token[0]);
+		Double longitud = Double.parseDouble(token[1]);
+		
+		LatLng ubicacion = new LatLng(BigDecimal.valueOf(latitud), BigDecimal.valueOf(longitud));
+		
+		GeocoderRequest geocoderRequest = new GeocoderRequestBuilder().setLocation(ubicacion).getGeocoderRequest();
+		GeocodeResponse geocoderResponse = geocoder.geocode(geocoderRequest);
+		List<GeocoderResult> resultados = geocoderResponse.getResults();
+		
+		return resultados.get(0).getFormattedAddress();
+		
 	}
 	
 	
