@@ -2,14 +2,20 @@ package com.geored.backoffice.managedBean.ofertas;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.xml.rpc.ServiceException;
 
 import com.geored.backoffice.managedBean.BaseBean;
+import com.geored.backoffice.utiles.UtilesGeocoding;
 import com.geored.backoffice.utiles.UtilesWeb;
 import com.geored.negocio.DaoException;
+import com.geored.negocio.EmpresaDTO;
+import com.geored.negocio.LocalDTO;
 import com.geored.negocio.NegocioException;
 import com.geored.negocio.OfertaDTO;
 
@@ -26,9 +32,16 @@ public class GestionOfertaBean extends BaseBean implements Serializable
 	
 	private OfertaDTO ofertaDTO = new OfertaDTO();
 	
+	private EmpresaDTO empresaDTO = new EmpresaDTO();
+
+	private List<LocalDTO> listaLocales = new ArrayList<LocalDTO>();
+	
+	private List<String> listaNombreLocales = new ArrayList<String>();
+	
 	public GestionOfertaBean()
 	{	
-		String idOferta = getRequestParameter("idOferta");                
+		String idOferta = getRequestParameter("idOferta");
+		String idEmpresa = getRequestParameter("idEmpresa");
 		
 		if(UtilesWeb.isNullOrEmpty(idOferta))
 		{
@@ -39,6 +52,18 @@ public class GestionOfertaBean extends BaseBean implements Serializable
 			try
 			{
 				ofertaDTO = getOfertaPort().obtener(Long.valueOf(idOferta));
+				
+				listaLocales = Arrays.asList(getEmpresaPort().obtener(Long.valueOf(idEmpresa)).getListaLocalesDTO());
+				
+				for (LocalDTO local : listaLocales) {
+						
+					if (ofertaDTO.getIdLocal().equals(local.getId()))
+					{
+						String ubicacion = local.getUbicacionGeografica();
+						listaNombreLocales.add(UtilesGeocoding.inverseGeocoding(ubicacion));
+					}
+				}
+				
 			} 
 			catch (NegocioException e)
 			{
@@ -78,4 +103,29 @@ public class GestionOfertaBean extends BaseBean implements Serializable
 	{
 		this.ofertaDTO = ofertaDTO;
 	}
+
+	public List<LocalDTO> getListaLocales() {
+		return listaLocales;
+	}
+
+	public void setListaLocales(List<LocalDTO> listaLocales) {
+		this.listaLocales = listaLocales;
+	}
+
+	public EmpresaDTO getEmpresaDTO() {
+		return empresaDTO;
+	}
+
+	public void setEmpresaDTO(EmpresaDTO empresaDTO) {
+		this.empresaDTO = empresaDTO;
+	}
+
+	public List<String> getListaNombreLocales() {
+		return listaNombreLocales;
+	}
+
+	public void setListaNombreLocales(List<String> listaNombreLocales) {
+		this.listaNombreLocales = listaNombreLocales;
+	}
+	
 }
