@@ -18,7 +18,6 @@ import org.primefaces.model.map.MapModel;
 import org.primefaces.model.map.Marker;
 
 import com.geored.backoffice.managedBean.BaseBean;
-import com.geored.backoffice.utiles.UtilesGeocoding;
 import com.geored.negocio.CheckInDTO;
 import com.geored.negocio.DaoException;
 import com.geored.negocio.NegocioException;
@@ -74,9 +73,14 @@ public class ReporteCheckInBean extends BaseBean implements Serializable
 				if(check.getFechaCreacion().after(fechaIni) && check.getFechaCreacion().before(fechaFi)) { 
 					
 						String direccion = sitioWS.obtener(check.getIdSitio()).getUbicacionGeografica();
-						com.google.code.geocoder.model.LatLng coordenadas = UtilesGeocoding.geocoding(direccion);
+						//com.google.code.geocoder.model.LatLng coordenadas = UtilesGeocoding.geocoding(direccion);
 						
-						LatLng coord = new LatLng(coordenadas.getLat().floatValue(),coordenadas.getLng().floatValue());
+						String limitador = "[,]";
+						String[] token = direccion.split(limitador);
+						Double latitud = Double.parseDouble(token[0]);
+						Double longitud = Double.parseDouble(token[1]);
+						
+						LatLng coord = new LatLng(latitud,longitud);
 						
 						checkinMap.addOverlay(new Marker(coord));
 				}
