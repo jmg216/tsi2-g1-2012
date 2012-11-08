@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:body>
+		<ui:composition template="/xhtml/templates/layout.xhtml">
+			<ui:define name="content">	
+				<h:form>
+					<h1 class="titulo-content">Reporte de Check-in</h1>
+					<p:panel header="Ubicaciones">
+						<p:panelGrid styleClass="hola">
+							<p:row>
+								<p:column>
+									<h:outputText value="Fecha Inicial:" /> 
+									<p:calendar value="#{reporteCheckInBean.fechaInicial}" />
+								</p:column>
+								<p:column>
+									<h:outputText value="Fecha Final:" /> 
+									<p:calendar value="#{reporteCheckInBean.fechaFinal}"/>
+								</p:column>
+							</p:row>
+						</p:panelGrid>									
+						<p:commandButton value="Ver Reporte" style="margin-top:-4%;margin-left:87%;" action="#{reporteCheckInBean.mostrarReporte()}" update="mapaCheckIn"/>
+						<p:gmap id="mapaCheckIn" model="#{reporteCheckInBean.checkinMap}" center="-34.904375,-56.166414" zoom="13" type="TERRAIN" style="width:862px;height:390px;margin-top:1%;"/>
+					</p:panel>
+				</h:form>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>	
