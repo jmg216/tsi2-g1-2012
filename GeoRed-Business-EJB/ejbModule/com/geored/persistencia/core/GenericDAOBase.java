@@ -74,7 +74,7 @@ public abstract class GenericDAOBase<EntityType, DtoType>
 		
 		if(toDTO)
 		{			
-			entityTransformer.toDtoList(listaEntidades);			
+			return entityTransformer.toDtoList(listaEntidades);			
 		}
 		
 	    return listaEntidades;

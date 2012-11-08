@@ -22,18 +22,14 @@ public class GestionOfertaBean extends BaseBean implements Serializable
 	 */
 	private static final long serialVersionUID = -6757255144084899088L;
 
-	private static final String TO_LISTADO = "to_listado";
-	
-	//private AdministradorDTO administradorDTO = new AdministradorDTO();
+	private static final String TO_LISTADO_OFERTAS = "to_listado_ofertas";
 	
 	private OfertaDTO ofertaDTO = new OfertaDTO();
 	
-	//private List<Local> listaAdministradores = new ArrayList<AdministradorDTO>();
-	
-	public GestionOfertaBean() 
-	{
+	public GestionOfertaBean()
+	{	
 		String idOferta = getRequestParameter("idOferta");                
-				
+		
 		if(UtilesWeb.isNullOrEmpty(idOferta))
 		{
 			ofertaDTO = new OfertaDTO();
@@ -42,7 +38,7 @@ public class GestionOfertaBean extends BaseBean implements Serializable
 		{
 			try
 			{
-				ofertaDTO = getOfertaPort().obtener(Long.valueOf(idOferta)); 
+				ofertaDTO = getOfertaPort().obtener(Long.valueOf(idOferta));
 			} 
 			catch (NegocioException e)
 			{
@@ -61,75 +57,25 @@ public class GestionOfertaBean extends BaseBean implements Serializable
 				addBeanError(MSJ_ERROR_COMUNICACION_WS);
 			}
 		}
-		
-		//cargarDatosIniciales();
-		
-	}
-	
-	/*private void cargarDatosIniciales()
-	{
-		try
-		{
-			//listaAdministradores = Arrays.asList(getAdministradorPort().obtenerListado());
-		}
-		catch (DaoException e)
-		{
-			addError(e.getMessage());
-		} 
-		catch (RemoteException e)
-		{
-			addError(MSJ_ERROR_COMUNICACION_WS);
-		} 
-		catch (ServiceException e)
-		{
-			addError(MSJ_ERROR_COMUNICACION_WS);
-		}
-	}*/
-	
-	public void guardarOferta()
-	{
-		try
-		{
-			// Si estoy creando 
-			if(ofertaDTO.getId() == null)
-			{
-				getOfertaPort().insertar(ofertaDTO);
-			}
-			else // Si estoy modificando
-			{
-				getOfertaPort().actualizar(ofertaDTO);
-			}
-		}
-		catch(NegocioException e)
-		{
-			addBeanError(e.getMessage());
-		} 
-		catch (DaoException e)
-		{
-			addBeanError(e.getMessage());
-		} 
-		catch (RemoteException e)
-		{
-			addBeanError(MSJ_ERROR_COMUNICACION_WS);
-		} 
-		catch (ServiceException e)
-		{
-			addBeanError(MSJ_ERROR_COMUNICACION_WS);
-		}
-	}
-	
-	public String toListado()
-	{
-		return TO_LISTADO;
 	}
 
-	public OfertaDTO getOfertaDTO() {
+	public void guardarOferta()
+	{
+		addBeanMessage("Oferta guardada correctamente");
+	}
+	
+	public String toListadoOfertas()
+	{
+		return TO_LISTADO_OFERTAS;
+	}
+
+	public OfertaDTO getOfertaDTO() 
+	{
 		return ofertaDTO;
 	}
 
-	public void setOfertaDTO(OfertaDTO ofertaDTO) {
+	public void setOfertaDTO(OfertaDTO ofertaDTO) 
+	{
 		this.ofertaDTO = ofertaDTO;
 	}
-	
-	
 }

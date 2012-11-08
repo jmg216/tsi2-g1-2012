@@ -32,8 +32,16 @@ public class ListadoEventosBean extends BaseBean implements Serializable
 	public ListadoEventosBean()
 	{
 		try
-		{	
-			listaEventos = Arrays.asList(getEventoPort().obtenerListado());
+		{	EventoDTO[] arrayEventos = getEventoPort().obtenerListado();
+		
+			if(arrayEventos != null)
+			{
+				listaEventos = Arrays.asList(arrayEventos);
+			}
+			else
+			{
+				listaEventos = new ArrayList<EventoDTO>();
+			}
 		} 
 		catch (ServiceException e)
 		{

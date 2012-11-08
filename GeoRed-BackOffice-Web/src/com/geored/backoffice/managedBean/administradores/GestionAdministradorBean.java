@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.xml.rpc.ServiceException;
@@ -14,8 +15,8 @@ import com.geored.backoffice.managedBean.BaseBean;
 import com.geored.backoffice.utiles.UtilesWeb;
 import com.geored.negocio.AdministradorDTO;
 import com.geored.negocio.DaoException;
-import com.geored.negocio.EmpresaDTO;
 import com.geored.negocio.NegocioException;
+import com.geored.negocio.TipoAdministradorDTO;
 
 @ManagedBean(name="gestionAdministradorBean")
 @RequestScoped
@@ -30,6 +31,8 @@ public class GestionAdministradorBean extends BaseBean implements Serializable
 	
 	private AdministradorDTO administradorDTO = new AdministradorDTO();
 	
+	private List<TipoAdministradorDTO> listaTiposAdministradores = new ArrayList<TipoAdministradorDTO>();
+	
 	public GestionAdministradorBean()
 	{	
 		String idAdministrador = getRequestParameter("idAdministrador");                
@@ -42,7 +45,7 @@ public class GestionAdministradorBean extends BaseBean implements Serializable
 		{
 			try
 			{
-				administradorDTO = getAdministradorPort().obtener(Long.valueOf(idAdministrador));
+				administradorDTO = getAdminPort().obtener(Long.valueOf(idAdministrador));
 			} 
 			catch (NegocioException e)
 			{
@@ -65,11 +68,26 @@ public class GestionAdministradorBean extends BaseBean implements Serializable
 		cargarDatosIniciales();
 	}
 	
+	@PostConstruct
+	public void init()
+	{
+		System.out.println("asds");
+	}
+	
 	private void cargarDatosIniciales()
 	{
 		try
 		{
-			List listaAdministradores = Arrays.asList(getAdministradorPort().obtenerListado());
+			TipoAdministradorDTO[] arrayTiposAdministradores = getGlobalPort().obtenerListadoTiposAdministradores();
+			
+			if(arrayTiposAdministradores != null)
+			{
+				listaTiposAdministradores = Arrays.asList(arrayTiposAdministradores);
+			}
+			else
+			{
+				listaTiposAdministradores = new ArrayList<TipoAdministradorDTO>();
+			}
 		}
 		catch (DaoException e)
 		{
@@ -85,8 +103,33 @@ public class GestionAdministradorBean extends BaseBean implements Serializable
 		}
 	}
 
+	public void guardarAdministrador()
+	{
+		addBeanMessage("Administrador guardado correctamente");
+	}
+	
 	public String toListadoAdministradores()
 	{
 		return TO_LISTADO_ADMINISTRADORES;
+	}
+
+	public AdministradorDTO getAdministradorDTO()
+	{
+		return administradorDTO;
+	}
+
+	public void setAdministradorDTO(AdministradorDTO administradorDTO)
+	{
+		this.administradorDTO = administradorDTO;
+	}
+
+	public List<TipoAdministradorDTO> getListaTiposAdministradores()
+	{
+		return listaTiposAdministradores;
+	}
+
+	public void setListaTiposAdministradores(List<TipoAdministradorDTO> listaTiposAdministradores)
+	{
+		this.listaTiposAdministradores = listaTiposAdministradores;
 	}
 }

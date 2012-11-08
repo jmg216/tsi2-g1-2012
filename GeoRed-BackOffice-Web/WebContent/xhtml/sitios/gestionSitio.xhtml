@@ -4,19 +4,40 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 	<h:body>
 		<ui:composition template="/xhtml/templates/layout.xhtml">
 			<ui:define name="content">	
-				<h:form>
-					<h1 class="titulo-content">Gestión de Sitios de Interes</h1>
+				<h:form>					
+					<h1 class="titulo-content">Gestión de Sitios</h1>
 					
-					<p:inputText value="#{loginBean.administradorDTO.email}" title="Email:"/>
-					<p:password value="#{loginBean.administradorDTO.pass}" title="Passwrod:"/>
+					<table>
+						<h:inputHidden value="#{gestionSitioBean.sitioDTO.id}"/>
+						<c:if test="#{gestionSitioBean.sitioDTO.id > 0}">
+							<tr>
+								<td><h:outputText value="Id:" /></td>
+								<td><p:inputText value="#{gestionSitioBean.sitioDTO.id}" disabled="true"/></td>
+							</tr>
+						</c:if>																		
+						<tr>
+							<td><h:outputText value="Nombre:" /></td>
+							<td><p:inputText value="#{gestionSitioBean.sitioDTO.nombre}"/></td>
+						</tr>																
+					</table>
 					
-					<p:commandButton value="Ingresar" action="#{loginBean.autenticar()}"/>
-				</h:form>
+					<div class="areaBotones">
+						<ul>
+							<li>
+								<p:commandButton value="Volver" action="#{gestionSitioBean.toListadoSitios()}"/>	
+							</li>
+							<li>
+								<p:commandButton value="Guardar" action="#{gestionSitioBean.guardarSitio()}" onclick="refreshView();"/>	
+							</li>
+						</ul>									
+					</div>					
+				</h:form>				
 			</ui:define>
 		</ui:composition>
 	</h:body>

@@ -72,7 +72,16 @@ public class GestionEmpresaBean extends BaseBean implements Serializable
 	{
 		try
 		{
-			listaAdministradores = Arrays.asList(getAdministradorPort().obtenerListado());
+			AdministradorDTO[] arrayAdministradores = getAdminPort().obtenerListado();
+			
+			if(arrayAdministradores != null)
+			{
+				listaAdministradores = Arrays.asList(arrayAdministradores);	
+			}
+			else
+			{
+				listaAdministradores = new ArrayList<AdministradorDTO>();
+			}
 		}
 		catch (DaoException e)
 		{
@@ -90,34 +99,36 @@ public class GestionEmpresaBean extends BaseBean implements Serializable
 	
 	public void guardarEmpresa()
 	{
-		try
-		{
-			// Si estoy creando 
-			if(empresaDTO.getId() == null)
-			{
-				getEmpresaPort().insertar(empresaDTO);
-			}
-			else // Si estoy modificando
-			{
-				getEmpresaPort().actualizar(empresaDTO);
-			}
-		}
-		catch(NegocioException e)
-		{
-			addBeanError(e.getMessage());
-		} 
-		catch (DaoException e)
-		{
-			addBeanError(e.getMessage());
-		} 
-		catch (RemoteException e)
-		{
-			addBeanError(MSJ_ERROR_COMUNICACION_WS);
-		} 
-		catch (ServiceException e)
-		{
-			addBeanError(MSJ_ERROR_COMUNICACION_WS);
-		}
+		addBeanMessage("Empresa guardada correctamente");
+		
+//		try
+//		{
+//			// Si estoy creando 
+//			if(empresaDTO.getId() == null)
+//			{
+//				getEmpresaPort().insertar(empresaDTO);
+//			}
+//			else // Si estoy modificando
+//			{
+//				getEmpresaPort().actualizar(empresaDTO);
+//			}
+//		}
+//		catch(NegocioException e)
+//		{
+//			addBeanError(e.getMessage());
+//		} 
+//		catch (DaoException e)
+//		{
+//			addBeanError(e.getMessage());
+//		} 
+//		catch (RemoteException e)
+//		{
+//			addBeanError(MSJ_ERROR_COMUNICACION_WS);
+//		} 
+//		catch (ServiceException e)
+//		{
+//			addBeanError(MSJ_ERROR_COMUNICACION_WS);
+//		}
 	}
 
 	public String toListadoEmpresas()

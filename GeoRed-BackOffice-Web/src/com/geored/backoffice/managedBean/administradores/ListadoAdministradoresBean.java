@@ -13,7 +13,6 @@ import javax.xml.rpc.ServiceException;
 import com.geored.backoffice.managedBean.BaseBean;
 import com.geored.negocio.AdministradorDTO;
 import com.geored.negocio.DaoException;
-import com.geored.negocio.EmpresaDTO;
 
 @ManagedBean(name="listadoAdministradoresBean")
 @RequestScoped
@@ -34,7 +33,16 @@ public class ListadoAdministradoresBean extends BaseBean implements Serializable
 	{	
 		try
 		{	
-			listaAdministradores = Arrays.asList(getAdministradorPort().obtenerListado());
+			AdministradorDTO[] arrayAdministradores = getAdminPort().obtenerListado();
+			
+			if(arrayAdministradores != null)
+			{
+				listaAdministradores = Arrays.asList(arrayAdministradores);
+			}
+			else
+			{
+				listaAdministradores = new ArrayList<AdministradorDTO>();
+			}			
 		} 
 		catch (ServiceException e)
 		{

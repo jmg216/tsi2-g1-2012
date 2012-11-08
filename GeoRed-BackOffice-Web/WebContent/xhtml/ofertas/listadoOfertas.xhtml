@@ -15,12 +15,12 @@
 					<div class="areaBotones">
 						<ul>
 							<li>
-								<p:commandButton value="Crear Oferta" action="#{listadoOfertaBean.toGestionOferta()}"/>
+								<p:commandButton value="Crear" action="#{listadoOfertasBean.toGestionOferta()}"/>
 							</li>
 						</ul>
 					</div>
 					
-					<p:dataTable id="dataTableOfertas" var="oferta" value="#{listadoOfertaBean.listaOfertas}"
+					<p:dataTable id="dataTableOfertas" var="oferta" value="#{listadoOfertasBean.listaOfertas}"
 				                 paginator="true" rows="10"  
 				                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
 				                 rowsPerPageTemplate="5,10,15">  
@@ -29,8 +29,8 @@
 				            <f:facet name="header">  
 				                <h:outputText value="ID" />  
 				            </f:facet>  
-				            <h:commandLink action="#{listadoOfertaBean.toGestionOferta()}" value="#{oferta.id}">
-				           		 <f:setPropertyActionListener target="#{listadoOfertaBean.idOferta}" value="#{oferta.id}"/>
+				            <h:commandLink action="#{listadoOfertasBean.toGestionOferta()}" value="#{oferta.id}">
+				           		 <f:setPropertyActionListener target="#{listadoOfertasBean.idOferta}" value="#{oferta.id}"/>
 				           	</h:commandLink> 
 				        </p:column>
 				        
