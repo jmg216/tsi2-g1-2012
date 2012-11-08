@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">        
+
+   	<RelativeLayout
+   	    	android:id="@+id/frame_relativo"
+   		    android:layout_width="match_parent"
+   		    android:layout_height="200dp"
+   		    android:background="@drawable/gradient_bg_header">
+		    
+		    <LinearLayout
+		        android:id="@+id/sitio_thumbnail"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:padding="2dip"
+		        android:layout_marginTop="4dp"
+		        android:layout_marginLeft="4dp"
+		        android:layout_marginBottom="4dp"
+		        android:layout_alignParentLeft="true"
+		        android:layout_marginRight="4dip"
+		        android:background="@drawable/image_bg" >
+		        
+		        
+		        <ImageView
+		            android:id="@+id/foto_sitio"
+		            android:layout_width="150dp"
+		            android:layout_height="100dp"
+		            android:layout_gravity="left"
+		            android:padding="2dip"/>
+   
+			</LinearLayout>	
+			
+			<TextView
+				android:id="@+id/nombre_sitio"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_alignTop="@+id/sitio_thumbnail"
+			    android:layout_toRightOf="@+id/sitio_thumbnail"
+				android:typeface="sans"
+				android:textSize="15dip"
+				android:textStyle="bold" 
+				android:textColor="@color/letras_oscuras"       	            
+			    android:gravity="center_vertical"/>
+			        
+			<TextView
+			    android:id="@+id/descripcion_sitio"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"		    
+			    android:layout_below="@+id/nombre_sitio"
+				android:textSize="10dip"
+				android:layout_marginTop="1dip"
+				android:layout_toRightOf="@+id/sitio_thumbnail"  
+				android:textColor="@color/letras_claras"                      
+			    android:singleLine="true"
+			    android:ellipsize="marquee"/>	
+			    	    	 
+		<Button
+		         android:id="@+id/checkin"
+		         android:layout_width="match_parent"
+		         android:layout_height="45dp"
+		         android:layout_marginBottom="5dp"
+		         android:layout_marginLeft="5dp"
+		         android:layout_marginRight="5dp"
+		         android:typeface="sans"
+		         android:layout_alignParentBottom="true"
+		         android:background="@drawable/gradient_bg_color"
+		         android:text="@string/checkin"
+		         android:onClick="checkinSitio"/>
+		
+		<TextView
+				android:id="@+id/info_sitio"
+			    android:layout_width="match_parent"
+			    android:layout_height="80dp"
+			    android:layout_alignTop="@+id/checkin"
+				android:layout_marginLeft="5dp"
+				android:layout_marginBottom="5dp"
+				android:layout_marginRight="5dp"
+				android:typeface="sans"
+				android:textSize="15dip"
+				android:textStyle="bold" 
+				android:textColor="@color/letras_oscuras"       	            
+				android:background="@drawable/border"/>
+							
+	</RelativeLayout>   
+</LinearLayout>

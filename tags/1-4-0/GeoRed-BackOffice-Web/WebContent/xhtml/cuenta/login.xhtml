@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body>
+		<ui:composition template="/xhtml/templates/layout.xhtml">
+			<ui:define name="content">	
+				<h:form>
+					<h1 class="titulo-content">Iniciar sesión</h1>
+					
+					<table>
+						<tr>
+							<td>
+								<h:outputText value="Email:" />
+							</td>
+							<td>
+								<p:inputText value="#{loginBean.email}" required="true"/>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<h:outputText value="Password:" />
+							</td>
+							<td>
+								<p:password value="#{loginBean.pass}" required="true"/>
+							</td>
+						</tr>
+					</table>
+					
+					<div class="areaBotones">
+						<ul>
+							<li>
+								<p:commandButton value="Ingresar" action="#{loginBean.iniciarSesion()}"/>	
+							</li>
+						</ul>									
+					</div>								
+				</h:form>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>	

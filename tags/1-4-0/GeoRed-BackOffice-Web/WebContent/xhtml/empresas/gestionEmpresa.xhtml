@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<h:body>
+		<ui:composition template="/xhtml/templates/layout.xhtml">
+			<ui:define name="content">	
+				<h:form>					
+					<h1 class="titulo-content">Gestión de Empresas</h1>
+					
+					<table>
+						<h:inputHidden value="#{gestionEmpresaBean.empresaDTO.id}"/>
+						<c:if test="#{gestionEmpresaBean.empresaDTO.id > 0}">
+							<tr>
+								<td><h:outputText value="Id:" /></td>
+								<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.id}" disabled="true"/></td>
+							</tr>
+						</c:if>												
+						<tr>
+							<td><h:outputText value="Nombre:" /></td>
+							<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.nombre}"/></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Descripción:" /></td>
+							<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.descripcion}"/></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Logo:" /></td>
+							<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.urlImagen}"/></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Administrador:" /></td>
+							<td>
+								<p:selectOneMenu value="#{gestionEmpresaBean.empresaDTO.idAministrador}">
+									<f:selectItems value="#{gestionEmpresaBean.listaAdministradores}" 
+										var="administrador" itemValue="#{administrador.id}" itemLabel="#{administrador.nombre}"/>
+								</p:selectOneMenu> 								
+							</td>						
+						</tr>
+					</table>
+					
+					<div class="areaBotones">
+						<ul>
+							<li>
+								<p:commandButton value="Volver" action="#{gestionEmpresaBean.toListadoEmpresas()}"/>	
+							</li>
+							<li>
+								<p:commandButton value="Guardar" action="#{gestionEmpresaBean.guardarEmpresa()}" onclick="refreshView();"/>	
+							</li>
+						</ul>									
+					</div>				
+				</h:form>				
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>	
