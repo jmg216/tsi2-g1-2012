@@ -11,6 +11,7 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 
 import com.geored.utiles.UtilesPersistencia;
@@ -23,7 +24,7 @@ import com.geored.utiles.UtilesPersistencia;
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public abstract class GenericDAOBase<EntityType, DtoType>
 {
-	@PersistenceContext(unitName=UtilesPersistencia.PERSISTENCE_UNIT_NAME)
+	@PersistenceContext(unitName=UtilesPersistencia.PERSISTENCE_UNIT_NAME, type=PersistenceContextType.EXTENDED)
 	protected EntityManager em;
 	
 	private Class<EntityType> entityClass = getEntityClass();
