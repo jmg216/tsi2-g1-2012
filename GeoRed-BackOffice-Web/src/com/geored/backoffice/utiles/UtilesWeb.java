@@ -16,6 +16,11 @@ public class UtilesWeb
 		return (str == null) || (str != null && str.isEmpty());
 	}
 	
+	public static boolean isNullOrZero(Long lng)
+	{
+		return (lng == null) || (lng != null && lng <= 0L);
+	}
+	
 	// Utilidades para encriptar password
   	public static String encriptarMD5(String cadena)
 	{

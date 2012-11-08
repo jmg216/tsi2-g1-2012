@@ -98,7 +98,58 @@ public class GestionAdministradorBean extends BaseBean implements Serializable
 
 	public void guardarAdministrador()
 	{
-		addBeanMessage("Administrador guardado correctamente");
+		boolean administradorValido = true;
+		
+		if(getAdministradorDTO() == null)
+		{
+			addBeanError("Administrador no puede ser nulo");			
+			administradorValido = false;
+		}
+		else
+		{
+			if(UtilesWeb.isNullOrEmpty(getAdministradorDTO().getEmail()))
+			{
+				addBeanError("'E-mail' es un campo obligatorio.");
+				administradorValido = false;
+			}
+			if(UtilesWeb.isNullOrEmpty(getAdministradorDTO().getNombre()))
+			{
+				addBeanError("'Nombre' es un campo obligatorio.");
+				administradorValido = false;
+			}
+			if(UtilesWeb.isNullOrZero(getAdministradorDTO().getIdTipoAdministrador()))
+			{
+				addBeanError("'Tipo de Administrador' es un campo obligatorio.");
+				administradorValido = false;
+			}
+		}
+		
+		// Si valida correctamente doy de alta el administrador
+		try
+		{
+			if(administradorValido)
+			{
+				getAdminPort().insertar(getAdministradorDTO());
+				
+				addBeanMessage("Administrador guardado correctamente");
+			}
+		} 
+		catch (NegocioException e)
+		{
+			addBeanError(e.getMessage());
+		} 
+		catch (DaoException e)
+		{
+			addBeanError(e.getMessage());
+		} 
+		catch (RemoteException e)
+		{
+			addBeanError(MSJ_ERROR_COMUNICACION_WS);
+		} 
+		catch (ServiceException e)
+		{
+			addBeanError(MSJ_ERROR_COMUNICACION_WS);
+		}		
 	}
 	
 	public String toListadoAdministradores()
