@@ -30,6 +30,15 @@
 						<tr>
 							<td><h:outputText value="Nombre:" /></td>
 							<td><p:inputText value="#{gestionAdministradorBean.administradorDTO.nombre}"/></td>
+						</tr>
+						<tr>
+							<td><p:outputLabel value="Tipo administrador:"/></td>
+							<td>
+								<p:selectOneMenu value="#{gestionAdministradorBean.administradorDTO.idTipoAdministrador}">
+									<f:selectItems value="#{gestionEmpresaBean.listaAdministradores}" 
+										var="administrador" itemValue="#{administrador.id}" itemLabel="#{administrador.nombre}"/>
+								</p:selectOneMenu> 		
+							</td>
 						</tr>																
 					</table>
 					

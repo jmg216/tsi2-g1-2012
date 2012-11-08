@@ -47,7 +47,7 @@ public class EmpresaDAOImpl extends GenericDAOBase<Empresa, EmpresaDTO> implemen
 		
 		if(source.getAdministrador() != null)
 		{
-			target.setIdAministrador(source.getAdministrador().getId());
+			target.setIdAdministrador(source.getAdministrador().getId());
 			target.setNombreAdministrador(source.getAdministrador().getNombre());
 		}		
 		

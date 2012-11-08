@@ -37,7 +37,7 @@ public class Usuario implements Serializable
 	@Column(name="NOMBRE", nullable=false)
 	private String nombre;
 	
-	@Column(name="URL_IMAGEN", nullable=false)
+	@Column(name="URL_IMAGEN")
 	private String urlImagen;
 	
 	@ManyToMany(fetch=FetchType.LAZY)

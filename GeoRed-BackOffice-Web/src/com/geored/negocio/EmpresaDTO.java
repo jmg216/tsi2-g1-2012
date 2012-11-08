@@ -14,7 +14,7 @@ public class EmpresaDTO  implements java.io.Serializable {
 
     private java.lang.Long id;
 
-    private java.lang.Long idAministrador;
+    private java.lang.Long idAdministrador;
 
     private com.geored.negocio.LocalDTO[] listaLocalesDTO;
 
@@ -31,7 +31,7 @@ public class EmpresaDTO  implements java.io.Serializable {
            java.lang.String descripcion,
            java.util.Calendar fechaCreacion,
            java.lang.Long id,
-           java.lang.Long idAministrador,
+           java.lang.Long idAdministrador,
            com.geored.negocio.LocalDTO[] listaLocalesDTO,
            java.lang.String nombre,
            java.lang.String nombreAdministrador,
@@ -39,7 +39,7 @@ public class EmpresaDTO  implements java.io.Serializable {
            this.descripcion = descripcion;
            this.fechaCreacion = fechaCreacion;
            this.id = id;
-           this.idAministrador = idAministrador;
+           this.idAdministrador = idAdministrador;
            this.listaLocalesDTO = listaLocalesDTO;
            this.nombre = nombre;
            this.nombreAdministrador = nombreAdministrador;
@@ -108,22 +108,22 @@ public class EmpresaDTO  implements java.io.Serializable {
 
 
     /**
-     * Gets the idAministrador value for this EmpresaDTO.
+     * Gets the idAdministrador value for this EmpresaDTO.
      * 
-     * @return idAministrador
+     * @return idAdministrador
      */
-    public java.lang.Long getIdAministrador() {
-        return idAministrador;
+    public java.lang.Long getIdAdministrador() {
+        return idAdministrador;
     }
 
 
     /**
-     * Sets the idAministrador value for this EmpresaDTO.
+     * Sets the idAdministrador value for this EmpresaDTO.
      * 
-     * @param idAministrador
+     * @param idAdministrador
      */
-    public void setIdAministrador(java.lang.Long idAministrador) {
-        this.idAministrador = idAministrador;
+    public void setIdAdministrador(java.lang.Long idAdministrador) {
+        this.idAdministrador = idAdministrador;
     }
 
 
@@ -235,9 +235,9 @@ public class EmpresaDTO  implements java.io.Serializable {
             ((this.id==null && other.getId()==null) || 
              (this.id!=null &&
               this.id.equals(other.getId()))) &&
-            ((this.idAministrador==null && other.getIdAministrador()==null) || 
-             (this.idAministrador!=null &&
-              this.idAministrador.equals(other.getIdAministrador()))) &&
+            ((this.idAdministrador==null && other.getIdAdministrador()==null) || 
+             (this.idAdministrador!=null &&
+              this.idAdministrador.equals(other.getIdAdministrador()))) &&
             ((this.listaLocalesDTO==null && other.getListaLocalesDTO()==null) || 
              (this.listaLocalesDTO!=null &&
               java.util.Arrays.equals(this.listaLocalesDTO, other.getListaLocalesDTO()))) &&
@@ -270,8 +270,8 @@ public class EmpresaDTO  implements java.io.Serializable {
         if (getId() != null) {
             _hashCode += getId().hashCode();
         }
-        if (getIdAministrador() != null) {
-            _hashCode += getIdAministrador().hashCode();
+        if (getIdAdministrador() != null) {
+            _hashCode += getIdAdministrador().hashCode();
         }
         if (getListaLocalesDTO() != null) {
             for (int i=0;
@@ -325,8 +325,8 @@ public class EmpresaDTO  implements java.io.Serializable {
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("idAministrador");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "idAministrador"));
+        elemField.setFieldName("idAdministrador");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "idAdministrador"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);

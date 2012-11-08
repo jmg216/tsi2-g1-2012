@@ -68,12 +68,6 @@ public class GestionAdministradorBean extends BaseBean implements Serializable
 		cargarDatosIniciales();
 	}
 	
-	@PostConstruct
-	public void init()
-	{
-		System.out.println("asds");
-	}
-	
 	private void cargarDatosIniciales()
 	{
 		try

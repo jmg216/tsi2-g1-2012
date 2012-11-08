@@ -15,7 +15,7 @@ public class EmpresaDTO
 	
 	private Date fechaCreacion;
 
-	private Long idAministrador;
+	private Long idAdministrador;
 	
 	private String nombreAdministrador;
 	
@@ -41,14 +41,14 @@ public class EmpresaDTO
 		this.nombre = nombre;
 	}
 
-	public Long getIdAministrador()
+	public Long getIdAdministrador()
 	{
-		return idAministrador;
+		return idAdministrador;
 	}
 
-	public void setIdAministrador(Long idAministrador)
+	public void setIdAdministrador(Long idAdministrador)
 	{
-		this.idAministrador = idAministrador;
+		this.idAdministrador = idAdministrador;
 	}
 
 	public String getNombreAdministrador()
