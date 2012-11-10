@@ -11,20 +11,42 @@
 		<ui:composition template="/xhtml/templates/layout.xhtml">
 			<ui:define name="content">	
 				<h:form>					
+					<c:set var="esModoEdicion" value="#{!utilesWeb.isNullOrZero(gestionSitioBean.sitioDTO.id)}"/>
+					
 					<h1 class="titulo-content">Gestión de Sitios</h1>
 					
 					<table>
-						<h:inputHidden value="#{gestionSitioBean.sitioDTO.id}"/>
-						<c:if test="#{gestionSitioBean.sitioDTO.id > 0}">
-							<tr>
-								<td><h:outputText value="Id:" /></td>
-								<td><p:inputText value="#{gestionSitioBean.sitioDTO.id}" disabled="true"/></td>
-							</tr>
-						</c:if>																		
+						<c:choose>					
+							<c:when test="#{esModoEdicion}">
+								<tr>
+									<td><h:outputText value="Id:" /></td>
+									<td><p:inputText value="#{gestionSitioBean.sitioDTO.id}" readonly="true"/></td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<h:inputHidden value="#{gestionSitioBean.sitioDTO.id}" />								
+							</c:otherwise>	
+						</c:choose>	
 						<tr>
 							<td><h:outputText value="Nombre:" /></td>
 							<td><p:inputText value="#{gestionSitioBean.sitioDTO.nombre}"/></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Descripcion:" /></td>
+							<td><p:inputText value="#{gestionSitioBean.sitioDTO.descripcion}"/></td>
 						</tr>																
+						<tr>
+							<td><h:outputText value="Imagen:" /></td>
+							<td><p:graphicImage url="#{gestionSitioBean.sitioDTO.urlImagen}"/></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Ubicación:" /></td>
+							<td><p:inputText value="#{gestionSitioBean.sitioDTO.ubicacionGeografica}"/></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Temáticas:"/></td>
+							<td></td>
+						</tr>
 					</table>
 					
 					<div class="areaBotones">

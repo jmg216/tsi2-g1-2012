@@ -10,10 +10,10 @@
 	<h:body>
 		<ui:composition template="/xhtml/templates/layout.xhtml">
 			<ui:define name="content">	
-				<h:form>					
-					<h1 class="titulo-content">Gestión de Administradores</h1>
-					
+				<h:form>						
 					<c:set var="esModoEdicion" value="#{!utilesWeb.isNullOrZero(gestionAdministradorBean.administradorDTO.id)}"/>
+					
+					<h1 class="titulo-content">Gestión de Administradores</h1>
 					
 					<table>
 						<c:choose>					

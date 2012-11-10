@@ -21,7 +21,7 @@ insert into geored.sitio (ID, DESCRIPCION, NOMBRE, UBICACION_GEOGRAFICA, URL_IMA
 
 insert into geored.sitio (ID, DESCRIPCION, NOMBRE, UBICACION_GEOGRAFICA, URL_IMAGEN) values (3, 'Para pasar la tarde', 'Plaza Seregni', '-34.896843,-56.171982', 'http://www.infocasas.com.uy/sitio/repo/img/plaza_seregni.jpeg');
 
-insert into geored.sitio (ID, DESCRIPCION, NOMBRE, UBICACION_GEOGRAFICA, URL_IMAGEN) values (4, 'Parque de juegos', '-34.913068,-56.1684', 'http://www.enlacesuruguayos.com/prodo1.jpg', 'Parque Rodó');
+insert into geored.sitio (ID, DESCRIPCION, NOMBRE, UBICACION_GEOGRAFICA, URL_IMAGEN) values (4, 'Parque de juegos', 'Parque Rodó', '-34.913068,-56.1684', 'http://www.enlacesuruguayos.com/prodo1.jpg');
 
 insert into geored.sitio (ID, DESCRIPCION, NOMBRE, UBICACION_GEOGRAFICA, URL_IMAGEN) values (5, 'Biblioteca pública', 'Biblioteca Nacional', '-34.902809,-56.177884', 'http://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Biblioteca_Nacional_de_Uruguay_-_fachada.JPG/300px-Biblioteca_Nacional_de_Uruguay_-_fachada.JPG');
 
