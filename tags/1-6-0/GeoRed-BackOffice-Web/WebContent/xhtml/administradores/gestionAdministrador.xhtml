@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<h:body>
+		<ui:composition template="/xhtml/templates/layout.xhtml">
+			<ui:define name="content">	
+				<h:form>					
+					<h1 class="titulo-content">Gestión de Administradores</h1>
+					
+					<table>
+						<h:inputHidden value="#{gestionAdministradorBean.administradorDTO.id}"/>
+						<c:if test="#{gestionAdministradorBean.administradorDTO.id > 0}">
+							<tr>
+								<td><h:outputText value="Id:" /></td>
+								<td><p:inputText value="#{gestionAdministradorBean.administradorDTO.id}" disabled="true"/></td>
+							</tr>
+						</c:if>												
+						<tr>
+							<td><h:outputText value="E-mail:" /></td>
+							<td>
+								<p:inputText value="#{gestionAdministradorBean.administradorDTO.email}"/>
+							</td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Nombre:" /></td>
+							<td><p:inputText value="#{gestionAdministradorBean.administradorDTO.nombre}"/></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Tipo administrador:"/></td>
+							<td>
+								<p:selectOneMenu value="#{gestionAdministradorBean.administradorDTO.idTipoAdministrador}">
+									<f:selectItem itemLabel="Seleccione uno..." itemValue="" />
+									<f:selectItems value="#{gestionAdministradorBean.listaTiposAdministradores}" 
+										var="tipoAdministrador" itemValue="#{tipoAdministrador.id}" itemLabel="#{tipoAdministrador.nombre}"/>
+								</p:selectOneMenu> 		
+							</td>
+						</tr>																
+					</table>
+					
+					<div class="areaBotones">
+						<ul>
+							<li>
+								<p:commandButton value="Volver" action="#{gestionAdministradorBean.toListadoAdministradores()}"/>	
+							</li>
+							<li>
+								<p:commandButton value="Guardar" action="#{gestionAdministradorBean.guardarAdministrador()}" onclick="refreshView();"/>	
+							</li>
+						</ul>									
+					</div>					
+				</h:form>				
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>	
