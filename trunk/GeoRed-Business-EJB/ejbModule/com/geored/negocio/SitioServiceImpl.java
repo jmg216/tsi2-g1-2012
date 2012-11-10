@@ -29,98 +29,61 @@ public class SitioServiceImpl implements SitioService
 	@WebMethod
 	public Long insertar(SitioDTO sitioDTO) throws NegocioException, DaoException
 	{
-		try
-		{
-			Sitio sitioEntity = sitioDAO.toEntity(sitioDTO);
-			
-			sitioDAO.insertar(sitioEntity);
-			
-			return sitioEntity.getId();
-		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}
+		Sitio sitioEntity = sitioDAO.toEntity(sitioDTO);
+		
+		sitioDAO.insertar(sitioEntity);
+		
+		return sitioEntity.getId();
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
 	public void actualizar(SitioDTO sitioDTO) throws NegocioException, DaoException
 	{
-		try
+		Sitio sitioEntity = (Sitio) sitioDAO.obtener(sitioDTO.getId(), false);
+		
+		if(sitioEntity == null)
 		{
-			Sitio sitioEntity = (Sitio) sitioDAO.obtener(sitioDTO.getId(), false);
-			
-			if(sitioEntity == null)
-			{
-				throw new NegocioException("Sitio no encontrado");
-			}
-			
-			sitioEntity = sitioDAO.toEntity(sitioDTO);
-			
-			sitioDAO.actualizar(sitioEntity);			
+			throw new NegocioException("Sitio no encontrado");
 		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}
+		
+		sitioEntity = sitioDAO.toEntity(sitioDTO);
+		
+		sitioDAO.actualizar(sitioEntity);			
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
 	public void eliminar(Long idSitio) throws NegocioException, DaoException
 	{
-		try
+		Sitio sitioEntity = (Sitio) sitioDAO.obtener(idSitio, false);
+		
+		if(sitioEntity == null)
 		{
-			Sitio sitioEntity = (Sitio) sitioDAO.obtener(idSitio, false);
-			
-			if(sitioEntity == null)
-			{
-				throw new NegocioException("Sitio no encontrado");
-			}
-			
-			sitioDAO.eliminar(sitioEntity);
+			throw new NegocioException("Sitio no encontrado");
 		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}
+		
+		sitioDAO.eliminar(sitioEntity);
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
 	public SitioDTO obtener(Long idSitio) throws NegocioException, DaoException
 	{
-		try
+		SitioDTO sitioDTO = (SitioDTO) sitioDAO.obtener(idSitio, true);
+		
+		if(sitioDTO == null)
 		{
-			SitioDTO sitioDTO = (SitioDTO) sitioDAO.obtener(idSitio, true);
-			
-			if(sitioDTO == null)
-			{
-				throw new NegocioException("Sitio no encontrada");
-			}
-			
-			return sitioDTO;
+			throw new NegocioException("Sitio no encontrada");
 		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}
+		
+		return sitioDTO;
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
 	public List<SitioDTO> obtenerListado() throws DaoException
 	{
-		try
-		{
-			return sitioDAO.obtenerListado(true);
-		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}
-		
-	}
-	
+		return sitioDAO.obtenerListado(true);
+	}	
 }

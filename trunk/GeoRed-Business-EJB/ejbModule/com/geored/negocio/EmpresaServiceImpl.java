@@ -29,97 +29,62 @@ public class EmpresaServiceImpl implements EmpresaService
 	@WebMethod
 	public Long insertar(EmpresaDTO empresaDTO)  throws NegocioException, DaoException
 	{
-		try
-		{
-			Empresa empresaEntity = empresaDAO.toEntity(empresaDTO);
+		Empresa empresaEntity = empresaDAO.toEntity(empresaDTO);
 
-			empresaDAO.insertar(empresaEntity);
-			
-			return empresaEntity.getId();
-		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}
+		empresaDAO.insertar(empresaEntity);
+		
+		return empresaEntity.getId();
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
 	public void actualizar(EmpresaDTO empresaDTO)  throws NegocioException, DaoException
 	{
-		try
+		Empresa empresaEntity = (Empresa) empresaDAO.obtener(empresaDTO.getId(), false);
+		
+		if(empresaEntity == null)
 		{
-			Empresa empresaEntity = (Empresa) empresaDAO.obtener(empresaDTO.getId(), false);
-			
-			if(empresaEntity == null)
-			{
-				throw new NegocioException("Empresa no encontrada");
-			}
-			
-			empresaEntity = empresaDAO.toEntity(empresaDTO);
-			
-			empresaDAO.actualizar(empresaEntity);			
+			throw new NegocioException("Empresa no encontrada");
 		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}
+		
+		empresaEntity = empresaDAO.toEntity(empresaDTO);
+		
+		empresaDAO.actualizar(empresaEntity);					
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
 	public void eliminar(Long idEmpresa)  throws NegocioException, DaoException
 	{
-		try
+		Empresa empresaEntity = (Empresa) empresaDAO.obtener(idEmpresa, false);
+		
+		if(empresaEntity == null)
 		{
-			Empresa empresaEntity = (Empresa) empresaDAO.obtener(idEmpresa, false);
-			
-			if(empresaEntity == null)
-			{
-				throw new NegocioException("Empresa no encontrada");
-			}
-			
-			empresaDAO.eliminar(empresaEntity);
+			throw new NegocioException("Empresa no encontrada");
 		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}
+		
+		empresaDAO.eliminar(empresaEntity);
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
 	public EmpresaDTO obtener(Long idEmpresa)  throws NegocioException, DaoException
 	{
-		try
-		{
-			EmpresaDTO empresaDTO = (EmpresaDTO) empresaDAO.obtener(idEmpresa, true);
-			
-			if(empresaDTO == null)
-			{
-				throw new NegocioException("Empresa no encontrada");
-			}
+		EmpresaDTO empresaDTO = (EmpresaDTO) empresaDAO.obtener(idEmpresa, true);
 		
-			return empresaDTO;
-		}
-		catch(Throwable e)
+		if(empresaDTO == null)
 		{
-			throw new DaoException(e);
+			throw new NegocioException("Empresa no encontrada");
 		}
+	
+		return empresaDTO;
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
 	public List<EmpresaDTO> obtenerListado() throws DaoException
 	{
-		try
-		{
-			return empresaDAO.obtenerListado(true);
-		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}		
+
+		return empresaDAO.obtenerListado(true);		
 	}
-	
 }

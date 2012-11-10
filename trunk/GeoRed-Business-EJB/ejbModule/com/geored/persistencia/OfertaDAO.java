@@ -8,10 +8,11 @@ import com.geored.dominio.Oferta;
 import com.geored.dominio.Tematica;
 import com.geored.dominio.Usuario;
 import com.geored.dto.OfertaDTO;
+import com.geored.exceptions.DaoException;
 import com.geored.persistencia.core.GenericDAO;
 
 @Local
 public interface OfertaDAO extends GenericDAO<Oferta, OfertaDTO>
 {
-	public Object buscarOfertasPorTematicas(List<Tematica> tematicas, Usuario u,  boolean toDTO);
+	public Object buscarOfertasPorTematicas(List<Tematica> tematicas, Usuario u,  boolean toDTO) throws DaoException;
 }

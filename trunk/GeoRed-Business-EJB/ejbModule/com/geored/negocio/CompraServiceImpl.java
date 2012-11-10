@@ -39,130 +39,96 @@ public class CompraServiceImpl implements CompraService
 	@WebMethod
 	public Long insertar(CompraDTO compraDTO) throws NegocioException, DaoException
 	{
-		try
+		
+		Compra compraEntity = compraDAO.toEntity(compraDTO);
+		
+		Usuario usuarioEntity = (Usuario) usuarioDAO.obtener(compraDTO.getIdUsuario(), false);
+		
+		if(usuarioEntity == null)
 		{
-			Compra compraEntity = compraDAO.toEntity(compraDTO);
-			
-			Usuario usuarioEntity = (Usuario) usuarioDAO.obtener(compraDTO.getIdUsuario(), false);
-			
-			if(usuarioEntity == null)
-			{
-				throw new NegocioException("Usuario no encontrado");
-			}
-			
-			Oferta ofertaEntity = (Oferta) ofertaDAO.obtener(compraDTO.getIdOferta(), false);
-			
-			if(ofertaEntity == null)
-			{
-				throw new NegocioException("Oferta no encontrada");
-			}
-			
-			compraEntity.setUsuario(usuarioEntity);
-			
-			compraEntity.setOferta(ofertaEntity);
-			
-			compraDAO.insertar(compraEntity);
-			
-			return compraEntity.getId();
+			throw new NegocioException("Usuario no encontrado");
 		}
-		catch(Throwable e)
+		
+		Oferta ofertaEntity = (Oferta) ofertaDAO.obtener(compraDTO.getIdOferta(), false);
+		
+		if(ofertaEntity == null)
 		{
-			throw new DaoException(e);
+			throw new NegocioException("Oferta no encontrada");
 		}
+		
+		compraEntity.setUsuario(usuarioEntity);
+		
+		compraEntity.setOferta(ofertaEntity);
+		
+		compraDAO.insertar(compraEntity);
+		
+		return compraEntity.getId();	
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
 	public void actualizar(CompraDTO compraDTO) throws NegocioException, DaoException
 	{
-		try
+		Compra compraEntity = (Compra) compraDAO.obtener(compraDTO.getId(), false);
+		
+		if(compraEntity == null)
 		{
-			Compra compraEntity = (Compra) compraDAO.obtener(compraDTO.getId(), false);
-			
-			if(compraEntity == null)
-			{
-				throw new NegocioException("Compra no encontrada");
-			}
-			
-			Usuario usuarioEntity = (Usuario) usuarioDAO.obtener(compraDTO.getIdUsuario(), false);
-			
-			if(usuarioEntity == null)
-			{
-				throw new NegocioException("Usuario no encontrado");
-			}
-			
-			Oferta ofertaEntity = (Oferta) ofertaDAO.obtener(compraDTO.getIdOferta(), false);
-			
-			if(ofertaEntity == null)
-			{
-				throw new NegocioException("Oferta no encontrada");
-			}
-			
-			compraEntity.setUsuario(usuarioEntity);
-			
-			compraEntity.setOferta(ofertaEntity);
-			
-			compraDAO.actualizar(compraEntity);
+			throw new NegocioException("Compra no encontrada");
 		}
-		catch(Throwable e)
+		
+		Usuario usuarioEntity = (Usuario) usuarioDAO.obtener(compraDTO.getIdUsuario(), false);
+		
+		if(usuarioEntity == null)
 		{
-			throw new DaoException(e);
+			throw new NegocioException("Usuario no encontrado");
 		}
+		
+		Oferta ofertaEntity = (Oferta) ofertaDAO.obtener(compraDTO.getIdOferta(), false);
+		
+		if(ofertaEntity == null)
+		{
+			throw new NegocioException("Oferta no encontrada");
+		}
+		
+		compraEntity.setUsuario(usuarioEntity);
+		
+		compraEntity.setOferta(ofertaEntity);
+		
+		compraDAO.actualizar(compraEntity);
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
 	public void eliminar(Long idCompra) throws NegocioException, DaoException
 	{
-		try
+		Compra compraEntity = (Compra) compraDAO.obtener(idCompra, false);
+		
+		if(compraEntity == null)
 		{
-			Compra compraEntity = (Compra) compraDAO.obtener(idCompra, false);
-			
-			if(compraEntity == null)
-			{
-				throw new NegocioException("Compra no encontrada");
-			}
-			
-			compraDAO.eliminar(compraEntity);
+			throw new NegocioException("Compra no encontrada");
 		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}
+		
+		compraDAO.eliminar(compraEntity);
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
 	public CompraDTO obtener(Long idCompra) throws NegocioException, DaoException
 	{
-		try
+		CompraDTO compraDTO = (CompraDTO) compraDAO.obtener(idCompra, true);
+		
+		if(compraDTO == null)
 		{
-			CompraDTO compraDTO = (CompraDTO) compraDAO.obtener(idCompra, true);
-			
-			if(compraDTO == null)
-			{
-				throw new NegocioException("Compra no encontrada");
-			}
-			
-			return compraDTO;
+			throw new NegocioException("Compra no encontrada");
 		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}
+		
+		return compraDTO;
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
 	public List<CompraDTO> obtenerListado() throws DaoException
 	{
-		try
-		{
-			return compraDAO.obtenerListado(true);
-		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}
+		return compraDAO.obtenerListado(true);
 	}
 }

@@ -34,125 +34,83 @@ public class AdminServiceImpl implements AdminService
 	@WebMethod
 	public Long insertar(AdministradorDTO administradorDTO) throws NegocioException, DaoException
 	{
-		try
+		Administrador administradorEntity = administradorDAO.toEntity(administradorDTO);
+		
+		TipoAdministrador tipoAdministradorEntity = (TipoAdministrador) tipoAdministradorDAO.obtener(administradorDTO.getIdTipoAdministrador(), false);
+		
+		if(tipoAdministradorEntity == null)
 		{
-			Administrador administradorEntity = administradorDAO.toEntity(administradorDTO);
-			
-			TipoAdministrador tipoAdministradorEntity = (TipoAdministrador) tipoAdministradorDAO.obtener(administradorDTO.getIdTipoAdministrador(), false);
-			
-			if(tipoAdministradorEntity == null)
-			{
-				throw new NegocioException("Tipo administrador no encontrado");
-			}
-			
-			administradorEntity.setTipoAdministrador(tipoAdministradorEntity);				
-			
-			administradorDAO.insertar(administradorEntity);
-			
-			return administradorEntity.getId();
+			throw new NegocioException("Tipo administrador no encontrado");
 		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}
+		
+		administradorEntity.setTipoAdministrador(tipoAdministradorEntity);				
+		
+		administradorDAO.insertar(administradorEntity);
+		
+		return administradorEntity.getId();
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
 	public void actualizar(AdministradorDTO administradorDTO) throws NegocioException, DaoException
 	{
-		try
+		Administrador administradorEntity = (Administrador) administradorDAO.obtener(administradorDTO.getId(), false);
+		
+		if(administradorEntity == null)
 		{
-			Administrador administradorEntity = (Administrador) administradorDAO.obtener(administradorDTO.getId(), false);
-			
-			if(administradorEntity == null)
-			{
-				throw new NegocioException("Administrador no encontrado");
-			}
-			
-			administradorEntity = administradorDAO.toEntity(administradorDTO);
-			
-			administradorDAO.actualizar(administradorEntity);			
+			throw new NegocioException("Administrador no encontrado");
 		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}
+		
+		administradorEntity = administradorDAO.toEntity(administradorDTO);
+		
+		administradorDAO.actualizar(administradorEntity);			
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED) 
 	@WebMethod
 	public void eliminar(Long idAdministrador) throws NegocioException, DaoException
 	{
-		try
+		Administrador administradorEntity = (Administrador) administradorDAO.obtener(idAdministrador, false);
+		
+		if(administradorEntity == null)
 		{
-			Administrador administradorEntity = (Administrador) administradorDAO.obtener(idAdministrador, false);
-			
-			if(administradorEntity == null)
-			{
-				throw new NegocioException("Administrador no encontrado");
-			}
-			
-			administradorDAO.eliminar(administradorEntity);
+			throw new NegocioException("Administrador no encontrado");
 		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}		
+		
+		administradorDAO.eliminar(administradorEntity);		
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
 	public AdministradorDTO obtener(Long idAdministrador) throws NegocioException, DaoException
 	{
-		try
+		AdministradorDTO administradorDTO = (AdministradorDTO) administradorDAO.obtener(idAdministrador, true);
+		
+		if(administradorDTO == null)
 		{
-			AdministradorDTO administradorDTO = (AdministradorDTO) administradorDAO.obtener(idAdministrador, true);
-			
-			if(administradorDTO == null)
-			{
-				throw new NegocioException("Administrador no encontrado");
-			}
-			
-			return administradorDTO;
+			throw new NegocioException("Administrador no encontrado");
 		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}
+		
+		return administradorDTO;	
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
 	public List<AdministradorDTO> obtenerListado() throws DaoException
 	{
-		try
-		{
-			return administradorDAO.obtenerListado(true);
-		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}
+		return administradorDAO.obtenerListado(true);		
 	}
 
 	@Override
 	public AdministradorDTO obtenerAdminPorEmailYPass(String email, String pass) throws NegocioException, DaoException
 	{
-		try
+		AdministradorDTO adminDTO = (AdministradorDTO) administradorDAO.obtenerAdminPorEmailYPass(email, pass, true);
+		
+		if(adminDTO == null)
 		{
-			AdministradorDTO adminDTO = (AdministradorDTO) administradorDAO.obtenerAdminPorEmailYPass(email, pass, true);
-			
-			if(adminDTO == null)
-			{
-				throw new NegocioException("Administrador no encontrado");
-			}
-			
-			return adminDTO;
+			throw new NegocioException("Administrador no encontrado");
 		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}
+		
+		return adminDTO;
 	}
 }

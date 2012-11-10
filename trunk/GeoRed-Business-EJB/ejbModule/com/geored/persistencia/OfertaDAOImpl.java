@@ -15,6 +15,7 @@ import com.geored.dominio.Tematica;
 import com.geored.dominio.Usuario;
 import com.geored.dto.OfertaDTO;
 import com.geored.dto.TematicaDTO;
+import com.geored.exceptions.DaoException;
 import com.geored.persistencia.core.GenericDAOBase;
 
 @Stateless
@@ -70,19 +71,27 @@ public class OfertaDAOImpl extends GenericDAOBase<Oferta, OfertaDTO> implements 
 		return target;
 	}
 	
-	public List buscarOfertasPorTematicas(List<Tematica> tematicas, Usuario u,  boolean toDTO)
+	public List buscarOfertasPorTematicas(List<Tematica> tematicas, Usuario u,  boolean toDTO) throws DaoException
 	{
-		Query query = em.createQuery("select o from Oferta oferta where o.listaTematicas in ?1");
+		try
+		{
+			Query query = em.createQuery("select o from Oferta oferta where o.listaTematicas in ?1");
+			
+	        query.setParameter(1, tematicas);       
+	        
+	        List<Oferta> listaOfertas = query.getResultList();
+	        
+	        if(toDTO)
+	        {
+	        	return toDtoList(listaOfertas);
+	        }
+	     
+	        return listaOfertas;
+		}
+		catch(Throwable e)
+		{
+			throw new DaoException(e.getMessage());
+		}
 		
-        query.setParameter(1, tematicas);       
-        
-        List<Oferta> listaOfertas = query.getResultList();
-        
-        if(toDTO)
-        {
-        	return toDtoList(listaOfertas);
-        }
-     
-        return listaOfertas;
     }	
 }

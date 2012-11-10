@@ -1,5 +1,8 @@
 package com.geored.exceptions;
 
+import javax.xml.ws.WebFault;
+
+@WebFault(faultBean="com.geored.exceptions.DaoException")
 public class DaoException extends Exception
 {
 	/**

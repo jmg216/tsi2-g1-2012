@@ -3,10 +3,12 @@ package com.geored.persistencia;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import com.geored.dominio.Administrador;
 import com.geored.dto.AdministradorDTO;
+import com.geored.exceptions.DaoException;
 import com.geored.persistencia.core.GenericDAOBase;
 
 @Stateless
@@ -45,19 +47,35 @@ public class AdministradorDAOImpl extends GenericDAOBase<Administrador, Administ
 	}
 
 	@Override
-	public Object obtenerAdminPorEmailYPass(String email, String pass, boolean toDTO)
+	public Object obtenerAdminPorEmailYPass(String email, String pass, boolean toDTO) throws DaoException
 	{
-		Query query = em.createQuery("select a from Administrador a where a.email = ?1 and a.pass = ?2");        
-        query.setParameter(1, email);        
-        query.setParameter(2, pass);
-        
-        Administrador adminEntity = (Administrador) query.getSingleResult();
-        
-        if(toDTO)
-        {        	
-        	return toDto(adminEntity);
-        }
-        
-        return adminEntity;
+		try
+		{
+			Query query = em.createQuery("select a from Administrador a where a.email = ?1 and a.pass = ?2");        
+	        query.setParameter(1, email);        
+	        query.setParameter(2, pass);
+	        
+	        Administrador adminEntity = null;
+	        
+	        try
+	        {
+	        	 adminEntity = (Administrador) query.getSingleResult();
+	        	 
+	        	 if(toDTO)
+	             {        	
+	             	return toDto(adminEntity);
+	             }
+	        }
+	        catch(NoResultException e)
+	        {
+	        	return null;
+	        }
+	        
+	        return adminEntity;
+		}
+		catch(Throwable e)
+		{
+			throw new DaoException(e.getMessage());
+		}
 	}
 }

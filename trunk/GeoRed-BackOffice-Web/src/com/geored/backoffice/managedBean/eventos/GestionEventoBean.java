@@ -40,22 +40,10 @@ public class GestionEventoBean extends BaseBean implements Serializable
 			{
 				eventoDTO = getEventoPort().obtener(Long.valueOf(idEvento));
 			} 
-			catch (NegocioException e)
+			catch (Exception e)
 			{
 				addBeanError(e.getMessage());
 			} 
-			catch (DaoException e)
-			{
-				addBeanError(e.getMessage());
-			} 
-			catch (RemoteException e)
-			{
-				addBeanError(MSJ_ERROR_COMUNICACION_WS);
-			} 
-			catch (ServiceException e)
-			{
-				addBeanError(MSJ_ERROR_COMUNICACION_WS);
-			}
 		}
 	}
 

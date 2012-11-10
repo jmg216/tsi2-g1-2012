@@ -43,18 +43,10 @@ public class ListadoEventosBean extends BaseBean implements Serializable
 				listaEventos = new ArrayList<EventoDTO>();
 			}
 		} 
-		catch (ServiceException e)
+		catch (Exception e)
 		{
-			addBeanError(MSJ_ERROR_COMUNICACION_WS);
+			handleWSException(e);
 		} 
-		catch (DaoException e)
-		{
-			addBeanError(e.getMessage());
-		} 
-		catch (RemoteException e)
-		{
-			addBeanError(MSJ_ERROR_COMUNICACION_WS);
-		}
 	}
 	
 	public String toGestionEvento()

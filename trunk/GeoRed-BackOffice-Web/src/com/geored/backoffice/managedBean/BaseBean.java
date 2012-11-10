@@ -1,5 +1,7 @@
 package com.geored.backoffice.managedBean;
 
+import java.rmi.RemoteException;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.xml.rpc.ServiceException;
@@ -8,12 +10,14 @@ import com.geored.negocio.AdminServiceImpl;
 import com.geored.negocio.AdminServiceImplServiceLocator;
 import com.geored.negocio.CompraServiceImpl;
 import com.geored.negocio.CompraServiceImplServiceLocator;
+import com.geored.negocio.DaoException;
 import com.geored.negocio.EmpresaServiceImpl;
 import com.geored.negocio.EmpresaServiceImplServiceLocator;
 import com.geored.negocio.EventoServiceImpl;
 import com.geored.negocio.EventoServiceImplServiceLocator;
 import com.geored.negocio.GlobalServiceImpl;
 import com.geored.negocio.GlobalServiceImplServiceLocator;
+import com.geored.negocio.NegocioException;
 import com.geored.negocio.OfertaServiceImpl;
 import com.geored.negocio.OfertaServiceImplServiceLocator;
 import com.geored.negocio.SitioServiceImpl;
@@ -23,7 +27,34 @@ import com.geored.negocio.UsuarioServiceImplServiceLocator;
 
 public abstract class BaseBean
 {
-	protected static final String MSJ_ERROR_COMUNICACION_WS = "Error de comunicación con el WS";
+	// Utilidades de errores
+	private static final String MSJ_ERROR_COMUNICACION_WS = "Error de comunicación con el WS";
+	private static final String PREFIX_MSJ_ERROR_NEGOCIO = "Error de negocio: ";
+	private static final String PREFIX_MSJ_ERROR_ACCESO_DATOS = "Error de acceso a datos: ";
+	
+	protected void handleWSException(Exception e)
+	{
+		if(e instanceof NegocioException)
+		{
+			addBeanError(PREFIX_MSJ_ERROR_NEGOCIO + ((NegocioException) e).getFaultString());
+		}
+		else if(e instanceof DaoException)
+		{
+			addBeanError(PREFIX_MSJ_ERROR_ACCESO_DATOS + ((DaoException) e).getFaultString());
+		}
+		else if(e instanceof RemoteException)
+		{
+			addBeanError(MSJ_ERROR_COMUNICACION_WS);
+		}
+		else if(e instanceof ServiceException)
+		{
+			addBeanError(MSJ_ERROR_COMUNICACION_WS);
+		}
+		else
+		{
+			addBeanError(e.getMessage());
+		}
+	}
 	
 	protected void addBeanError(String message)
 	{

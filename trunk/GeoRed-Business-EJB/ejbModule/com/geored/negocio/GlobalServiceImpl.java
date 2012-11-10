@@ -37,44 +37,20 @@ public class GlobalServiceImpl implements GlobalService
 	@WebMethod
 	public List<TipoAdministradorDTO> obtenerListadoTiposAdministradores() throws DaoException
 	{
-		try
-		{		
-			return tipoAdministradorDAO.obtenerListado(true);
-		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}
+		return tipoAdministradorDAO.obtenerListado(true);
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
 	public List<TematicaDTO> obtenerListadoTematicas() throws DaoException
 	{
-		try
-		{		
-			return tematicaDAO.obtenerListado(true);
-		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}
+		return tematicaDAO.obtenerListado(true);
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
 	public List<TipoNotificacionDTO> obtenerListadoTiposNotificaciones() throws DaoException
 	{
-		try
-		{		
-			return tipoNotificacionDAO.obtenerListado(true);
-		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}
+		return tipoNotificacionDAO.obtenerListado(true);
 	}
-	
-	
-	
 }

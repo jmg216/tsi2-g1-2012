@@ -1,7 +1,6 @@
 package com.geored.backoffice.managedBean.reportes;
 
 import java.io.Serializable;
-import java.rmi.RemoteException;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -12,7 +11,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.xml.rpc.ServiceException;
 
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
@@ -21,8 +19,6 @@ import org.primefaces.model.map.Marker;
 
 import com.geored.backoffice.managedBean.BaseBean;
 import com.geored.negocio.CheckInDTO;
-import com.geored.negocio.DaoException;
-import com.geored.negocio.NegocioException;
 
 @ManagedBean(name="reporteCheckInBean")
 @RequestScoped
@@ -86,25 +82,10 @@ public class ReporteCheckInBean extends BaseBean implements Serializable
 				}
 			}
 		
-		} catch (ServiceException e) 
-		
+		} 
+		catch (Exception e) 
 		{
-			addBeanError(MSJ_ERROR_COMUNICACION_WS);
-			
-		} catch (NegocioException e)
-		
-		{
-			addBeanError(MSJ_ERROR_COMUNICACION_WS);
-			
-		} catch (DaoException e) 
-		
-		{
-			addBeanError(e.getMessage());
-			
-		} catch (RemoteException e) 
-		
-		{
-			addBeanError(MSJ_ERROR_COMUNICACION_WS);
+			handleWSException(e);
 		}
 	}
 
