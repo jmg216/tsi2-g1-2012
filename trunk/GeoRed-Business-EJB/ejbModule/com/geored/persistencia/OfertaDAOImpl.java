@@ -75,7 +75,7 @@ public class OfertaDAOImpl extends GenericDAOBase<Oferta, OfertaDTO> implements 
 	{
 		try
 		{
-			Query query = em.createQuery("select o from Oferta oferta where o.listaTematicas in ?1");
+			Query query = em.createQuery("select o from com.geored.dominio.Oferta oferta where o.listaTematicas in ?1");
 			
 	        query.setParameter(1, tematicas);       
 	        

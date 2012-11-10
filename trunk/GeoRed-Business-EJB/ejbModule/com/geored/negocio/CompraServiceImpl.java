@@ -131,4 +131,11 @@ public class CompraServiceImpl implements CompraService
 	{
 		return compraDAO.obtenerListado(true);
 	}
+
+	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+	@WebMethod
+	public List<CompraDTO> obtenerListadoPorOferta(Long idOferta) throws DaoException
+	{
+		return compraDAO.obtenerListadoPorOferta(idOferta, true);
+	}
 }

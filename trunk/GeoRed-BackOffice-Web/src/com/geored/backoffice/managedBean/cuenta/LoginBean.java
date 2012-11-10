@@ -22,7 +22,7 @@ public class LoginBean extends BaseBean implements Serializable
 	private static final String SUCCESS = "success";
 	
 	private String email = "admin@geored.com";
-	private String pass = "admin";
+	private String pass;
 
 	public String iniciarSesion()
 	{
@@ -32,14 +32,18 @@ public class LoginBean extends BaseBean implements Serializable
 			
 			AdministradorDTO administradorDTO = admiWs.obtenerAdminPorEmailYPass(getEmail(), UtilesSeguridadWeb.encriptarMD5(getPass()));
 		
-			if(administradorDTO != null)
+			if(administradorDTO == null)
 			{
-				UtilesSeguridadWeb.guardarUsuarioAutenticado(administradorDTO);
+				return null;
 			}
+			
+			UtilesSeguridadWeb.guardarUsuarioAutenticado(administradorDTO);
 		} 
 		catch (Exception e)
 		{
 			handleWSException(e);
+			
+			return null;
 		} 
 		
 		return SUCCESS;
@@ -55,6 +59,11 @@ public class LoginBean extends BaseBean implements Serializable
 	public boolean hayUsuarioAutenticado()
 	{
 		return UtilesSeguridadWeb.hayUsuarioAutenticado();
+	}
+	
+	public AdministradorDTO obtenerUsuarioAutenticado()
+	{
+		return UtilesSeguridadWeb.obtenerUsuarioAutenticado();
 	}
 	
 	public String getEmail()

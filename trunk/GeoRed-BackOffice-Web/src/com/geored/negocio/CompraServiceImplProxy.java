@@ -74,5 +74,11 @@ public class CompraServiceImplProxy implements com.geored.negocio.CompraServiceI
     return compraServiceImpl.obtener(arg0);
   }
   
+  public com.geored.negocio.CompraDTO[] obtenerListadoPorOferta(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.DaoException{
+    if (compraServiceImpl == null)
+      _initCompraServiceImplProxy();
+    return compraServiceImpl.obtenerListadoPorOferta(arg0);
+  }
+  
   
 }

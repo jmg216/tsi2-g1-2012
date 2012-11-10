@@ -44,11 +44,11 @@ public class Sitio implements Serializable
 	@JoinTable(name="sitio_tematica",
 	joinColumns =
 	{
-	    @JoinColumn(name = "TEMATICA_FK")
+	    @JoinColumn(name = "SITIO_FK")
 	},
 	inverseJoinColumns =
 	{
-	    @JoinColumn(name = "SITIO_FK")
+	    @JoinColumn(name = "TEMATICA_FK")
 	})
 	private List<Tematica> listaTematicas;
 	

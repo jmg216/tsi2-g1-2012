@@ -61,7 +61,7 @@ public class UsuarioDAOImpl extends GenericDAOBase<Usuario, UsuarioDTO> implemen
 	{
 		try
 		{
-			Query query = em.createQuery("select u from Usuario u where u.email = ?1 and u.pass = ?2");        
+			Query query = em.createQuery("select u from com.geored.dominio.Usuario u where u.email = ?1 and u.pass = ?2");        
 	        query.setParameter(1, email);        
 	        query.setParameter(2, pass);
 	        

@@ -44,11 +44,11 @@ public class Usuario implements Serializable
 	@JoinTable(name="usuario_tematica",
 	joinColumns =
 	{
-	    @JoinColumn(name = "TEMATICA_FK")
+	    @JoinColumn(name = "USUARIO_FK")
 	},
 	inverseJoinColumns =
 	{
-	    @JoinColumn(name = "USUARIO_FK")
+	    @JoinColumn(name = "TEMATICA_FK")
 	})
 	private List<Tematica> listaTematicas;
 	

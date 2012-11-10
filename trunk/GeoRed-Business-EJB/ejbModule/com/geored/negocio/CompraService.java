@@ -20,4 +20,6 @@ public interface CompraService
 	public CompraDTO obtener(Long idCompra) throws NegocioException, DaoException;
 	
 	public List<CompraDTO> obtenerListado() throws DaoException;
+	
+	public List<CompraDTO> obtenerListadoPorOferta(Long idOferta) throws DaoException;
 }

@@ -11,4 +11,6 @@ import com.geored.persistencia.core.GenericDAO;
 public interface AdministradorDAO extends GenericDAO<Administrador, AdministradorDTO>
 {
 	public Object obtenerAdminPorEmailYPass(String email, String pass, boolean toDTO) throws DaoException;
+	
+	public Object obtenerAdminPorEmail(String email, boolean toDTO) throws DaoException;
 }

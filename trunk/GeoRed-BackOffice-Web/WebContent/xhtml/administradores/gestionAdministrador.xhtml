@@ -15,7 +15,7 @@
 					
 					<table>
 						<h:inputHidden value="#{gestionAdministradorBean.administradorDTO.id}"/>
-						<c:if test="#{gestionAdministradorBean.administradorDTO.id > 0}">
+						<c:if test="#{gestionAdministradorBean.administradorDTO.id != null}">
 							<tr>
 								<td><h:outputText value="Id:" /></td>
 								<td><p:inputText value="#{gestionAdministradorBean.administradorDTO.id}" disabled="true"/></td>
@@ -31,16 +31,18 @@
 							<td><h:outputText value="Nombre:" /></td>
 							<td><p:inputText value="#{gestionAdministradorBean.administradorDTO.nombre}"/></td>
 						</tr>
-						<tr>
-							<td><h:outputText value="Tipo administrador:"/></td>
-							<td>
-								<p:selectOneMenu value="#{gestionAdministradorBean.administradorDTO.idTipoAdministrador}">
-									<f:selectItem itemLabel="Seleccione uno..." itemValue="" />
-									<f:selectItems value="#{gestionAdministradorBean.listaTiposAdministradores}" 
-										var="tipoAdministrador" itemValue="#{tipoAdministrador.id}" itemLabel="#{tipoAdministrador.nombre}"/>
-								</p:selectOneMenu> 		
-							</td>
-						</tr>																
+						<c:if test="#{gestionAdministradorBean.administradorDTO.id == null}">
+							<tr>							
+								<td><h:outputText value="Tipo administrador:"/></td>
+								<td>
+									<p:selectOneMenu value="#{gestionAdministradorBean.administradorDTO.idTipoAdministrador}">
+										<f:selectItem itemLabel="Seleccione uno..." itemValue="" />
+										<f:selectItems value="#{gestionAdministradorBean.listaTiposAdministradores}" 
+											var="tipoAdministrador" itemValue="#{tipoAdministrador.id}" itemLabel="#{tipoAdministrador.nombre}"/>
+									</p:selectOneMenu> 		
+								</td>
+							</tr>																
+						</c:if>						
 					</table>
 					
 					<div class="areaBotones">

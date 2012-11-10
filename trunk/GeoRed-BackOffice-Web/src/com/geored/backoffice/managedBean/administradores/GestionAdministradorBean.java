@@ -22,6 +22,10 @@ public class GestionAdministradorBean extends BaseBean implements Serializable
 	 */
 	private static final long serialVersionUID = -1818155054179872179L;
 	
+	private static final int VALIDAR_CREAR = 1;
+	
+	private static final int VALIDAR_MODIFICAR = 2;
+	
 	private static final String TO_LISTADO_ADMINISTRADORES = "to_listado_administradores";
 	
 	private AdministradorDTO administradorDTO = new AdministradorDTO();
@@ -74,46 +78,87 @@ public class GestionAdministradorBean extends BaseBean implements Serializable
 
 	public void guardarAdministrador()
 	{
-		boolean administradorValido = true;
-		
-		if(getAdministradorDTO() == null)
+		try
 		{
-			addBeanError("Administrador no puede ser nulo");			
-			administradorValido = false;
+			if(getAdministradorDTO() == null)
+			{
+				addBeanError("Administrador no puede ser nulo");			
+			}
+			else
+			{
+				if(UtilesWeb.isNullOrZero(getAdministradorDTO().getId()))
+				{
+					if(validar(VALIDAR_CREAR))
+					{
+						getAdminPort().insertar(getAdministradorDTO());
+						
+						addBeanMessage("Administrador guardado correctamente");
+					}
+				}
+				else
+				{
+					if(validar(VALIDAR_MODIFICAR))
+					{
+						getAdminPort().actualizar(getAdministradorDTO());
+						
+						addBeanMessage("Administrador guardado correctamente");
+					}
+				}				 
+			}
+		}	
+		catch (Exception e)
+		{
+			handleWSException(e);
 		}
-		else
+	}
+	
+	private boolean validar(int opValidar)
+	{
+		boolean isValid = true;
+		
+		switch(opValidar)
 		{
+		case VALIDAR_CREAR:			
 			if(UtilesWeb.isNullOrEmpty(getAdministradorDTO().getEmail()))
 			{
 				addBeanError("'E-mail' es un campo obligatorio.");
-				administradorValido = false;
+				isValid = false;
 			}
 			if(UtilesWeb.isNullOrEmpty(getAdministradorDTO().getNombre()))
 			{
 				addBeanError("'Nombre' es un campo obligatorio.");
-				administradorValido = false;
+				isValid = false;
 			}
 			if(UtilesWeb.isNullOrZero(getAdministradorDTO().getIdTipoAdministrador()))
 			{
 				addBeanError("'Tipo de Administrador' es un campo obligatorio.");
-				administradorValido = false;
+				isValid = false;
 			}
+			break;
+			
+		case VALIDAR_MODIFICAR:
+			if(UtilesWeb.isNullOrEmpty(getAdministradorDTO().getEmail()))
+			{
+				addBeanError("'E-mail' es un campo obligatorio.");
+				isValid = false;
+			}
+			if(UtilesWeb.isNullOrEmpty(getAdministradorDTO().getNombre()))
+			{
+				addBeanError("'Nombre' es un campo obligatorio.");
+				isValid = false;
+			}
+			if(UtilesWeb.isNullOrZero(getAdministradorDTO().getIdTipoAdministrador()))
+			{
+				addBeanError("'Tipo de Administrador' es un campo obligatorio.");
+				isValid = false;
+			}
+			break;
+			
+		default:
+			isValid = false;
 		}
 		
-		// Si valida correctamente doy de alta el administrador
-		try
-		{
-			if(administradorValido)
-			{
-				getAdminPort().insertar(getAdministradorDTO());
-				
-				addBeanMessage("Administrador guardado correctamente");
-			}
-		} 
-		catch (Exception e)
-		{
-			handleWSException(e);
-		} 		
+		return isValid;
 	}
 	
 	public String toListadoAdministradores()

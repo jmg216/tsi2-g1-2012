@@ -9,7 +9,6 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 
 import com.geored.dominio.Empresa;
-import com.geored.dominio.Local;
 import com.geored.dto.EmpresaDTO;
 import com.geored.dto.LocalDTO;
 import com.geored.persistencia.core.GenericDAOBase;
