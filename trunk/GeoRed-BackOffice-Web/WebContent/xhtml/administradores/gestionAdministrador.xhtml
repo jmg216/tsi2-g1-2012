@@ -13,36 +13,47 @@
 				<h:form>					
 					<h1 class="titulo-content">Gestión de Administradores</h1>
 					
+					<c:set var="esModoEdicion" value="#{!utilesWeb.isNullOrZero(gestionAdministradorBean.administradorDTO.id)}"/>
+					
 					<table>
-						<h:inputHidden value="#{gestionAdministradorBean.administradorDTO.id}"/>
-						<c:if test="#{gestionAdministradorBean.administradorDTO.id != null}">
-							<tr>
-								<td><h:outputText value="Id:" /></td>
-								<td><p:inputText value="#{gestionAdministradorBean.administradorDTO.id}" disabled="true"/></td>
-							</tr>
-						</c:if>												
+						<c:choose>					
+							<c:when test="#{esModoEdicion}">
+								<tr>
+									<td><h:outputText value="Id:" /></td>
+									<td><p:inputText value="#{gestionAdministradorBean.administradorDTO.id}" readonly="true"/></td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<h:inputHidden value="#{gestionAdministradorBean.administradorDTO.id}" />								
+							</c:otherwise>	
+						</c:choose>											
 						<tr>
 							<td><h:outputText value="E-mail:" /></td>
-							<td>
-								<p:inputText value="#{gestionAdministradorBean.administradorDTO.email}"/>
+							<td>	
+								<p:inputText value="#{gestionAdministradorBean.administradorDTO.email}" readonly="#{esModoEdicion}"/>																						
 							</td>
 						</tr>
 						<tr>
 							<td><h:outputText value="Nombre:" /></td>
-							<td><p:inputText value="#{gestionAdministradorBean.administradorDTO.nombre}"/></td>
+							<td><p:inputText value="#{gestionAdministradorBean.administradorDTO.nombre}" readonly="#{esModoEdicion}"/></td>
 						</tr>
-						<c:if test="#{gestionAdministradorBean.administradorDTO.id == null}">
-							<tr>							
-								<td><h:outputText value="Tipo administrador:"/></td>
-								<td>
-									<p:selectOneMenu value="#{gestionAdministradorBean.administradorDTO.idTipoAdministrador}">
-										<f:selectItem itemLabel="Seleccione uno..." itemValue="" />
-										<f:selectItems value="#{gestionAdministradorBean.listaTiposAdministradores}" 
-											var="tipoAdministrador" itemValue="#{tipoAdministrador.id}" itemLabel="#{tipoAdministrador.nombre}"/>
-									</p:selectOneMenu> 		
-								</td>
-							</tr>																
-						</c:if>						
+						<tr>							
+							<td><h:outputText value="Tipo administrador:"/></td>
+							<td>
+								<c:choose>
+									<c:when test="#{esModoEdicion}">
+										<p:inputText value="#{gestionAdministradorBean.administradorDTO.nombreTipoAdministrador}" readonly="true"/>										
+									</c:when>
+									<c:otherwise>
+										<p:selectOneMenu value="#{gestionAdministradorBean.administradorDTO.idTipoAdministrador}">
+											<f:selectItem itemLabel="Seleccione uno..." itemValue="" />
+											<f:selectItems value="#{gestionAdministradorBean.listaTiposAdministradores}" 
+												var="tipoAdministrador" itemValue="#{tipoAdministrador.id}" itemLabel="#{tipoAdministrador.nombre}"/>
+										</p:selectOneMenu> 		
+									</c:otherwise>
+								</c:choose>
+							</td>
+						</tr>																
 					</table>
 					
 					<div class="areaBotones">

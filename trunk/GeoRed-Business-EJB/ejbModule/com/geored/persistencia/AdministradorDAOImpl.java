@@ -38,7 +38,7 @@ public class AdministradorDAOImpl extends GenericDAOBase<Administrador, Administ
 		target.setNombre(source.getNombre());
 		
 		if(source.getTipoAdministrador() != null)
-		{
+		{						
 			target.setIdTipoAdministrador(source.getTipoAdministrador().getId());
 			target.setNombreTipoAdministrador(source.getTipoAdministrador().getNombre());
 		}

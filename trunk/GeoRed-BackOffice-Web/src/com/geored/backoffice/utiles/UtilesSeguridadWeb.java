@@ -9,7 +9,9 @@ import com.geored.negocio.AdministradorDTO;
 
 public class UtilesSeguridadWeb
 {
-	// Constantes seguridad
+	// Constantes seguridad	
+	public static final String DEFAULT_PASS = "admin";
+	
 	private static final String KEY_ADMIN_AUTENTICADO = "com.geored.utiles.UtilesSeguridad.KEY_ADMIN_AUTENTICADO";
 	
 	public static void guardarUsuarioAutenticado(AdministradorDTO administradorDTO)

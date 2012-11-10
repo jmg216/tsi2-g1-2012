@@ -4,14 +4,8 @@ import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
-import javax.ejb.TransactionManagement;
-import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 
 import com.geored.exceptions.DaoException;
@@ -21,11 +15,9 @@ import com.geored.utiles.UtilesPersistencia;
  * Implementa las operaciones del GenericDAO de forma generica.
  * Es padre de todos los DAOImpl.
  */
-@Stateless
-@TransactionManagement(TransactionManagementType.CONTAINER)
 public abstract class GenericDAOBase<EntityType, DtoType>
 {
-	@PersistenceContext(unitName=UtilesPersistencia.PERSISTENCE_UNIT_NAME, type=PersistenceContextType.EXTENDED)
+	@PersistenceContext(unitName=UtilesPersistencia.PERSISTENCE_UNIT_NAME)
 	protected EntityManager em;
 	
 	private Class<EntityType> entityClass = getEntityClass();
@@ -34,8 +26,6 @@ public abstract class GenericDAOBase<EntityType, DtoType>
 	
 	private EntityTransformer<EntityType, DtoType> entityTransformer = (EntityTransformer<EntityType, DtoType>) this;
 	
-	
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public EntityType insertar(EntityType entity) throws DaoException
 	{
 		try
@@ -49,7 +39,6 @@ public abstract class GenericDAOBase<EntityType, DtoType>
 		}	
 	}
 	
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void actualizar(EntityType entity) throws DaoException
 	{
 		try
@@ -62,7 +51,6 @@ public abstract class GenericDAOBase<EntityType, DtoType>
 		}
 	}
 	
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void eliminar(EntityType entity) throws DaoException
 	{
 		try
@@ -75,7 +63,6 @@ public abstract class GenericDAOBase<EntityType, DtoType>
 		}
 	}
 	
-	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	public Object obtener(Long id, boolean toDTO) throws DaoException
 	{
 		try
@@ -95,7 +82,6 @@ public abstract class GenericDAOBase<EntityType, DtoType>
 		}
 	}
 	
-	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	public List obtenerListado(boolean toDTO) throws DaoException
 	{
 		try

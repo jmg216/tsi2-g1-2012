@@ -38,6 +38,7 @@
         <navigation-case>
             <from-outcome>to_listado_administradores</from-outcome>
             <to-view-id>/xhtml/administradores/listadoAdministradores.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
     </navigation-rule>
    
@@ -63,6 +64,7 @@
         <navigation-case>
             <from-outcome>to_listado_empresas</from-outcome>
             <to-view-id>/xhtml/empresas/listadoEmpresas.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
     </navigation-rule>
     
@@ -88,6 +90,7 @@
         <navigation-case>
             <from-outcome>to_listado_eventos</from-outcome>
             <to-view-id>/xhtml/eventos/listadoEventos.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
     </navigation-rule>
     
@@ -113,6 +116,7 @@
         <navigation-case>
             <from-outcome>to_listado_ofertas</from-outcome>
             <to-view-id>/xhtml/ofertas/listadoOfertas.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
     </navigation-rule>
     
@@ -140,6 +144,7 @@
         <navigation-case>
             <from-outcome>to_listado_sitios</from-outcome>
             <to-view-id>/xhtml/sitios/listadoSitios.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
     </navigation-rule>
     

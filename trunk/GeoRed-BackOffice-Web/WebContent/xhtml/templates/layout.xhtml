@@ -26,7 +26,7 @@
 				
 				<div class="session-status-container">
 					<c:choose>
-						<c:when test="#{loginBean.hayUsuarioAutenticado() == false}">
+						<c:when test="#{utilesWeb.hayUsuarioAutenticado() == false}">
 							<span>
 								<h:link outcome="/xhtml/cuenta/login.xhtml" styleClass="simple-link" value="Iniciar sesión" />					
 							</span>
@@ -44,7 +44,7 @@
 			</div>
 			
 			<!-- Menu -->
-			<c:if test="#{loginBean.hayUsuarioAutenticado()}">
+			<c:if test="#{utilesWeb.hayUsuarioAutenticado()}">
 				<div id="menu">
 					<ui:include src="menu.xhtml" />
 				</div>
