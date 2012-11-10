@@ -6,6 +6,8 @@ import javax.xml.rpc.ServiceException;
 
 import com.geored.negocio.AdminServiceImpl;
 import com.geored.negocio.AdminServiceImplServiceLocator;
+import com.geored.negocio.CompraServiceImpl;
+import com.geored.negocio.CompraServiceImplServiceLocator;
 import com.geored.negocio.EmpresaServiceImpl;
 import com.geored.negocio.EmpresaServiceImplServiceLocator;
 import com.geored.negocio.EventoServiceImpl;
@@ -103,6 +105,17 @@ public abstract class BaseBean
 		}
 		
 		return usuarioPort;
+	}
+	
+	private CompraServiceImpl compraPort;
+	protected CompraServiceImpl getCompraPort() throws ServiceException 
+	{
+		if(compraPort == null)
+		{
+			compraPort = new CompraServiceImplServiceLocator().getCompraServiceImplPort();
+		}
+		
+		return compraPort;
 	}
 	
 	private GlobalServiceImpl globalPort;
