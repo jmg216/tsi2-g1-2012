@@ -27,16 +27,6 @@ insert into geored.sitio (ID, DESCRIPCION, NOMBRE, UBICACION_GEOGRAFICA, URL_IMA
 
 insert into geored.sitio (ID, DESCRIPCION, NOMBRE, UBICACION_GEOGRAFICA, URL_IMAGEN) values (6, 'Monumento nacional', 'Palacio Legislativo', '-34.891194,-56.187197', 'http://www.generalflores.com/imagenes/palacio/8379.jpg');
 
-/*CheckIns*/
-
-insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (1, '2012-09-22', 'Gym Astro' ,  1, 3);
-
-insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (2, '2012-11-11', 'Plaza Seregni' , 3, 1);
-
-insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (3, '2012-07-01', 'Biblioteca Nacional' , 5, 4);
-
-insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (4, '2012-09-15', 'Palacion Legislativo' , 6, 2);
-
 
 /*CONFIGURACIÓN*/
 
@@ -101,3 +91,13 @@ insert into geored.usuario_tematica (TEMATICA_FK, USUARIO_FK) values (2, 1);/*Va
 
 insert into geored.usuario_tematica (TEMATICA_FK, USUARIO_FK) values (3, 2);/*Juan con tematica Otros*/
 insert into geored.usuario_tematica (TEMATICA_FK, USUARIO_FK) values (4, 2);/*Juan con tematica Plaza*/
+
+/*CheckIns*/
+
+insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (1, '2012-09-22', 'Gym Astro' ,  1, 3);
+
+insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (2, '2012-11-11', 'Plaza Seregni' , 3, 1);
+
+insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (3, '2012-07-01', 'Biblioteca Nacional' , 5, 4);
+
+insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (4, '2012-09-15', 'Palacion Legislativo' , 6, 2);
