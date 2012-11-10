@@ -8,25 +8,45 @@
 	<h:body>
 		<ui:composition template="/xhtml/templates/layout.xhtml">
 			<ui:define name="content">	
-				<h:form>
+				<h:form id="form">
+				
+					<p:growl id="growl" showDetail="true" sticky="true" /> 
+					
 					<h1 class="titulo-content">Reporte de Check-in</h1>
-					<p:panel header="Ubicaciones">
-						<p:panelGrid styleClass="hola">
-							<p:row>
-								<p:column>
-									<h:outputText value="Fecha Inicial:" /> 
-									<p:calendar value="#{reporteCheckInBean.fechaInicial}" />
-								</p:column>
-								<p:column>
-									<h:outputText value="Fecha Final:" /> 
-									<p:calendar value="#{reporteCheckInBean.fechaFinal}"/>
-								</p:column>
-							</p:row>
-						</p:panelGrid>									
-						<p:commandButton value="Ver Reporte" style="margin-top:-4%;margin-left:87%;" action="#{reporteCheckInBean.mostrarReporte()}" update="mapaCheckIn"/>
-						<p:gmap id="mapaCheckIn" model="#{reporteCheckInBean.checkinMap}" center="-34.904375,-56.166414" zoom="13" type="TERRAIN" style="width:862px;height:390px;margin-top:1%;"/>
-					</p:panel>
-				</h:form>
+					
+					<div class="areaBotones">
+						<ul>
+							<li>
+								<p:commandButton value="Ver Reporte" type="button" onclick="fechaDialog.show()" icon="ui-icon-pin-s"/>
+							</li>
+						</ul>
+					</div>
+					
+					<p:gmap id="mapaCheckIn" model="#{reporteCheckInBean.checkinMap}" center="-34.904375,-56.166414" zoom="13" type="TERRAIN" style="width:890px;height:390px"/>
+					
+					<p:dialog  id="fechaDialog" modal="true" widgetVar="fechaDialog" header="Ingrese el periodo de tiempo...">						
+							
+							<h:panelGrid columns="2">
+								
+								<h:outputText value= "Fecha Inicial:" />
+								<p:calendar value="#{reporteCheckInBean.fechaInicial}" />
+								
+								<h:outputText value= "Fecha Final:" />
+								<p:calendar value="#{reporteCheckInBean.fechaFinal}" />
+								
+								<f:facet name="footer">
+									<p:commandButton id="aceptar" value="Aceptar" style="float:right;" action="#{reporteCheckInBean.mostrarReporte()}" onstart="fechaDialog.hide()" oncomplete="statusDialog.hide()" onclick="statusDialog.show()" update="mapaCheckIn,growl" icon="ui-icon-arrowrefresh-1-w"/>						
+								</f:facet>
+	
+							</h:panelGrid>
+							
+					</p:dialog>
+				
+					<p:dialog modal="true" widgetVar="statusDialog" header="Espere por favor...">
+						<p:graphicImage value="/resources/images/loadingbar.gif"/>
+					</p:dialog>
+						
+				</h:form>				
 			</ui:define>
 		</ui:composition>
 	</h:body>

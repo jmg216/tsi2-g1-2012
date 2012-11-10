@@ -16,6 +16,8 @@ import com.geored.negocio.OfertaServiceImpl;
 import com.geored.negocio.OfertaServiceImplServiceLocator;
 import com.geored.negocio.SitioServiceImpl;
 import com.geored.negocio.SitioServiceImplServiceLocator;
+import com.geored.negocio.UsuarioServiceImpl;
+import com.geored.negocio.UsuarioServiceImplServiceLocator;
 
 public abstract class BaseBean
 {
@@ -90,6 +92,17 @@ public abstract class BaseBean
 		}
 		
 		return sitioPort;
+	}
+	
+	private UsuarioServiceImpl usuarioPort;
+	protected UsuarioServiceImpl getUsuarioPort() throws ServiceException
+	{
+		if(usuarioPort == null)
+		{
+			usuarioPort = new UsuarioServiceImplServiceLocator().getUsuarioServiceImplPort();
+		}
+		
+		return usuarioPort;
 	}
 	
 	private GlobalServiceImpl globalPort;

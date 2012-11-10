@@ -8,8 +8,10 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.xml.rpc.ServiceException;
 
 import org.primefaces.model.map.DefaultMapModel;
@@ -21,10 +23,6 @@ import com.geored.backoffice.managedBean.BaseBean;
 import com.geored.negocio.CheckInDTO;
 import com.geored.negocio.DaoException;
 import com.geored.negocio.NegocioException;
-import com.geored.negocio.SitioServiceImpl;
-import com.geored.negocio.SitioServiceImplServiceLocator;
-import com.geored.negocio.UsuarioServiceImpl;
-import com.geored.negocio.UsuarioServiceImplServiceLocator;
 
 @ManagedBean(name="reporteCheckInBean")
 @RequestScoped
@@ -55,10 +53,8 @@ public class ReporteCheckInBean extends BaseBean implements Serializable
 	{
 		try 
 		{
-			SitioServiceImpl sitioWS = new SitioServiceImplServiceLocator().getSitioServiceImplPort();
-			UsuarioServiceImpl usuarioWS = new UsuarioServiceImplServiceLocator().getUsuarioServiceImplPort();
 			
-			CheckInDTO[] arrayCheckIn = usuarioWS.obtenerListadoCheckIns();
+			CheckInDTO[] arrayCheckIn = getUsuarioPort().obtenerListadoCheckIns();
 			listadoCheckIns = Arrays.asList(arrayCheckIn);
 			checkinMap = new DefaultMapModel();
 			
@@ -72,8 +68,7 @@ public class ReporteCheckInBean extends BaseBean implements Serializable
 			{
 				if(check.getFechaCreacion().after(fechaIni) && check.getFechaCreacion().before(fechaFi)) { 
 					
-						String direccion = sitioWS.obtener(check.getIdSitio()).getUbicacionGeografica();
-						//com.google.code.geocoder.model.LatLng coordenadas = UtilesGeocoding.geocoding(direccion);
+						String direccion = getSitioPort().obtener(check.getIdSitio()).getUbicacionGeografica(); 
 						
 						String limitador = "[,]";
 						String[] token = direccion.split(limitador);
@@ -83,6 +78,11 @@ public class ReporteCheckInBean extends BaseBean implements Serializable
 						LatLng coord = new LatLng(latitud,longitud);
 						
 						checkinMap.addOverlay(new Marker(coord));
+				}
+				
+				else 
+				{
+					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("No hay check-ins en las fechas indicadas..."));
 				}
 			}
 		
