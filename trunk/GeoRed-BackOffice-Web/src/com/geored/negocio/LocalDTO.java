@@ -8,9 +8,13 @@
 package com.geored.negocio;
 
 public class LocalDTO  implements java.io.Serializable {
+    private java.lang.String direccion;
+
     private java.lang.Long id;
 
     private java.lang.Long idEmpresa;
+
+    private com.geored.negocio.OfertaDTO[] listaOfertas;
 
     private java.lang.String nombre;
 
@@ -22,16 +26,40 @@ public class LocalDTO  implements java.io.Serializable {
     }
 
     public LocalDTO(
+           java.lang.String direccion,
            java.lang.Long id,
            java.lang.Long idEmpresa,
+           com.geored.negocio.OfertaDTO[] listaOfertas,
            java.lang.String nombre,
            java.lang.String nombreEmpresa,
            java.lang.String ubicacionGeografica) {
+           this.direccion = direccion;
            this.id = id;
            this.idEmpresa = idEmpresa;
+           this.listaOfertas = listaOfertas;
            this.nombre = nombre;
            this.nombreEmpresa = nombreEmpresa;
            this.ubicacionGeografica = ubicacionGeografica;
+    }
+
+
+    /**
+     * Gets the direccion value for this LocalDTO.
+     * 
+     * @return direccion
+     */
+    public java.lang.String getDireccion() {
+        return direccion;
+    }
+
+
+    /**
+     * Sets the direccion value for this LocalDTO.
+     * 
+     * @param direccion
+     */
+    public void setDireccion(java.lang.String direccion) {
+        this.direccion = direccion;
     }
 
 
@@ -72,6 +100,34 @@ public class LocalDTO  implements java.io.Serializable {
      */
     public void setIdEmpresa(java.lang.Long idEmpresa) {
         this.idEmpresa = idEmpresa;
+    }
+
+
+    /**
+     * Gets the listaOfertas value for this LocalDTO.
+     * 
+     * @return listaOfertas
+     */
+    public com.geored.negocio.OfertaDTO[] getListaOfertas() {
+        return listaOfertas;
+    }
+
+
+    /**
+     * Sets the listaOfertas value for this LocalDTO.
+     * 
+     * @param listaOfertas
+     */
+    public void setListaOfertas(com.geored.negocio.OfertaDTO[] listaOfertas) {
+        this.listaOfertas = listaOfertas;
+    }
+
+    public com.geored.negocio.OfertaDTO getListaOfertas(int i) {
+        return this.listaOfertas[i];
+    }
+
+    public void setListaOfertas(int i, com.geored.negocio.OfertaDTO _value) {
+        this.listaOfertas[i] = _value;
     }
 
 
@@ -146,12 +202,18 @@ public class LocalDTO  implements java.io.Serializable {
         __equalsCalc = obj;
         boolean _equals;
         _equals = true && 
+            ((this.direccion==null && other.getDireccion()==null) || 
+             (this.direccion!=null &&
+              this.direccion.equals(other.getDireccion()))) &&
             ((this.id==null && other.getId()==null) || 
              (this.id!=null &&
               this.id.equals(other.getId()))) &&
             ((this.idEmpresa==null && other.getIdEmpresa()==null) || 
              (this.idEmpresa!=null &&
               this.idEmpresa.equals(other.getIdEmpresa()))) &&
+            ((this.listaOfertas==null && other.getListaOfertas()==null) || 
+             (this.listaOfertas!=null &&
+              java.util.Arrays.equals(this.listaOfertas, other.getListaOfertas()))) &&
             ((this.nombre==null && other.getNombre()==null) || 
              (this.nombre!=null &&
               this.nombre.equals(other.getNombre()))) &&
@@ -172,11 +234,25 @@ public class LocalDTO  implements java.io.Serializable {
         }
         __hashCodeCalc = true;
         int _hashCode = 1;
+        if (getDireccion() != null) {
+            _hashCode += getDireccion().hashCode();
+        }
         if (getId() != null) {
             _hashCode += getId().hashCode();
         }
         if (getIdEmpresa() != null) {
             _hashCode += getIdEmpresa().hashCode();
+        }
+        if (getListaOfertas() != null) {
+            for (int i=0;
+                 i<java.lang.reflect.Array.getLength(getListaOfertas());
+                 i++) {
+                java.lang.Object obj = java.lang.reflect.Array.get(getListaOfertas(), i);
+                if (obj != null &&
+                    !obj.getClass().isArray()) {
+                    _hashCode += obj.hashCode();
+                }
+            }
         }
         if (getNombre() != null) {
             _hashCode += getNombre().hashCode();
@@ -198,6 +274,13 @@ public class LocalDTO  implements java.io.Serializable {
     static {
         typeDesc.setXmlType(new javax.xml.namespace.QName("http://negocio.geored.com/", "localDTO"));
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("direccion");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "direccion"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("id");
         elemField.setXmlName(new javax.xml.namespace.QName("", "id"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
@@ -210,6 +293,14 @@ public class LocalDTO  implements java.io.Serializable {
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("listaOfertas");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "listaOfertas"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://negocio.geored.com/", "ofertaDTO"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(true);
+        elemField.setMaxOccursUnbounded(true);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("nombre");
