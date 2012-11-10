@@ -1,16 +1,12 @@
 package com.geored.backoffice.managedBean.sitios;
 
 import java.io.Serializable;
-import java.rmi.RemoteException;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.xml.rpc.ServiceException;
 
 import com.geored.backoffice.managedBean.BaseBean;
 import com.geored.backoffice.utiles.UtilesWeb;
-import com.geored.negocio.DaoException;
-import com.geored.negocio.NegocioException;
 import com.geored.negocio.SitioDTO;
 
 @ManagedBean(name="gestionSitioBean")
@@ -40,22 +36,10 @@ public class GestionSitioBean extends BaseBean implements Serializable
 			{
 				sitioDTO = getSitioPort().obtener(Long.valueOf(idSitio));
 			} 
-			catch (NegocioException e)
+			catch (Exception e)
 			{
 				addBeanError(e.getMessage());
 			} 
-			catch (DaoException e)
-			{
-				addBeanError(e.getMessage());
-			} 
-			catch (RemoteException e)
-			{
-				addBeanError(MSJ_ERROR_COMUNICACION_WS);
-			} 
-			catch (ServiceException e)
-			{
-				addBeanError(MSJ_ERROR_COMUNICACION_WS);
-			}
 		}
 	}
 

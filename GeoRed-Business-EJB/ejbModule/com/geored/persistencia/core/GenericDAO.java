@@ -2,6 +2,8 @@ package com.geored.persistencia.core;
 
 import java.util.List;
 
+import com.geored.exceptions.DaoException;
+
 /**
  * Define las operacione basicas del ORM:
  *   - insertar
@@ -10,17 +12,17 @@ import java.util.List;
  *   - obtener
  *   - obtenerListado
  *   
- * Seran implementadas por el GenericDAOBase de forma genéricas.
+ * Seran implementadas por el GenericDAOBase de forma genérica.
  */
 public interface GenericDAO<EntityType, DtoType> extends EntityTransformer<EntityType, DtoType>
 {	
-	public EntityType insertar(EntityType entity);
+	public EntityType insertar(EntityType entity) throws DaoException;
 	
-	public void actualizar(EntityType entity);
+	public void actualizar(EntityType entity) throws DaoException;
 	
-	public void eliminar(EntityType entity);
+	public void eliminar(EntityType entity) throws DaoException;
 
-	public Object obtener(Long id, boolean toDTO);
+	public Object obtener(Long id, boolean toDTO) throws DaoException;
 	
-	public List obtenerListado(boolean toDTO);
+	public List obtenerListado(boolean toDTO) throws DaoException;
 }

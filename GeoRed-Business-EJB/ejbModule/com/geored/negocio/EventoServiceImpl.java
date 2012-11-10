@@ -28,19 +28,12 @@ public class EventoServiceImpl implements EventoService
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
 	public Long insertar(EventoDTO eventoDTO)  throws NegocioException, DaoException
-	{
-		try
-		{
-			Evento eventoEntity = eventoDAO.toEntity(eventoDTO);
-			
-			eventoDAO.insertar(eventoEntity);
-			
-			return eventoEntity.getId();
-		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}
+	{	
+		Evento eventoEntity = eventoDAO.toEntity(eventoDTO);
+		
+		eventoDAO.insertar(eventoEntity);
+		
+		return eventoEntity.getId();
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -70,57 +63,34 @@ public class EventoServiceImpl implements EventoService
 	@WebMethod
 	public void eliminar(Long idEvento)  throws NegocioException, DaoException
 	{
-		try
+		Evento eventoEntity = (Evento) eventoDAO.obtener(idEvento, false);
+		
+		if(eventoEntity == null)
 		{
-			Evento eventoEntity = (Evento) eventoDAO.obtener(idEvento, false);
-			
-			if(eventoEntity == null)
-			{
-				throw new NegocioException("Evento no encontrado");
-			}
-			
-			eventoDAO.eliminar(eventoEntity);
+			throw new NegocioException("Evento no encontrado");
 		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}
+		
+		eventoDAO.eliminar(eventoEntity);
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
 	public EventoDTO obtener(Long idEvento)  throws NegocioException, DaoException
 	{
-		try
+		EventoDTO eventoDTO = (EventoDTO) eventoDAO.obtener(idEvento, true);
+		
+		if(eventoDTO == null)
 		{
-			EventoDTO eventoDTO = (EventoDTO) eventoDAO.obtener(idEvento, true);
-			
-			if(eventoDTO == null)
-			{
-				throw new NegocioException("Evento no encontrado");
-			}
-			
-			return eventoDTO;
+			throw new NegocioException("Evento no encontrado");
 		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}
+		
+		return eventoDTO;
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
 	public List<EventoDTO> obtenerListado() throws DaoException
 	{
-		try
-		{
-			return eventoDAO.obtenerListado(true);
-		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}
-		
-	}
-	
+		return eventoDAO.obtenerListado(true);	
+	}	
 }

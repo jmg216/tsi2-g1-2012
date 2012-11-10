@@ -29,97 +29,61 @@ public class OfertaServiceImpl implements OfertaService
 	@WebMethod
 	public Long insertar(OfertaDTO ofertaDTO) throws NegocioException, DaoException
 	{
-		try
-		{
-			Oferta ofertaEntity = ofertaDAO.toEntity(ofertaDTO);
-			
-			ofertaDAO.insertar(ofertaEntity);
-			
-			return ofertaEntity.getId();
-		}
-		catch(Throwable e)
-		{
-			throw new NegocioException(e);
-		}
+		Oferta ofertaEntity = ofertaDAO.toEntity(ofertaDTO);
+		
+		ofertaDAO.insertar(ofertaEntity);
+		
+		return ofertaEntity.getId();
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
 	public void actualizar(OfertaDTO ofertaDTO) throws NegocioException, DaoException
 	{
-		try
+		Oferta eventoEntity = (Oferta) ofertaDAO.obtener(ofertaDTO.getId(), false);
+		
+		if(eventoEntity == null)
 		{
-			Oferta eventoEntity = (Oferta) ofertaDAO.obtener(ofertaDTO.getId(), false);
-			
-			if(eventoEntity == null)
-			{
-				throw new NegocioException("Oferta no encontrada");
-			}
-			
-			eventoEntity = ofertaDAO.toEntity(ofertaDTO);
-			
-			ofertaDAO.actualizar(eventoEntity);			
+			throw new NegocioException("Oferta no encontrada");
 		}
-		catch(Throwable e)
-		{
-			throw new NegocioException(e);
-		}
+		
+		eventoEntity = ofertaDAO.toEntity(ofertaDTO);
+		
+		ofertaDAO.actualizar(eventoEntity);			
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
 	public void eliminar(Long idOferta) throws NegocioException, DaoException
 	{
-		try
+		Oferta ofertaEntity = (Oferta) ofertaDAO.obtener(idOferta, false);
+		
+		if(ofertaEntity == null)
 		{
-			Oferta ofertaEntity = (Oferta) ofertaDAO.obtener(idOferta, false);
-			
-			if(ofertaEntity == null)
-			{
-				throw new NegocioException("Oferta no encontrada");
-			}
-			
-			ofertaDAO.eliminar(ofertaEntity);
+			throw new NegocioException("Oferta no encontrada");
 		}
-		catch(Throwable e)
-		{
-			throw new NegocioException(e);
-		}
+		
+		ofertaDAO.eliminar(ofertaEntity);
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
 	public OfertaDTO obtener(Long idOferta) throws NegocioException, DaoException
 	{
-		try
+		OfertaDTO ofertaDTO = (OfertaDTO) ofertaDAO.obtener(idOferta, true);
+		
+		if(ofertaDTO == null)
 		{
-			OfertaDTO ofertaDTO = (OfertaDTO) ofertaDAO.obtener(idOferta, true);
-			
-			if(ofertaDTO == null)
-			{
-				throw new NegocioException("Oferta no encontrada");
-			}
-			
-			return ofertaDTO;
+			throw new NegocioException("Oferta no encontrada");
 		}
-		catch(Throwable e)
-		{
-			throw new NegocioException(e);
-		}
+		
+		return ofertaDTO;
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
 	public List<OfertaDTO> obtenerListado() throws DaoException
 	{
-		try
-		{
-			return ofertaDAO.obtenerListado(true);
-		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}		
+		return ofertaDAO.obtenerListado(true);		
 	}
-	
 }

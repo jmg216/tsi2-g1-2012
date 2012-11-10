@@ -1,20 +1,16 @@
 package com.geored.backoffice.managedBean.administradores;
 
 import java.io.Serializable;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.xml.rpc.ServiceException;
 
 import com.geored.backoffice.managedBean.BaseBean;
 import com.geored.backoffice.utiles.UtilesWeb;
 import com.geored.negocio.AdministradorDTO;
-import com.geored.negocio.DaoException;
-import com.geored.negocio.NegocioException;
 import com.geored.negocio.TipoAdministradorDTO;
 
 @ManagedBean(name="gestionAdministradorBean")
@@ -46,22 +42,10 @@ public class GestionAdministradorBean extends BaseBean implements Serializable
 			{
 				administradorDTO = getAdminPort().obtener(Long.valueOf(idAdministrador));
 			} 
-			catch (NegocioException e)
+			catch (Exception e)
 			{
-				addBeanError(e.getMessage());
+				handleWSException(e);
 			} 
-			catch (DaoException e)
-			{
-				addBeanError(e.getMessage());
-			} 
-			catch (RemoteException e)
-			{
-				addBeanError(MSJ_ERROR_COMUNICACION_WS);
-			} 
-			catch (ServiceException e)
-			{
-				addBeanError(MSJ_ERROR_COMUNICACION_WS);
-			}
 		}
 		
 		cargarDatosIniciales();
@@ -82,18 +66,10 @@ public class GestionAdministradorBean extends BaseBean implements Serializable
 				listaTiposAdministradores = new ArrayList<TipoAdministradorDTO>();
 			}
 		}
-		catch (DaoException e)
+		catch (Exception e)
 		{
-			addBeanError(e.getMessage());
+			handleWSException(e);
 		} 
-		catch (RemoteException e)
-		{
-			addBeanError(MSJ_ERROR_COMUNICACION_WS);
-		} 
-		catch (ServiceException e)
-		{
-			addBeanError(MSJ_ERROR_COMUNICACION_WS);
-		}
 	}
 
 	public void guardarAdministrador()
@@ -134,22 +110,10 @@ public class GestionAdministradorBean extends BaseBean implements Serializable
 				addBeanMessage("Administrador guardado correctamente");
 			}
 		} 
-		catch (NegocioException e)
+		catch (Exception e)
 		{
-			addBeanError(e.getMessage());
-		} 
-		catch (DaoException e)
-		{
-			addBeanError(e.getMessage());
-		} 
-		catch (RemoteException e)
-		{
-			addBeanError(MSJ_ERROR_COMUNICACION_WS);
-		} 
-		catch (ServiceException e)
-		{
-			addBeanError(MSJ_ERROR_COMUNICACION_WS);
-		}		
+			handleWSException(e);
+		} 		
 	}
 	
 	public String toListadoAdministradores()

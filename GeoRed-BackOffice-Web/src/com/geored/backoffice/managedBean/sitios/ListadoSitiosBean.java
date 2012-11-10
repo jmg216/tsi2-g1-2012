@@ -1,17 +1,14 @@
 package com.geored.backoffice.managedBean.sitios;
 
 import java.io.Serializable;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.xml.rpc.ServiceException;
 
 import com.geored.backoffice.managedBean.BaseBean;
-import com.geored.negocio.DaoException;
 import com.geored.negocio.SitioDTO;
 
 @ManagedBean(name="listadoSitiosBean")
@@ -44,20 +41,10 @@ public class ListadoSitiosBean extends BaseBean implements Serializable
 				listaSitios = new ArrayList<SitioDTO>();
 			}
 		} 
-		catch (ServiceException e) 
+		catch (Exception e) 
 		{
-			addBeanError(MSJ_ERROR_COMUNICACION_WS);
-			
+			handleWSException(e);
 		} 
-		catch (DaoException e) 
-		{
-			addBeanError(e.getMessage());
-			
-		}
-		catch (RemoteException e) 
-		{
-			addBeanError(MSJ_ERROR_COMUNICACION_WS);
-		}
 	}
 	
 	public String toGestionSitio()

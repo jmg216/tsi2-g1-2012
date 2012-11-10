@@ -1,16 +1,13 @@
 package com.geored.backoffice.managedBean.cuenta;
 
 import java.io.Serializable;
-import java.rmi.RemoteException;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.xml.rpc.ServiceException;
 
 import com.geored.backoffice.managedBean.BaseBean;
 import com.geored.backoffice.utiles.UtilesSeguridadWeb;
 import com.geored.negocio.AdminServiceImpl;
-import com.geored.negocio.AdminServiceImplServiceLocator;
 import com.geored.negocio.AdministradorDTO;
 
 @ManagedBean(name="loginBean")
@@ -24,29 +21,25 @@ public class LoginBean extends BaseBean implements Serializable
 	
 	private static final String SUCCESS = "success";
 	
-	private String email;
-	private String pass;
+	private String email = "admin@geored.com";
+	private String pass = "admin";
 
 	public String iniciarSesion()
 	{
 		try
 		{
-			AdminServiceImpl admiWs = new AdminServiceImplServiceLocator().getAdminServiceImplPort();
+			AdminServiceImpl admiWs = getAdminPort();
 			
-			AdministradorDTO administradorDTO = admiWs.obtenerAdminPorEmailYPass(getEmail(), getPass());
-			
+			AdministradorDTO administradorDTO = admiWs.obtenerAdminPorEmailYPass(getEmail(), UtilesSeguridadWeb.encriptarMD5(getPass()));
+		
 			if(administradorDTO != null)
 			{
 				UtilesSeguridadWeb.guardarUsuarioAutenticado(administradorDTO);
 			}
 		} 
-		catch (RemoteException e1)
+		catch (Exception e)
 		{
-			addBeanError(MSJ_ERROR_COMUNICACION_WS);
-		}
-		catch (ServiceException e)
-		{
-			addBeanError(MSJ_ERROR_COMUNICACION_WS);
+			handleWSException(e);
 		} 
 		
 		return SUCCESS;

@@ -1,7 +1,6 @@
 package com.geored.backoffice.managedBean.reportes;
 
 import java.io.Serializable;
-import java.rmi.RemoteException;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -10,11 +9,9 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.xml.rpc.ServiceException;
 
 import com.geored.backoffice.managedBean.BaseBean;
 import com.geored.negocio.CompraDTO;
-import com.geored.negocio.DaoException;
 
 @ManagedBean(name="reporteComprasBean")
 @RequestScoped
@@ -55,20 +52,10 @@ public class ReporteComprasBean extends BaseBean implements Serializable
 			
 		} 
 		
-		catch (DaoException e) 
+		catch (Exception e) 
 		{
-			addBeanError(e.getMessage());
+			handleWSException(e);
 		} 
-		
-		catch (RemoteException e)
-		{
-			addBeanError(MSJ_ERROR_COMUNICACION_WS);
-		} 
-		
-		catch (ServiceException e) 
-		{
-			addBeanError(MSJ_ERROR_COMUNICACION_WS);
-		}
 	}
 
 	public Date getFechaInicial() {

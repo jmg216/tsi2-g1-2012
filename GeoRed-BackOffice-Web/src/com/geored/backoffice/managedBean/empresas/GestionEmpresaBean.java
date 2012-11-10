@@ -47,22 +47,10 @@ public class GestionEmpresaBean extends BaseBean implements Serializable
 			{
 				empresaDTO = getEmpresaPort().obtener(Long.valueOf(idEmpresa));
 			} 
-			catch (NegocioException e)
+			catch (Exception e)
 			{
 				addBeanError(e.getMessage());
 			} 
-			catch (DaoException e)
-			{
-				addBeanError(e.getMessage());
-			} 
-			catch (RemoteException e)
-			{
-				addBeanError(MSJ_ERROR_COMUNICACION_WS);
-			} 
-			catch (ServiceException e)
-			{
-				addBeanError(MSJ_ERROR_COMUNICACION_WS);
-			}
 		}
 		
 		cargarDatosIniciales();
@@ -83,18 +71,10 @@ public class GestionEmpresaBean extends BaseBean implements Serializable
 				listaAdministradores = new ArrayList<AdministradorDTO>();
 			}
 		}
-		catch (DaoException e)
+		catch (Exception e)
 		{
-			addBeanError(e.getMessage());
+			handleWSException(e);
 		} 
-		catch (RemoteException e)
-		{
-			addBeanError(MSJ_ERROR_COMUNICACION_WS);
-		} 
-		catch (ServiceException e)
-		{
-			addBeanError(MSJ_ERROR_COMUNICACION_WS);
-		}
 	}
 	
 	public void guardarEmpresa()

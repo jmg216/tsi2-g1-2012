@@ -34,134 +34,82 @@ public class UsuarioServiceImpl implements UsuarioService
 	@WebMethod
 	public Long insertar(UsuarioDTO usuarioDTO) throws NegocioException, DaoException
 	{
-		try
-		{
-			Usuario usuarioEntity = usuarioDAO.toEntity(usuarioDTO);
-			
-			usuarioDAO.insertar(usuarioEntity);
-			
-			return usuarioEntity.getId();
-		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}
+		Usuario usuarioEntity = usuarioDAO.toEntity(usuarioDTO);
+		
+		usuarioDAO.insertar(usuarioEntity);
+		
+		return usuarioEntity.getId();
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
 	public void actualizar(UsuarioDTO usuarioDTO) throws NegocioException, DaoException
 	{
-		try
+		Usuario usuarioEntity = (Usuario) usuarioDAO.obtener(usuarioDTO.getId(), false);
+		
+		if(usuarioEntity == null)
 		{
-			Usuario usuarioEntity = (Usuario) usuarioDAO.obtener(usuarioDTO.getId(), false);
-			
-			if(usuarioEntity == null)
-			{
-				throw new NegocioException("Oferta no encontrada");
-			}
-			
-			usuarioEntity = usuarioDAO.toEntity(usuarioDTO);
-			
-			usuarioDAO.actualizar(usuarioEntity);			
+			throw new NegocioException("Oferta no encontrada");
 		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}
+		
+		usuarioEntity = usuarioDAO.toEntity(usuarioDTO);
+		
+		usuarioDAO.actualizar(usuarioEntity);			
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod 
 	public void eliminar(Long idUsuario) throws NegocioException, DaoException
 	{
-		try
+		Usuario usuarioEntity = (Usuario) usuarioDAO.obtener(idUsuario, false);
+		
+		if(usuarioEntity == null)
 		{
-			Usuario usuarioEntity = (Usuario) usuarioDAO.obtener(idUsuario, false);
-			
-			if(usuarioEntity == null)
-			{
-				throw new NegocioException("Usuario no encontrado");
-			}
-			
-			usuarioDAO.eliminar(usuarioEntity);
+			throw new NegocioException("Usuario no encontrado");
 		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}
+		
+		usuarioDAO.eliminar(usuarioEntity);
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
 	public UsuarioDTO obtener(Long idUsuario) throws NegocioException, DaoException
 	{
-		try
+		UsuarioDTO usuarioDTO = (UsuarioDTO) usuarioDAO.obtener(idUsuario, true);
+		
+		if(usuarioDTO == null)
 		{
-			UsuarioDTO usuarioDTO = (UsuarioDTO) usuarioDAO.obtener(idUsuario, true);
-			
-			if(usuarioDTO == null)
-			{
-				throw new NegocioException("Usuario no encontrado");
-			}
-			
-			return usuarioDTO;
+			throw new NegocioException("Usuario no encontrado");
 		}
-		catch(Throwable e)
-		{
-			throw new NegocioException(e);
-		}
+		
+		return usuarioDTO;
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
 	public List<UsuarioDTO> obtenerListado() throws DaoException
 	{
-		try
-		{
-			return usuarioDAO.obtenerListado(true);
-		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}
-		
+		return usuarioDAO.obtenerListado(true);
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
 	public UsuarioDTO obtenerPorEmailYPass(String email, String pass) throws NegocioException, DaoException
 	{
-		try
+		UsuarioDTO usuarioDTO = (UsuarioDTO) usuarioDAO.obtenerUsuarioPorEmailYPass(email, pass, true);
+		
+		if(usuarioDTO == null)
 		{
-			UsuarioDTO usuarioDTO = (UsuarioDTO) usuarioDAO.obtenerUsuarioPorEmailYPass(email, pass, true);
-			
-			if(usuarioDTO == null)
-			{
-				throw new NegocioException("Usuario no encontrado");
-			}
-			
-			return usuarioDTO;
+			throw new NegocioException("Usuario no encontrado");
 		}
-		catch(Throwable e)
-		{
-			throw new DaoException();
-		}
-	
+		
+		return usuarioDTO;
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
 	public List<CheckInDTO> obtenerListadoCheckIns() throws DaoException
 	{
-		try
-		{
-			return checkInDAO.obtenerListado(true);
-		}
-		catch(Throwable e)
-		{
-			throw new DaoException(e);
-		}
-	}
-	
+		return checkInDAO.obtenerListado(true);
+	}	
 }

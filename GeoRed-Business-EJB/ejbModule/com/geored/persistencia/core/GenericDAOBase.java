@@ -14,6 +14,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 
+import com.geored.exceptions.DaoException;
 import com.geored.utiles.UtilesPersistencia;
 
 /**
@@ -35,50 +36,85 @@ public abstract class GenericDAOBase<EntityType, DtoType>
 	
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public EntityType insertar(EntityType entity)
+	public EntityType insertar(EntityType entity) throws DaoException
 	{
-		em.persist(entity);
-		return entity;
+		try
+		{
+			em.persist(entity);
+			return entity;
+		}
+		catch(Throwable e)
+		{
+			throw new DaoException(e.getMessage());
+		}	
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void actualizar(EntityType entity)
+	public void actualizar(EntityType entity) throws DaoException
 	{
-		em.refresh(entity);
+		try
+		{
+			em.refresh(entity);
+		}
+		catch(Throwable e)
+		{
+			throw new DaoException(e.getMessage());
+		}
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void eliminar(EntityType entity)
+	public void eliminar(EntityType entity) throws DaoException
 	{
-		em.remove(entity);
+		try
+		{
+			em.remove(entity);
+		}
+		catch(Throwable e)
+		{
+			throw new DaoException(e.getMessage());
+		}
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
-	public Object obtener(Long id, boolean toDTO)
+	public Object obtener(Long id, boolean toDTO) throws DaoException
 	{
-		EntityType entity = em.find(entityClass, id);
-		
-		if(toDTO)
-		{							
-			return entityTransformer.toDto(entity);			
+		try
+		{	
+			EntityType entity = em.find(entityClass, id);
+			
+			if(toDTO)
+			{							
+				return entityTransformer.toDto(entity);			
+			}
+			
+			return entity;
 		}
-		
-		return entity;
+		catch(Throwable e)
+		{
+			throw new DaoException(e.getMessage());
+		}
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
-	public List obtenerListado(boolean toDTO)
+	public List obtenerListado(boolean toDTO) throws DaoException
 	{
-		Query query = em.createQuery("SELECT e FROM " + entityClass.getName() + " e");
-		
-		List<EntityType> listaEntidades = query.getResultList();
-		
-		if(toDTO)
-		{			
-			return entityTransformer.toDtoList(listaEntidades);			
+		try
+		{
+			Query query = em.createQuery("SELECT e FROM " + entityClass.getName() + " e");
+			
+			List<EntityType> listaEntidades = query.getResultList();
+			
+			if(toDTO)
+			{			
+				return entityTransformer.toDtoList(listaEntidades);			
+			}
+			
+			return listaEntidades;
 		}
-		
-	    return listaEntidades;
+		catch(Throwable e)
+		{
+			throw new DaoException(e.getMessage());
+		}
 	}
 	
 	// TRANSFORMACION DE COLECCIONES
