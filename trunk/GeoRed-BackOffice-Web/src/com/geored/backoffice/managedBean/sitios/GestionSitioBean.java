@@ -1,6 +1,9 @@
 package com.geored.backoffice.managedBean.sitios;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -8,6 +11,7 @@ import javax.faces.bean.RequestScoped;
 import com.geored.backoffice.managedBean.BaseBean;
 import com.geored.backoffice.utiles.UtilesWeb;
 import com.geored.negocio.SitioDTO;
+import com.geored.negocio.TematicaDTO;
 
 @ManagedBean(name="gestionSitioBean")
 @RequestScoped
@@ -21,6 +25,8 @@ public class GestionSitioBean extends BaseBean implements Serializable
 	private static final String TO_LISTADO_SITIOS = "to_listado_sitios";
 	
 	private SitioDTO sitioDTO = new SitioDTO();
+	
+	private List<TematicaDTO> listaTematicas = new ArrayList<TematicaDTO>();
 	
 	public GestionSitioBean()
 	{	
@@ -41,8 +47,22 @@ public class GestionSitioBean extends BaseBean implements Serializable
 				addBeanError(e.getMessage());
 			} 
 		}
+		
+		cargarDatoIniciales();
 	}
 
+	private void cargarDatoIniciales()
+	{
+		try
+		{
+			listaTematicas = Arrays.asList(getGlobalPort().obtenerListadoTematicas());
+		} 
+		catch (Exception e)
+		{
+			handleWSException(e);
+		}
+	}
+	
 	public void guardarSitio()
 	{
 		addBeanMessage("Sitio guardado correctamente");
@@ -62,6 +82,14 @@ public class GestionSitioBean extends BaseBean implements Serializable
 	{
 		this.sitioDTO = sitioDTO;
 	}
-	
-	
+
+	public List<TematicaDTO> getListaTematicas()
+	{
+		return listaTematicas;
+	}
+
+	public void setListaTematicas(List<TematicaDTO> listaTematicas)
+	{
+		this.listaTematicas = listaTematicas;
+	}
 }
