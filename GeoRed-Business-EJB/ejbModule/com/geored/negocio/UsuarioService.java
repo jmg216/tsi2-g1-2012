@@ -24,5 +24,6 @@ public interface UsuarioService
 	
 	public UsuarioDTO obtenerPorEmailYPass(String email, String pass) throws NegocioException, DaoException;
 	
+	// OPERACIONES CON CHECK-INS
 	public List<CheckInDTO> obtenerListadoCheckIns() throws DaoException;
 }

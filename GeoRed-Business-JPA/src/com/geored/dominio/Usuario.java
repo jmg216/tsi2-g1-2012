@@ -52,18 +52,6 @@ public class Usuario implements Serializable
 	})
 	private List<Tematica> listaTematicas;
 	
-	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinTable(name="usuario_oferta",
-	joinColumns =
-	{
-	    @JoinColumn(name = "OFERTA_FK")
-	},
-	inverseJoinColumns =
-	{
-	    @JoinColumn(name = "USUARIO_FK")
-	})
-	private List<Oferta> listaCompras;
-	
 	public Long getId()
 	{
 		return id;
@@ -122,15 +110,5 @@ public class Usuario implements Serializable
 	public void setListaTematicas(List<Tematica> listaTematicas)
 	{
 		this.listaTematicas = listaTematicas;
-	}
-
-	public List<Oferta> getListaCompras()
-	{
-		return listaCompras;
-	}
-
-	public void setListaCompras(List<Oferta> listaCompras)
-	{
-		this.listaCompras = listaCompras;
 	}
 }

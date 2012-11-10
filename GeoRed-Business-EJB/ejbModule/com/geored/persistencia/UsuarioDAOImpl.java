@@ -9,7 +9,6 @@ import javax.ejb.TransactionManagementType;
 import javax.persistence.Query;
 
 import com.geored.dominio.Usuario;
-import com.geored.dto.OfertaDTO;
 import com.geored.dto.TematicaDTO;
 import com.geored.dto.UsuarioDTO;
 import com.geored.persistencia.core.GenericDAOBase;
@@ -52,12 +51,6 @@ public class UsuarioDAOImpl extends GenericDAOBase<Usuario, UsuarioDTO> implemen
 		if(source.getListaTematicas() != null)
 		{
 			target.setListaTematicasDTO(tematicaDAO.toDtoList(source.getListaTematicas()));
-		}
-		
-		target.setListaComprasDTO(new ArrayList<OfertaDTO>());
-		if(source.getListaCompras() != null)
-		{
-			target.setListaComprasDTO(ofertaDAO.toDtoList(source.getListaCompras()));
 		}
 			
 		return target;

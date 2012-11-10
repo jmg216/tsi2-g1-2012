@@ -36,7 +36,7 @@ public class AdminServiceImpl implements AdminService
 	{
 		try
 		{
-			Administrador administradorEntity = administradorDAO.toEntity(administradorDTO);;
+			Administrador administradorEntity = administradorDAO.toEntity(administradorDTO);
 			
 			TipoAdministrador tipoAdministradorEntity = (TipoAdministrador) tipoAdministradorDAO.obtener(administradorDTO.getIdTipoAdministrador(), false);
 			
@@ -98,8 +98,7 @@ public class AdminServiceImpl implements AdminService
 		catch(Throwable e)
 		{
 			throw new DaoException(e);
-		}
-		
+		}		
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)

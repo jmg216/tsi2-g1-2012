@@ -64,9 +64,6 @@ public class Oferta implements Serializable
 	})
 	private List<Tematica> listaTematicas;
 
-	@ManyToMany(mappedBy="listaCompras", fetch=FetchType.LAZY)
-	private List<Usuario> listaCompradores;
-	
 	public Long getId()
 	{
 		return id;
@@ -155,17 +152,5 @@ public class Oferta implements Serializable
 	public void setListaTematicas(List<Tematica> listaTematicas)
 	{
 		this.listaTematicas = listaTematicas;
-	}
-
-	public List<Usuario> getListaCompradores()
-	{
-		return listaCompradores;
-	}
-
-	public void setListaCompradores(List<Usuario> listaCompradores)
-	{
-		this.listaCompradores = listaCompradores;
-	}
-	
-	
+	}	
 }

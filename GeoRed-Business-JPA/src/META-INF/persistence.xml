@@ -17,5 +17,6 @@
 		<class>com.geored.dominio.Local</class>
 		<class>com.geored.dominio.TipoNotificacion</class>
 		<class>com.geored.dominio.Empresa</class>
+		<class>com.geored.dominio.Compra</class>
 	</persistence-unit>
 </persistence>

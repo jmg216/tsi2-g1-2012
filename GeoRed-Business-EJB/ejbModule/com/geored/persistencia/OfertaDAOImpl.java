@@ -15,14 +15,12 @@ import com.geored.dominio.Tematica;
 import com.geored.dominio.Usuario;
 import com.geored.dto.OfertaDTO;
 import com.geored.dto.TematicaDTO;
-import com.geored.dto.UsuarioDTO;
 import com.geored.persistencia.core.GenericDAOBase;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class OfertaDAOImpl extends GenericDAOBase<Oferta, OfertaDTO> implements OfertaDAO
 {
-
 	@EJB
 	private TematicaDAO tematicaDAO;
 	
@@ -67,12 +65,6 @@ public class OfertaDAOImpl extends GenericDAOBase<Oferta, OfertaDTO> implements 
 		if(source.getListaTematicas() != null)
 		{
 			target.setListaTematicasDTO(tematicaDAO.toDtoList(source.getListaTematicas()));
-		}
-		
-		target.setListaCompradoresDTO(new ArrayList<UsuarioDTO>());
-		if(source.getListaCompradores() != null)
-		{
-			target.setListaCompradoresDTO(usuarioDAO.toDtoList(source.getListaCompradores()));
 		}
 		
 		return target;
