@@ -25,7 +25,6 @@ public class OfertaDTO
 
 	private List<TematicaDTO> listaTematicasDTO;
 	
-	private List<UsuarioDTO> listaCompradoresDTO;
 	public Long getId()
 	{
 		return id;
@@ -124,15 +123,5 @@ public class OfertaDTO
 	public void setListaTematicasDTO(List<TematicaDTO> listaTematicasDTO)
 	{
 		this.listaTematicasDTO = listaTematicasDTO;
-	}
-
-	public List<UsuarioDTO> getListaCompradoresDTO()
-	{
-		return listaCompradoresDTO;
-	}
-
-	public void setListaCompradoresDTO(List<UsuarioDTO> listaCompradoresDTO)
-	{
-		this.listaCompradoresDTO = listaCompradoresDTO;
 	}
 }

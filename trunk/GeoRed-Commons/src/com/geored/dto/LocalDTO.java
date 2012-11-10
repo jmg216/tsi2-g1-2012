@@ -1,16 +1,22 @@
 package com.geored.dto;
 
+import java.util.List;
+
 public class LocalDTO
 {
 	private Long id;
 	
 	private String nombre;
 	
+	private String direccion;
+	
 	private String ubicacionGeografica;
 	
 	private Long idEmpresa;
 	
 	private String nombreEmpresa;
+	
+	private List<OfertaDTO> listaOfertas;
 
 	public Long getId()
 	{
@@ -60,5 +66,25 @@ public class LocalDTO
 	public void setUbicacionGeografica(String ubicacionGeografica)
 	{
 		this.ubicacionGeografica = ubicacionGeografica;
+	}
+
+	public String getDireccion()
+	{
+		return direccion;
+	}
+
+	public void setDireccion(String direccion)
+	{
+		this.direccion = direccion;
+	}
+
+	public List<OfertaDTO> getListaOfertas()
+	{
+		return listaOfertas;
+	}
+
+	public void setListaOfertas(List<OfertaDTO> listaOfertas)
+	{
+		this.listaOfertas = listaOfertas;
 	}
 }
