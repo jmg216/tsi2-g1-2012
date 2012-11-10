@@ -56,16 +56,6 @@ public class LoginBean extends BaseBean implements Serializable
 		return SUCCESS;
 	}
 	
-	public boolean hayUsuarioAutenticado()
-	{
-		return UtilesSeguridadWeb.hayUsuarioAutenticado();
-	}
-	
-	public AdministradorDTO obtenerUsuarioAutenticado()
-	{
-		return UtilesSeguridadWeb.obtenerUsuarioAutenticado();
-	}
-	
 	public String getEmail()
 	{
 		return email;

@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import com.geored.backoffice.managedBean.BaseBean;
+import com.geored.backoffice.utiles.UtilesSeguridadWeb;
 import com.geored.backoffice.utiles.UtilesWeb;
 import com.geored.negocio.AdministradorDTO;
 import com.geored.negocio.TipoAdministradorDTO;
@@ -90,6 +91,8 @@ public class GestionAdministradorBean extends BaseBean implements Serializable
 				{
 					if(validar(VALIDAR_CREAR))
 					{
+						getAdministradorDTO().setPass(UtilesSeguridadWeb.encriptarMD5(UtilesSeguridadWeb.DEFAULT_PASS));
+						
 						getAdminPort().insertar(getAdministradorDTO());
 						
 						addBeanMessage("Administrador guardado correctamente");
