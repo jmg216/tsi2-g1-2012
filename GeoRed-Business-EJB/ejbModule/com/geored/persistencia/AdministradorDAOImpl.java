@@ -51,9 +51,41 @@ public class AdministradorDAOImpl extends GenericDAOBase<Administrador, Administ
 	{
 		try
 		{
-			Query query = em.createQuery("select a from Administrador a where a.email = ?1 and a.pass = ?2");        
+			Query query = em.createQuery("select a from com.geored.dominio.Administrador a where a.email = ?1 and a.pass = ?2");        
 	        query.setParameter(1, email);        
 	        query.setParameter(2, pass);
+	        
+	        Administrador adminEntity = null;
+	        
+	        try
+	        {
+	        	 adminEntity = (Administrador) query.getSingleResult();
+	        	 
+	        	 if(toDTO)
+	             {        	
+	             	return toDto(adminEntity);
+	             }
+	        }
+	        catch(NoResultException e)
+	        {
+	        	return null;
+	        }
+	        
+	        return adminEntity;
+		}
+		catch(Throwable e)
+		{
+			throw new DaoException(e.getMessage());
+		}
+	}
+
+	@Override
+	public Object obtenerAdminPorEmail(String email, boolean toDTO) throws DaoException
+	{
+		try
+		{
+			Query query = em.createQuery("select a from com.geored.dominio.Administrador a where a.email = ?1");        
+	        query.setParameter(1, email);        
 	        
 	        Administrador adminEntity = null;
 	        

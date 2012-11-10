@@ -56,11 +56,11 @@ public class Oferta implements Serializable
 	@JoinTable(name="oferta_tematica",
 	joinColumns =
 	{
-	    @JoinColumn(name = "TEMATICA_FK")
+	    @JoinColumn(name = "OFERTA_FK")
 	},
 	inverseJoinColumns =
 	{
-	    @JoinColumn(name = "OFERTA_FK")
+	    @JoinColumn(name = "TEMATICA_FK")
 	})
 	private List<Tematica> listaTematicas;
 

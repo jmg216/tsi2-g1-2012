@@ -27,32 +27,37 @@ public class UtilesSeguridadWeb
 		return FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(KEY_ADMIN_AUTENTICADO) != null;
 	}
 	
+	public static AdministradorDTO obtenerUsuarioAutenticado()
+	{
+		return (AdministradorDTO) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(KEY_ADMIN_AUTENTICADO);
+	}
+	
 	// Utilidades para encriptar password
-	  	public static String encriptarMD5(String cadena)
+  	public static String encriptarMD5(String cadena)
+	{
+  		final char[] CONSTS_HEX = { '0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f' };
+  		
+		try
 		{
-	  		final char[] CONSTS_HEX = { '0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f' };
-	  		
-			try
+			MessageDigest msgd = MessageDigest.getInstance("MD5");
+			
+			byte[] bytes = msgd.digest(cadena.getBytes());
+			
+			StringBuilder strCadenaMD5 = new StringBuilder(2 * bytes.length);
+			
+			for (int i = 0; i < bytes.length; i++)
 			{
-				MessageDigest msgd = MessageDigest.getInstance("MD5");
-				
-				byte[] bytes = msgd.digest(cadena.getBytes());
-				
-				StringBuilder strCadenaMD5 = new StringBuilder(2 * bytes.length);
-				
-				for (int i = 0; i < bytes.length; i++)
-				{
-					int bajo = (int)(bytes[i] & 0x0f);
-					int alto = (int)((bytes[i] & 0xf0) >> 4);
-					strCadenaMD5.append(CONSTS_HEX[alto]);
-					strCadenaMD5.append(CONSTS_HEX[bajo]);
-				}
-				
-				return strCadenaMD5.toString();
-			} 
-			catch (NoSuchAlgorithmException e) 
-			{
-			   return null;
+				int bajo = (int)(bytes[i] & 0x0f);
+				int alto = (int)((bytes[i] & 0xf0) >> 4);
+				strCadenaMD5.append(CONSTS_HEX[alto]);
+				strCadenaMD5.append(CONSTS_HEX[bajo]);
 			}
+			
+			return strCadenaMD5.toString();
+		} 
+		catch (NoSuchAlgorithmException e) 
+		{
+		   return null;
 		}
+	}
 }

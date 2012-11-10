@@ -34,6 +34,12 @@ public class AdminServiceImpl implements AdminService
 	@WebMethod
 	public Long insertar(AdministradorDTO administradorDTO) throws NegocioException, DaoException
 	{
+		//Verifico no exista otro administrador con el mismo email
+		if(administradorDAO.obtenerAdminPorEmail(administradorDTO.getEmail(), false) != null)
+		{
+			throw new NegocioException("Ya existe un administrador con el email ingresado");
+		}
+		
 		Administrador administradorEntity = administradorDAO.toEntity(administradorDTO);
 		
 		TipoAdministrador tipoAdministradorEntity = (TipoAdministrador) tipoAdministradorDAO.obtener(administradorDTO.getIdTipoAdministrador(), false);
@@ -54,7 +60,15 @@ public class AdminServiceImpl implements AdminService
 	@WebMethod
 	public void actualizar(AdministradorDTO administradorDTO) throws NegocioException, DaoException
 	{
-		Administrador administradorEntity = (Administrador) administradorDAO.obtener(administradorDTO.getId(), false);
+		//Verifico no exista otro administrador con el mismo email
+		Administrador administradorEntity = (Administrador) administradorDAO.obtenerAdminPorEmail(administradorDTO.getEmail(), false);
+		if(administradorEntity != null && !administradorEntity.getId().equals(administradorDTO.getId()))
+		{
+			throw new NegocioException("Ya existe un administrador con el email ingresado");
+		}
+		
+		// Si no existe otro con el mismo email lo guardo
+		administradorEntity = (Administrador) administradorDAO.obtener(administradorDTO.getId(), false);
 		
 		if(administradorEntity == null)
 		{

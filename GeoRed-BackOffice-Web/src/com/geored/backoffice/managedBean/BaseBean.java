@@ -145,7 +145,7 @@ public abstract class BaseBean
 		{
 			compraPort = new CompraServiceImplServiceLocator().getCompraServiceImplPort();
 		}
-		
+
 		return compraPort;
 	}
 	

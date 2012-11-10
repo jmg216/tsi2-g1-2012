@@ -48,11 +48,11 @@ public class Evento implements Serializable
 	@JoinTable(name="evento_tematica",
 	joinColumns =
 	{
-	    @JoinColumn(name = "TEMATICA_FK")
+	    @JoinColumn(name = "EVENTO_FK")
 	},
 	inverseJoinColumns =
 	{
-	    @JoinColumn(name = "EVENTO_FK")
+	    @JoinColumn(name = "TEMATICA_FK")
 	})
 	private List<Tematica> listaTematicas;
 
