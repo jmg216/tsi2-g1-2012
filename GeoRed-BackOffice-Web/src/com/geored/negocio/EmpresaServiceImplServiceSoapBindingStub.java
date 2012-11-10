@@ -189,6 +189,20 @@ public class EmpresaServiceImplServiceSoapBindingStub extends org.apache.axis.cl
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
 
+            qName = new javax.xml.namespace.QName("http://negocio.geored.com/", "ofertaDTO");
+            cachedSerQNames.add(qName);
+            cls = com.geored.negocio.OfertaDTO.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://negocio.geored.com/", "tematicaDTO");
+            cachedSerQNames.add(qName);
+            cls = com.geored.negocio.TematicaDTO.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
     }
 
     protected org.apache.axis.client.Call createCall() throws java.rmi.RemoteException {

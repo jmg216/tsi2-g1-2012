@@ -12,8 +12,6 @@ public class UsuarioDTO  implements java.io.Serializable {
 
     private java.lang.Long id;
 
-    private com.geored.negocio.OfertaDTO[] listaComprasDTO;
-
     private com.geored.negocio.TematicaDTO[] listaTematicasDTO;
 
     private java.lang.String nombre;
@@ -28,14 +26,12 @@ public class UsuarioDTO  implements java.io.Serializable {
     public UsuarioDTO(
            java.lang.String email,
            java.lang.Long id,
-           com.geored.negocio.OfertaDTO[] listaComprasDTO,
            com.geored.negocio.TematicaDTO[] listaTematicasDTO,
            java.lang.String nombre,
            java.lang.String pass,
            java.lang.String urlImagen) {
            this.email = email;
            this.id = id;
-           this.listaComprasDTO = listaComprasDTO;
            this.listaTematicasDTO = listaTematicasDTO;
            this.nombre = nombre;
            this.pass = pass;
@@ -80,34 +76,6 @@ public class UsuarioDTO  implements java.io.Serializable {
      */
     public void setId(java.lang.Long id) {
         this.id = id;
-    }
-
-
-    /**
-     * Gets the listaComprasDTO value for this UsuarioDTO.
-     * 
-     * @return listaComprasDTO
-     */
-    public com.geored.negocio.OfertaDTO[] getListaComprasDTO() {
-        return listaComprasDTO;
-    }
-
-
-    /**
-     * Sets the listaComprasDTO value for this UsuarioDTO.
-     * 
-     * @param listaComprasDTO
-     */
-    public void setListaComprasDTO(com.geored.negocio.OfertaDTO[] listaComprasDTO) {
-        this.listaComprasDTO = listaComprasDTO;
-    }
-
-    public com.geored.negocio.OfertaDTO getListaComprasDTO(int i) {
-        return this.listaComprasDTO[i];
-    }
-
-    public void setListaComprasDTO(int i, com.geored.negocio.OfertaDTO _value) {
-        this.listaComprasDTO[i] = _value;
     }
 
 
@@ -216,9 +184,6 @@ public class UsuarioDTO  implements java.io.Serializable {
             ((this.id==null && other.getId()==null) || 
              (this.id!=null &&
               this.id.equals(other.getId()))) &&
-            ((this.listaComprasDTO==null && other.getListaComprasDTO()==null) || 
-             (this.listaComprasDTO!=null &&
-              java.util.Arrays.equals(this.listaComprasDTO, other.getListaComprasDTO()))) &&
             ((this.listaTematicasDTO==null && other.getListaTematicasDTO()==null) || 
              (this.listaTematicasDTO!=null &&
               java.util.Arrays.equals(this.listaTematicasDTO, other.getListaTematicasDTO()))) &&
@@ -247,17 +212,6 @@ public class UsuarioDTO  implements java.io.Serializable {
         }
         if (getId() != null) {
             _hashCode += getId().hashCode();
-        }
-        if (getListaComprasDTO() != null) {
-            for (int i=0;
-                 i<java.lang.reflect.Array.getLength(getListaComprasDTO());
-                 i++) {
-                java.lang.Object obj = java.lang.reflect.Array.get(getListaComprasDTO(), i);
-                if (obj != null &&
-                    !obj.getClass().isArray()) {
-                    _hashCode += obj.hashCode();
-                }
-            }
         }
         if (getListaTematicasDTO() != null) {
             for (int i=0;
@@ -302,14 +256,6 @@ public class UsuarioDTO  implements java.io.Serializable {
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
-        typeDesc.addFieldDesc(elemField);
-        elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("listaComprasDTO");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "listaComprasDTO"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://negocio.geored.com/", "ofertaDTO"));
-        elemField.setMinOccurs(0);
-        elemField.setNillable(true);
-        elemField.setMaxOccursUnbounded(true);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("listaTematicasDTO");

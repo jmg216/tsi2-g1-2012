@@ -20,8 +20,6 @@ public class OfertaDTO  implements java.io.Serializable {
 
     private java.lang.Long idLocal;
 
-    private com.geored.negocio.UsuarioDTO[] listaCompradoresDTO;
-
     private com.geored.negocio.TematicaDTO[] listaTematicasDTO;
 
     private java.lang.String nombre;
@@ -40,7 +38,6 @@ public class OfertaDTO  implements java.io.Serializable {
            java.util.Calendar fechaInicio,
            java.lang.Long id,
            java.lang.Long idLocal,
-           com.geored.negocio.UsuarioDTO[] listaCompradoresDTO,
            com.geored.negocio.TematicaDTO[] listaTematicasDTO,
            java.lang.String nombre,
            java.lang.String nombreLocal,
@@ -51,7 +48,6 @@ public class OfertaDTO  implements java.io.Serializable {
            this.fechaInicio = fechaInicio;
            this.id = id;
            this.idLocal = idLocal;
-           this.listaCompradoresDTO = listaCompradoresDTO;
            this.listaTematicasDTO = listaTematicasDTO;
            this.nombre = nombre;
            this.nombreLocal = nombreLocal;
@@ -180,34 +176,6 @@ public class OfertaDTO  implements java.io.Serializable {
 
 
     /**
-     * Gets the listaCompradoresDTO value for this OfertaDTO.
-     * 
-     * @return listaCompradoresDTO
-     */
-    public com.geored.negocio.UsuarioDTO[] getListaCompradoresDTO() {
-        return listaCompradoresDTO;
-    }
-
-
-    /**
-     * Sets the listaCompradoresDTO value for this OfertaDTO.
-     * 
-     * @param listaCompradoresDTO
-     */
-    public void setListaCompradoresDTO(com.geored.negocio.UsuarioDTO[] listaCompradoresDTO) {
-        this.listaCompradoresDTO = listaCompradoresDTO;
-    }
-
-    public com.geored.negocio.UsuarioDTO getListaCompradoresDTO(int i) {
-        return this.listaCompradoresDTO[i];
-    }
-
-    public void setListaCompradoresDTO(int i, com.geored.negocio.UsuarioDTO _value) {
-        this.listaCompradoresDTO[i] = _value;
-    }
-
-
-    /**
      * Gets the listaTematicasDTO value for this OfertaDTO.
      * 
      * @return listaTematicasDTO
@@ -324,9 +292,6 @@ public class OfertaDTO  implements java.io.Serializable {
             ((this.idLocal==null && other.getIdLocal()==null) || 
              (this.idLocal!=null &&
               this.idLocal.equals(other.getIdLocal()))) &&
-            ((this.listaCompradoresDTO==null && other.getListaCompradoresDTO()==null) || 
-             (this.listaCompradoresDTO!=null &&
-              java.util.Arrays.equals(this.listaCompradoresDTO, other.getListaCompradoresDTO()))) &&
             ((this.listaTematicasDTO==null && other.getListaTematicasDTO()==null) || 
              (this.listaTematicasDTO!=null &&
               java.util.Arrays.equals(this.listaTematicasDTO, other.getListaTematicasDTO()))) &&
@@ -367,17 +332,6 @@ public class OfertaDTO  implements java.io.Serializable {
         }
         if (getIdLocal() != null) {
             _hashCode += getIdLocal().hashCode();
-        }
-        if (getListaCompradoresDTO() != null) {
-            for (int i=0;
-                 i<java.lang.reflect.Array.getLength(getListaCompradoresDTO());
-                 i++) {
-                java.lang.Object obj = java.lang.reflect.Array.get(getListaCompradoresDTO(), i);
-                if (obj != null &&
-                    !obj.getClass().isArray()) {
-                    _hashCode += obj.hashCode();
-                }
-            }
         }
         if (getListaTematicasDTO() != null) {
             for (int i=0;
@@ -450,14 +404,6 @@ public class OfertaDTO  implements java.io.Serializable {
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
-        typeDesc.addFieldDesc(elemField);
-        elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("listaCompradoresDTO");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "listaCompradoresDTO"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://negocio.geored.com/", "usuarioDTO"));
-        elemField.setMinOccurs(0);
-        elemField.setNillable(true);
-        elemField.setMaxOccursUnbounded(true);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("listaTematicasDTO");

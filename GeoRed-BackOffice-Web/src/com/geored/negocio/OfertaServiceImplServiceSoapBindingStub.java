@@ -189,13 +189,6 @@ public class OfertaServiceImplServiceSoapBindingStub extends org.apache.axis.cli
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
 
-            qName = new javax.xml.namespace.QName("http://negocio.geored.com/", "usuarioDTO");
-            cachedSerQNames.add(qName);
-            cls = com.geored.negocio.UsuarioDTO.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(beansf);
-            cachedDeserFactories.add(beandf);
-
     }
 
     protected org.apache.axis.client.Call createCall() throws java.rmi.RemoteException {
