@@ -22,7 +22,18 @@
 						</ul>
 					</div>
 					
-					<p:gmap id="mapaCheckIn" model="#{reporteCheckInBean.checkinMap}" center="-34.904375,-56.166414" zoom="13" type="TERRAIN" style="width:890px;height:390px"/>
+					<p:gmap id="mapaCheckIn" model="#{reporteCheckInBean.checkinMap}"  center="-34.904375,-56.166414" zoom="13" type="TERRAIN" style="width:890px;height:390px">
+						<p:ajax event="overlaySelect" listener="#{reporteCheckInBean.onMarkerSelect}" />
+  
+				        <p:gmapInfoWindow>  
+				            <p:outputPanel style="text-align:center;display:block;margin:auto:">  
+				
+				                    <h:outputText value="#{reporteCheckInBean.marcador.title}" /> 
+				  
+				            </p:outputPanel>  				  
+				        </p:gmapInfoWindow>  
+						
+					</p:gmap>
 					
 					<p:dialog  id="fechaDialog" modal="true" widgetVar="fechaDialog" header="Ingrese el periodo de tiempo...">						
 							

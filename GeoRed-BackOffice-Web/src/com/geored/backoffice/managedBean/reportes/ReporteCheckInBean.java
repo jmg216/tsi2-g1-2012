@@ -9,9 +9,10 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.event.map.OverlaySelectEvent;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
@@ -21,7 +22,7 @@ import com.geored.backoffice.managedBean.BaseBean;
 import com.geored.negocio.CheckInDTO;
 
 @ManagedBean(name="reporteCheckInBean")
-@RequestScoped
+@SessionScoped
 public class ReporteCheckInBean extends BaseBean implements Serializable
 {		
 	/**
@@ -73,14 +74,19 @@ public class ReporteCheckInBean extends BaseBean implements Serializable
 						
 						LatLng coord = new LatLng(latitud,longitud);
 						
-						checkinMap.addOverlay(new Marker(coord));
-				}
-				
-				else 
-				{
-					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("No hay check-ins en las fechas indicadas..."));
+						checkinMap.addOverlay(new Marker(coord,check.getNombreSitio(), check.getNombreUsuario(),"http://maps.google.com/mapfiles/ms/micons/blue-dot.png"));
 				}
 			}
+			
+			if(checkinMap.getMarkers().size() == 0) 
+			{
+				FacesMessage message = new FacesMessage();
+				
+				message.setSummary("Reporte de Check-In");
+				message.setDetail("No hay check-ins en las fechas indicadas...");
+				
+				FacesContext.getCurrentInstance().addMessage(null, message);
+			}	
 		
 		} 
 		catch (Exception e) 
@@ -128,5 +134,10 @@ public class ReporteCheckInBean extends BaseBean implements Serializable
 	public void setMarcador(Marker marcador) {
 		this.marcador = marcador;
 	}	
+	
+	public void onMarkerSelect(OverlaySelectEvent event) 
+	{
+		marcador = (Marker) event.getOverlay();
+	}
 	
 }
