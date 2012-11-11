@@ -10,23 +10,26 @@
 		<ui:composition template="/xhtml/templates/layout.xhtml">
 			<ui:define name="content">	
 				<h:form>
+					
+					<p:growl id="growl" showDetail="true" sticky="true" /> 
+				
 					<h1 class="titulo-content">Reporte de Compras</h1>
 					
 					<div class="areaBotones">
 						<ul>
 							<li>
-								<p:commandButton value="Ver Reporte" type="button" onclick="fechaDialog.show()" icon="ui-icon-pin-s"/>
+								<p:commandButton value="Ver Reporte" type="button" onclick="fechaDialog.show()"/>
 							</li>
 						</ul>
 					</div>
 					
 					<p:outputPanel id="grafico" autoUpdate="true">
-						<p:pieChart id="sample" value="#{reporteComprasBean.pieModel}" legendPosition="w" title="Compras en el rango ingresado" style="width:600px;height:400px" showDataLabels="true" dataFormat="value" rendered="#{requestScope.mostrar}"/> 
+						<p:pieChart id="sample" value="#{reporteComprasBean.pieModel}" legendPosition="w" title="Compras en el rango ingresado" style="width:600px;height:400px;margin-top:2%;margin-right:16%" showDataLabels="true" dataFormat="value" rendered="#{requestScope.mostrar}"/> 
 					</p:outputPanel>
 					
 					<p:dialog  id="fechaDialog" modal="true" widgetVar="fechaDialog" header="Ingrese el periodo de tiempo...">						
 							
-							<h:panelGrid columns="2">
+							<h:panelGrid id="panel" columns="2">
 								
 								<h:outputText value= "Fecha Inicial:" />
 								<p:calendar value="#{reporteComprasBean.fechaInicial}" />
@@ -35,7 +38,7 @@
 								<p:calendar value="#{reporteComprasBean.fechaFinal}" />
 								
 								<f:facet name="footer">
-									<p:commandButton id="aceptar" value="Aceptar" style="float:right;" action="#{reporteComprasBean.mostrarReporte()}" onstart="fechaDialog.hide()" icon="ui-icon-arrowrefresh-1-w">
+									<p:commandButton id="aceptar" value="Aceptar" style="float:right;" action="#{reporteComprasBean.mostrarReporte()}" onstart="fechaDialog.hide()" icon="ui-icon-arrowrefresh-1-w" update="growl"> 
 										<f:setPropertyActionListener target="#{requestScope.mostrar}" value="#{true}" />
 									</p:commandButton>
 								</f:facet>

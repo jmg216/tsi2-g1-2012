@@ -61,6 +61,7 @@ public class ReporteCheckInBean extends BaseBean implements Serializable
 			fechaIni.setTime(fechaInicial);
 			fechaFi.setTime(fechaFinal);
 			
+			
 			for (CheckInDTO check: listadoCheckIns)
 			{
 				if(check.getFechaCreacion().after(fechaIni) && check.getFechaCreacion().before(fechaFi)) { 
@@ -74,7 +75,13 @@ public class ReporteCheckInBean extends BaseBean implements Serializable
 						
 						LatLng coord = new LatLng(latitud,longitud);
 						
-						checkinMap.addOverlay(new Marker(coord,check.getNombreSitio(), check.getNombreUsuario(),"http://maps.google.com/mapfiles/ms/micons/blue-dot.png"));
+						Integer mes = check.getFechaCreacion().get(Calendar.MONTH);
+						int sum = mes + 1;
+						
+						String fechaMostrar = check.getFechaCreacion().get(Calendar.DAY_OF_MONTH) + "/" + sum  + "/" + check.getFechaCreacion().get(Calendar.YEAR);
+						String data = "Hecho por: " + check.getNombreUsuario() + "\n en la fecha: " + fechaMostrar;
+						
+						checkinMap.addOverlay(new Marker(coord,check.getNombreSitio(), data,"http://maps.google.com/mapfiles/ms/micons/blue-dot.png"));
 				}
 			}
 			
