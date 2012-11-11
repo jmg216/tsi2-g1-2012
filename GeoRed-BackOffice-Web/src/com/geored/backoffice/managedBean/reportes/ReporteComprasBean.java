@@ -8,8 +8,10 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 import org.primefaces.model.chart.PieChartModel;
 
@@ -76,6 +78,16 @@ public class ReporteComprasBean extends BaseBean implements Serializable
 					}
 				}
 					
+			}
+			
+			if(pieModel.getData().isEmpty()) 
+			{
+				FacesMessage message = new FacesMessage();
+				
+				message.setSummary("Reporte de Compras");
+				message.setDetail("No hay compras de oferta en las fechas indicadas...");
+				
+				FacesContext.getCurrentInstance().addMessage(null, message);
 			}
 		} 
 		
