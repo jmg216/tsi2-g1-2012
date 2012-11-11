@@ -1,6 +1,7 @@
 package com.geored.backoffice.managedBean.reportes;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -10,8 +11,11 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
+import org.primefaces.model.chart.PieChartModel;
+
 import com.geored.backoffice.managedBean.BaseBean;
 import com.geored.negocio.CompraDTO;
+import com.geored.negocio.OfertaDTO;
 
 @ManagedBean(name="reporteComprasBean")
 @RequestScoped
@@ -25,6 +29,9 @@ public class ReporteComprasBean extends BaseBean implements Serializable
 	private Date fechaInicial;
 	private Date fechaFinal;
 	private List<CompraDTO> listadoCompras;
+	private List<CompraDTO> listadoComprasOferta;
+	private List<OfertaDTO> listadoOfertas;
+	private PieChartModel pieModel;
 
 	public ReporteComprasBean()
 	{
@@ -34,15 +41,19 @@ public class ReporteComprasBean extends BaseBean implements Serializable
 	@PostConstruct
 	public void init() 
 	{
-		listadoCompras = null;
+		
 	}
 	
 	public void mostrarReporte () 
 	{
 		try 
 		{
-			CompraDTO[] arrayCompras = getCompraPort().obtenerListado();
-			listadoCompras = Arrays.asList(arrayCompras);
+			OfertaDTO [] arrayOfertas = getOfertaPort().obtenerListado();
+			
+			listadoOfertas = Arrays.asList(arrayOfertas);
+			listadoCompras = new ArrayList<CompraDTO>();
+			
+			pieModel = new PieChartModel();
 			
 			//Conversion de Date To Calendar
 			Calendar fechaIni = Calendar.getInstance();
@@ -50,6 +61,22 @@ public class ReporteComprasBean extends BaseBean implements Serializable
 			fechaIni.setTime(fechaInicial);
 			fechaFi.setTime(fechaFinal);
 			
+			for (OfertaDTO oferta: listadoOfertas)
+			{
+				CompraDTO[] arrayComprasOferta = getCompraPort().obtenerListadoPorOferta(oferta.getId());
+				listadoComprasOferta = Arrays.asList(arrayComprasOferta);
+				
+				for(CompraDTO compra: listadoComprasOferta)
+				{
+					if(compra.getFechaCreacion().after(fechaIni) && compra.getFechaCreacion().before(fechaFi)) 
+					{
+						listadoCompras.add(compra);
+						pieModel.set(oferta.getNombre(), listadoCompras.size());
+						
+					}
+				}
+					
+			}
 		} 
 		
 		catch (Exception e) 
@@ -81,6 +108,9 @@ public class ReporteComprasBean extends BaseBean implements Serializable
 	public void setListadoCompras(List<CompraDTO> listadoCompras) {
 		this.listadoCompras = listadoCompras;
 	}
-	
-	
+
+	public PieChartModel getPieModel() {
+		return pieModel;
+	}
+
 }

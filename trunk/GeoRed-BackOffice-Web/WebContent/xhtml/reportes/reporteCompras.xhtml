@@ -12,10 +12,38 @@
 				<h:form>
 					<h1 class="titulo-content">Reporte de Compras</h1>
 					
-					<p:inputText value="#{loginBean.administradorDTO.email}" title="Email:"/>
-					<p:password value="#{loginBean.administradorDTO.pass}" title="Passwrod:"/>
+					<div class="areaBotones">
+						<ul>
+							<li>
+								<p:commandButton value="Ver Reporte" type="button" onclick="fechaDialog.show()" icon="ui-icon-pin-s"/>
+							</li>
+						</ul>
+					</div>
 					
-					<p:commandButton value="Ingresar" action="#{loginBean.autenticar()}"/>
+					<p:outputPanel id="grafico" autoUpdate="true">
+						<p:pieChart id="sample" value="#{reporteComprasBean.pieModel}" legendPosition="w" title="Compras en el rango ingresado" style="width:600px;height:400px" showDataLabels="true" dataFormat="value" rendered="#{requestScope.mostrar}"/> 
+					</p:outputPanel>
+					
+					<p:dialog  id="fechaDialog" modal="true" widgetVar="fechaDialog" header="Ingrese el periodo de tiempo...">						
+							
+							<h:panelGrid columns="2">
+								
+								<h:outputText value= "Fecha Inicial:" />
+								<p:calendar value="#{reporteComprasBean.fechaInicial}" />
+								
+								<h:outputText value= "Fecha Final:" />
+								<p:calendar value="#{reporteComprasBean.fechaFinal}" />
+								
+								<f:facet name="footer">
+									<p:commandButton id="aceptar" value="Aceptar" style="float:right;" action="#{reporteComprasBean.mostrarReporte()}" onstart="fechaDialog.hide()" icon="ui-icon-arrowrefresh-1-w">
+										<f:setPropertyActionListener target="#{requestScope.mostrar}" value="#{true}" />
+									</p:commandButton>
+								</f:facet>
+	
+							</h:panelGrid>
+							
+					</p:dialog>
+					
 				</h:form>
 			</ui:define>
 		</ui:composition>
