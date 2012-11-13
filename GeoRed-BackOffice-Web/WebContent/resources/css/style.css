@@ -12,7 +12,7 @@ input, select, textarea
     font-size: 12px;
     border: 1px #000000 solid;
     font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif !important;
-	width: 250px;     
+	width: 300px;     
 }
 
 #page
@@ -38,7 +38,7 @@ input, select, textarea
 #footer
 {
 	background-color: #FFFFFF;
-	width: 70%;
+	width: 71%;
 	height: 40px;	
 	position: fixed;
 	bottom: 0px;
@@ -99,4 +99,11 @@ input, select, textarea
 {
 	display: inline;
 	padding: 5px 0px 5px 0px;
+}
+
+.black-shadow
+{
+	box-shadow: 0px 0px 10px #262626;
+	-webkit-box-shadow: 0px 0px 10px #262626;
+	-moz-box-shadow: 0px 5px 10px #262626
 }

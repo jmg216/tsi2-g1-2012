@@ -15,38 +15,68 @@
 					
 					<h1 class="titulo-content">Gestión de Sitios</h1>
 					
-					<table>
-						<c:choose>					
-							<c:when test="#{esModoEdicion}">
-								<tr>
-									<td><h:outputText value="Id:" /></td>
-									<td><p:inputText value="#{gestionSitioBean.sitioDTO.id}" readonly="true"/></td>
-								</tr>
-							</c:when>
-							<c:otherwise>
-								<h:inputHidden value="#{gestionSitioBean.sitioDTO.id}" />								
-							</c:otherwise>	
-						</c:choose>	
+					<table width="100%;">
 						<tr>
-							<td><h:outputText value="Nombre:" /></td>
-							<td><p:inputText value="#{gestionSitioBean.sitioDTO.nombre}"/></td>
-						</tr>
-						<tr>
-							<td><h:outputText value="Descripcion:" /></td>
-							<td><p:inputText value="#{gestionSitioBean.sitioDTO.descripcion}"/></td>
-						</tr>																
-						<tr>
-							<td><h:outputText value="Imagen:" /></td>
-							<td><p:graphicImage url="#{gestionSitioBean.sitioDTO.urlImagen}"/></td>
-						</tr>
-						<tr>
-							<td><h:outputText value="Ubicación:" /></td>
-							<td><p:inputText value="#{gestionSitioBean.sitioDTO.ubicacionGeografica}"/></td>
-						</tr>
-						<tr>
-							<td><h:outputText value="Temáticas:"/></td>
-							<td></td>
-						</tr>
+							<td style="vertical-align: top;">
+								<table>	
+									<c:choose>					
+										<c:when test="#{esModoEdicion}">
+											<tr>
+												<td><h:outputText value="Id:" /></td>
+												<td><p:inputText value="#{gestionSitioBean.sitioDTO.id}" readonly="true"/></td>
+											</tr>
+										</c:when>
+										<c:otherwise>
+											<h:inputHidden value="#{gestionSitioBean.sitioDTO.id}" />								
+										</c:otherwise>	
+									</c:choose>	
+									<tr>
+										<td><h:outputText value="Nombre:" /></td>
+										<td><p:inputText value="#{gestionSitioBean.sitioDTO.nombre}"/></td>
+									</tr>
+									<tr>
+										<td><h:outputText value="Descripcion:" /></td>
+										<td><p:inputText value="#{gestionSitioBean.sitioDTO.descripcion}"/></td>
+									</tr>																
+									<tr>
+										<td><h:outputText value="URL Imagen:" /></td>
+										<td><p:inputText value="#{gestionSitioBean.sitioDTO.urlImagen}"/></td>
+									</tr>
+									<c:if test="#{!utilesWeb.isNullOrEmpty(gestionSitioBean.sitioDTO.urlImagen)}">
+										<tr>
+											<td></td>
+											<td><p:graphicImage url="#{gestionSitioBean.sitioDTO.urlImagen}" width="310px;" onclick="dlgFullImage.show();" styleClass="black-shadow" style="cursor: pointer;"/></td>
+										</tr>
+									</c:if>
+									<tr>
+										<td style="vertical-align: top;"><h:outputText value="Temáticas:"/></td>
+										<td>
+											<p:selectManyCheckbox value="#{gestionSitioBean.tematicasSeleccionadas}" layout="pageDirection">  
+									            <f:selectItems value="#{gestionSitioBean.listaTematicas}" var="tematica" itemValue="#{tematica.id}" itemLabel="#{tematica.nombre}" />  
+									        </p:selectManyCheckbox>  
+										</td>
+									</tr>
+								</table>
+							</td>
+							<td style="vertical-align: top; width: 60%">
+								<table width="100%;">									
+									<c:if test="#{!utilesWeb.isNullOrEmpty(gestionSitioBean.sitioDTO.ubicacionGeografica)}">	
+										<tr>
+											<td colspan="2"><div id="containerMapaSitio" style="width: 100%; height: 350px;" class="black-shadow"></div></td>
+										</tr>
+										<script type="text/javascript">
+											$(function(){
+												refreshMapaSitio();	
+											})											
+										</script>
+									</c:if>
+									<tr>
+										<td><h:outputText value="Haga click en el cuadro de texto para cambiar la ubicación:" /></td>
+										<td><p:inputText widgetVar="idUbicacionSitio" style="cursor: pointer;" value="#{gestionSitioBean.sitioDTO.ubicacionGeografica}" readonly="true" onclick="showMapaSelector(this.id, refreshMapaSitio)"/></td>
+									</tr>
+								</table>
+							</td>
+						</tr>						
 					</table>
 					
 					<div class="areaBotones">
@@ -58,8 +88,39 @@
 								<p:commandButton value="Guardar" action="#{gestionSitioBean.guardarSitio()}" onclick="refreshView();"/>	
 							</li>
 						</ul>									
-					</div>					
-				</h:form>				
+					</div>	
+					
+					<c:if test="#{!utilesWeb.isNullOrEmpty(gestionSitioBean.sitioDTO.urlImagen)}">
+						<p:dialog modal="true" resizable="false" widgetVar="dlgFullImage" header="Imagen">
+							<p:graphicImage url="#{gestionSitioBean.sitioDTO.urlImagen}"/>
+						</p:dialog>
+					</c:if>
+				</h:form>
+				
+				<script type="text/javascript">
+					function refreshMapaSitio()
+					{
+						var splitUbicacionSitio = idUbicacionSitio.jq.val().split(",");
+						
+						var latitud = splitUbicacionSitio[0];
+						var longitud = splitUbicacionSitio[1];
+
+						var latLngSitio = new google.maps.LatLng(latitud, longitud);
+						var myOptions = {
+					      zoom: 10,
+					      center: latLngSitio,
+					      mapTypeId: google.maps.MapTypeId.ROADMAP
+					    };
+					    
+					    var mapSitio = new google.maps.Map(document.getElementById("containerMapaSitio"), myOptions);
+
+						// Agrego un marcador en el mapa
+					    new google.maps.Marker({
+					        position: latLngSitio,
+					        map: mapSitio
+					    });					    
+					}
+				</script>				
 			</ui:define>
 		</ui:composition>
 	</h:body>
