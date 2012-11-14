@@ -25,23 +25,17 @@ public class UsuarioDAOImpl extends GenericDAOBase<Usuario, UsuarioDTO> implemen
 	private OfertaDAO ofertaDAO;
 	
 	@Override
-	public Usuario toEntity(UsuarioDTO source)
+	public void toEntity(UsuarioDTO source, Usuario target)
 	{
-		Usuario target = new Usuario();
-		
 		target.setEmail(source.getEmail());
 		target.setPass(source.getPass());
 		target.setNombre(source.getNombre());
 		target.setUrlImagen(source.getUrlImagen());
-		
-		return target;
 	}
 
 	@Override
-	public UsuarioDTO toDto(Usuario source)
+	public void toDto(Usuario source, UsuarioDTO target)
 	{
-		UsuarioDTO target = new UsuarioDTO();
-		
 		target.setId(source.getId());
 		target.setEmail(source.getEmail());
 		target.setPass(source.getPass());
@@ -53,8 +47,6 @@ public class UsuarioDAOImpl extends GenericDAOBase<Usuario, UsuarioDTO> implemen
 		{
 			target.setListaTematicasDTO(tematicaDAO.toDtoList(source.getListaTematicas()));
 		}
-			
-		return target;
 	}
 	
 	public Object obtenerUsuarioPorEmailYPass(String email, String pass, boolean toDTO) throws DaoException

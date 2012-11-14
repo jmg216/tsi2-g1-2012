@@ -90,6 +90,8 @@ public class CompraServiceImpl implements CompraService
 			throw new NegocioException("Oferta no encontrada");
 		}
 		
+		compraDAO.toEntity(compraDTO, compraEntity);
+		
 		compraEntity.setUsuario(usuarioEntity);
 		
 		compraEntity.setOferta(ofertaEntity);

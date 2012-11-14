@@ -12,20 +12,14 @@ import com.geored.persistencia.core.GenericDAOBase;
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class AmistadDAOImpl extends GenericDAOBase<Amistad, AmistadDTO> implements AmistadDAO
 {
-
 	@Override
-	public Amistad toEntity(AmistadDTO source)
+	public void toEntity(AmistadDTO source, Amistad target)
 	{		
-		Amistad target = new Amistad();
-		
-		return target;
 	}
 
 	@Override
-	public AmistadDTO toDto(Amistad source)
+	public void toDto(Amistad source, AmistadDTO target)
 	{
-		AmistadDTO target = new AmistadDTO();
-		
 		target.setId(source.getId());
 		
 		if(source.getUsuarioA() != null)
@@ -39,7 +33,5 @@ public class AmistadDAOImpl extends GenericDAOBase<Amistad, AmistadDTO> implemen
 			target.setIdUsuarioB(source.getUsuarioB().getId());
 			target.setNombreUsuarioB(source.getUsuarioB().getNombre());
 		}	
-		
-		return target;
 	}	
 }

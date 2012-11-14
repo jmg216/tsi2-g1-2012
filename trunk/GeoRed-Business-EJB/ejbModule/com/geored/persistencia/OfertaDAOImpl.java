@@ -29,25 +29,19 @@ public class OfertaDAOImpl extends GenericDAOBase<Oferta, OfertaDTO> implements 
 	private UsuarioDAO usuarioDAO;
 	
 	@Override
-	public Oferta toEntity(OfertaDTO source)
+	public void toEntity(OfertaDTO source, Oferta target)
 	{
-		Oferta target = new Oferta();
-		
 		target.setNombre(source.getNombre());
 		target.setDescripcion(source.getDescripcion());
 		target.setCosto(source.getCosto());
 		target.setUrlImagen(source.getUrlImagen());
 		target.setFechaInicio(new Timestamp(source.getFechaInicio().getTime()));
 		target.setFechaFin(new Timestamp(source.getFechaFin().getTime()));
-		
-		return target;
 	}
 
 	@Override
-	public OfertaDTO toDto(Oferta source)
+	public void toDto(Oferta source, OfertaDTO target)
 	{
-		OfertaDTO target = new OfertaDTO();
-		
 		target.setId(source.getId());
 		target.setNombre(source.getNombre());
 		target.setDescripcion(source.getDescripcion());
@@ -67,8 +61,6 @@ public class OfertaDAOImpl extends GenericDAOBase<Oferta, OfertaDTO> implements 
 		{
 			target.setListaTematicasDTO(tematicaDAO.toDtoList(source.getListaTematicas()));
 		}
-		
-		return target;
 	}
 	
 	public List buscarOfertasPorTematicas(List<Tematica> tematicas, Usuario u,  boolean toDTO) throws DaoException

@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import com.geored.dominio.Sitio;
+import com.geored.dto.SitioDTO;
 import com.geored.exceptions.DaoException;
 import com.geored.utiles.UtilesPersistencia;
 
@@ -43,7 +45,7 @@ public abstract class GenericDAOBase<EntityType, DtoType>
 	{
 		try
 		{
-			em.refresh(entity);
+			em.merge(entity);
 		}
 		catch(Throwable e)
 		{
@@ -100,6 +102,44 @@ public abstract class GenericDAOBase<EntityType, DtoType>
 		catch(Throwable e)
 		{
 			throw new DaoException(e.getMessage());
+		}
+	}
+	
+	// TO ENTITY
+	public EntityType toEntity(DtoType source)
+	{		
+		try
+		{
+			EntityType target = entityClass.newInstance();
+			
+			entityTransformer.toEntity(source, target);
+			
+			return target;
+		} 
+		catch (InstantiationException | IllegalAccessException e)
+		{
+			e.printStackTrace();
+			
+			return null;
+		}
+	}
+	
+	// TO DTO 
+	public DtoType toDto(EntityType source)
+	{
+		try
+		{
+			DtoType target = dtoClass.newInstance();
+			
+			entityTransformer.toDto(source, target);
+			
+			return target;
+		} 
+		catch (InstantiationException | IllegalAccessException e)
+		{
+			e.printStackTrace();
+			
+			return null;
 		}
 	}
 	

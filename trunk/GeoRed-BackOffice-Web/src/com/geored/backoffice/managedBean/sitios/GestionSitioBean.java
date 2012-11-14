@@ -32,7 +32,7 @@ public class GestionSitioBean extends BaseBean implements Serializable
 	
 	private List<TematicaDTO> listaTematicas = new ArrayList<TematicaDTO>();
 	
-	private List<Long> tematicasSeleccionadas = new ArrayList<Long>();
+	private List<String> tematicasSeleccionadas = new ArrayList<String>();
 	
 	public GestionSitioBean()
 	{	
@@ -62,6 +62,16 @@ public class GestionSitioBean extends BaseBean implements Serializable
 		try
 		{
 			listaTematicas = Arrays.asList(getGlobalPort().obtenerListadoTematicas());
+			
+			// Cargo los ids de las tematicas seleccionadas en el sitio
+			tematicasSeleccionadas = new ArrayList<String>();
+			if(sitioDTO.getListaTematicasDTO() != null)
+			{
+				for(TematicaDTO tematicaDTO : sitioDTO.getListaTematicasDTO())
+				{
+					tematicasSeleccionadas.add(tematicaDTO.getId().toString());
+				}
+			}			
 		} 
 		catch (Exception e)
 		{
@@ -79,11 +89,28 @@ public class GestionSitioBean extends BaseBean implements Serializable
 			}
 			else
 			{
+				// Transformo las tematicas seleccionadas
+				List<TematicaDTO> listaTematicasDTO = new ArrayList<TematicaDTO>();
+				if(tematicasSeleccionadas != null)
+				{
+					for(String idTematica : tematicasSeleccionadas)
+					{
+						TematicaDTO tematicaDTO = new TematicaDTO();
+						
+						tematicaDTO.setId(Long.valueOf(idTematica));
+						
+						listaTematicasDTO.add(tematicaDTO);
+					}
+				}
+				getSitioDTO().setListaTematicasDTO(listaTematicasDTO.toArray(new TematicaDTO[]{}));
+				
 				if(UtilesWeb.isNullOrZero(getSitioDTO().getId()))
 				{
 					if(validar(VALIDAR_CREAR))
 					{
-						getSitioPort().insertar(getSitioDTO());
+						Long idSitioNuevo = getSitioPort().insertar(getSitioDTO());
+						
+						setSitioDTO(getSitioPort().obtener(idSitioNuevo));
 						
 						addBeanMessage("Sitio guardado correctamente");
 					}
@@ -93,6 +120,8 @@ public class GestionSitioBean extends BaseBean implements Serializable
 					if(validar(VALIDAR_MODIFICAR))
 					{
 						getSitioPort().actualizar(getSitioDTO());	
+						
+						setSitioDTO(getSitioPort().obtener(getSitioDTO().getId()));
 						
 						addBeanMessage("Sitio guardado correctamente");
 					}
@@ -114,9 +143,8 @@ public class GestionSitioBean extends BaseBean implements Serializable
 	{
 		boolean isValid = true;
 		
-		switch(opValidar)
+		if(opValidar == VALIDAR_CREAR || opValidar == VALIDAR_MODIFICAR)
 		{
-		case VALIDAR_CREAR:			
 			if(UtilesWeb.isNullOrEmpty(getSitioDTO().getNombre()))
 			{
 				addBeanError("'Nombre' es un campo obligatorio.");
@@ -137,33 +165,11 @@ public class GestionSitioBean extends BaseBean implements Serializable
 				addBeanError("'Ubicación Geográfica' es un campo obligatorio.");
 				isValid = false;
 			}
-			break;
-			
-		case VALIDAR_MODIFICAR:
-			if(UtilesWeb.isNullOrEmpty(getSitioDTO().getNombre()))
+			if(tematicasSeleccionadas == null || tematicasSeleccionadas.isEmpty())
 			{
-				addBeanError("'Nombre' es un campo obligatorio.");
-				isValid = false;
-			}			
-			if(UtilesWeb.isNullOrEmpty(getSitioDTO().getDescripcion()))
-			{
-				addBeanError("'Descripción' es un campo obligatorio.");
+				addBeanError("Debe seleccionar al menos una temática.");
 				isValid = false;
 			}
-			if(UtilesWeb.isNullOrEmpty(getSitioDTO().getUrlImagen()))
-			{
-				addBeanError("'URL Imagen' es un campo obligatorio.");
-				isValid = false;
-			}
-			if(UtilesWeb.isNullOrEmpty(getSitioDTO().getUbicacionGeografica()))
-			{
-				addBeanError("'Ubicación Geográfica' es un campo obligatorio.");
-				isValid = false;
-			}
-			break;
-			
-		default:
-			isValid = false;
 		}
 		
 		return isValid;
@@ -189,13 +195,13 @@ public class GestionSitioBean extends BaseBean implements Serializable
 		this.listaTematicas = listaTematicas;
 	}
 
-	public List<Long> getTematicasSeleccionadas()
+	public List<String> getTematicasSeleccionadas()
 	{
 		return tematicasSeleccionadas;
 	}
 
-	public void setTematicasSeleccionadas(List<Long> tematicasSeleccionadas)
+	public void setTematicasSeleccionadas(List<String> tematicasSeleccionadas)
 	{
 		this.tematicasSeleccionadas = tematicasSeleccionadas;
-	}	
+	}
 }

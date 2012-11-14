@@ -52,7 +52,7 @@ public class UsuarioServiceImpl implements UsuarioService
 			throw new NegocioException("Oferta no encontrada");
 		}
 		
-		usuarioEntity = usuarioDAO.toEntity(usuarioDTO);
+		usuarioDAO.toEntity(usuarioDTO, usuarioEntity);
 		
 		usuarioDAO.actualizar(usuarioEntity);			
 	}

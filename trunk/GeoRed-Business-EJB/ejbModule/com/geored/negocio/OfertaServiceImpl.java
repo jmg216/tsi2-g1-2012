@@ -40,16 +40,16 @@ public class OfertaServiceImpl implements OfertaService
 	@WebMethod
 	public void actualizar(OfertaDTO ofertaDTO) throws NegocioException, DaoException
 	{
-		Oferta eventoEntity = (Oferta) ofertaDAO.obtener(ofertaDTO.getId(), false);
+		Oferta ofertaEntity = (Oferta) ofertaDAO.obtener(ofertaDTO.getId(), false);
 		
-		if(eventoEntity == null)
+		if(ofertaEntity == null)
 		{
 			throw new NegocioException("Oferta no encontrada");
 		}
 		
-		eventoEntity = ofertaDAO.toEntity(ofertaDTO);
+		ofertaDAO.toEntity(ofertaDTO, ofertaEntity);
 		
-		ofertaDAO.actualizar(eventoEntity);			
+		ofertaDAO.actualizar(ofertaEntity);			
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)

@@ -75,7 +75,7 @@ public class AdminServiceImpl implements AdminService
 			throw new NegocioException("Administrador no encontrado");
 		}
 		
-		administradorEntity = administradorDAO.toEntity(administradorDTO);
+		administradorDAO.toEntity(administradorDTO, administradorEntity);
 		
 		administradorDAO.actualizar(administradorEntity);			
 	}
