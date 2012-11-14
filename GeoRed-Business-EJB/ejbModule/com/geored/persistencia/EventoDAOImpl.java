@@ -23,24 +23,18 @@ public class EventoDAOImpl extends GenericDAOBase<Evento, EventoDTO> implements 
 	private TematicaDAO tematicaDAO;
 	
 	@Override
-	public Evento toEntity(EventoDTO source)
+	public void toEntity(EventoDTO source, Evento target)
 	{
-		Evento target = new Evento();
-		
 		target.setNombre(source.getNombre());
 		target.setDescripcion(source.getDescripcion());
 		target.setFechaInicio(new Timestamp(source.getFechaInicio().getTime()));
 		target.setFechaFin(new Timestamp(source.getFechaFin().getTime()));
 		target.setUbicacionGeografica(source.getUbicacionGeogrica());
-		
-		return target;
 	}
 
 	@Override
-	public EventoDTO toDto(Evento source)
+	public void toDto(Evento source, EventoDTO target)
 	{
-		EventoDTO target = new EventoDTO();
-		
 		target.setId(source.getId());
 		target.setNombre(source.getNombre());
 		target.setDescripcion(source.getDescripcion());
@@ -52,8 +46,6 @@ public class EventoDAOImpl extends GenericDAOBase<Evento, EventoDTO> implements 
 		{			
 			target.setListaTematicasDTO(tematicaDAO.toDtoList(source.getListaTematicas()));
 		}
-		
-		return target;
 	}
 	
 }

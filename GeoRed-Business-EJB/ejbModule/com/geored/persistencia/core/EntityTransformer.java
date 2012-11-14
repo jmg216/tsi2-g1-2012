@@ -8,9 +8,15 @@ import java.util.List;
  */
 public interface EntityTransformer<EntityType, DtoType>
 {
+	// TO ENTITY
 	public EntityType toEntity(DtoType source);
 	
+	public void toEntity(DtoType source, EntityType target);
+	
+	// TO DTO
 	public DtoType toDto(EntityType source);
+	
+	public void toDto(EntityType source, DtoType target);
 	
 	// TRANSFORMACION DE COLECCIONES
 	public List<EntityType> toEntityList(List<DtoType> listaDtos);

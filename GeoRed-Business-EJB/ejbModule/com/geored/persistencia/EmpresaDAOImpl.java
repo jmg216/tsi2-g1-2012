@@ -21,23 +21,17 @@ public class EmpresaDAOImpl extends GenericDAOBase<Empresa, EmpresaDTO> implemen
 	private LocalDAO localDAO;
 	
 	@Override
-	public Empresa toEntity(EmpresaDTO source)
+	public void toEntity(EmpresaDTO source, Empresa target)
 	{
-		Empresa target = new Empresa();
-		
 		target.setNombre(source.getNombre());
 		target.setDescripcion(source.getDescripcion());	
 		target.setUrlImagen(source.getUrlImagen());
 		target.setFechaCreacion(new Timestamp(source.getFechaCreacion().getTime()));
-		
-		return target;
 	}
 
 	@Override
-	public EmpresaDTO toDto(Empresa source)
+	public void toDto(Empresa source, EmpresaDTO target)
 	{
-		EmpresaDTO target = new EmpresaDTO();
-		
 		target.setId(source.getId());
 		target.setNombre(source.getNombre());
 		target.setDescripcion(source.getDescripcion());
@@ -55,7 +49,5 @@ public class EmpresaDAOImpl extends GenericDAOBase<Empresa, EmpresaDTO> implemen
 		{			
 			target.setListaLocalesDTO(localDAO.toDtoList(source.getListaLocales()));
 		}
-		
-		return target;
 	}	
 }

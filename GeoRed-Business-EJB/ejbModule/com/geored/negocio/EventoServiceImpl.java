@@ -49,7 +49,7 @@ public class EventoServiceImpl implements EventoService
 				throw new NegocioException("Evento no encontrado");
 			}
 			
-			eventoEntity = eventoDAO.toEntity(eventoDTO);
+			eventoDAO.toEntity(eventoDTO, eventoEntity);
 			
 			eventoDAO.actualizar(eventoEntity);			
 		}

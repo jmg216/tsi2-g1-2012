@@ -47,7 +47,7 @@ public class EmpresaServiceImpl implements EmpresaService
 			throw new NegocioException("Empresa no encontrada");
 		}
 		
-		empresaEntity = empresaDAO.toEntity(empresaDTO);
+		empresaDAO.toEntity(empresaDTO, empresaEntity);
 		
 		empresaDAO.actualizar(empresaEntity);					
 	}

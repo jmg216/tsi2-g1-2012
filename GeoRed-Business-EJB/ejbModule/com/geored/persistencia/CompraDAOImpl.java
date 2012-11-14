@@ -18,20 +18,14 @@ import com.geored.persistencia.core.GenericDAOBase;
 public class CompraDAOImpl extends GenericDAOBase<Compra, CompraDTO> implements CompraDAO
 {
 	@Override
-	public Compra toEntity(CompraDTO source)
+	public void toEntity(CompraDTO source, Compra target)
 	{
-		Compra target = new Compra();
-		
 		target.setFechaCreacion(new Timestamp(source.getFechaCreacion().getTime()));
-		
-		return target;
 	}
 
 	@Override
-	public CompraDTO toDto(Compra source)
+	public void toDto(Compra source, CompraDTO target)
 	{
-		CompraDTO target = new CompraDTO();
-		
 		target.setId(source.getId());
 		target.setFechaCreacion(source.getFechaCreacion());
 		
@@ -46,8 +40,6 @@ public class CompraDAOImpl extends GenericDAOBase<Compra, CompraDTO> implements 
 			target.setIdOferta(source.getOferta().getId());
 			target.setNombreOferta(source.getOferta().getNombre());
 		}
-				
-		return target;	
 	}
 
 	@Override
