@@ -18,6 +18,7 @@ import com.geored.exceptions.DaoException;
 import com.geored.exceptions.NegocioException;
 import com.geored.persistencia.AdministradorDAO;
 import com.geored.persistencia.TipoAdministradorDAO;
+import com.geored.utiles.UtilesNegocio;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -84,6 +85,11 @@ public class AdminServiceImpl implements AdminService
 	@WebMethod
 	public void eliminar(Long idAdministrador) throws NegocioException, DaoException
 	{
+		if(UtilesNegocio.ID_ADMIN_PRINCIPAL.equals(idAdministrador))
+		{
+			throw new NegocioException("No se puede eliminar el administrador principal");
+		}
+		
 		Administrador administradorEntity = (Administrador) administradorDAO.obtener(idAdministrador, false);
 		
 		if(administradorEntity == null)
@@ -91,7 +97,20 @@ public class AdminServiceImpl implements AdminService
 			throw new NegocioException("Administrador no encontrado");
 		}
 		
-		administradorDAO.eliminar(administradorEntity);		
+		if(administradorEntity.getListaEmpresas() != null && !administradorEntity.getListaEmpresas().isEmpty())
+		{
+			throw new NegocioException("El administrador no se puede eliminar, tiene empresas asociadas");
+		}
+		
+		try
+		{
+			administradorDAO.eliminar(administradorEntity);
+		}
+		catch(Exception e)
+		{
+			throw e;
+		}
+				
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)

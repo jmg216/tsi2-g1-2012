@@ -6,6 +6,12 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
     version="2.1">
 
+    <!-- Listeners -->
+    <lifecycle>
+		<phase-listener id="nocache">com.geored.backoffice.utiles.CacheControlPhaseListener</phase-listener>		
+	</lifecycle>
+    
+    
     <!-- CUENTA -->
     <navigation-rule>       
         <from-view-id>/xhtml/cuenta/login.xhtml</from-view-id>
@@ -13,6 +19,12 @@
         <navigation-case>
             <from-outcome>success</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>error</from-outcome>
+            <to-view-id>/xhtml/cuenta/login.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
     </navigation-rule>
     
@@ -36,10 +48,15 @@
         <from-view-id>/xhtml/administradores/gestionAdministrador.xhtml</from-view-id>
         
         <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/xhtml/administradores/gestionAdministrador.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
             <from-outcome>to_listado_administradores</from-outcome>
             <to-view-id>/xhtml/administradores/listadoAdministradores.xhtml</to-view-id>
             <redirect/>
-        </navigation-case>
+        </navigation-case>        
     </navigation-rule>
    
     <!-- EMPRESA -->
@@ -61,6 +78,11 @@
     <navigation-rule>
         <from-view-id>/xhtml/empresas/gestionEmpresa.xhtml</from-view-id>
         
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/xhtml/empresas/gestionEmpresa.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
         <navigation-case>
             <from-outcome>to_listado_empresas</from-outcome>
             <to-view-id>/xhtml/empresas/listadoEmpresas.xhtml</to-view-id>
@@ -88,6 +110,11 @@
         <from-view-id>/xhtml/eventos/gestionEvento.xhtml</from-view-id>
         
         <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/xhtml/eventos/gestionEvento.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
             <from-outcome>to_listado_eventos</from-outcome>
             <to-view-id>/xhtml/eventos/listadoEventos.xhtml</to-view-id>
             <redirect/>
@@ -113,6 +140,11 @@
     <navigation-rule>
         <from-view-id>/xhtml/ofertas/gestionOferta.xhtml</from-view-id>
         
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/xhtml/ofertas/gestionOferta.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
         <navigation-case>
             <from-outcome>to_listado_ofertas</from-outcome>
             <to-view-id>/xhtml/ofertas/listadoOfertas.xhtml</to-view-id>
@@ -141,6 +173,11 @@
     <navigation-rule>
         <from-view-id>/xhtml/sitios/gestionSitio.xhtml</from-view-id>
         
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/xhtml/sitios/gestionSitio.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
         <navigation-case>
             <from-outcome>to_listado_sitios</from-outcome>
             <to-view-id>/xhtml/sitios/listadoSitios.xhtml</to-view-id>

@@ -32,6 +32,10 @@ public abstract class BaseBean
 	private static final String PREFIX_MSJ_ERROR_NEGOCIO = "Error de negocio: ";
 	private static final String PREFIX_MSJ_ERROR_ACCESO_DATOS = "Error de acceso a datos: ";
 	
+	// Constantes de retornos
+	protected static final String SUCCESS = "success";
+	protected static final String ERROR = "error";
+	
 	protected void handleWSException(Exception e)
 	{
 		if(e instanceof NegocioException)
@@ -59,16 +63,28 @@ public abstract class BaseBean
 	protected void addBeanError(String message)
 	{
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
+		FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+		FacesContext.getCurrentInstance().getExternalContext().getFlash().setRedirect(true);
 	}
 	
 	protected void addBeanMessage(String message)
 	{
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
+		FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
 	}
 	
 	protected String getRequestParameter(String key)
 	{
 		return FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get(key);
+	}
+	
+	protected void setFlashAttribute(String key, Object value)
+	{
+		FacesContext.getCurrentInstance().getExternalContext().getFlash().put(key, value);
+	}
+	protected Object getFlashAttribute(String key)
+	{
+		return FacesContext.getCurrentInstance().getExternalContext().getFlash().get(key);
 	}
 	
 	// Ports WS

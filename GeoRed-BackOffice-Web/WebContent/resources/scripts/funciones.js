@@ -1,8 +1,3 @@
-function refreshView()
-{
-	window.location.refresh(windows.location.page);
-}
-
 // Funciones mapa selector
 function showMapaSelector(idCampoSelector, callbackRefreshFn) 
 {

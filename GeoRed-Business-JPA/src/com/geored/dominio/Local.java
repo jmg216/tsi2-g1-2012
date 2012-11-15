@@ -41,7 +41,7 @@ public class Local implements Serializable
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Empresa empresa;
 
-	@OneToMany(mappedBy="local")
+	@OneToMany(mappedBy="local", fetch=FetchType.LAZY)
 	private List<Oferta> listaOfertas;
 	
 	public Long getId()

@@ -28,7 +28,7 @@ public class GestionSitioBean extends BaseBean implements Serializable
 	
 	private static final String TO_LISTADO_SITIOS = "to_listado_sitios";
 	
-	private SitioDTO sitioDTO = new SitioDTO();
+	private SitioDTO sitioDTO;
 	
 	private List<TematicaDTO> listaTematicas = new ArrayList<TematicaDTO>();
 	
@@ -36,22 +36,29 @@ public class GestionSitioBean extends BaseBean implements Serializable
 	
 	public GestionSitioBean()
 	{	
-		String idSitio = getRequestParameter("idSitio");                
-		
-		if(UtilesWeb.isNullOrEmpty(idSitio))
+		sitioDTO = (SitioDTO) getFlashAttribute("sitioDTO");
+				
+		if(sitioDTO == null)
 		{
-			sitioDTO = new SitioDTO();
-		}
-		else
-		{
-			try
+			String idSitio = getRequestParameter("idSitio");     
+			
+			if(UtilesWeb.isNullOrEmpty(idSitio))
 			{
-				sitioDTO = getSitioPort().obtener(Long.valueOf(idSitio));
-			} 
-			catch (Exception e)
+				sitioDTO = new SitioDTO();
+			}
+			else
 			{
-				addBeanError(e.getMessage());
-			} 
+				try
+				{
+					sitioDTO = getSitioPort().obtener(Long.valueOf(idSitio));
+				} 
+				catch (Exception e)
+				{
+					addBeanError(e.getMessage());
+				} 
+			}
+			
+			setFlashAttribute("sitioDTO", sitioDTO);
 		}
 		
 		cargarDatoIniciales();
@@ -79,7 +86,7 @@ public class GestionSitioBean extends BaseBean implements Serializable
 		}
 	}
 	
-	public void guardarSitio()
+	public String guardarSitio()
 	{
 		try
 		{
@@ -132,6 +139,8 @@ public class GestionSitioBean extends BaseBean implements Serializable
 		{
 			handleWSException(e);
 		}
+		
+		return SUCCESS;
 	}
 	
 	public String toListadoSitios()

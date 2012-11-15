@@ -1,5 +1,8 @@
 package com.geored.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AdministradorDTO
 {
 	private Long id;
@@ -14,6 +17,8 @@ public class AdministradorDTO
 	
 	private String nombreTipoAdministrador;
 
+	private List<EmpresaDTO> listaEmpresasDTO = new ArrayList<EmpresaDTO>();
+	
 	public Long getId()
 	{
 		return id;
@@ -72,5 +77,15 @@ public class AdministradorDTO
 	public void setEmail(String email)
 	{
 		this.email = email;
-	}	
+	}
+
+	public List<EmpresaDTO> getListaEmpresasDTO()
+	{
+		return listaEmpresasDTO;
+	}
+
+	public void setListaEmpresasDTO(List<EmpresaDTO> listaEmpresasDTO)
+	{
+		this.listaEmpresasDTO = listaEmpresasDTO;
+	}
 }

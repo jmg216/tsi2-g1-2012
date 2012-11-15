@@ -2,7 +2,8 @@ package com.geored.utiles;
 
 public class UtilesNegocio
 {
-
+	public static final Long ID_ADMIN_PRINCIPAL = 1L;
+	
 	public static final double radioTierraKm = 6371;
 	
 	public static double CalcularDistanciaCoordenadas(String strLat1, String strLon1, String strLat2, String strLon2)

@@ -15,18 +15,14 @@
 					
 					<h1 class="titulo-content">Gestión de Administradores</h1>
 					
-					<table>
-						<c:choose>					
-							<c:when test="#{esModoEdicion}">
-								<tr>
-									<td><h:outputText value="Id:" /></td>
-									<td><p:inputText value="#{gestionAdministradorBean.administradorDTO.id}" readonly="true"/></td>
-								</tr>
-							</c:when>
-							<c:otherwise>
-								<h:inputHidden value="#{gestionAdministradorBean.administradorDTO.id}" />								
-							</c:otherwise>	
-						</c:choose>											
+					<table>	
+						<h:inputHidden value="#{gestionAdministradorBean.administradorDTO.id}" />								
+						<c:if test="#{esModoEdicion}">
+							<tr>
+								<td><h:outputText value="Id:" /></td>
+								<td><p:inputText value="#{gestionAdministradorBean.administradorDTO.id}" readonly="true"/></td>
+							</tr>
+						</c:if>			
 						<tr>
 							<td><h:outputText value="E-mail:" /></td>
 							<td>	
@@ -62,7 +58,7 @@
 								<p:commandButton value="Volver" action="#{gestionAdministradorBean.toListadoAdministradores()}"/>	
 							</li>
 							<li>
-								<p:commandButton value="Guardar" action="#{gestionAdministradorBean.guardarAdministrador()}" onclick="refreshView();"/>	
+								<p:commandButton value="Guardar" action="#{gestionAdministradorBean.guardarAdministrador()}"  />	
 							</li>
 						</ul>									
 					</div>					

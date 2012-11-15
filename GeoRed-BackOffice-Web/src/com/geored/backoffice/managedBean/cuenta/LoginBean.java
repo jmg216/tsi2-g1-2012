@@ -7,6 +7,7 @@ import javax.faces.bean.RequestScoped;
 
 import com.geored.backoffice.managedBean.BaseBean;
 import com.geored.backoffice.utiles.UtilesSeguridadWeb;
+import com.geored.backoffice.utiles.UtilesWeb;
 import com.geored.negocio.AdminServiceImpl;
 import com.geored.negocio.AdministradorDTO;
 
@@ -19,8 +20,6 @@ public class LoginBean extends BaseBean implements Serializable
 	 */
 	private static final long serialVersionUID = 1070740152270054906L;
 	
-	private static final String SUCCESS = "success";
-	
 	private String email = "admin@geored.com";
 	private String pass;
 
@@ -28,13 +27,20 @@ public class LoginBean extends BaseBean implements Serializable
 	{
 		try
 		{
+			if(!validaInicioSesion())
+			{	
+				return ERROR;
+			}
+			
 			AdminServiceImpl admiWs = getAdminPort();
 			
 			AdministradorDTO administradorDTO = admiWs.obtenerAdminPorEmailYPass(getEmail(), UtilesSeguridadWeb.encriptarMD5(getPass()));
 		
 			if(administradorDTO == null)
 			{
-				return null;
+				addBeanError("Administrador no encontrado");
+				
+				return ERROR;
 			}
 			
 			UtilesSeguridadWeb.guardarUsuarioAutenticado(administradorDTO);
@@ -43,12 +49,31 @@ public class LoginBean extends BaseBean implements Serializable
 		{
 			handleWSException(e);
 			
-			return null;
+			return ERROR;
 		} 
 		
 		return SUCCESS;
 	}
 
+	private boolean validaInicioSesion()
+	{
+		boolean isValid = true;
+		
+		if(UtilesWeb.isNullOrEmpty(getEmail()))
+		{
+			addBeanError("El campo 'E-mail' es obligatorio");
+			isValid = false;
+		}
+		
+		if(UtilesWeb.isNullOrEmpty(getPass()))
+		{
+			addBeanError("El campo 'Password' es obligatorio");
+			isValid = false;
+		}
+		
+		return isValid;
+	}
+	
 	public String cerrarSesion()
 	{
 		UtilesSeguridadWeb.borrarUsuarioAutenticado();
