@@ -77,7 +77,7 @@ public class GestionAdministradorBean extends BaseBean implements Serializable
 		} 
 	}
 
-	public void guardarAdministrador()
+	public String guardarAdministrador()
 	{
 		try
 		{
@@ -113,15 +113,16 @@ public class GestionAdministradorBean extends BaseBean implements Serializable
 		{
 			handleWSException(e);
 		}
+		
+		return SUCCESS;
 	}
 	
 	private boolean validar(int opValidar)
 	{
 		boolean isValid = true;
 		
-		switch(opValidar)
-		{
-		case VALIDAR_CREAR:			
+		if(opValidar == VALIDAR_CREAR || opValidar == VALIDAR_MODIFICAR)
+		{			
 			if(UtilesWeb.isNullOrEmpty(getAdministradorDTO().getEmail()))
 			{
 				addBeanError("'E-mail' es un campo obligatorio.");
@@ -137,28 +138,6 @@ public class GestionAdministradorBean extends BaseBean implements Serializable
 				addBeanError("'Tipo de Administrador' es un campo obligatorio.");
 				isValid = false;
 			}
-			break;
-			
-		case VALIDAR_MODIFICAR:
-			if(UtilesWeb.isNullOrEmpty(getAdministradorDTO().getEmail()))
-			{
-				addBeanError("'E-mail' es un campo obligatorio.");
-				isValid = false;
-			}
-			if(UtilesWeb.isNullOrEmpty(getAdministradorDTO().getNombre()))
-			{
-				addBeanError("'Nombre' es un campo obligatorio.");
-				isValid = false;
-			}
-			if(UtilesWeb.isNullOrZero(getAdministradorDTO().getIdTipoAdministrador()))
-			{
-				addBeanError("'Tipo de Administrador' es un campo obligatorio.");
-				isValid = false;
-			}
-			break;
-			
-		default:
-			isValid = false;
 		}
 		
 		return isValid;

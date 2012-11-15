@@ -202,9 +202,37 @@ public class AdminServiceImplServiceSoapBindingStub extends org.apache.axis.clie
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
 
+            qName = new javax.xml.namespace.QName("http://negocio.geored.com/", "empresaDTO");
+            cachedSerQNames.add(qName);
+            cls = com.geored.negocio.EmpresaDTO.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://negocio.geored.com/", "localDTO");
+            cachedSerQNames.add(qName);
+            cls = com.geored.negocio.LocalDTO.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
             qName = new javax.xml.namespace.QName("http://negocio.geored.com/", "NegocioException");
             cachedSerQNames.add(qName);
             cls = com.geored.negocio.NegocioException.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://negocio.geored.com/", "ofertaDTO");
+            cachedSerQNames.add(qName);
+            cls = com.geored.negocio.OfertaDTO.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://negocio.geored.com/", "tematicaDTO");
+            cachedSerQNames.add(qName);
+            cls = com.geored.negocio.TematicaDTO.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);

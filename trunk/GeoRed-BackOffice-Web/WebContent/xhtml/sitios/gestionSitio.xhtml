@@ -19,11 +19,13 @@
 						<tr>
 							<td style="vertical-align: top;">
 								<table>	
-									<tr>
-										<td><h:outputText value="Id:" /></td>
-										<td><p:inputText value="#{gestionSitioBean.sitioDTO.id}" readonly="true"/></td>												
-										<h:inputHidden value="#{gestionSitioBean.sitioDTO.id}" />								
-									</tr>
+									<h:inputHidden value="#{gestionSitioBean.sitioDTO.id}" />								
+									<c:if test="#{esModoEdicion}">
+										<tr>
+											<td><h:outputText value="Id:" /></td>
+											<td><p:inputText value="#{gestionSitioBean.sitioDTO.id}" readonly="true"/></td>												
+										</tr>
+									</c:if>									
 									<tr>
 										<td><h:outputText value="Nombre:" /></td>
 										<td><p:inputText value="#{gestionSitioBean.sitioDTO.nombre}"/></td>
@@ -79,7 +81,7 @@
 								<p:commandButton value="Volver" action="#{gestionSitioBean.toListadoSitios()}"/>	
 							</li>
 							<li>
-								<p:commandButton value="Guardar" action="#{gestionSitioBean.guardarSitio()}" onclick="refreshView();"/>	
+								<p:commandButton value="Guardar" action="#{gestionSitioBean.guardarSitio()}"/>	
 							</li>
 						</ul>									
 					</div>	

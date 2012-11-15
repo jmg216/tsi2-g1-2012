@@ -1,6 +1,7 @@
 package com.geored.dominio;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -38,6 +40,9 @@ public class Administrador implements Serializable
 	@JoinColumn(name="TIPO_ADMINISTRADOR_FK", nullable=false)
 	@ManyToOne(fetch=FetchType.LAZY)
 	private TipoAdministrador tipoAdministrador;
+	
+	@OneToMany(mappedBy="administrador", fetch=FetchType.LAZY)
+	private List<Empresa> listaEmpresas;
 
 	public Long getId()
 	{
@@ -88,6 +93,14 @@ public class Administrador implements Serializable
 	{
 		this.email = email;
 	}
-	
-	
+
+	public List<Empresa> getListaEmpresas()
+	{
+		return listaEmpresas;
+	}
+
+	public void setListaEmpresas(List<Empresa> listaEmpresas)
+	{
+		this.listaEmpresas = listaEmpresas;
+	}
 }

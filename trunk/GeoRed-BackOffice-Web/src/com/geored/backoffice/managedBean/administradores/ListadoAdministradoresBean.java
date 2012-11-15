@@ -13,6 +13,7 @@ import javax.xml.rpc.ServiceException;
 import com.geored.backoffice.managedBean.BaseBean;
 import com.geored.negocio.AdministradorDTO;
 import com.geored.negocio.DaoException;
+import com.geored.negocio.NegocioException;
 
 @ManagedBean(name="listadoAdministradoresBean")
 @RequestScoped
@@ -48,6 +49,18 @@ public class ListadoAdministradoresBean extends BaseBean implements Serializable
 		{
 			handleWSException(e);
 		} 
+	}
+	
+	public void eliminarAdministrador()
+	{
+		try
+		{
+			getAdminPort().eliminar(idAdministrador);
+		} 
+		catch (Exception e)
+		{
+			handleWSException(e);
+		}
 	}
 	
 	public String toGestionAdministrador()

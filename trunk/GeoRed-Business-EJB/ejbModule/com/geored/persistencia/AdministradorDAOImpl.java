@@ -1,5 +1,8 @@
 package com.geored.persistencia;
 
+import java.util.ArrayList;
+
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
@@ -8,6 +11,7 @@ import javax.persistence.Query;
 
 import com.geored.dominio.Administrador;
 import com.geored.dto.AdministradorDTO;
+import com.geored.dto.EmpresaDTO;
 import com.geored.exceptions.DaoException;
 import com.geored.persistencia.core.GenericDAOBase;
 
@@ -15,6 +19,9 @@ import com.geored.persistencia.core.GenericDAOBase;
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class AdministradorDAOImpl extends GenericDAOBase<Administrador, AdministradorDTO> implements AdministradorDAO
 {	
+	@EJB
+	private EmpresaDAO empresaDAO;
+	
 	@Override
 	public void toEntity(AdministradorDTO source, Administrador target)
 	{
@@ -35,6 +42,12 @@ public class AdministradorDAOImpl extends GenericDAOBase<Administrador, Administ
 		{						
 			target.setIdTipoAdministrador(source.getTipoAdministrador().getId());
 			target.setNombreTipoAdministrador(source.getTipoAdministrador().getNombre());
+		}
+		
+		target.setListaEmpresasDTO(new ArrayList<EmpresaDTO>());
+		if(source.getListaEmpresas() != null)
+		{
+			target.setListaEmpresasDTO(empresaDAO.toDtoList(source.getListaEmpresas()));
 		}
 	}
 

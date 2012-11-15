@@ -14,6 +14,8 @@ public class AdministradorDTO  implements java.io.Serializable {
 
     private java.lang.Long idTipoAdministrador;
 
+    private com.geored.negocio.EmpresaDTO[] listaEmpresasDTO;
+
     private java.lang.String nombre;
 
     private java.lang.String nombreTipoAdministrador;
@@ -27,12 +29,14 @@ public class AdministradorDTO  implements java.io.Serializable {
            java.lang.String email,
            java.lang.Long id,
            java.lang.Long idTipoAdministrador,
+           com.geored.negocio.EmpresaDTO[] listaEmpresasDTO,
            java.lang.String nombre,
            java.lang.String nombreTipoAdministrador,
            java.lang.String pass) {
            this.email = email;
            this.id = id;
            this.idTipoAdministrador = idTipoAdministrador;
+           this.listaEmpresasDTO = listaEmpresasDTO;
            this.nombre = nombre;
            this.nombreTipoAdministrador = nombreTipoAdministrador;
            this.pass = pass;
@@ -96,6 +100,34 @@ public class AdministradorDTO  implements java.io.Serializable {
      */
     public void setIdTipoAdministrador(java.lang.Long idTipoAdministrador) {
         this.idTipoAdministrador = idTipoAdministrador;
+    }
+
+
+    /**
+     * Gets the listaEmpresasDTO value for this AdministradorDTO.
+     * 
+     * @return listaEmpresasDTO
+     */
+    public com.geored.negocio.EmpresaDTO[] getListaEmpresasDTO() {
+        return listaEmpresasDTO;
+    }
+
+
+    /**
+     * Sets the listaEmpresasDTO value for this AdministradorDTO.
+     * 
+     * @param listaEmpresasDTO
+     */
+    public void setListaEmpresasDTO(com.geored.negocio.EmpresaDTO[] listaEmpresasDTO) {
+        this.listaEmpresasDTO = listaEmpresasDTO;
+    }
+
+    public com.geored.negocio.EmpresaDTO getListaEmpresasDTO(int i) {
+        return this.listaEmpresasDTO[i];
+    }
+
+    public void setListaEmpresasDTO(int i, com.geored.negocio.EmpresaDTO _value) {
+        this.listaEmpresasDTO[i] = _value;
     }
 
 
@@ -179,6 +211,9 @@ public class AdministradorDTO  implements java.io.Serializable {
             ((this.idTipoAdministrador==null && other.getIdTipoAdministrador()==null) || 
              (this.idTipoAdministrador!=null &&
               this.idTipoAdministrador.equals(other.getIdTipoAdministrador()))) &&
+            ((this.listaEmpresasDTO==null && other.getListaEmpresasDTO()==null) || 
+             (this.listaEmpresasDTO!=null &&
+              java.util.Arrays.equals(this.listaEmpresasDTO, other.getListaEmpresasDTO()))) &&
             ((this.nombre==null && other.getNombre()==null) || 
              (this.nombre!=null &&
               this.nombre.equals(other.getNombre()))) &&
@@ -207,6 +242,17 @@ public class AdministradorDTO  implements java.io.Serializable {
         }
         if (getIdTipoAdministrador() != null) {
             _hashCode += getIdTipoAdministrador().hashCode();
+        }
+        if (getListaEmpresasDTO() != null) {
+            for (int i=0;
+                 i<java.lang.reflect.Array.getLength(getListaEmpresasDTO());
+                 i++) {
+                java.lang.Object obj = java.lang.reflect.Array.get(getListaEmpresasDTO(), i);
+                if (obj != null &&
+                    !obj.getClass().isArray()) {
+                    _hashCode += obj.hashCode();
+                }
+            }
         }
         if (getNombre() != null) {
             _hashCode += getNombre().hashCode();
@@ -247,6 +293,14 @@ public class AdministradorDTO  implements java.io.Serializable {
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("listaEmpresasDTO");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "listaEmpresasDTO"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://negocio.geored.com/", "empresaDTO"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(true);
+        elemField.setMaxOccursUnbounded(true);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("nombre");
