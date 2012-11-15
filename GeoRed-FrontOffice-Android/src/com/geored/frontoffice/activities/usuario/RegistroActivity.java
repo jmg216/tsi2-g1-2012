@@ -3,6 +3,7 @@ package com.geored.frontoffice.activities.usuario;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -14,16 +15,16 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.geored.dto.TematicaDTO;
 import com.geored.frontoffice.activities.R;
 import com.geored.frontoffice.activities.menu.MenuActivity;
+import com.geored.frontoffice.dto.TematicaADTO;
 import com.geored.frontoffice.dto.UsuarioADTO;
 import com.geored.frontoffice.wsclient.FactoryWS;
 import com.geored.frontoffice.wsclient.UsuarioWS;
@@ -66,13 +67,15 @@ public class RegistroActivity extends Activity {
     	usuarioADTO.setNombre(usuario.getText().toString());
     	usuarioADTO.setEmail(email.getText().toString());
     	usuarioADTO.setPass(pass.getText().toString());
-    	//aca hay que hacer un set de la url
+    	if (urlImagen.getText() != null)
+    	{	
+    		usuarioADTO.setUrlImagen(urlImagen.getText().toString());
+    	}
     	
 //    	usuarioADTO.setNombre("Juan");
 //    	usuarioADTO.setEmail("juan@hotmail.com");
 //    	usuarioADTO.setPass("juanPass");
-    	
-    	
+
     	Long idUsuario = usuarioWS.insertar(usuarioADTO);
 			
     	//Si se registra correctamente lo redirecciona al menu, sino
