@@ -77,6 +77,30 @@ public class FactoryWS {
 		return ofertaWS;
 	}
 	
+	//GlobalWS
+	private GlobalWS globalWS;
+	
+	public GlobalWS getGlobalWS()
+	{
+		if (globalWS == null)
+		{
+			globalWS = new GlobalWS();
+		}
+		return globalWS;
+	}
+	
+	//CompraWs
+	private CompraWS compraWS;
+	
+	public CompraWS getCompraWS()
+	{
+		if (compraWS == null)
+		{
+			compraWS = new CompraWS();
+		}
+		return compraWS;
+	}
+	
 	//AdminWS
 	private AdminWS adminWS;
 	

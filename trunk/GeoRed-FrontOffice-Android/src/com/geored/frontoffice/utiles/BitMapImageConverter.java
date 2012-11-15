@@ -17,7 +17,7 @@ public class BitMapImageConverter {
         Bitmap bm = null;
         
         try 
-        {
+        {	//TODO parsear url. Si no es valida poner una imagen por defecto.
             URL aURL = new URL(url);
             URLConnection conn = aURL.openConnection();
             conn.connect();

@@ -13,7 +13,6 @@ import org.ksoap2.transport.HttpTransportSE;
 public class WSProxyClient
 {
 	public static final String NAMESPACE = "http://negocio.geored.com/";
-//	public static final String URL = "http://10.0.2.2:8080/GeoRed-Business-EJB/UsuarioServiceImpl?wsdl";
 	public static final String SOAP_ACTION = "";	
 	
 	/**
@@ -61,6 +60,7 @@ public class WSProxyClient
         {
     		HttpTransportSE androidHttpTransport = new HttpTransportSE(url);
     		androidHttpTransport.call(SOAP_ACTION, envelope);
+    		androidHttpTransport.debug = true;
     		
     		return envelope.getResponse();
          }

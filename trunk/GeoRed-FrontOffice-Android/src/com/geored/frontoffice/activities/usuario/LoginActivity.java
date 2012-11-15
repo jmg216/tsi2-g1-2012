@@ -1,6 +1,8 @@
 package com.geored.frontoffice.activities.usuario;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -18,17 +20,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.geored.frontoffice.activities.R;
-import com.geored.frontoffice.activities.usuario.RegistroActivity;
 import com.geored.frontoffice.activities.menu.MenuActivity;
+import com.geored.frontoffice.dto.TematicaADTO;
 import com.geored.frontoffice.dto.UsuarioADTO;
 import com.geored.frontoffice.utiles.UtilesSeguridadAndroid;
 import com.geored.frontoffice.wsclient.FactoryWS;
+import com.geored.frontoffice.wsclient.GlobalWS;
 import com.geored.frontoffice.wsclient.UsuarioWS;
 
 public class LoginActivity extends Activity implements OnClickListener  {
 
 	
 	private UsuarioWS usuarioWS = FactoryWS.getInstancia().getUsuarioWS();
+	private GlobalWS globalWS = FactoryWS.getInstancia().getGlobalWS();
 	
 	private static final int TIEMPO_MENSAJE = 300000;
 	
@@ -57,10 +61,14 @@ public class LoginActivity extends Activity implements OnClickListener  {
     	String email = txtEmail.getText().toString();
     	String pass = txtPass.getText().toString();
     	
-    	email = "jmg216@hotmail.com";
-    	pass = "juanma";
+    	email = "juan@gmail.com";
+    	pass = "juan";
     	
     	UsuarioADTO usuarioADTO = usuarioWS.obtenerPorEmailYPass(email, pass);
+    	
+    	//Asi instancio para obtener la lista de tematicas...
+    	List<TematicaADTO> tematicas = new ArrayList<TematicaADTO>();
+    	tematicas = globalWS.obtenerListadoTematicas();
     	
     	if (usuarioADTO != null)
     	{

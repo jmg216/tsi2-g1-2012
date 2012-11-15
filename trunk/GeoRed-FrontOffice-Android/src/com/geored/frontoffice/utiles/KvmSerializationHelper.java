@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
@@ -150,7 +151,7 @@ public class KvmSerializationHelper
 		{
 			return PropertyInfo.BOOLEAN_CLASS;
 		}
-		else if(type.equals(Vector.class))
+		else if(type.equals(List.class))
 		{
 			return PropertyInfo.VECTOR_CLASS;
 		}
