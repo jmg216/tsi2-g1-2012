@@ -82,8 +82,8 @@ public class UsuarioADTO extends com.geored.dto.UsuarioDTO implements KvmSeriali
 						{
 							if (response.getProperty(i) instanceof SoapObject)
 							{
-								//SoapObject listaTematicas = (SoapObject) response.getProperty(i);
-								/*PropertyInfo info = new PropertyInfo();
+								SoapObject listaTematicas = (SoapObject) response.getProperty(i);
+								PropertyInfo info = new PropertyInfo();
 								response.getPropertyInfo(i+1, info);
 								info.getName();
 								
@@ -91,10 +91,7 @@ public class UsuarioADTO extends com.geored.dto.UsuarioDTO implements KvmSeriali
 								{
 									indiceFields++;
 								}
-								else
-								{
-									
-								}*/
+
 								//List<T> = new ArrayList<T>();
 								//fieldsADTO[indiceFields].getType();
 								//this.get
