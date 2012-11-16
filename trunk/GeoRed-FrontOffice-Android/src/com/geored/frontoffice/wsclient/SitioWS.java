@@ -44,20 +44,7 @@ public class SitioWS
 		
 		SitioADTO sitioADTO = new SitioADTO();
 		
-		if (response == null)
-		{
-			return null;
-		}
-		else
-		{
-			//TODO ver orden de las properies
-			
-        	sitioADTO.setDescripcion(response.getProperty(0).toString());
-        	sitioADTO.setId(Long.parseLong(response.getProperty(1).toString()));
-        	sitioADTO.setUrlImagen(response.getProperty(2).toString());        	
-        	sitioADTO.setNombre(response.getProperty(3).toString());
-        	sitioADTO.setUbicacionGeografica(response.getProperty(4).toString());
-		}
+		sitioADTO.parseSitioADTO(response);
 		
 		return sitioADTO;
 	}
@@ -76,14 +63,8 @@ public class SitioWS
 			
 			SitioADTO sitio = new SitioADTO();
 			
-			//TODO ver orden de las properies
+			sitio.parseSitioADTO(info);
 			
-        	sitio.setDescripcion(info.getProperty(0).toString());
-        	sitio.setId(Long.parseLong(info.getProperty(1).toString()));        	
-        	sitio.setNombre(info.getProperty(2).toString());
-        	sitio.setUbicacionGeografica(info.getProperty(3).toString());
-        	sitio.setUrlImagen(info.getProperty(4).toString());
-        	
             sitiosADTO[i] = sitio;			
 		}
 		

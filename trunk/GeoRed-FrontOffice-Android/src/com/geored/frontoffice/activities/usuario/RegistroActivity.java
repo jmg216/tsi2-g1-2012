@@ -3,15 +3,16 @@ package com.geored.frontoffice.activities.usuario;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,13 +22,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.geored.dto.TematicaDTO;
 import com.geored.frontoffice.activities.R;
 import com.geored.frontoffice.activities.menu.MenuActivity;
-import com.geored.frontoffice.dto.TematicaADTO;
 import com.geored.frontoffice.dto.UsuarioADTO;
+import com.geored.frontoffice.utiles.UtilesAndorid;
 import com.geored.frontoffice.wsclient.FactoryWS;
 import com.geored.frontoffice.wsclient.UsuarioWS;
+import com.google.android.gcm.GCMRegistrar;
 
 public class RegistroActivity extends Activity {
 	
@@ -57,6 +58,9 @@ public class RegistroActivity extends Activity {
     
     public void registroUsuario (View v) throws IOException, XmlPullParserException
     {
+    	final String regId;
+    	
+    	
     	EditText usuario = (EditText) this.findViewById(R.id.txtNombreUsuario);
     	EditText email = (EditText) this.findViewById(R.id.txtEmail);
     	EditText pass = (EditText) this.findViewById(R.id.txtPassword);   
@@ -71,13 +75,28 @@ public class RegistroActivity extends Activity {
     	{	
     		usuarioADTO.setUrlImagen(urlImagen.getText().toString());
     	}
-    	
+    	    	
 //    	usuarioADTO.setNombre("Juan");
 //    	usuarioADTO.setEmail("juan@hotmail.com");
 //    	usuarioADTO.setPass("juanPass");
 
     	Long idUsuario = usuarioWS.insertar(usuarioADTO);
-			
+			    	
+        //Comprobamos si está todo en orden para utilizar GCM
+        GCMRegistrar.checkDevice(RegistroActivity.this);
+        GCMRegistrar.checkManifest(RegistroActivity.this);
+        
+        //Si no estamos registrados --> Nos registramos en GCM
+        regId = GCMRegistrar.getRegistrationId(RegistroActivity.this);
+        if (regId.equals("")) 
+        {
+            GCMRegistrar.register(RegistroActivity.this, UtilesAndorid.ID_SENDER_GCM); //Sender ID
+        } 
+        else 
+        {
+            Log.v("GCMTest", "Ya registrado");
+        } 
+        
     	//Si se registra correctamente lo redirecciona al menu, sino
     	//envia mensaje de error.
 		if(idUsuario != null)
