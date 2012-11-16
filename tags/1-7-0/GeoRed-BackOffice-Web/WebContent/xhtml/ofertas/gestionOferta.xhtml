@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<h:body>
+		<ui:composition template="/xhtml/templates/layout.xhtml">
+			<ui:define name="content">	
+				<h:form>					
+					<h1 class="titulo-content">Gestión de Ofertas</h1>
+					
+					<table>
+						<h:inputHidden value="#{gestionOfertaBean.ofertaDTO.id}"/>
+						<c:if test="#{gestionOfertaBean.ofertaDTO.id > 0}">
+							<tr>
+								<td><h:outputText value="Id:" /></td>
+								<td><p:inputText value="#{gestionOfertaBean.ofertaDTO.id}" disabled="true"/></td>
+							</tr>
+						</c:if>																		
+						<tr>
+							<td><h:outputText value="Nombre:" /></td>
+							<td><p:inputText value="#{gestionOfertaBean.ofertaDTO.nombre}"/></td>
+						</tr>																
+					</table>
+					
+					<div class="areaBotones">
+						<ul>
+							<li>
+								<p:commandButton value="Volver" action="#{gestionOfertaBean.toListadoOfertas()}"/>	
+							</li>
+							<li>
+								<p:commandButton value="Guardar" action="#{gestionOfertaBean.guardarOferta()}"/>	
+							</li>
+						</ul>									
+					</div>					
+				</h:form>				
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>	
