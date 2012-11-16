@@ -1,6 +1,5 @@
 package com.geored.negocio;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -105,6 +104,11 @@ public class SitioServiceImpl implements SitioService
 		if(sitioEntity == null)
 		{
 			throw new NegocioException("Sitio no encontrado");
+		}
+		
+		if(sitioEntity.getListaTematicas() != null && !sitioEntity.getListaTematicas().isEmpty())
+		{
+			throw new NegocioException("El sitio no se puede eliminar, tiene tematicas asociadas");
 		}
 		
 		sitioDAO.eliminar(sitioEntity);

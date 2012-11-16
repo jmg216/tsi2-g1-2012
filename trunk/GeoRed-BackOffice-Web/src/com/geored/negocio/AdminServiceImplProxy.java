@@ -56,6 +56,12 @@ public class AdminServiceImplProxy implements com.geored.negocio.AdminServiceImp
     return adminServiceImpl.obtenerListado();
   }
   
+  public com.geored.negocio.AdministradorDTO[] obtenerListadoPorTipo(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.DaoException{
+    if (adminServiceImpl == null)
+      _initAdminServiceImplProxy();
+    return adminServiceImpl.obtenerListadoPorTipo(arg0);
+  }
+  
   public void eliminar(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
     if (adminServiceImpl == null)
       _initAdminServiceImplProxy();

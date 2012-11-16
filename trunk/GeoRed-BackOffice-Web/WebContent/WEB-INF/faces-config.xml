@@ -33,6 +33,11 @@
         <from-view-id>/xhtml/administradores/listadoAdministradores.xhtml</from-view-id>
         
         <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/xhtml/administradores/listadoAdministradores.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
             <from-outcome>to_gestion_administrador</from-outcome>
             <to-view-id>/xhtml/administradores/gestionAdministrador.xhtml</to-view-id>
             <redirect>
@@ -63,6 +68,11 @@
     <navigation-rule>
         <from-view-id>/xhtml/empresas/listadoEmpresas.xhtml</from-view-id>
         
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/xhtml/empresas/listadoEmpresas.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
         <navigation-case>
             <from-outcome>to_gestion_empresa</from-outcome>
             <to-view-id>/xhtml/empresas/gestionEmpresa.xhtml</to-view-id>
@@ -95,6 +105,11 @@
         <from-view-id>/xhtml/eventos/listadoEventos.xhtml</from-view-id>
         
         <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/xhtml/eventos/listadoEventos.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
             <from-outcome>to_gestion_evento</from-outcome>
             <to-view-id>/xhtml/eventos/gestionEvento.xhtml</to-view-id>
             <redirect>
@@ -125,6 +140,11 @@
     <navigation-rule>
         <from-view-id>/xhtml/ofertas/listadoOfertas.xhtml</from-view-id>
         
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/xhtml/ofertas/listadoOfertas.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
         <navigation-case>
             <from-outcome>to_gestion_oferta</from-outcome>
             <to-view-id>/xhtml/ofertas/gestionOferta.xhtml</to-view-id>
@@ -158,6 +178,11 @@
     <navigation-rule>
         <from-view-id>/xhtml/sitios/listadoSitios.xhtml</from-view-id>
         
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/xhtml/sitios/listadoSitios.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
         <navigation-case>
             <from-outcome>to_gestion_sitio</from-outcome>
             <to-view-id>/xhtml/sitios/gestionSitio.xhtml</to-view-id>

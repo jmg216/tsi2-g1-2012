@@ -47,6 +47,20 @@ public class ListadoSitiosBean extends BaseBean implements Serializable
 		} 
 	}
 	
+	public String eliminarSitio()
+	{
+		try
+		{
+			getSitioPort().eliminar(idSitio);
+		} 
+		catch (Exception e)
+		{
+			handleWSException(e);
+		}
+		
+		return SUCCESS;
+	}
+	
 	public String toGestionSitio()
 	{
 		return TO_GESTION_SITIO;

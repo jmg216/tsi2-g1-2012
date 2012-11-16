@@ -46,7 +46,21 @@
 				                <h:outputText value="Descripcion" />  
 				            </f:facet>  
 				            <h:outputText value="#{empresa.descripcion}" />  
-				        </p:column>  				  
+				        </p:column> 
+				         
+				        <p:column>  
+				            <f:facet name="header">  
+				                <h:outputText value="Administrador" />  
+				            </f:facet>  
+				            <h:outputText value="#{empresa.nombreAdministrador}" />  
+				        </p:column>  
+				        
+				        <p:column style="width: 30px;">				        	
+				   			<h:commandLink action="#{listadoEmpresasBean.eliminarEmpresa()}">
+				   				<h:graphicImage value="/resources/images/ico-eliminar.png"/>
+				           		<f:setPropertyActionListener target="#{listadoEmpresasBean.idEmpresa}" value="#{empresa.id}"/>
+				           	</h:commandLink>
+				        </p:column>					  
 				    </p:dataTable> 
 				</h:form>
 			</ui:define>

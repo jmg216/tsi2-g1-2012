@@ -10,6 +10,7 @@ package com.geored.negocio;
 public interface AdminServiceImpl extends java.rmi.Remote {
     public void actualizar(com.geored.negocio.AdministradorDTO arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
     public com.geored.negocio.AdministradorDTO[] obtenerListado() throws java.rmi.RemoteException, com.geored.negocio.DaoException;
+    public com.geored.negocio.AdministradorDTO[] obtenerListadoPorTipo(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.DaoException;
     public void eliminar(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
     public java.lang.Long insertar(com.geored.negocio.AdministradorDTO arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
     public com.geored.negocio.AdministradorDTO obtener(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;

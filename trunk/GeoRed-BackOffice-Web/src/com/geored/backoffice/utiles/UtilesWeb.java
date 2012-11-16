@@ -9,7 +9,7 @@ import com.geored.negocio.AdministradorDTO;
 @SessionScoped
 public class UtilesWeb
 {
-	public static final Long ID_TIPO_ADMIN_GLOBAL = 1L;
+	public static final Long ID_TIPO_ADMIN_APLICACION = 1L;
 	
 	public static final Long ID_TIPO_ADMIN_EMPRESA = 2L;
 	
@@ -31,5 +31,10 @@ public class UtilesWeb
 	public static AdministradorDTO obtenerUsuarioAutenticado()
 	{
 		return UtilesSeguridadWeb.obtenerUsuarioAutenticado();
+	}
+	
+	public static boolean esAdministradorEmpresa()
+	{
+		return UtilesSeguridadWeb.obtenerUsuarioAutenticado().getIdTipoAdministrador().equals(ID_TIPO_ADMIN_EMPRESA);
 	}
 }

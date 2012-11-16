@@ -63,6 +63,11 @@ public class EmpresaServiceImpl implements EmpresaService
 			throw new NegocioException("Empresa no encontrada");
 		}
 		
+		if(empresaEntity.getListaLocales() != null && !empresaEntity.getListaLocales().isEmpty())
+		{
+			throw new NegocioException("La empresa no se puede eliminar, tiene locales asociados");
+		}
+		
 		empresaDAO.eliminar(empresaEntity);
 	}
 

@@ -11,47 +11,94 @@
 		<ui:composition template="/xhtml/templates/layout.xhtml">
 			<ui:define name="content">	
 				<h:form>					
+					<c:set var="esAdminEmpresa" value="#{utilesWeb.esAdministradorEmpresa()}"/>
+					<c:set var="esModoEdicion" value="#{!utilesWeb.isNullOrZero(gestionEmpresaBean.empresaDTO.id)}"/>
+				
 					<h1 class="titulo-content">Gestión de Empresas</h1>
+					<h:inputHidden value="#{gestionEmpresaBean.empresaDTO.id}"/>	
 					
-					<table>
-						<h:inputHidden value="#{gestionEmpresaBean.empresaDTO.id}"/>
-						<c:if test="#{gestionEmpresaBean.empresaDTO.id > 0}">
-							<tr>
-								<td><h:outputText value="Id:" /></td>
-								<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.id}" disabled="true"/></td>
-							</tr>
-						</c:if>												
-						<tr>
-							<td><h:outputText value="Nombre:" /></td>
-							<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.nombre}"/></td>
-						</tr>
-						<tr>
-							<td><h:outputText value="Descripción:" /></td>
-							<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.descripcion}"/></td>
-						</tr>
-						<tr>
-							<td><h:outputText value="Logo:" /></td>
-							<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.urlImagen}"/></td>
-						</tr>
-						<tr>
-							<td><h:outputText value="Administrador:" /></td>
-							<td>
-								<p:selectOneMenu value="#{gestionEmpresaBean.empresaDTO.idAdministrador}">
-									<f:selectItems value="#{gestionEmpresaBean.listaAdministradores}" 
-										var="administrador" itemValue="#{administrador.id}" itemLabel="#{administrador.nombre}"/>
-								</p:selectOneMenu> 								
-							</td>						
-						</tr>
-					</table>
+					<c:choose>
+						<c:when test="#{esAdminEmpresa}">
+							<table>
+								<tr>
+									<td><h:outputText value="Id:" /></td>
+									<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.id}" readonly="true"/></td>
+								</tr>
+								<tr>
+									<td><h:outputText value="Nombre:" /></td>
+									<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.nombre}" readonly="#{!esAdminEmpresa}"/></td>
+								</tr>
+								<tr>
+									<td><h:outputText value="Descripción:" /></td>
+									<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.descripcion}"/></td>
+								</tr>
+								<tr>
+									<td><h:outputText value="Logo:" /></td>
+									<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.urlImagen}"/></td>
+								</tr>
+								<tr>
+									<td><h:outputText value="Administrador:" /></td>
+									<td>								
+										<p:selectOneMenu value="#{gestionEmpresaBean.empresaDTO.idAdministrador}">
+											<f:selectItems value="#{gestionEmpresaBean.listaAdministradores}" 
+												var="administrador" itemValue="#{administrador.id}" itemLabel="#{administrador.nombre}"/>
+										</p:selectOneMenu> 								
+									</td>						
+								</tr>
+							</table>		
+						</c:when>
+						<c:otherwise>
+							<table>
+								<c:if test="#{esModoEdicion}">
+									<tr>
+										<td><h:outputText value="Id:" /></td>
+										<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.id}" readonly="true"/></td>
+									</tr>
+								</c:if>
+								<tr>
+									<td><h:outputText value="Nombre:" /></td>
+									<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.nombre}" readonly="#{!esModoEdicion}"/></td>
+								</tr>
+								<tr>
+									<td><h:outputText value="Administrador:" /></td>
+									<c:choose>
+										<c:when test="#{!esModoEdicion}">
+											<td>								
+												<p:selectOneMenu value="#{gestionEmpresaBean.empresaDTO.idAdministrador}">
+													<f:selectItems value="#{gestionEmpresaBean.listaAdministradores}" 
+														var="administrador" itemValue="#{administrador.id}" itemLabel="#{administrador.nombre}"/>
+												</p:selectOneMenu> 								
+											</td>						
+										</c:when>
+										<c:otherwise>
+											<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.nombreAdministrador}" readonly="true"/></td>
+										</c:otherwise>
+									</c:choose>									
+								</tr>
+							</table>
+						</c:otherwise>
+					</c:choose>
 					
 					<div class="areaBotones">
 						<ul>
 							<li>
 								<p:commandButton value="Volver" action="#{gestionEmpresaBean.toListadoEmpresas()}"/>	
 							</li>
-							<li>
-								<p:commandButton value="Guardar" action="#{gestionEmpresaBean.guardarEmpresa()}"/>	
-							</li>
+							
+							<c:choose>
+								<c:when test="#{esAdminEmpresa}">
+									<li>								
+										<p:commandButton value="Guardar" action="#{gestionEmpresaBean.guardarEmpresa()}"/>	
+									</li>
+								</c:when>
+								<c:otherwise>
+									<c:if test="#{!esModoEdicion}">
+										<li>								
+											<p:commandButton value="Guardar" action="#{gestionEmpresaBean.guardarEmpresa()}"/>	
+										</li>
+									</c:if>
+								</c:otherwise>
+							</c:choose>
 						</ul>									
 					</div>				
 				</h:form>				

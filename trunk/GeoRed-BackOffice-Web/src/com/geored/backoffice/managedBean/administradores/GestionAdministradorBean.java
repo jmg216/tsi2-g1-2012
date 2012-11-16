@@ -27,6 +27,8 @@ public class GestionAdministradorBean extends BaseBean implements Serializable
 	
 	private static final int VALIDAR_MODIFICAR = 2;
 	
+	private static final String ADMINISTRADOR_DTO_KEY = "ADMINISTRADOR_DTO_KEY";
+	
 	private static final String TO_LISTADO_ADMINISTRADORES = "to_listado_administradores";
 	
 	private AdministradorDTO administradorDTO = new AdministradorDTO();
@@ -35,24 +37,31 @@ public class GestionAdministradorBean extends BaseBean implements Serializable
 	
 	public GestionAdministradorBean()
 	{	
-		String idAdministrador = getRequestParameter("idAdministrador");                
+		administradorDTO = (AdministradorDTO) getFlashAttribute(ADMINISTRADOR_DTO_KEY);
 		
-		if(UtilesWeb.isNullOrEmpty(idAdministrador))
+		if(administradorDTO == null)
 		{
-			administradorDTO = new AdministradorDTO();
-		}
-		else
-		{
-			try
+			String idAdministrador = getRequestParameter("idAdministrador");                
+			
+			if(UtilesWeb.isNullOrEmpty(idAdministrador))
 			{
-				administradorDTO = getAdminPort().obtener(Long.valueOf(idAdministrador));
-			} 
-			catch (Exception e)
+				administradorDTO = new AdministradorDTO();
+			}
+			else
 			{
-				handleWSException(e);
-			} 
+				try
+				{
+					administradorDTO = getAdminPort().obtener(Long.valueOf(idAdministrador));
+				} 
+				catch (Exception e)
+				{
+					handleWSException(e);
+				} 
+			}
+			
+			setFlashAttribute(ADMINISTRADOR_DTO_KEY, administradorDTO);
 		}
-		
+			
 		cargarDatosIniciales();
 	}
 	

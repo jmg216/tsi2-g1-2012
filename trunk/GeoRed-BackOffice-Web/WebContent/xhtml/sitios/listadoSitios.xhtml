@@ -47,7 +47,13 @@
 				            </f:facet>  
 				            <h:outputText value="#{sitio.descripcion}" />  
 				        </p:column>
-				        				  
+				        	
+				        <p:column style="width: 30px;">				        	
+				   			<h:commandLink action="#{listadoSitiosBean.eliminarSitio()}">
+				   				<h:graphicImage value="/resources/images/ico-eliminar.png"/>
+				           		<f:setPropertyActionListener target="#{listadoSitiosBean.idSitio}" value="#{sitio.id}"/>
+				           	</h:commandLink>
+				        </p:column>				  
 				    </p:dataTable> 
 				</h:form>
 			</ui:define>
