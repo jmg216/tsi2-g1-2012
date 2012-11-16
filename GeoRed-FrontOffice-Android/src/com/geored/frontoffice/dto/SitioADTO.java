@@ -77,7 +77,15 @@ public class SitioADTO extends com.geored.dto.SitioDTO implements KvmSerializabl
 						{
 							if (response.getProperty(i) instanceof SoapObject)
 							{
+								SoapObject listaTematicas = (SoapObject) response.getProperty(i);
+								PropertyInfo info = new PropertyInfo();
+								response.getPropertyInfo(i+1, info);
+								info.getName();
 								
+								if (!fieldsADTO[indiceFields].getName().equals(info.getName()))
+								{
+									indiceFields++;
+								}								
 							}
 							else
 							{
