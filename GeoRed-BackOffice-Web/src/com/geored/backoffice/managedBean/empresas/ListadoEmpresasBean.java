@@ -1,18 +1,16 @@
 package com.geored.backoffice.managedBean.empresas;
 
 import java.io.Serializable;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.xml.rpc.ServiceException;
 
 import com.geored.backoffice.managedBean.BaseBean;
-import com.geored.negocio.DaoException;
 import com.geored.negocio.EmpresaDTO;
+import com.geored.negocio.NegocioException;
 
 
 @ManagedBean(name="listadoEmpresasBean")
@@ -50,6 +48,20 @@ public class ListadoEmpresasBean extends BaseBean implements Serializable
 		{
 			handleWSException(e);
 		} 
+	}
+	
+	public String eliminarEmpresa()
+	{
+		try
+		{
+			getEmpresaPort().eliminar(idEmpresa);
+		}
+		catch(Exception e)
+		{
+			handleWSException(e);
+		}
+		
+		return SUCCESS;
 	}
 	
 	public String toGestionEmpresa()

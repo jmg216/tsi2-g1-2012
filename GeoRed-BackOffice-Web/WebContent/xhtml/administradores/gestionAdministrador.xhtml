@@ -58,7 +58,7 @@
 								<p:commandButton value="Volver" action="#{gestionAdministradorBean.toListadoAdministradores()}"/>	
 							</li>
 							<li>
-								<p:commandButton value="Guardar" action="#{gestionAdministradorBean.guardarAdministrador()}"  />	
+								<p:commandButton value="Guardar" action="#{gestionAdministradorBean.guardarAdministrador()}" rendered="#{!esModoEdicion}" />	
 							</li>
 						</ul>									
 					</div>					

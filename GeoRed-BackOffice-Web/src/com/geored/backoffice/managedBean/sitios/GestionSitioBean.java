@@ -26,9 +26,11 @@ public class GestionSitioBean extends BaseBean implements Serializable
 	
 	private static final int VALIDAR_MODIFICAR = 2; 
 	
+	private static final String SITIO_DTO_KEY = "SITIO_DTO_KEY"; 
+	
 	private static final String TO_LISTADO_SITIOS = "to_listado_sitios";
 	
-	private SitioDTO sitioDTO;
+	private SitioDTO sitioDTO = new SitioDTO();
 	
 	private List<TematicaDTO> listaTematicas = new ArrayList<TematicaDTO>();
 	
@@ -36,7 +38,7 @@ public class GestionSitioBean extends BaseBean implements Serializable
 	
 	public GestionSitioBean()
 	{	
-		sitioDTO = (SitioDTO) getFlashAttribute("sitioDTO");
+		sitioDTO = (SitioDTO) getFlashAttribute(SITIO_DTO_KEY);
 				
 		if(sitioDTO == null)
 		{
@@ -58,7 +60,7 @@ public class GestionSitioBean extends BaseBean implements Serializable
 				} 
 			}
 			
-			setFlashAttribute("sitioDTO", sitioDTO);
+			setFlashAttribute(SITIO_DTO_KEY, sitioDTO);
 		}
 		
 		cargarDatoIniciales();

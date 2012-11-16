@@ -32,10 +32,10 @@ public class Empresa implements Serializable
 	@Column(name="NOMBRE", nullable=false)
 	private String nombre;
 	
-	@Column(name="DESCRIPCION", nullable=false)
+	@Column(name="DESCRIPCION")
 	private String descripcion;
 	
-	@Column(name="URL_IMAGEN", nullable=false)
+	@Column(name="URL_IMAGEN")
 	private String urlImagen;
 	
 	@Column(name="FECHA_CREACION", nullable=false)

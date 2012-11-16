@@ -1,19 +1,15 @@
 package com.geored.backoffice.managedBean.administradores;
 
 import java.io.Serializable;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.xml.rpc.ServiceException;
 
 import com.geored.backoffice.managedBean.BaseBean;
 import com.geored.negocio.AdministradorDTO;
-import com.geored.negocio.DaoException;
-import com.geored.negocio.NegocioException;
 
 @ManagedBean(name="listadoAdministradoresBean")
 @RequestScoped
@@ -51,7 +47,7 @@ public class ListadoAdministradoresBean extends BaseBean implements Serializable
 		} 
 	}
 	
-	public void eliminarAdministrador()
+	public String eliminarAdministrador()
 	{
 		try
 		{
@@ -61,6 +57,8 @@ public class ListadoAdministradoresBean extends BaseBean implements Serializable
 		{
 			handleWSException(e);
 		}
+		
+		return SUCCESS;
 	}
 	
 	public String toGestionAdministrador()

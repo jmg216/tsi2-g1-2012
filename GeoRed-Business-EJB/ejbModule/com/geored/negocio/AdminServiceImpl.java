@@ -146,4 +146,10 @@ public class AdminServiceImpl implements AdminService
 		
 		return adminDTO;
 	}
+
+	@Override
+	public List<AdministradorDTO> obtenerListadoPorTipo(Long idTipoAdmin) throws DaoException
+	{
+		return administradorDAO.obtenerListadoPorTipo(idTipoAdmin, true);
+	}
 }

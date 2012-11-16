@@ -21,5 +21,7 @@ public interface AdminService
 	
 	public List<AdministradorDTO> obtenerListado() throws DaoException;
 	
+	public List<AdministradorDTO> obtenerListadoPorTipo(Long idTipoAdmin) throws DaoException;
+	
 	public AdministradorDTO obtenerAdminPorEmailYPass(String email, String pass) throws NegocioException, DaoException;
 }

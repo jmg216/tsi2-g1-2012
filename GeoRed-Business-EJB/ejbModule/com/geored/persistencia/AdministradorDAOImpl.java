@@ -1,6 +1,7 @@
 package com.geored.persistencia;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -109,6 +110,29 @@ public class AdministradorDAOImpl extends GenericDAOBase<Administrador, Administ
 	        }
 	        
 	        return adminEntity;
+		}
+		catch(Throwable e)
+		{
+			throw new DaoException(e.getMessage());
+		}
+	}
+
+	@Override
+	public List obtenerListadoPorTipo(Long idTipoAdmin, boolean toDTO) throws DaoException
+	{
+		try
+		{
+			Query query = em.createQuery("SELECT a FROM com.geored.dominio.Administrador a where a.tipoAdministrador.id = ?1");
+			query.setParameter(1, idTipoAdmin);
+			
+			List<Administrador> listaAdministradores = query.getResultList();
+			
+			if(toDTO)
+			{			
+				return toDtoList(listaAdministradores);			
+			}
+			
+			return listaAdministradores;
 		}
 		catch(Throwable e)
 		{
