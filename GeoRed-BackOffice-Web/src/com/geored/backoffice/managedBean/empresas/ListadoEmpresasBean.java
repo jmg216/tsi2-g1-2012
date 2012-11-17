@@ -9,9 +9,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import com.geored.backoffice.managedBean.BaseBean;
+import com.geored.backoffice.utiles.UtilesWeb;
 import com.geored.negocio.EmpresaDTO;
-import com.geored.negocio.NegocioException;
-
 
 @ManagedBean(name="listadoEmpresasBean")
 @RequestScoped
@@ -32,7 +31,18 @@ public class ListadoEmpresasBean extends BaseBean implements Serializable
 	{
 		try
 		{	
-			EmpresaDTO[] arrayEmpresas = getEmpresaPort().obtenerListado();
+			// Si es admin empresas solo traigo las del usuario autenticado
+			
+			EmpresaDTO[] arrayEmpresas = {};
+			
+			if(UtilesWeb.esAdministradorEmpresa())
+			{
+				arrayEmpresas = getEmpresaPort().obtenerListadoPorAdministrador(UtilesWeb.obtenerEmpresaAdministrada().getId());
+			}
+			else
+			{
+				arrayEmpresas = getEmpresaPort().obtenerListado();
+			}
 			
 			if(arrayEmpresas != null)
 			{

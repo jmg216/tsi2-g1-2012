@@ -2,15 +2,19 @@ package com.geored.persistencia;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
+import javax.persistence.Query;
 
+import com.geored.dominio.Administrador;
 import com.geored.dominio.Empresa;
 import com.geored.dto.EmpresaDTO;
 import com.geored.dto.LocalDTO;
+import com.geored.exceptions.DaoException;
 import com.geored.persistencia.core.GenericDAOBase;
 
 @Stateless
@@ -48,6 +52,29 @@ public class EmpresaDAOImpl extends GenericDAOBase<Empresa, EmpresaDTO> implemen
 		if(source.getListaLocales() != null)
 		{			
 			target.setListaLocalesDTO(localDAO.toDtoList(source.getListaLocales()));
+		}
+	}
+
+	@Override
+	public List obtenerListadoPorAdministrador(Long idAdministrador, boolean toDTO) throws DaoException
+	{
+		try
+		{
+			Query query = em.createQuery("SELECT e FROM com.geored.dominio.Empresa e where e.administrador.id = ?1");
+			query.setParameter(1, idAdministrador);
+			
+			List<Empresa> listaEmpresas = query.getResultList();
+			
+			if(toDTO)
+			{			
+				return toDtoList(listaEmpresas);			
+			}
+			
+			return listaEmpresas;
+		}
+		catch(Throwable e)
+		{
+			throw new DaoException(e.getMessage());
 		}
 	}	
 }

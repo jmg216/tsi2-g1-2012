@@ -4,16 +4,20 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 	<h:form>
 		<p:menubar>    			
+			<c:set var="esAdminEmpresa" value="#{utilesWeb.esAdministradorEmpresa()}"/>
+			
 			<p:submenu label="Administración">
-				<p:menuitem value="Administradores" url="/xhtml/administradores/listadoAdministradores.xhtml" />
-				<p:menuitem value="Sitios" url="/xhtml/sitios/listadoSitios.xhtml" />  	         
-    	        <p:menuitem value="Eventos" url="/xhtml/eventos/listadoEventos.xhtml" />  
-	            <p:menuitem value="Empresas" url="/xhtml/empresas/listadoEmpresas.xhtml" /> 
-	            <p:menuitem value="Ofertas" url="/xhtml/ofertas/listadoOfertas.xhtml" /> 
+				<p:menuitem value="Administradores" url="/xhtml/administradores/listadoAdministradores.xhtml" rendered="#{!esAdminEmpresa}" />
+				<p:menuitem value="Sitios" url="/xhtml/sitios/listadoSitios.xhtml" rendered="#{!esAdminEmpresa}" />         
+    	        <p:menuitem value="Eventos" url="/xhtml/eventos/listadoEventos.xhtml" rendered="#{!esAdminEmpresa}" />  
+	            <p:menuitem value="Empresas" url="/xhtml/empresas/listadoEmpresas.xhtml"/>
+     			<p:menuitem value="Locales" url="/xhtml/locales/listadoLocales.xhtml" rendered="#{esAdminEmpresa}" />  	 
+	            <p:menuitem value="Ofertas" url="/xhtml/ofertas/listadoOfertas.xhtml" rendered="#{esAdminEmpresa}" /> 
 			</p:submenu>
 			
 			<p:submenu label="Reportes">
@@ -23,7 +27,6 @@
 			
 			<p:submenu label="Perfil" style="float:right;">
 				<p:menuitem value="Mis datos" url="/xhtml/cuenta/perfil.xhtml" />			
-	            <p:menuitem value="Mis empresas" url="/xhtml/empresas/misEmpresas.xhtml" />
 			</p:submenu>
 	    </p:menubar>
 	</h:form> 
