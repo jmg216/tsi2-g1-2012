@@ -55,6 +55,7 @@ public class ReporteComprasBean extends BaseBean implements Serializable
 			listadoOfertas = Arrays.asList(arrayOfertas);
 			listadoCompras = new ArrayList<CompraDTO>();
 			
+			
 			pieModel = new PieChartModel();
 			
 			//Conversion de Date To Calendar
