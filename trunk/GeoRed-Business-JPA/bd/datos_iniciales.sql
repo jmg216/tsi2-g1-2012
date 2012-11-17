@@ -8,11 +8,25 @@ insert into geored.tipo_administrador (ID, NOMBRE) values (2, 'Empresa');
 insert into geored.administrador (ID, EMAIL, NOMBRE, PASS, TIPO_ADMINISTRADOR_FK) values (1, 'admin@geored.com', 'admin', '21232f297a57a5a743894a0e4a801fc3', 1);
 
 /* Administrador de Empresa Beauty */
-insert into geored.administrador (ID, EMAIL, NOMBRE, PASS, TIPO_ADMINISTRADOR_FK) values (2, 'beauty@geored.com', 'beauty', '21232f297a57a5a743894a0e4a801fc3', 2);
+insert into geored.administrador (ID, EMAIL, NOMBRE, PASS, TIPO_ADMINISTRADOR_FK) values (2, 'maxi.silveraf@gmail.com', 'Maximiliano Silvera', '21232f297a57a5a743894a0e4a801fc3', 2);
+
+/* Administrador de Il mondo */
+insert into geored.administrador (ID, EMAIL, NOMBRE, PASS, TIPO_ADMINISTRADOR_FK) values (3, 'lavarece@gmail.com', 'Vanessa Revetria', '21232f297a57a5a743894a0e4a801fc3', 2);
+
+/* Administrador de Teatro Solis */
+insert into geored.administrador (ID, EMAIL, NOMBRE, PASS, TIPO_ADMINISTRADOR_FK) values (4, 'juanma.miraballes@gmail.com', 'Juan Manuel Miraballes', '21232f297a57a5a743894a0e4a801fc3', 2);
+
 
 /*Empresa con administrador */
 insert into geored.empresa (ID, DESCRIPCION, FECHA_CREACION, NOMBRE, URL_IMAGEN,  ADMINISTRADOR_FK)
 values (1, 'Empresa de cosmeticos', '2012-12-22', 'Beauty', 'http://3.bp.blogspot.com/_jJXpVP_ML4I/SwL_OT1Nx6I/AAAAAAAAABw/OW8tlgJeN2U/S660/beauty.jpg', 2);
+
+insert into geored.empresa (ID, DESCRIPCION, FECHA_CREACION, NOMBRE, URL_IMAGEN,  ADMINISTRADOR_FK)
+values (2, 'La pizza del mondo es un clásico de este restaurante de minutas y comida rápida. Y tiene de todo: jamón, tomate en rodajas, huevo, morrón, palmitos y salsa golf.', '2012-12-22', 'Il Mondo della Pizza', 'http://profile.ak.fbcdn.net/hprofile-ak-prn1/27535_133395436676362_7639_n.jpg', 3);
+
+insert into geored.empresa (ID, DESCRIPCION, FECHA_CREACION, NOMBRE, URL_IMAGEN,  ADMINISTRADOR_FK)
+values (3, 'El Teatro Solís es hoy el mayor referente patrimonial de las artes escénicas de Uruguay y su primer escenario.', '2012-12-22', 'Teatro Solis', 'http://www.ithu.edu.uy/imagenes/teatro-solis.jpg', 4);
+
 
 /*Sitio de interés*/
 insert into geored.sitio (ID, DESCRIPCION, NOMBRE, UBICACION_GEOGRAFICA, URL_IMAGEN) values (1, 'Buen lugar para hacer ejercicio', 'Gym Astro', '-34.883611, -56.181944', 'http://theawkwardpint.files.wordpress.com/2012/05/93_1.jpeg');
