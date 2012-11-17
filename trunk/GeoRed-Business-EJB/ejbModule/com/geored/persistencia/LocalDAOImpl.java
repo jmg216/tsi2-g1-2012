@@ -6,10 +6,14 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
 
+import com.geored.dominio.Administrador;
 import com.geored.dominio.Local;
 import com.geored.dto.LocalDTO;
 import com.geored.dto.OfertaDTO;
+import com.geored.exceptions.DaoException;
 import com.geored.persistencia.core.GenericDAOBase;
 
 @Stateless
@@ -45,6 +49,37 @@ public class LocalDAOImpl extends GenericDAOBase<Local, LocalDTO> implements Loc
 		if(source.getListaOfertas() != null)
 		{
 			target.setListaOfertas(ofertaDAO.toDtoList(source.getListaOfertas()));
+		}
+	}
+
+	@Override
+	public Object obtenerLocalPorNombreYEmpresa(String nombre, Long idEmpresa, boolean toDTO) throws DaoException
+	{
+		try
+		{
+			Query query = em.createQuery("select l from com.geored.dominio.Local l where l.nombre = ?1 and l.empresa.id = ?2");        
+	        query.setParameter(1, nombre);      
+	        query.setParameter(2, idEmpresa);
+	        
+	        try
+	        {
+	        	 Local localEntity = (Local) query.getSingleResult();
+	        	 
+	        	 if(toDTO)
+	             {        	
+	             	return toDto(localEntity);
+	             }
+	        	 
+	        	 return localEntity;
+	        }
+	        catch(NoResultException e)
+	        {
+	        	return null;
+	        }
+		}
+		catch(Throwable e)
+		{
+			throw new DaoException(e.getMessage());
 		}
 	}
 }

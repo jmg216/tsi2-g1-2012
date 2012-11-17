@@ -4,6 +4,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import com.geored.negocio.AdministradorDTO;
+import com.geored.negocio.EmpresaDTO;
 
 @ManagedBean(name="utilesWeb")
 @SessionScoped
@@ -36,5 +37,10 @@ public class UtilesWeb
 	public static boolean esAdministradorEmpresa()
 	{
 		return UtilesSeguridadWeb.obtenerUsuarioAutenticado().getIdTipoAdministrador().equals(ID_TIPO_ADMIN_EMPRESA);
+	}
+	
+	public static EmpresaDTO obtenerEmpresaAdministrada()
+	{
+		return UtilesSeguridadWeb.obtenerEmpresaAutenticada();
 	}
 }

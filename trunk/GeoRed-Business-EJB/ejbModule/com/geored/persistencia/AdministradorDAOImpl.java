@@ -61,23 +61,21 @@ public class AdministradorDAOImpl extends GenericDAOBase<Administrador, Administ
 	        query.setParameter(1, email);        
 	        query.setParameter(2, pass);
 	        
-	        Administrador adminEntity = null;
-	        
 	        try
 	        {
-	        	 adminEntity = (Administrador) query.getSingleResult();
+	        	Administrador adminEntity = (Administrador) query.getSingleResult();
 	        	 
 	        	 if(toDTO)
 	             {        	
 	             	return toDto(adminEntity);
 	             }
+	        	 
+	        	 return adminEntity;
 	        }
 	        catch(NoResultException e)
 	        {
 	        	return null;
 	        }
-	        
-	        return adminEntity;
 		}
 		catch(Throwable e)
 		{
@@ -93,23 +91,21 @@ public class AdministradorDAOImpl extends GenericDAOBase<Administrador, Administ
 			Query query = em.createQuery("select a from com.geored.dominio.Administrador a where a.email = ?1");        
 	        query.setParameter(1, email);        
 	        
-	        Administrador adminEntity = null;
-	        
 	        try
 	        {
-	        	 adminEntity = (Administrador) query.getSingleResult();
+	        	 Administrador adminEntity = (Administrador) query.getSingleResult();
 	        	 
 	        	 if(toDTO)
 	             {        	
 	             	return toDto(adminEntity);
 	             }
+	        	 
+	        	 return adminEntity;
 	        }
 	        catch(NoResultException e)
 	        {
 	        	return null;
 	        }
-	        
-	        return adminEntity;
 		}
 		catch(Throwable e)
 		{

@@ -23,6 +23,12 @@ public class GestionEmpresaBean extends BaseBean implements Serializable
 	 */
 	private static final long serialVersionUID = -904426109389600335L;
 
+	private static final int VALIDAR_CREAR = 1;
+	
+	private static final int VALIDAR_MODIFICAR = 2;
+	
+	private static final String EMPRESA_DTO_KEY = "EMPRESA_DTO_KEY";
+	
 	private static final String TO_LISTADO_EMPRESAS = "to_listado_empresas";
 	
 	private EmpresaDTO empresaDTO = new EmpresaDTO();
@@ -31,22 +37,29 @@ public class GestionEmpresaBean extends BaseBean implements Serializable
 	
 	public GestionEmpresaBean()
 	{	
-		String idEmpresa = getRequestParameter("idEmpresa");                
+		empresaDTO = (EmpresaDTO) getFlashAttribute(EMPRESA_DTO_KEY);
 		
-		if(UtilesWeb.isNullOrEmpty(idEmpresa))
+		if(empresaDTO == null)
 		{
-			empresaDTO = new EmpresaDTO();
-		}
-		else
-		{
-			try
+			String idEmpresa = getRequestParameter("idEmpresa");                
+			
+			if(UtilesWeb.isNullOrEmpty(idEmpresa))
 			{
-				empresaDTO = getEmpresaPort().obtener(Long.valueOf(idEmpresa));
-			} 
-			catch (Exception e)
+				empresaDTO = new EmpresaDTO();
+			}
+			else
 			{
-				addBeanError(e.getMessage());
-			} 
+				try
+				{
+					empresaDTO = getEmpresaPort().obtener(Long.valueOf(idEmpresa));
+				} 
+				catch (Exception e)
+				{
+					addBeanError(e.getMessage());
+				} 
+			}
+			
+			setFlashAttribute(EMPRESA_DTO_KEY, empresaDTO);
 		}
 		
 		cargarDatosIniciales();
@@ -73,40 +86,63 @@ public class GestionEmpresaBean extends BaseBean implements Serializable
 		} 
 	}
 	
-	public void guardarEmpresa()
-	{
-		addBeanMessage("Empresa guardada correctamente");
+	public String guardarEmpresa()
+	{		
+		try
+		{
+			// Si estoy creando 
+			if(UtilesWeb.isNullOrZero(empresaDTO.getId()))
+			{
+				if(validar(VALIDAR_CREAR))
+				{
+					getEmpresaPort().insertar(empresaDTO);
+					
+					addBeanMessage("Empresa guardada correctamente");
+				}				
+			}
+			else // Si estoy modificando
+			{
+				if(validar(VALIDAR_MODIFICAR))
+				{
+					getEmpresaPort().actualizar(empresaDTO);
+					
+					addBeanMessage("Empresa guardada correctamente");
+				}				
+			}				
+		}
+		catch(Exception e)
+		{
+			handleWSException(e);
+		} 
 		
-//		try
-//		{
-//			// Si estoy creando 
-//			if(empresaDTO.getId() == null)
-//			{
-//				getEmpresaPort().insertar(empresaDTO);
-//			}
-//			else // Si estoy modificando
-//			{
-//				getEmpresaPort().actualizar(empresaDTO);
-//			}
-//		}
-//		catch(NegocioException e)
-//		{
-//			addBeanError(e.getMessage());
-//		} 
-//		catch (DaoException e)
-//		{
-//			addBeanError(e.getMessage());
-//		} 
-//		catch (RemoteException e)
-//		{
-//			addBeanError(MSJ_ERROR_COMUNICACION_WS);
-//		} 
-//		catch (ServiceException e)
-//		{
-//			addBeanError(MSJ_ERROR_COMUNICACION_WS);
-//		}
+		return SUCCESS;
 	}
 
+	private boolean validar(int opValidar)
+	{
+		boolean isValid = true;
+		
+		if(opValidar == VALIDAR_CREAR)
+		{
+			if(UtilesWeb.isNullOrEmpty(getEmpresaDTO().getNombre()))
+			{
+				addBeanError("El campo 'Nombre' es obligatorio");
+				isValid = false;
+			}
+			if(UtilesWeb.isNullOrZero(getEmpresaDTO().getIdAdministrador()))
+			{
+				addBeanError("El campo 'Administrador' es obligatorio");
+				isValid = false;
+			}
+		}
+		else if(opValidar == VALIDAR_MODIFICAR)
+		{
+			
+		}
+		
+		return isValid;
+	}
+	
 	public String toListadoEmpresas()
 	{
 		return TO_LISTADO_EMPRESAS;

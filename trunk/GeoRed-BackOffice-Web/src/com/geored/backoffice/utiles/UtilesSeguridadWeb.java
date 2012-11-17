@@ -6,6 +6,7 @@ import java.security.NoSuchAlgorithmException;
 import javax.faces.context.FacesContext;
 
 import com.geored.negocio.AdministradorDTO;
+import com.geored.negocio.EmpresaDTO;
 
 public class UtilesSeguridadWeb
 {
@@ -14,6 +15,9 @@ public class UtilesSeguridadWeb
 	
 	private static final String KEY_ADMIN_AUTENTICADO = "com.geored.utiles.UtilesSeguridad.KEY_ADMIN_AUTENTICADO";
 	
+	private static final String KEY_EMPRESA_ADMINISTRADA = "com.geored.utiles.UtilesSeguridad.KEY_EMPRESA_ADMINISTRADA";
+	
+	// Funciones con el usuario autenticado
 	public static void guardarUsuarioAutenticado(AdministradorDTO administradorDTO)
 	{
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(KEY_ADMIN_AUTENTICADO, administradorDTO);
@@ -32,6 +36,17 @@ public class UtilesSeguridadWeb
 	public static AdministradorDTO obtenerUsuarioAutenticado()
 	{
 		return (AdministradorDTO) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(KEY_ADMIN_AUTENTICADO);
+	}
+	
+	// Funciones para el admin de empresa, indica que empresa esta administrando
+	public static void guardarEmpresaAdministrada(EmpresaDTO empresaDTO)
+	{
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(KEY_EMPRESA_ADMINISTRADA, empresaDTO);
+	}
+	
+	public static EmpresaDTO obtenerEmpresaAutenticada()
+	{
+		return (EmpresaDTO) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(KEY_EMPRESA_ADMINISTRADA);
 	}
 	
 	// Utilidades para encriptar password

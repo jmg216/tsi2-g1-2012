@@ -65,23 +65,21 @@ public class SitioDAOImpl extends GenericDAOBase<Sitio, SitioDTO> implements Sit
 			Query query = em.createQuery("select s from com.geored.dominio.Sitio s where s.nombre = ?1");        
 	        query.setParameter(1, nombre);        
 	        
-	        Sitio sitioEntity = null;
-	        
 	        try
 	        {
-	        	 sitioEntity = (Sitio) query.getSingleResult();
+	        	 Sitio sitioEntity = (Sitio) query.getSingleResult();
 	        	 
 	        	 if(toDTO)
 	             {        	
 	             	return toDto(sitioEntity);
 	             }
+	        	 
+	        	 return sitioEntity;
 	        }
 	        catch(NoResultException e)
 	        {
 	        	return null;
 	        }
-	        
-	        return sitioEntity;
 		}
 		catch(Throwable e)
 		{

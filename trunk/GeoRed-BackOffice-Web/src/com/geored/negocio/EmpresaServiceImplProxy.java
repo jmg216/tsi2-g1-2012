@@ -74,5 +74,41 @@ public class EmpresaServiceImplProxy implements com.geored.negocio.EmpresaServic
     return empresaServiceImpl.obtener(arg0);
   }
   
+  public com.geored.negocio.LocalDTO obtenerLocal(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+    if (empresaServiceImpl == null)
+      _initEmpresaServiceImplProxy();
+    return empresaServiceImpl.obtenerLocal(arg0);
+  }
+  
+  public java.lang.Long insertarLocal(com.geored.negocio.LocalDTO arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+    if (empresaServiceImpl == null)
+      _initEmpresaServiceImplProxy();
+    return empresaServiceImpl.insertarLocal(arg0);
+  }
+  
+  public void actualizarLocal(com.geored.negocio.LocalDTO arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+    if (empresaServiceImpl == null)
+      _initEmpresaServiceImplProxy();
+    empresaServiceImpl.actualizarLocal(arg0);
+  }
+  
+  public com.geored.negocio.LocalDTO[] obtenerListadoLocales() throws java.rmi.RemoteException, com.geored.negocio.DaoException{
+    if (empresaServiceImpl == null)
+      _initEmpresaServiceImplProxy();
+    return empresaServiceImpl.obtenerListadoLocales();
+  }
+  
+  public void eliminarLocal(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+    if (empresaServiceImpl == null)
+      _initEmpresaServiceImplProxy();
+    empresaServiceImpl.eliminarLocal(arg0);
+  }
+  
+  public com.geored.negocio.EmpresaDTO[] obtenerListadoPorAdministrador(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.DaoException{
+    if (empresaServiceImpl == null)
+      _initEmpresaServiceImplProxy();
+    return empresaServiceImpl.obtenerListadoPorAdministrador(arg0);
+  }
+  
   
 }

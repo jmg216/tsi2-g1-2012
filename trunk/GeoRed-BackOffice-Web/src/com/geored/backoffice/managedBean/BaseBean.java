@@ -35,6 +35,7 @@ public abstract class BaseBean
 	// Constantes de retornos
 	protected static final String SUCCESS = "success";
 	protected static final String ERROR = "error";
+	protected static final String TO_INDEX = "to_index";
 	
 	protected void handleWSException(Exception e)
 	{

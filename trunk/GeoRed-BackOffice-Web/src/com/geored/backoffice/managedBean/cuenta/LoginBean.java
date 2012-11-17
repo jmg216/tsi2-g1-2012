@@ -20,6 +20,8 @@ public class LoginBean extends BaseBean implements Serializable
 	 */
 	private static final long serialVersionUID = 1070740152270054906L;
 	
+	private static final String TO_SELECCION_EMPRESA = "to_seleccion_empresa";
+	
 	private String email = "admin@geored.com";
 	private String pass;
 
@@ -44,6 +46,11 @@ public class LoginBean extends BaseBean implements Serializable
 			}
 			
 			UtilesSeguridadWeb.guardarUsuarioAutenticado(administradorDTO);
+			
+			if(administradorDTO.getIdTipoAdministrador().equals(UtilesWeb.ID_TIPO_ADMIN_EMPRESA))
+			{
+				return TO_SELECCION_EMPRESA;
+			}
 		} 
 		catch (Exception e)
 		{
@@ -78,7 +85,7 @@ public class LoginBean extends BaseBean implements Serializable
 	{
 		UtilesSeguridadWeb.borrarUsuarioAutenticado();
 		
-		return SUCCESS;
+		return TO_INDEX;
 	}
 	
 	public String getEmail()

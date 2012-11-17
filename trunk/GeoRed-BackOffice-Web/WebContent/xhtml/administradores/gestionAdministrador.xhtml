@@ -42,7 +42,7 @@
 									</c:when>
 									<c:otherwise>
 										<p:selectOneMenu value="#{gestionAdministradorBean.administradorDTO.idTipoAdministrador}">
-											<f:selectItem itemLabel="Seleccione uno..." itemValue="" />
+											<f:selectItem itemLabel="---" itemValue="" />
 											<f:selectItems value="#{gestionAdministradorBean.listaTiposAdministradores}" 
 												var="tipoAdministrador" itemValue="#{tipoAdministrador.id}" itemLabel="#{tipoAdministrador.nombre}"/>
 										</p:selectOneMenu> 		
