@@ -17,6 +17,7 @@
 							<td><h:outputText value="Empresa:" /></td>
 							<td>
 								<p:selectOneMenu value="#{seleccionEmpresaBean.idEmpresa}">
+									<f:selectItem itemLabel="---" itemValue="" />
 									<f:selectItems value="#{seleccionEmpresaBean.listaEmpresas}" 
 										var="empresa" itemValue="#{empresa.id}" itemLabel="#{empresa.nombre}"/>
 								</p:selectOneMenu>

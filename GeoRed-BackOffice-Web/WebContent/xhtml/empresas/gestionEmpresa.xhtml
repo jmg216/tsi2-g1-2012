@@ -11,11 +11,12 @@
 		<ui:composition template="/xhtml/templates/layout.xhtml">
 			<ui:define name="content">	
 				<h:form>					
-					<c:set var="esAdminEmpresa" value="#{utilesWeb.esAdministradorEmpresa()}"/>
+					<c:set var="esAdminEmpresa" value="#{utilesWeb.esAdminEmpresa()}"/>
 					<c:set var="esModoEdicion" value="#{!utilesWeb.isNullOrZero(gestionEmpresaBean.empresaDTO.id)}"/>
 				
 					<h1 class="titulo-content">Gestión de Empresas</h1>
 					<h:inputHidden value="#{gestionEmpresaBean.empresaDTO.id}"/>	
+					<h:inputHidden value="#{gestionEmpresaBean.empresaDTO.idAdministrador}"/>	
 					
 					<c:choose>
 						<c:when test="#{esAdminEmpresa}">
@@ -26,7 +27,7 @@
 								</tr>
 								<tr>
 									<td><h:outputText value="Nombre:" /></td>
-									<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.nombre}" readonly="#{!esAdminEmpresa}"/></td>
+									<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.nombre}"/></td>
 								</tr>
 								<tr>
 									<td><h:outputText value="Descripción:" /></td>
@@ -48,7 +49,7 @@
 								</c:if>
 								<tr>
 									<td><h:outputText value="Nombre:" /></td>
-									<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.nombre}" readonly="#{!esModoEdicion}"/></td>
+									<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.nombre}" readonly="#{esModoEdicion}"/></td>
 								</tr>
 								<tr>
 									<td><h:outputText value="Administrador:" /></td>

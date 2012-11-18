@@ -26,21 +26,37 @@ public class UtilesWeb
 	
 	public static boolean hayUsuarioAutenticado()
 	{
-		return UtilesSeguridadWeb.hayUsuarioAutenticado();
+		return UtilesSeguridadWeb.obtenerUsuarioAutenticado() != null || UtilesSeguridadWeb.obtenerUsuarioSeleccionEmpresa() != null;
 	}
 	
 	public static AdministradorDTO obtenerUsuarioAutenticado()
 	{
-		return UtilesSeguridadWeb.obtenerUsuarioAutenticado();
-	}
-	
-	public static boolean esAdministradorEmpresa()
-	{
-		return UtilesSeguridadWeb.obtenerUsuarioAutenticado().getIdTipoAdministrador().equals(ID_TIPO_ADMIN_EMPRESA);
+		if(UtilesSeguridadWeb.obtenerUsuarioSeleccionEmpresa() != null)
+		{
+			return UtilesSeguridadWeb.obtenerUsuarioSeleccionEmpresa();
+		}
+		else
+		{
+			return UtilesSeguridadWeb.obtenerUsuarioAutenticado();
+		}
 	}
 	
 	public static EmpresaDTO obtenerEmpresaAdministrada()
 	{
-		return UtilesSeguridadWeb.obtenerEmpresaAutenticada();
+		return UtilesSeguridadWeb.obtenerEmpresaAdministrada();
+	}
+	
+	public static boolean esAdminEmpresa()
+	{
+		if(UtilesSeguridadWeb.obtenerUsuarioSeleccionEmpresa() != null)
+		{
+			return true;
+		}
+		else if(UtilesSeguridadWeb.obtenerUsuarioAutenticado() != null)
+		{
+			return obtenerUsuarioAutenticado().getIdTipoAdministrador().equals(ID_TIPO_ADMIN_EMPRESA); 
+		}
+		
+		return false;
 	}
 }
