@@ -36,7 +36,7 @@ public class SeleccionEmpresaBean extends BaseBean implements Serializable
 	{
 		try
 		{
-			if(idEmpresa == null)
+			if(UtilesWeb.isNullOrZero(idEmpresa))
 			{
 				addBeanError("Debe seleccionar una empresa");
 			}
@@ -45,6 +45,13 @@ public class SeleccionEmpresaBean extends BaseBean implements Serializable
 				EmpresaDTO empresaDTO = getEmpresaPort().obtener(idEmpresa);
 				
 				UtilesSeguridadWeb.guardarEmpresaAdministrada(empresaDTO);
+				
+				if(UtilesSeguridadWeb.obtenerUsuarioSeleccionEmpresa() != null)
+				{
+					UtilesSeguridadWeb.guardarUsuarioAutenticado(UtilesSeguridadWeb.obtenerUsuarioSeleccionEmpresa());
+					
+					UtilesSeguridadWeb.borrarUsuarioSeleccionEmpresa();
+				}
 				
 				return TO_INDEX;
 			}

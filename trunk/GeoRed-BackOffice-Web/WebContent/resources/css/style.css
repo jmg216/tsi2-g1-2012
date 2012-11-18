@@ -107,3 +107,21 @@ input, select, textarea
 	-webkit-box-shadow: 0px 0px 10px #262626;
 	-moz-box-shadow: 0px 5px 10px #262626
 }
+
+.container-bienvenido ul
+{
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+.container-bienvenido ul li
+{
+	display: inline;
+	float: left;
+	padding-left: 5px;
+	padding-right: 5px;
+	height: 20px;
+	line-height: 20px;
+	border-left: 1px solid #000000;
+}

@@ -24,6 +24,11 @@ public class LoginBean extends BaseBean implements Serializable
 	
 	private String email = "admin@geored.com";
 	private String pass;
+	
+	public LoginBean()
+	{
+		UtilesSeguridadWeb.limpiarDatosSeguridad();
+	}
 
 	public String iniciarSesion()
 	{
@@ -45,11 +50,15 @@ public class LoginBean extends BaseBean implements Serializable
 				return ERROR;
 			}
 			
-			UtilesSeguridadWeb.guardarUsuarioAutenticado(administradorDTO);
-			
 			if(administradorDTO.getIdTipoAdministrador().equals(UtilesWeb.ID_TIPO_ADMIN_EMPRESA))
 			{
+				UtilesSeguridadWeb.guardarUsuarioSeleccionEmpresa(administradorDTO);
+				
 				return TO_SELECCION_EMPRESA;
+			}
+			else
+			{
+				UtilesSeguridadWeb.guardarUsuarioAutenticado(administradorDTO);
 			}
 		} 
 		catch (Exception e)
@@ -83,7 +92,7 @@ public class LoginBean extends BaseBean implements Serializable
 	
 	public String cerrarSesion()
 	{
-		UtilesSeguridadWeb.borrarUsuarioAutenticado();
+		UtilesSeguridadWeb.limpiarDatosSeguridad();
 		
 		return TO_INDEX;
 	}

@@ -35,11 +35,21 @@
 							</span>
 						</c:when>
 						<c:otherwise>
-							<span>
-								<h:form>
-									<h:commandLink action="#{loginBean.cerrarSesion()}" styleClass="simple-link" value="Cerrar sesión" />	
-								</h:form>
-							</span>
+							<div class="container-bienvenido">
+								<ul>
+									<li style="border: 0px; font-style: italic;">																				
+										Bienvenido: <h:outputText value="#{utilesWeb.obtenerUsuarioAutenticado().nombre}" />
+										<c:if test="#{utilesWeb.obtenerEmpresaAdministrada() != null}">
+											(Empresa: <h:outputText value="#{utilesWeb.obtenerEmpresaAdministrada().nombre}" />)
+										</c:if>										
+									</li>
+									<li>
+										<h:form>
+											<h:commandLink action="#{loginBean.cerrarSesion()}" styleClass="simple-link" value="Cerrar sesión" />	
+										</h:form>
+									</li>
+								</ul>
+							</div>
 						</c:otherwise>
 					</c:choose>											
 				</div>				

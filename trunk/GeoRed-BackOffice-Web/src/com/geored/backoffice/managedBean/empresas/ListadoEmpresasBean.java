@@ -35,9 +35,9 @@ public class ListadoEmpresasBean extends BaseBean implements Serializable
 			
 			EmpresaDTO[] arrayEmpresas = {};
 			
-			if(UtilesWeb.esAdministradorEmpresa())
+			if(UtilesWeb.esAdminEmpresa())
 			{
-				arrayEmpresas = getEmpresaPort().obtenerListadoPorAdministrador(UtilesWeb.obtenerEmpresaAdministrada().getId());
+				arrayEmpresas = getEmpresaPort().obtenerListadoPorAdministrador(UtilesWeb.obtenerUsuarioAutenticado().getId());
 			}
 			else
 			{

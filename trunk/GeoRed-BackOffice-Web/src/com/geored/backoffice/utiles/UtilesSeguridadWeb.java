@@ -13,6 +13,8 @@ public class UtilesSeguridadWeb
 	// Constantes seguridad	
 	public static final String DEFAULT_PASS = "admin";
 	
+	private static final String KEY_ADMIN_SELECCION_EMPRESA = "com.geored.utiles.UtilesSeguridad.KEY_ADMIN_SELECCION_EMPRESA";
+	
 	private static final String KEY_ADMIN_AUTENTICADO = "com.geored.utiles.UtilesSeguridad.KEY_ADMIN_AUTENTICADO";
 	
 	private static final String KEY_EMPRESA_ADMINISTRADA = "com.geored.utiles.UtilesSeguridad.KEY_EMPRESA_ADMINISTRADA";
@@ -28,14 +30,25 @@ public class UtilesSeguridadWeb
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove(KEY_ADMIN_AUTENTICADO);
 	}
 	
-	public static boolean hayUsuarioAutenticado()
-	{
-		return FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(KEY_ADMIN_AUTENTICADO) != null;
-	}
-	
 	public static AdministradorDTO obtenerUsuarioAutenticado()
 	{
 		return (AdministradorDTO) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(KEY_ADMIN_AUTENTICADO);
+	}
+	
+	// Funciones con el usuario seleccion empresa
+	public static void guardarUsuarioSeleccionEmpresa(AdministradorDTO administradorDTO)
+	{
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(KEY_ADMIN_SELECCION_EMPRESA, administradorDTO);
+	}
+	
+	public static void borrarUsuarioSeleccionEmpresa()
+	{
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove(KEY_ADMIN_SELECCION_EMPRESA);
+	}
+	
+	public static AdministradorDTO obtenerUsuarioSeleccionEmpresa()
+	{
+		return (AdministradorDTO) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(KEY_ADMIN_SELECCION_EMPRESA);
 	}
 	
 	// Funciones para el admin de empresa, indica que empresa esta administrando
@@ -44,9 +57,21 @@ public class UtilesSeguridadWeb
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(KEY_EMPRESA_ADMINISTRADA, empresaDTO);
 	}
 	
-	public static EmpresaDTO obtenerEmpresaAutenticada()
+	public static EmpresaDTO obtenerEmpresaAdministrada()
 	{
 		return (EmpresaDTO) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(KEY_EMPRESA_ADMINISTRADA);
+	}
+	
+	public static void borrarEmpresaAdministrada()
+	{
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove(KEY_EMPRESA_ADMINISTRADA);
+	}
+	
+	public static void limpiarDatosSeguridad()
+	{
+		borrarUsuarioAutenticado();
+		borrarUsuarioSeleccionEmpresa();
+		borrarEmpresaAdministrada();
 	}
 	
 	// Utilidades para encriptar password

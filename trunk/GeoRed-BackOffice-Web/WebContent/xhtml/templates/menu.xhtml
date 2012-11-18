@@ -9,7 +9,7 @@
 
 	<h:form>
 		<p:menubar>    			
-			<c:set var="esAdminEmpresa" value="#{utilesWeb.esAdministradorEmpresa()}"/>
+			<c:set var="esAdminEmpresa" value="#{utilesWeb.esAdminEmpresa()}"/>
 			
 			<p:submenu label="Administración">
 				<p:menuitem value="Administradores" url="/xhtml/administradores/listadoAdministradores.xhtml" rendered="#{!esAdminEmpresa}" />
@@ -27,6 +27,7 @@
 			
 			<p:submenu label="Perfil" style="float:right;">
 				<p:menuitem value="Mis datos" url="/xhtml/cuenta/perfil.xhtml" />			
+				<p:menuitem value="Cambiar empresa" url="/xhtml/empresas/seleccionEmpresa.xhtml" rendered="#{utilesWeb.esAdminEmpresa()}" />
 			</p:submenu>
 	    </p:menubar>
 	</h:form> 

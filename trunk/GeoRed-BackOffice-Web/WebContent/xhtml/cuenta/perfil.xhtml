@@ -9,13 +9,60 @@
 	<h:body>
 		<ui:composition template="/xhtml/templates/layout.xhtml">
 			<ui:define name="content">	
-				<h:form>
-					<h1 class="titulo-content">Mi datos</h1>
+				<h:form>											
+					<h1 class="titulo-content">Mis datos</h1>
 					
-					<p:inputText value="#{loginBean.administradorDTO.email}" title="Email:"/>
-					<p:password value="#{loginBean.administradorDTO.pass}" title="Passwrod:"/>
+					<table>	
+						<h:inputHidden value="#{perfilBean.administradorDTO.id}" />		
+						<h:inputHidden value="#{perfilBean.administradorDTO.pass}" />
+						<h:inputHidden value="#{perfilBean.administradorDTO.idTipoAdministrador}" />		
+														
+						<tr>
+							<td><h:outputText value="E-mail:" /></td>
+							<td>	
+								<p:inputText value="#{perfilBean.administradorDTO.email}"/>																						
+							</td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Nombre:" /></td>
+							<td><p:inputText value="#{perfilBean.administradorDTO.nombre}"/></td>
+						</tr>
+					</table>
+					<table>
+						<tr>
+							<td>
+								<p:fieldset legend="Cambiar contraseña">  
+									<table>
+										<tr>
+											<td><h:outputText value="Contraseña actual:" /> </td>
+											<td><p:password value="#{perfilBean.contraseniaActual}"/></td>
+										</tr>
+										<tr>
+											<td><h:outputText value="Nueva contraseña:" /> </td>
+											<td><p:password value="#{perfilBean.nuevaContrasenia}"/></td>
+										</tr>
+										<tr>
+											<td><h:outputText value="Confirmar nueva contraseña:" /> </td>
+											<td><p:password value="#{perfilBean.confirmacionNuevaContrasenia}"/></td>
+										</tr>
+										<tr>
+											<td colspan="2" style="text-align: center;">
+												<p:commandButton value="Cambiar" action="#{perfilBean.cambiarContraseña()}" />	
+											</td>
+										</tr>
+									</table>
+							    </p:fieldset>  
+							</td>
+						</tr>																
+					</table>
 					
-					<p:commandButton value="Ingresar" action="#{loginBean.autenticar()}"/>
+					<div class="areaBotones">
+						<ul>
+							<li>
+								<p:commandButton value="Guardar" action="#{perfilBean.guardarDatos()}" />	
+							</li>
+						</ul>									
+					</div>	
 				</h:form>
 			</ui:define>
 		</ui:composition>
