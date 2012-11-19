@@ -67,7 +67,7 @@ public class OfertaDAOImpl extends GenericDAOBase<Oferta, OfertaDTO> implements 
 	{
 		try
 		{
-			Query query = em.createQuery("select o from com.geored.dominio.Oferta oferta where o.listaTematicas in ?1");
+			Query query = em.createQuery("select o from com.geored.dominio.Oferta o where o.listaTematicas in ?1");
 			
 	        query.setParameter(1, tematicas);       
 	        
@@ -85,5 +85,29 @@ public class OfertaDAOImpl extends GenericDAOBase<Oferta, OfertaDTO> implements 
 			throw new DaoException(e.getMessage());
 		}
 		
-    }	
+    }
+
+	@Override
+	public List obtenerListadoPorEmpresa(Long idEmpresa, boolean toDTO) throws DaoException
+	{
+		try
+		{
+			Query query = em.createQuery("select o from com.geored.dominio.Oferta o where o.local.empresa.id = ?1");
+			
+	        query.setParameter(1, idEmpresa);       
+	        
+	        List<Oferta> listaOfertas = query.getResultList();
+	        
+	        if(toDTO)
+	        {
+	        	return toDtoList(listaOfertas);
+	        }
+	     
+	        return listaOfertas;
+		}
+		catch(Throwable e)
+		{
+			throw new DaoException(e.getMessage());
+		}
+	}	
 }

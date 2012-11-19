@@ -20,4 +20,6 @@ public interface OfertaService
 	public OfertaDTO obtener(Long idOferta)  throws NegocioException, DaoException;
 	
 	public List<OfertaDTO> obtenerListado() throws DaoException;
+	
+	public List<OfertaDTO> obtenerListadoPorEmpresa(Long idEmpresa) throws DaoException;
 }

@@ -36,7 +36,7 @@ public class GestionAdministradorBean extends BaseBean implements Serializable
 	private List<TipoAdministradorDTO> listaTiposAdministradores = new ArrayList<TipoAdministradorDTO>();
 	
 	public GestionAdministradorBean()
-	{	
+	{
 		administradorDTO = (AdministradorDTO) getFlashAttribute(ADMINISTRADOR_DTO_KEY);
 		
 		if(administradorDTO == null)

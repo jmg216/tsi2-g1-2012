@@ -29,6 +29,11 @@ public class UtilesWeb
 		return UtilesSeguridadWeb.obtenerUsuarioAutenticado() != null || UtilesSeguridadWeb.obtenerUsuarioSeleccionEmpresa() != null;
 	}
 	
+	public static boolean existeUsuarioSeleccionEmpresa()
+	{
+		return UtilesSeguridadWeb.obtenerUsuarioSeleccionEmpresa() != null;
+	}
+	
 	public static AdministradorDTO obtenerUsuarioAutenticado()
 	{
 		if(UtilesSeguridadWeb.obtenerUsuarioSeleccionEmpresa() != null)

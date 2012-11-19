@@ -9,7 +9,7 @@
 
 	<h:body>
 		<ui:composition template="/xhtml/templates/layout.xhtml">
-			<ui:define name="content">	
+			<ui:define name="content">					
 				<h:form>					
 					<c:set var="esAdminEmpresa" value="#{utilesWeb.esAdminEmpresa()}"/>
 					<c:set var="esModoEdicion" value="#{!utilesWeb.isNullOrZero(gestionEmpresaBean.empresaDTO.id)}"/>
@@ -35,8 +35,22 @@
 								</tr>
 								<tr>
 									<td><h:outputText value="Logo:" /></td>
-									<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.urlImagen}"/></td>
+									<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.urlImagen}"/></td>									
 								</tr>					
+								<c:if test="#{!utilesWeb.isNullOrEmpty(gestionEmpresaBean.empresaDTO.urlImagen)}">
+									<tr>
+										<td></td>
+										<td><p:graphicImage url="#{gestionEmpresaBean.empresaDTO.urlImagen}" width="310px;" onclick="dlgFullImageEmpresa.show();" styleClass="black-shadow" style="cursor: pointer;"/></td>
+									</tr>
+								</c:if>
+								<tr>
+									<td><h:outputText value="Locales:" /></td>
+									<td>
+										<p:dataList value="#{gestionEmpresaBean.empresaDTO.listaLocalesDTO}" var="local" itemType="square">  
+										    #{local.nombre} - #{local.direccion}
+										</p:dataList> 
+									</td>
+								</tr>
 							</table>		
 						</c:when>
 						<c:otherwise>
@@ -93,8 +107,14 @@
 								</c:otherwise>
 							</c:choose>
 						</ul>									
-					</div>				
-				</h:form>				
+					</div>		
+					
+					<c:if test="#{!utilesWeb.isNullOrEmpty(gestionEmpresaBean.empresaDTO.urlImagen)}">
+						<p:dialog modal="true" resizable="false" widgetVar="dlgFullImageEmpresa" header="Imagen">
+							<p:graphicImage url="#{gestionEmpresaBean.empresaDTO.urlImagen}"/>
+						</p:dialog>
+					</c:if>							
+				</h:form>			
 			</ui:define>
 		</ui:composition>
 	</h:body>

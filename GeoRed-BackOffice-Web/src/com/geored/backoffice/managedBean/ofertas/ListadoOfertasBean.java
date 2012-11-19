@@ -9,7 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import com.geored.backoffice.managedBean.BaseBean;
-import com.geored.negocio.LocalDTO;
+import com.geored.backoffice.utiles.UtilesWeb;
 import com.geored.negocio.OfertaDTO;
 
 @ManagedBean(name="listadoOfertasBean")
@@ -26,49 +26,22 @@ public class ListadoOfertasBean extends BaseBean implements Serializable
 	private Long idOferta;
 	
 	private List<OfertaDTO> listaOfertas = new ArrayList<OfertaDTO>();
-	
-	private List<LocalDTO> listaLocales = new ArrayList<LocalDTO>();
-	
-	private List<OfertaDTO> listadoOfertas = new ArrayList<OfertaDTO>();
-	
-	private List<OfertaDTO> listaPublicar = new ArrayList<OfertaDTO>();
-	
-	private OfertaDTO ofertaDTO = new OfertaDTO();
 
-	public ListadoOfertasBean() 
+	public ListadoOfertasBean()
 	{
 		try 
 		{
-			String idEmpresa = getRequestParameter("idEmpresa");
-			
-			listaLocales = Arrays.asList(getEmpresaPort().obtener(Long.valueOf(idEmpresa)).getListaLocalesDTO());
-			
-			listaOfertas = Arrays.asList(getOfertaPort().obtenerListado());
-			
-			for (OfertaDTO oferta : listaOfertas) 
+			OfertaDTO[] arrayOfertasDTO = getOfertaPort().obtenerListadoPorEmpresa(UtilesWeb.obtenerEmpresaAdministrada().getId());
+				
+			if(arrayOfertasDTO != null)
 			{
-				for (LocalDTO local : listaLocales) {
-					
-					if (oferta.getIdLocal().equals(local.getId()))
-					{
-						listadoOfertas.add(oferta);
-					}
-				}
-			}
-			
-			if(listadoOfertas != null)
-			{
-				listaPublicar = listadoOfertas;
-			}
-			else
-			{
-				listaPublicar = new ArrayList<OfertaDTO>();
-			}
+				listaOfertas = Arrays.asList(arrayOfertasDTO);
+			}			
 		} 
 		catch (Exception e) 
 		{
 			handleWSException(e);
-		} 
+		}
 	}
 	
 	public String toGestionOferta()
@@ -95,38 +68,4 @@ public class ListadoOfertasBean extends BaseBean implements Serializable
 	{
 		this.listaOfertas = listaOfertas;
 	}
-
-	public List<LocalDTO> getListaLocales() {
-		return listaLocales;
-	}
-
-	public void setListaLocales(List<LocalDTO> listaLocales) {
-		this.listaLocales = listaLocales;
-	}
-
-	public List<OfertaDTO> getListadoOfertas() {
-		return listadoOfertas;
-	}
-
-	public void setListadoOfertas(List<OfertaDTO> listadoOfertas) {
-		this.listadoOfertas = listadoOfertas;
-	}
-
-	public List<OfertaDTO> getListaPublicar() {
-		return listaPublicar;
-	}
-
-	public void setListaPublicar(List<OfertaDTO> listaPublicar) {
-		this.listaPublicar = listaPublicar;
-	}
-
-	public OfertaDTO getOfertaDTO() {
-		return ofertaDTO;
-	}
-
-	public void setOfertaDTO(OfertaDTO ofertaDTO) {
-		this.ofertaDTO = ofertaDTO;
-	}
-	
-	
 }

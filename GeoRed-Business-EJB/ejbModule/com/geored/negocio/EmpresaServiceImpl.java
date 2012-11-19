@@ -13,12 +13,14 @@ import javax.ejb.TransactionManagementType;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
+import com.geored.dominio.Administrador;
 import com.geored.dominio.Empresa;
 import com.geored.dominio.Local;
 import com.geored.dto.EmpresaDTO;
 import com.geored.dto.LocalDTO;
 import com.geored.exceptions.DaoException;
 import com.geored.exceptions.NegocioException;
+import com.geored.persistencia.AdministradorDAO;
 import com.geored.persistencia.EmpresaDAO;
 import com.geored.persistencia.LocalDAO;
 
@@ -33,14 +35,31 @@ public class EmpresaServiceImpl implements EmpresaService
 	@EJB
 	private LocalDAO localDAO;
 	
+	@EJB 
+	private AdministradorDAO administradorDAO;
+	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
 	public Long insertar(EmpresaDTO empresaDTO)  throws NegocioException, DaoException
 	{
-		Empresa empresaEntity = empresaDAO.toEntity(empresaDTO);
+		if(empresaDAO.obtenerPorNombre(empresaDTO.getNombre(), false) != null)
+		{
+			throw new NegocioException("Ya existe una empresa con este nombre");
+		}
 
-		empresaEntity.setFechaCreacion(new Timestamp(new Date().getTime()));
+		empresaDTO.setFechaCreacion(new Date());
 		
+		Empresa empresaEntity = empresaDAO.toEntity(empresaDTO);
+		
+		Administrador adminEntity = (Administrador) administradorDAO.obtener(empresaDTO.getIdAdministrador(), false);
+		
+		if(adminEntity == null)
+		{
+			throw new NegocioException("Administrador no encontrado");
+		}
+		
+		empresaEntity.setAdministrador(adminEntity);
+
 		empresaDAO.insertar(empresaEntity);
 		
 		return empresaEntity.getId();
@@ -50,7 +69,14 @@ public class EmpresaServiceImpl implements EmpresaService
 	@WebMethod
 	public void actualizar(EmpresaDTO empresaDTO)  throws NegocioException, DaoException
 	{
-		Empresa empresaEntity = (Empresa) empresaDAO.obtener(empresaDTO.getId(), false);
+		Empresa empresaEntity = (Empresa) empresaDAO.obtenerPorNombre(empresaDTO.getNombre(), false);
+		
+		if(empresaEntity != null && !empresaEntity.getId().equals(empresaDTO.getId()))
+		{
+			throw new NegocioException("Ya existe una empresa con ese nombre");
+		}
+		
+		empresaEntity = (Empresa) empresaDAO.obtener(empresaDTO.getId(), false);
 		
 		if(empresaEntity == null)
 		{
@@ -198,5 +224,12 @@ public class EmpresaServiceImpl implements EmpresaService
 	public List<EmpresaDTO> obtenerListadoPorAdministrador(Long idAdministrador) throws DaoException
 	{
 		return empresaDAO.obtenerListadoPorAdministrador(idAdministrador, true);
+	}
+
+	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+	@WebMethod
+	public List<LocalDTO> obtenerListadoLocalesPorEmpresa(Long idEmpresa) throws DaoException
+	{
+		return localDAO.obtenerListadoPorEmpresa(idEmpresa, true);
 	}
 }

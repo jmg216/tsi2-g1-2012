@@ -1,6 +1,7 @@
 package com.geored.persistencia;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -81,5 +82,28 @@ public class LocalDAOImpl extends GenericDAOBase<Local, LocalDTO> implements Loc
 		{
 			throw new DaoException(e.getMessage());
 		}
+	}
+
+	@Override
+	public List obtenerListadoPorEmpresa(Long idEmpresa, boolean toDTO) throws DaoException
+	{
+		try
+		{
+			Query query = em.createQuery("SELECT l FROM com.geored.dominio.Local l where l.empresa.id = ?1");
+			query.setParameter(1, idEmpresa);
+			
+			List<Local> listaLocales = query.getResultList();
+			
+			if(toDTO)
+			{			
+				return toDtoList(listaLocales);			
+			}
+			
+			return listaLocales;
+		}
+		catch(Throwable e)
+		{
+			throw new DaoException(e.getMessage());
+		} 
 	}
 }

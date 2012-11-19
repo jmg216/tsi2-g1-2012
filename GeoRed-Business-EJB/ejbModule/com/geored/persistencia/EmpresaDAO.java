@@ -12,5 +12,7 @@ import com.geored.persistencia.core.GenericDAO;
 @Local
 public interface EmpresaDAO extends GenericDAO<Empresa, EmpresaDTO>
 {
+	public Object obtenerPorNombre(String nombre, boolean toDTO) throws DaoException;
+	
 	public List obtenerListadoPorAdministrador(Long idAdministrador, boolean toDTO) throws DaoException;
 }

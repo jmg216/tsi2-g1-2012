@@ -1,17 +1,14 @@
 package com.geored.backoffice.managedBean.eventos;
 
 import java.io.Serializable;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.xml.rpc.ServiceException;
 
 import com.geored.backoffice.managedBean.BaseBean;
-import com.geored.negocio.DaoException;
 import com.geored.negocio.EventoDTO;
 
 @ManagedBean(name="listadoEventosBean")

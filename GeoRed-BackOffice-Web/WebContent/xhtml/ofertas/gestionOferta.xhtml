@@ -9,22 +9,26 @@
 
 	<h:body>
 		<ui:composition template="/xhtml/templates/layout.xhtml">
-			<ui:define name="content">	
+			<ui:define name="content">
 				<h:form>					
 					<h1 class="titulo-content">Gestión de Ofertas</h1>
 					
 					<table>
 						<h:inputHidden value="#{gestionOfertaBean.ofertaDTO.id}"/>
-						<c:if test="#{gestionOfertaBean.ofertaDTO.id > 0}">
+						<c:if test="#{!utilesWeb.isNullOrZero(gestionOfertaBean.ofertaDTO.id)}">
 							<tr>
 								<td><h:outputText value="Id:" /></td>
-								<td><p:inputText value="#{gestionOfertaBean.ofertaDTO.id}" disabled="true"/></td>
+								<td><p:inputText value="#{gestionOfertaBean.ofertaDTO.id}" readonly="true"/></td>
 							</tr>
 						</c:if>																		
 						<tr>
 							<td><h:outputText value="Nombre:" /></td>
 							<td><p:inputText value="#{gestionOfertaBean.ofertaDTO.nombre}"/></td>
 						</tr>																
+						<tr>
+							<td><h:outputText value="Descripción:" /></td>
+							<td><p:inputText value="#{gestionOfertaBean.ofertaDTO.descripcion}"/></td>
+						</tr>	
 					</table>
 					
 					<div class="areaBotones">

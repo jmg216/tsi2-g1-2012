@@ -6,6 +6,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.xml.rpc.ServiceException;
 
+import com.geored.backoffice.utiles.UtilesWeb;
 import com.geored.negocio.AdminServiceImpl;
 import com.geored.negocio.AdminServiceImplServiceLocator;
 import com.geored.negocio.CompraServiceImpl;
@@ -57,7 +58,7 @@ public abstract class BaseBean
 		}
 		else
 		{
-			addBeanError(e.getMessage());
+			addBeanError(!UtilesWeb.isNullOrEmpty(e.getMessage()) ? e.getMessage() : e.getLocalizedMessage());
 		}
 	}
 	

@@ -8,9 +8,9 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
-import com.geored.dominio.Administrador;
 import com.geored.dominio.Empresa;
 import com.geored.dto.EmpresaDTO;
 import com.geored.dto.LocalDTO;
@@ -30,7 +30,12 @@ public class EmpresaDAOImpl extends GenericDAOBase<Empresa, EmpresaDTO> implemen
 		target.setNombre(source.getNombre());
 		target.setDescripcion(source.getDescripcion());	
 		target.setUrlImagen(source.getUrlImagen());
-		target.setFechaCreacion(new Timestamp(source.getFechaCreacion().getTime()));
+		
+		if(source.getFechaCreacion() != null)
+		{
+			target.setFechaCreacion(new Timestamp(source.getFechaCreacion().getTime()));
+		}
+		
 	}
 
 	@Override
@@ -71,6 +76,36 @@ public class EmpresaDAOImpl extends GenericDAOBase<Empresa, EmpresaDTO> implemen
 			}
 			
 			return listaEmpresas;
+		}
+		catch(Throwable e)
+		{
+			throw new DaoException(e.getMessage());
+		}
+	}
+
+	@Override
+	public Object obtenerPorNombre(String nombre, boolean toDTO) throws DaoException
+	{
+		try
+		{
+			Query query = em.createQuery("select e from com.geored.dominio.Empresa e where e.nombre = ?1");        
+	        query.setParameter(1, nombre);      	       
+	        
+	        try
+	        {
+	        	 Empresa empresaEntity = (Empresa) query.getSingleResult();
+	        	 
+	        	 if(toDTO)
+	             {        	
+	             	return toDto(empresaEntity);
+	             }
+	        	 
+	        	 return empresaEntity;
+	        }
+	        catch(NoResultException e)
+	        {
+	        	return null;
+	        }
 		}
 		catch(Throwable e)
 		{

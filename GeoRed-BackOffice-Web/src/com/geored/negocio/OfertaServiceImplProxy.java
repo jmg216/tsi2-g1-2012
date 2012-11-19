@@ -68,6 +68,12 @@ public class OfertaServiceImplProxy implements com.geored.negocio.OfertaServiceI
     return ofertaServiceImpl.insertar(arg0);
   }
   
+  public com.geored.negocio.OfertaDTO[] obtenerListadoPorEmpresa(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.DaoException{
+    if (ofertaServiceImpl == null)
+      _initOfertaServiceImplProxy();
+    return ofertaServiceImpl.obtenerListadoPorEmpresa(arg0);
+  }
+  
   public com.geored.negocio.OfertaDTO obtener(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
     if (ofertaServiceImpl == null)
       _initOfertaServiceImplProxy();

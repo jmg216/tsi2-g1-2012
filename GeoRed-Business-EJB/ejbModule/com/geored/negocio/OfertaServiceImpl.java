@@ -86,4 +86,11 @@ public class OfertaServiceImpl implements OfertaService
 	{
 		return ofertaDAO.obtenerListado(true);		
 	}
+
+	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+	@WebMethod
+	public List<OfertaDTO> obtenerListadoPorEmpresa(Long idEmpresa) throws DaoException
+	{
+		return ofertaDAO.obtenerListadoPorEmpresa(idEmpresa, true);
+	}
 }

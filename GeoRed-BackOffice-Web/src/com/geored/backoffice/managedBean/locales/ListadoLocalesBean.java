@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import com.geored.backoffice.managedBean.BaseBean;
+import com.geored.backoffice.utiles.UtilesSeguridadWeb;
 import com.geored.negocio.LocalDTO;
 
 @ManagedBean(name="listadoLocalesBean")
@@ -30,7 +31,7 @@ public class ListadoLocalesBean extends BaseBean implements Serializable
 	{
 		try 
 		{
-			LocalDTO[] arrayLocales = getEmpresaPort().obtenerListadoLocales();
+			LocalDTO[] arrayLocales = getEmpresaPort().obtenerListadoLocalesPorEmpresa(UtilesSeguridadWeb.obtenerEmpresaAdministrada().getId());
 			
 			if(arrayLocales != null)
 			{
