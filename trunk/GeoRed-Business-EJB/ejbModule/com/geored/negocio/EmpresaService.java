@@ -34,4 +34,6 @@ public interface EmpresaService
 	public LocalDTO obtenerLocal(Long idLocal) throws NegocioException, DaoException;
 	
 	public List<LocalDTO> obtenerListadoLocales() throws DaoException;
+	
+	public List<LocalDTO> obtenerListadoLocalesPorEmpresa(Long idEmpresa) throws DaoException;
 }

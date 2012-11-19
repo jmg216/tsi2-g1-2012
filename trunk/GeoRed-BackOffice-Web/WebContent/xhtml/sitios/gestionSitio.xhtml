@@ -41,7 +41,7 @@
 									<c:if test="#{!utilesWeb.isNullOrEmpty(gestionSitioBean.sitioDTO.urlImagen)}">
 										<tr>
 											<td></td>
-											<td><p:graphicImage url="#{gestionSitioBean.sitioDTO.urlImagen}" width="310px;" onclick="dlgFullImage.show();" styleClass="black-shadow" style="cursor: pointer;"/></td>
+											<td><p:graphicImage url="#{gestionSitioBean.sitioDTO.urlImagen}" width="310px;" onclick="dlgFullImageSitio.show();" styleClass="black-shadow" style="cursor: pointer;"/></td>
 										</tr>
 									</c:if>
 									<tr>
@@ -67,8 +67,9 @@
 										</script>
 									</c:if>
 									<tr>
-										<td><h:outputText value="Haga click en el cuadro de texto para cambiar la ubicación:" /></td>
-										<td><p:inputText widgetVar="idUbicacionSitio" style="cursor: pointer;" value="#{gestionSitioBean.sitioDTO.ubicacionGeografica}" onclick="showMapaSelector(this.id, refreshMapaSitio)"/></td>
+										<td><h:outputText value="Ubicación geográfica, click en el campo para cambiar:" /></td>
+										<td><p:inputText widgetVar="idUbicacionSitio" style="cursor: pointer;" value="#{gestionSitioBean.sitioDTO.ubicacionGeografica}" 
+											onclick="showMapaSelector(this.id, refreshMapaSitio)" onkeydown="return false;"/></td>
 									</tr>
 								</table>
 							</td>
@@ -87,7 +88,7 @@
 					</div>	
 					
 					<c:if test="#{!utilesWeb.isNullOrEmpty(gestionSitioBean.sitioDTO.urlImagen)}">
-						<p:dialog modal="true" resizable="false" widgetVar="dlgFullImage" header="Imagen">
+						<p:dialog modal="true" resizable="false" widgetVar="dlgFullImageSitio" header="Imagen">
 							<p:graphicImage url="#{gestionSitioBean.sitioDTO.urlImagen}"/>
 						</p:dialog>
 					</c:if>

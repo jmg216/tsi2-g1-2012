@@ -24,7 +24,7 @@ public class GestionLocalBean extends BaseBean implements Serializable
 	
 	private static final String LOCAL_DTO_KEY = "LOCAL_DTO_KEY"; 
 	
-	private static final String TO_LISTADO_LOCALES = "to_listado_sitios";
+	private static final String TO_LISTADO_LOCALES = "to_listado_locales";
 	
 	private LocalDTO localDTO = new LocalDTO();
 	
@@ -113,13 +113,19 @@ public class GestionLocalBean extends BaseBean implements Serializable
 		{
 			if(UtilesWeb.isNullOrEmpty(getLocalDTO().getNombre()))
 			{
-				addBeanError("'Nombre' es un campo obligatorio.");
+				addBeanError("El campo 'Nombre' es obligatorio.");
 				isValid = false;
-			}						
+			}		
+			
+			if(UtilesWeb.isNullOrEmpty(getLocalDTO().getDireccion()))
+			{
+				addBeanError("El campo 'Dirección' es obligatorio");
+				isValid = false;
+			}
 			
 			if(UtilesWeb.isNullOrEmpty(getLocalDTO().getUbicacionGeografica()))
 			{
-				addBeanError("'Ubicación Geográfica' es un campo obligatorio.");
+				addBeanError("El campo 'Ubicación Geográfica' es obligatorio.");
 				isValid = false;
 			}			
 		}

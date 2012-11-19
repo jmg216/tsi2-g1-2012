@@ -9,9 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import com.geored.backoffice.managedBean.BaseBean;
-import com.geored.backoffice.utiles.UtilesGeocoding;
 import com.geored.backoffice.utiles.UtilesWeb;
-import com.geored.negocio.EmpresaDTO;
 import com.geored.negocio.LocalDTO;
 import com.geored.negocio.OfertaDTO;
 
@@ -25,52 +23,63 @@ public class GestionOfertaBean extends BaseBean implements Serializable
 	private static final long serialVersionUID = -6757255144084899088L;
 
 	private static final String TO_LISTADO_OFERTAS = "to_listado_ofertas";
+
+	private static final String OFERTA_DTO_KEY = "OFERTA_DTO_KEY"; 
 	
 	private OfertaDTO ofertaDTO = new OfertaDTO();
-	
-	private EmpresaDTO empresaDTO = new EmpresaDTO();
 
 	private List<LocalDTO> listaLocales = new ArrayList<LocalDTO>();
 	
-	private List<String> listaNombreLocales = new ArrayList<String>();
-	
 	public GestionOfertaBean()
 	{	
-		String idOferta = getRequestParameter("idOferta");
-		String idEmpresa = getRequestParameter("idEmpresa");
+		ofertaDTO = (OfertaDTO) getFlashAttribute(OFERTA_DTO_KEY);
 		
-		if(UtilesWeb.isNullOrEmpty(idOferta))
+		if(ofertaDTO == null)
 		{
-			ofertaDTO = new OfertaDTO();
-		}
-		else
+			String idOferta = getRequestParameter("idOferta");
+			
+			if(UtilesWeb.isNullOrEmpty(idOferta))
+			{
+				ofertaDTO = new OfertaDTO();
+			}
+			else
+			{
+				try
+				{
+					ofertaDTO = getOfertaPort().obtener(Long.valueOf(idOferta));
+				} 
+				catch (Exception e)
+				{
+					handleWSException(e);
+				} 
+			}
+			
+			setFlashAttribute(OFERTA_DTO_KEY, ofertaDTO);
+		}		
+		
+		cargarDatosIniciales();
+	}
+	
+	private void cargarDatosIniciales()
+	{
+		try
 		{
-			try
+			LocalDTO[] arrayLocalesDTO = getEmpresaPort().obtenerListadoLocalesPorEmpresa(UtilesWeb.obtenerEmpresaAdministrada().getId());
+					
+			if(arrayLocalesDTO != null)
 			{
-				ofertaDTO = getOfertaPort().obtener(Long.valueOf(idOferta));
-				
-				listaLocales = Arrays.asList(getEmpresaPort().obtener(Long.valueOf(idEmpresa)).getListaLocalesDTO());
-				
-				for (LocalDTO local : listaLocales) {
-						
-					if (ofertaDTO.getIdLocal().equals(local.getId()))
-					{
-						String ubicacion = local.getUbicacionGeografica();
-						listaNombreLocales.add(UtilesGeocoding.inverseGeocoding(ubicacion));
-					}
-				}
-				
-			} 
-			catch (Exception e)
-			{
-				handleWSException(e);
-			} 
+				listaLocales = Arrays.asList(arrayLocalesDTO);
+			}
+		} 
+		catch(Exception e)
+		{
+			handleWSException(e);
 		}
 	}
 
-	public void guardarOferta()
+	public String guardarOferta()
 	{
-		addBeanMessage("Oferta guardada correctamente");
+		return SUCCESS;
 	}
 	
 	public String toListadoOfertas()
@@ -88,28 +97,13 @@ public class GestionOfertaBean extends BaseBean implements Serializable
 		this.ofertaDTO = ofertaDTO;
 	}
 
-	public List<LocalDTO> getListaLocales() {
+	public List<LocalDTO> getListaLocales()
+	{
 		return listaLocales;
 	}
 
-	public void setListaLocales(List<LocalDTO> listaLocales) {
+	public void setListaLocales(List<LocalDTO> listaLocales)
+	{
 		this.listaLocales = listaLocales;
 	}
-
-	public EmpresaDTO getEmpresaDTO() {
-		return empresaDTO;
-	}
-
-	public void setEmpresaDTO(EmpresaDTO empresaDTO) {
-		this.empresaDTO = empresaDTO;
-	}
-
-	public List<String> getListaNombreLocales() {
-		return listaNombreLocales;
-	}
-
-	public void setListaNombreLocales(List<String> listaNombreLocales) {
-		this.listaNombreLocales = listaNombreLocales;
-	}
-	
 }

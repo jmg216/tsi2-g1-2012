@@ -49,8 +49,9 @@
 										</script>
 									</c:if>
 									<tr>
-										<td><h:outputText value="Haga click en el cuadro de texto para cambiar la ubicación:" /></td>
-										<td><p:inputText widgetVar="idUbicacionLocal" style="cursor: pointer;" value="#{gestionLocalBean.localDTO.ubicacionGeografica}" onclick="showMapaSelector(this.id, refreshMapaLocal)"/></td>
+										<td><h:outputText value="Ubicación geográfica, click en el campo para cambiar:" /></td>
+										<td><p:inputText widgetVar="idUbicacionLocal" style="cursor: pointer;" value="#{gestionLocalBean.localDTO.ubicacionGeografica}" 
+											onclick="showMapaSelector(this.id, refreshMapaLocal)" onkeydown="return false;"/></td>
 									</tr>
 								</table>
 							</td>

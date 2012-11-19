@@ -26,7 +26,7 @@ public class ListadoSitiosBean extends BaseBean implements Serializable
 	
 	private List<SitioDTO> listaSitios = new ArrayList<SitioDTO>();
 
-	public ListadoSitiosBean() 
+	public ListadoSitiosBean()
 	{
 		try 
 		{

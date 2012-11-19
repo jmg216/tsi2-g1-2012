@@ -17,6 +17,7 @@ public interface EmpresaServiceImpl extends java.rmi.Remote {
     public com.geored.negocio.EmpresaDTO obtener(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
     public com.geored.negocio.LocalDTO[] obtenerListadoLocales() throws java.rmi.RemoteException, com.geored.negocio.DaoException;
     public void eliminarLocal(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
+    public com.geored.negocio.LocalDTO[] obtenerListadoLocalesPorEmpresa(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.DaoException;
     public com.geored.negocio.LocalDTO obtenerLocal(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
     public com.geored.negocio.EmpresaDTO[] obtenerListadoPorAdministrador(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.DaoException;
 }

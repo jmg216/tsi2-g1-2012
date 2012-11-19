@@ -57,7 +57,7 @@
 			</div>
 			
 			<!-- Menu -->
-			<c:if test="#{utilesWeb.hayUsuarioAutenticado()}">
+			<c:if test="#{utilesWeb.hayUsuarioAutenticado() and !utilesWeb.existeUsuarioSeleccionEmpresa()}">
 				<div id="menu">
 					<ui:include src="menu.xhtml" />
 				</div>
