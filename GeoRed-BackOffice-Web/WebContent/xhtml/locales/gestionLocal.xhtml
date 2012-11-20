@@ -51,7 +51,7 @@
 									<tr>
 										<td><h:outputText value="Ubicación geográfica, click en el campo para cambiar:" /></td>
 										<td><p:inputText widgetVar="idUbicacionLocal" style="cursor: pointer;" value="#{gestionLocalBean.localDTO.ubicacionGeografica}" 
-											onclick="showMapaSelector(this.id, refreshMapaLocal)" onkeydown="return false;"/></td>
+											onfocus="showMapaSelector(this.id, refreshMapaLocal)" onclick="showMapaSelector(this.id, refreshMapaLocal)" onkeydown="return false;"/></td>
 									</tr>
 								</table>
 							</td>
