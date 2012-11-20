@@ -14,6 +14,8 @@ public class UtilesWeb
 	
 	public static final Long ID_TIPO_ADMIN_EMPRESA = 2L;
 	
+	public static final String DATE_PATTERN = "dd/MM/yyyy HH:mm";
+	
 	public static boolean isNullOrEmpty(String str)
 	{
 		return (str == null) || (str != null && str.isEmpty());

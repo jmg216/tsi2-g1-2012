@@ -70,7 +70,12 @@ public class GestionSitioBean extends BaseBean implements Serializable
 	{
 		try
 		{
-			listaTematicas = Arrays.asList(getGlobalPort().obtenerListadoTematicas());
+			TematicaDTO[] arrayTematicas = getGlobalPort().obtenerListadoTematicas();
+			
+			if(arrayTematicas != null)
+			{
+				listaTematicas = Arrays.asList(arrayTematicas);
+			}
 			
 			// Cargo los ids de las tematicas seleccionadas en el sitio
 			tematicasSeleccionadas = new ArrayList<String>();
@@ -113,6 +118,7 @@ public class GestionSitioBean extends BaseBean implements Serializable
 				}
 				getSitioDTO().setListaTematicasDTO(listaTematicasDTO.toArray(new TematicaDTO[]{}));
 				
+				// Pregunto si es creacion o edicion
 				if(UtilesWeb.isNullOrZero(getSitioDTO().getId()))
 				{
 					if(validar(VALIDAR_CREAR))

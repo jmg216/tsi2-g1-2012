@@ -36,14 +36,18 @@
 									</tr>																
 									<tr>
 										<td><h:outputText value="URL Imagen:" /></td>
-										<td><p:inputText value="#{gestionSitioBean.sitioDTO.urlImagen}"/></td>
+										<td><p:inputText id="imagenSitio" value="#{gestionSitioBean.sitioDTO.urlImagen}" style="cursor:pointer;"/></td>
+										<p:tooltip for="imagenSitio" showEvent="focus" hideEvent="blur">
+											<c:choose>
+												<c:when test="#{!utilesWeb.isNullOrEmpty(gestionSitioBean.sitioDTO.urlImagen)}">
+													<p:graphicImage url="#{gestionSitioBean.sitioDTO.urlImagen}" width="310px;" onclick="dlgFullImageSitio.show();" styleClass="black-shadow" style="cursor: pointer;"/>
+												</c:when>
+												<c:otherwise>
+													<h:outputText value="Debe ingresar una imagen" />
+												</c:otherwise>
+											</c:choose>											
+										</p:tooltip>										
 									</tr>
-									<c:if test="#{!utilesWeb.isNullOrEmpty(gestionSitioBean.sitioDTO.urlImagen)}">
-										<tr>
-											<td></td>
-											<td><p:graphicImage url="#{gestionSitioBean.sitioDTO.urlImagen}" width="310px;" onclick="dlgFullImageSitio.show();" styleClass="black-shadow" style="cursor: pointer;"/></td>
-										</tr>
-									</c:if>
 									<tr>
 										<td style="vertical-align: top;"><h:outputText value="Temáticas:"/></td>
 										<td>
@@ -69,7 +73,7 @@
 									<tr>
 										<td><h:outputText value="Ubicación geográfica, click en el campo para cambiar:" /></td>
 										<td><p:inputText widgetVar="idUbicacionSitio" style="cursor: pointer;" value="#{gestionSitioBean.sitioDTO.ubicacionGeografica}" 
-											onclick="showMapaSelector(this.id, refreshMapaSitio)" onkeydown="return false;"/></td>
+											onfocus="showMapaSelector(this.id, refreshMapaSitio)" onclick="showMapaSelector(this.id, refreshMapaSitio)" onkeydown="return false;"/></td>
 									</tr>
 								</table>
 							</td>

@@ -12,6 +12,7 @@ import com.geored.backoffice.managedBean.BaseBean;
 import com.geored.backoffice.utiles.UtilesWeb;
 import com.geored.negocio.LocalDTO;
 import com.geored.negocio.OfertaDTO;
+import com.geored.negocio.TematicaDTO;
 
 @ManagedBean(name="gestionOfertaBean")
 @RequestScoped
@@ -26,9 +27,17 @@ public class GestionOfertaBean extends BaseBean implements Serializable
 
 	private static final String OFERTA_DTO_KEY = "OFERTA_DTO_KEY"; 
 	
+	private static final int VALIDAR_CREAR = 1;
+	
+	private static final int VALIDAR_MODIFICAR = 2;
+	
 	private OfertaDTO ofertaDTO = new OfertaDTO();
 
 	private List<LocalDTO> listaLocales = new ArrayList<LocalDTO>();
+	
+	private List<TematicaDTO> listaTematicas = new ArrayList<TematicaDTO>();
+	
+	private List<String> tematicasSeleccionadas = new ArrayList<String>();
 	
 	public GestionOfertaBean()
 	{	
@@ -64,12 +73,22 @@ public class GestionOfertaBean extends BaseBean implements Serializable
 	{
 		try
 		{
+			// Locales
+			
 			LocalDTO[] arrayLocalesDTO = getEmpresaPort().obtenerListadoLocalesPorEmpresa(UtilesWeb.obtenerEmpresaAdministrada().getId());
 					
 			if(arrayLocalesDTO != null)
 			{
 				listaLocales = Arrays.asList(arrayLocalesDTO);
 			}
+			
+			// Tematicas
+			TematicaDTO[] arrayTematicasDTO = getGlobalPort().obtenerListadoTematicas();
+			
+			if(arrayTematicasDTO != null)
+			{
+				listaTematicas = Arrays.asList(arrayTematicasDTO);
+			}			
 		} 
 		catch(Exception e)
 		{
@@ -79,7 +98,111 @@ public class GestionOfertaBean extends BaseBean implements Serializable
 
 	public String guardarOferta()
 	{
+		try
+		{
+			if(getOfertaDTO() == null)
+			{
+				addBeanError("Oferta no puede ser nula");
+			}
+			else			
+			{
+				// Transformo las tematicas seleccionadas
+				List<TematicaDTO> listaTematicasDTO = new ArrayList<TematicaDTO>();
+				if(tematicasSeleccionadas != null)
+				{
+					for(String idTematica : tematicasSeleccionadas)
+					{
+						TematicaDTO tematicaDTO = new TematicaDTO();
+						
+						tematicaDTO.setId(Long.valueOf(idTematica));
+						
+						listaTematicasDTO.add(tematicaDTO);
+					}
+				}
+				getOfertaDTO().setListaTematicasDTO(listaTematicasDTO.toArray(new TematicaDTO[]{}));
+				
+				// Pregunto si es creacion o edicion
+				if(UtilesWeb.isNullOrZero(getOfertaDTO().getId()))
+				{
+					if(validar(VALIDAR_CREAR))
+					{
+						Long idOfertaNueva = getOfertaPort().insertar(getOfertaDTO());
+						
+						setOfertaDTO(getOfertaPort().obtener(idOfertaNueva));
+						
+						addBeanMessage("Oferta guardada correctamente");
+					}
+				}
+				else
+				{
+					if(validar(VALIDAR_MODIFICAR))
+					{
+						getOfertaPort().actualizar(getOfertaDTO());	
+						
+						setOfertaDTO(getOfertaPort().obtener(getOfertaDTO().getId()));
+						
+						addBeanMessage("Oferta guardada correctamente");
+					}
+				}
+			}
+		}
+		catch(Exception e)
+		{
+			handleWSException(e);
+		}
+		
 		return SUCCESS;
+	}
+	
+	private boolean validar(int opValidar)
+	{
+		boolean isValid = true;
+		
+		if(opValidar == VALIDAR_CREAR || opValidar == VALIDAR_MODIFICAR)
+		{
+			if(UtilesWeb.isNullOrEmpty(getOfertaDTO().getNombre()))
+			{
+				addBeanError("gestionOfertaForm:nombreOferta", "Obligatorio");
+				isValid = false;
+			}			
+			if(UtilesWeb.isNullOrEmpty(getOfertaDTO().getDescripcion()))
+			{
+				addBeanError("gestionOfertaForm:descripcionOferta", "Obligatorio");
+				isValid = false;
+			}			
+			if(getOfertaDTO().getCosto() == null)
+			{
+				addBeanError("gestionOfertaForm:costoOferta", "Obligatorio");
+				isValid = false;
+			}			
+			if(UtilesWeb.isNullOrEmpty(getOfertaDTO().getUrlImagen()))
+			{
+				addBeanError("gestionOfertaForm:imagenOferta", "Obligatorio");
+				isValid = false;
+			}
+			if(getOfertaDTO().getFechaInicio() == null)
+			{
+				addBeanError("gestionOfertaForm:fechaInicioOferta", "Obligatorio");
+				isValid = false;
+			}
+			if(getOfertaDTO().getFechaFin() == null)
+			{
+				addBeanError("gestionOfertaForm:fechaFinOferta", "Obligatorio");
+				isValid = false;
+			}
+			if(UtilesWeb.isNullOrZero(getOfertaDTO().getIdLocal()))
+			{
+				addBeanError("gestionOfertaForm:localOferta", "Obligatorio");
+				isValid = false;
+			}
+			if(tematicasSeleccionadas == null || tematicasSeleccionadas.isEmpty())
+			{
+				addBeanError("gestionOfertaForm:tematicasOferta", "Debe seleccionar al menos una");
+				isValid = false;
+			}
+		}
+		
+		return isValid;
 	}
 	
 	public String toListadoOfertas()
@@ -105,5 +228,25 @@ public class GestionOfertaBean extends BaseBean implements Serializable
 	public void setListaLocales(List<LocalDTO> listaLocales)
 	{
 		this.listaLocales = listaLocales;
+	}
+
+	public List<TematicaDTO> getListaTematicas()
+	{
+		return listaTematicas;
+	}
+
+	public void setListaTematicas(List<TematicaDTO> listaTematicas)
+	{
+		this.listaTematicas = listaTematicas;
+	}
+
+	public List<String> getTematicasSeleccionadas()
+	{
+		return tematicasSeleccionadas;
+	}
+
+	public void setTematicasSeleccionadas(List<String> tematicasSeleccionadas)
+	{
+		this.tematicasSeleccionadas = tematicasSeleccionadas;
 	}
 }

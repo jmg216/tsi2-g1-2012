@@ -10,7 +10,7 @@
 	<h:body>
 		<ui:composition template="/xhtml/templates/layout.xhtml">
 			<ui:define name="content">
-				<h:form>					
+				<h:form id="gestionOfertaForm">					
 					<h1 class="titulo-content">Gestión de Ofertas</h1>
 					
 					<table>
@@ -23,12 +23,78 @@
 						</c:if>																		
 						<tr>
 							<td><h:outputText value="Nombre:" /></td>
-							<td><p:inputText value="#{gestionOfertaBean.ofertaDTO.nombre}"/></td>
+							<td>
+								<p:inputText id="nombreOferta" value="#{gestionOfertaBean.ofertaDTO.nombre}"/>
+								<p:message for="nombreOferta"/>
+							</td>							
 						</tr>																
 						<tr>
 							<td><h:outputText value="Descripción:" /></td>
-							<td><p:inputText value="#{gestionOfertaBean.ofertaDTO.descripcion}"/></td>
+							<td>
+								<p:inputText id="descripcionOferta" value="#{gestionOfertaBean.ofertaDTO.descripcion}"/>
+								<p:message for="descripcionOferta"/>								
+							</td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Imagen:" /></td>
+							<td>
+								<p:inputText id="imagenOferta" value="#{gestionOfertaBean.ofertaDTO.urlImagen}"/>
+								<p:message for="imagenOferta"/>
+							</td>
+							<p:tooltip for="imagenOferta" showEvent="focus" hideEvent="blur">
+								<c:choose>
+									<c:when test="#{!utilesWeb.isNullOrEmpty(gestionOfertaBean.ofertaDTO.urlImagen)}">
+										<p:graphicImage url="#{gestionOfertaBean.ofertaDTO.urlImagen}" width="310px;" onclick="dlgFullImagenOferta.show();" styleClass="black-shadow" style="cursor: pointer;"/>
+									</c:when>
+									<c:otherwise>
+										<h:outputText value="Debe ingresar una imagen" />
+									</c:otherwise>
+								</c:choose>											
+							</p:tooltip>
 						</tr>	
+						<tr>
+							<td><h:outputText value="Costo:" /></td>
+							<td>
+								<p:inputText id="costoOferta" value="#{gestionOfertaBean.ofertaDTO.costo}"/>
+								<p:message for="costoOferta"/>
+							</td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Fecha inicio:" /></td>
+							<td>
+								<p:calendar id="fechaInicioOferta" value="#{gestionOfertaBean.ofertaDTO.fechaInicio}" pattern="dd/MM/yyyy HH:mm">
+									<f:converter converterId="com.geored.backoffice.converter.CalendarConverter"/>
+								</p:calendar>
+								<p:message for="fechaInicioOferta"/>
+							</td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Fecha fin:" /></td>
+							<td>
+								<p:calendar id="fechaFinOferta" value="#{gestionOfertaBean.ofertaDTO.fechaFin}" pattern="dd/MM/yyyy HH:mm" />
+								<p:message for="fechaFinOferta"/>
+							</td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Local:" /></td>
+							<td>
+								<p:selectOneMenu id="localOferta" value="#{gestionOfertaBean.ofertaDTO.idLocal}">
+									<f:selectItem itemLabel="---" itemValue="" />
+									<f:selectItems value="#{gestionOfertaBean.listaLocales}" 
+										var="local" itemValue="#{local.id}" itemLabel="#{local.nombre}"/>
+								</p:selectOneMenu> 		
+								<p:message for="localOferta"/>
+							</td>
+						</tr>
+						<tr>
+							<td style="vertical-align: top;"><h:outputText value="Temáticas:"/></td>
+							<td>
+								<p:selectManyCheckbox id="tematicasOferta" value="#{gestionOfertaBean.tematicasSeleccionadas}" layout="pageDirection">  
+						            <f:selectItems value="#{gestionOfertaBean.listaTematicas}" var="tematica" itemValue="#{tematica.id}" itemLabel="#{tematica.nombre}" />  
+						        </p:selectManyCheckbox>  
+						        <p:message for="tematicasOferta"/>
+							</td>
+						</tr>
 					</table>
 					
 					<div class="areaBotones">
@@ -40,7 +106,13 @@
 								<p:commandButton value="Guardar" action="#{gestionOfertaBean.guardarOferta()}"/>	
 							</li>
 						</ul>									
-					</div>					
+					</div>
+					
+					<c:if test="#{!utilesWeb.isNullOrEmpty(gestionOfertaBean.ofertaDTO.urlImagen)}">
+						<p:dialog modal="true" resizable="false" widgetVar="dlgFullImageOferta" header="Imagen">
+							<p:graphicImage url="#{gestionOfertaBean.ofertaDTO.urlImagen}"/>
+						</p:dialog>
+					</c:if>					
 				</h:form>				
 			</ui:define>
 		</ui:composition>

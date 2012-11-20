@@ -62,11 +62,16 @@ public abstract class BaseBean
 		}
 	}
 	
-	protected void addBeanError(String message)
+	protected void addBeanError(String field, String message)
 	{
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
+		FacesContext.getCurrentInstance().addMessage(field, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
 		FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
 		FacesContext.getCurrentInstance().getExternalContext().getFlash().setRedirect(true);
+	}
+	
+	protected void addBeanError(String message)
+	{
+		addBeanError(null, message);
 	}
 	
 	protected void addBeanMessage(String message)
