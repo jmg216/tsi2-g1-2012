@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:body>
+		<ui:composition template="/xhtml/templates/layout.xhtml">
+			<ui:define name="content">	
+				<h:form id="form">
+				
+					<p:growl id="growl" showDetail="true" sticky="true" /> 
+					
+					<h1 class="titulo-content">Reporte de Check-in</h1>
+					
+					<div class="areaBotones">
+						<ul>
+							<li>
+								<p:commandButton value="Ver Reporte" type="button" onclick="fechaDialog.show()" icon="ui-icon-pin-s"/>
+							</li>
+						</ul>
+					</div>
+					
+					<p:gmap id="mapaCheckIn" model="#{reporteCheckInBean.checkinMap}"  center="-34.904375,-56.166414" zoom="13" type="TERRAIN" style="width:890px;height:390px">
+						<p:ajax event="overlaySelect" listener="#{reporteCheckInBean.onMarkerSelect}" />
+  
+				        <p:gmapInfoWindow>  
+				            <p:outputPanel style="text-align:center;display:block;margin:auto:">  
+				
+				                    <h:outputText value="#{reporteCheckInBean.marcador.title}" /> 
+				                   	<br />
+				                    <h:outputText value="#{reporteCheckInBean.marcador.data}" /> 
+				  
+				            </p:outputPanel>  				  
+				        </p:gmapInfoWindow>  
+						
+					</p:gmap>
+					
+					<p:dialog  id="fechaDialog" modal="true" widgetVar="fechaDialog" header="Ingrese el periodo de tiempo...">						
+					
+							<p:focus for="aceptar" />
+							
+							<h:panelGrid columns="2">
+								
+								<h:outputText value= "Fecha Inicial:" />
+								<p:calendar value="#{reporteCheckInBean.fechaInicial}" />
+								
+								<h:outputText value= "Fecha Final:" />
+								<p:calendar value="#{reporteCheckInBean.fechaFinal}" />
+								
+								<f:facet name="footer">
+									<p:commandButton id="aceptar" value="Aceptar" style="float:right;" action="#{reporteCheckInBean.mostrarReporte()}" onstart="fechaDialog.hide()" oncomplete="statusDialog.hide()" onclick="statusDialog.show()" update="mapaCheckIn,growl" icon="ui-icon-arrowrefresh-1-w"/>						
+								</f:facet>
+	
+							</h:panelGrid>
+							
+					</p:dialog>
+				
+					<p:dialog modal="true" widgetVar="statusDialog" header="Espere por favor...">
+						<p:graphicImage value="/resources/images/loadingbar.gif"/>
+					</p:dialog>
+						
+				</h:form>				
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>	

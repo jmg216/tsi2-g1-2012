@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<h:body>
+		<ui:composition template="/xhtml/templates/layout.xhtml">
+			<ui:define name="content">					
+				<h:form>					
+					<c:set var="esAdminEmpresa" value="#{utilesWeb.esAdminEmpresa()}"/>
+					<c:set var="esModoEdicion" value="#{!utilesWeb.isNullOrZero(gestionEmpresaBean.empresaDTO.id)}"/>
+				
+					<h1 class="titulo-content">Gestión de Empresas</h1>
+					<h:inputHidden value="#{gestionEmpresaBean.empresaDTO.id}"/>	
+					<h:inputHidden value="#{gestionEmpresaBean.empresaDTO.idAdministrador}"/>	
+					
+					<c:choose>
+						<c:when test="#{esAdminEmpresa}">
+							<table>
+								<tr>
+									<td><h:outputText value="Id:" /></td>
+									<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.id}" readonly="true"/></td>
+								</tr>
+								<tr>
+									<td><h:outputText value="Nombre:" /></td>
+									<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.nombre}"/></td>
+								</tr>
+								<tr>
+									<td><h:outputText value="Descripción:" /></td>
+									<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.descripcion}"/></td>
+								</tr>
+								<tr>
+									<td><h:outputText value="Logo:" /></td>
+									<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.urlImagen}"/></td>									
+								</tr>					
+								<c:if test="#{!utilesWeb.isNullOrEmpty(gestionEmpresaBean.empresaDTO.urlImagen)}">
+									<tr>
+										<td></td>
+										<td><p:graphicImage url="#{gestionEmpresaBean.empresaDTO.urlImagen}" width="310px;" onclick="dlgFullImageEmpresa.show();" styleClass="black-shadow" style="cursor: pointer;"/></td>
+									</tr>
+								</c:if>
+								<tr>
+									<td><h:outputText value="Locales:" /></td>
+									<td>
+										<p:dataList value="#{gestionEmpresaBean.empresaDTO.listaLocalesDTO}" var="local" itemType="square">  
+										    #{local.nombre} - #{local.direccion}
+										</p:dataList> 
+									</td>
+								</tr>
+							</table>		
+						</c:when>
+						<c:otherwise>
+							<table>
+								<c:if test="#{esModoEdicion}">
+									<tr>
+										<td><h:outputText value="Id:" /></td>
+										<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.id}" readonly="true"/></td>
+									</tr>
+								</c:if>
+								<tr>
+									<td><h:outputText value="Nombre:" /></td>
+									<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.nombre}" readonly="#{esModoEdicion}"/></td>
+								</tr>
+								<tr>
+									<td><h:outputText value="Administrador:" /></td>
+									<c:choose>
+										<c:when test="#{!esModoEdicion}">
+											<td>								
+												<p:selectOneMenu value="#{gestionEmpresaBean.empresaDTO.idAdministrador}">
+													<f:selectItem itemLabel="---" itemValue="" />
+													<f:selectItems value="#{gestionEmpresaBean.listaAdministradores}" 
+														var="administrador" itemValue="#{administrador.id}" itemLabel="#{administrador.nombre}"/>
+												</p:selectOneMenu> 								
+											</td>						
+										</c:when>
+										<c:otherwise>
+											<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.nombreAdministrador}" readonly="true"/></td>
+										</c:otherwise>
+									</c:choose>									
+								</tr>
+							</table>
+						</c:otherwise>
+					</c:choose>
+					
+					<div class="areaBotones">
+						<ul>
+							<li>
+								<p:commandButton value="Volver" action="#{gestionEmpresaBean.toListadoEmpresas()}"/>	
+							</li>
+							
+							<c:choose>
+								<c:when test="#{esAdminEmpresa}">
+									<li>								
+										<p:commandButton value="Guardar" action="#{gestionEmpresaBean.guardarEmpresa()}"/>	
+									</li>
+								</c:when>
+								<c:otherwise>
+									<c:if test="#{!esModoEdicion}">
+										<li>								
+											<p:commandButton value="Guardar" action="#{gestionEmpresaBean.guardarEmpresa()}"/>	
+										</li>
+									</c:if>
+								</c:otherwise>
+							</c:choose>
+						</ul>									
+					</div>		
+					
+					<c:if test="#{!utilesWeb.isNullOrEmpty(gestionEmpresaBean.empresaDTO.urlImagen)}">
+						<p:dialog modal="true" resizable="false" widgetVar="dlgFullImageEmpresa" header="Imagen">
+							<p:graphicImage url="#{gestionEmpresaBean.empresaDTO.urlImagen}"/>
+						</p:dialog>
+					</c:if>							
+				</h:form>			
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>	

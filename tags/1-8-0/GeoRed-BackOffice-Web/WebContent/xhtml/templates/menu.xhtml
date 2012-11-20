@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<h:form>
+		<p:menubar>    			
+			<c:set var="esAdminEmpresa" value="#{utilesWeb.esAdminEmpresa()}"/>
+			
+			<p:submenu label="Administración">
+				<p:menuitem value="Administradores" url="/xhtml/administradores/listadoAdministradores.xhtml" rendered="#{!esAdminEmpresa}" />
+				<p:menuitem value="Sitios" url="/xhtml/sitios/listadoSitios.xhtml" rendered="#{!esAdminEmpresa}" />         
+    	        <p:menuitem value="Eventos" url="/xhtml/eventos/listadoEventos.xhtml" rendered="#{!esAdminEmpresa}" />  
+	            <p:menuitem value="Empresas" url="/xhtml/empresas/listadoEmpresas.xhtml"/>
+     			<p:menuitem value="Locales" url="/xhtml/locales/listadoLocales.xhtml" rendered="#{esAdminEmpresa}" />  	 
+	            <p:menuitem value="Ofertas" url="/xhtml/ofertas/listadoOfertas.xhtml" rendered="#{esAdminEmpresa}" /> 
+			</p:submenu>
+			
+			<p:submenu label="Reportes">
+				<p:menuitem value="Check-In" url="/xhtml/reportes/reporteCheckIn.xhtml" />  	         
+    	        <p:menuitem value="Compras" url="/xhtml/reportes/reporteCompras.xhtml" />  
+			</p:submenu>
+			
+			<p:submenu label="Perfil" style="float:right;">
+				<p:menuitem value="Mis datos" url="/xhtml/cuenta/perfil.xhtml" />			
+				<p:menuitem value="Cambiar empresa" url="/xhtml/empresas/seleccionEmpresa.xhtml" rendered="#{utilesWeb.esAdminEmpresa()}" />
+			</p:submenu>
+	    </p:menubar>
+	</h:form> 
+</html>
