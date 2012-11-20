@@ -10,6 +10,8 @@ import com.geored.frontoffice.dto.UsuarioADTO;
 public class UtilesSeguridadAndroid{
 	
 	private static final String KEY_USER_PREFERENCE = "UserPreference";
+	public static final String API_KEY = "AIzaSyA-sjjWHPR2JIHEipdGAFKH8rLcK25Od1A";
+	public static final String ID_SENDER_GCM = "121239138891";
 	
 	public static void setUsuarioAutenticado(Context context, UsuarioADTO usuarioADTO)
 	{
