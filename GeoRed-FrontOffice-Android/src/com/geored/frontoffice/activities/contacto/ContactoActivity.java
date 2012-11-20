@@ -37,9 +37,9 @@ public class ContactoActivity extends ListActivity {
     private EditText edit_search_text;
     private Context context;
 	
-	 @Override
+    @Override
 	  public void onCreate(Bundle savedInstanceState) 
-	 {
+	{
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.general_list);
 	    
@@ -83,70 +83,44 @@ public class ContactoActivity extends ListActivity {
 				
 			}
 			
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}			
+			public void afterTextChanged(Editable s) {}
 			
-			public void afterTextChanged(Editable s) {
-				
-				
-			}
-		});
+        });  
         
-//        viewUsuarios = new Runnable()
-//        {
-//            public void run() 
-//            {
-            	usuarios = usuarioWS.obtenerListado();
-//                runOnUiThread(returnRes);
-//            }	        
-//	  };
-	  
-//      Thread thread =  new Thread(null, viewUsuarios, "MagentoBackground");
-//      thread.start();
-//      m_ProgressDialog = ProgressDialog.show(this, res.getString(R.string.cargando), res.getString(R.string.obteniendo_datos), true);	  
-//	}
-	 
-//	 private Runnable returnRes = new Runnable() 
-//	 {
-//	        public void run() 
-//	        {
-	            if(usuarios != null && usuarios.size() > 0)
-	            {
-	                c_adapter.notifyDataSetChanged();
-	                
-	                for(int i = 0; i < usuarios.size(); i++)
-	                {
-	                	c_adapter.add(usuarios.get(i));
-	                }
-	            }
-//	            m_ProgressDialog.dismiss();
-	            c_adapter.notifyDataSetChanged();
-	        }
-//	    };	
+	    usuarios = usuarioWS.obtenerListado();
+	
+	    if(usuarios != null && usuarios.size() > 0)
+		{
+	    	c_adapter.notifyDataSetChanged();
+		                
+		    for(int i = 0; i < usuarios.size(); i++)
+		    {
+		        	c_adapter.add(usuarios.get(i));
+		    }
+		}
+	    c_adapter.notifyDataSetChanged();
+	 }
 	    
-	    @Override
-	    protected void onListItemClick(ListView l, View v, int position, long id) {
-	        // TODO Auto-generated method stub
+    @Override
+	protected void onListItemClick(ListView l, View v, int position, long id)
+    {
+    	super.onListItemClick(l, v, position, id);
 	    	
-	    	super.onListItemClick(l, v, position, id);
-	    	
-	        Intent i = new Intent(this, ContactoDetalleActivity.class);
+	    Intent i = new Intent(this, ContactoDetalleActivity.class);
 	        
-	        UsuarioADTO contactoSeleccionado = (UsuarioADTO) getListAdapter().getItem(position);
+	    UsuarioADTO contactoSeleccionado = (UsuarioADTO) getListAdapter().getItem(position);
 	        
-	        i.putExtra("nombreContacto", contactoSeleccionado.getNombre());  
+	    i.putExtra("nombreContacto", contactoSeleccionado.getNombre());  
 	        
-	        // Creo la vista usando LocalActivityManager del SitioGroupActivity
-	        View view = ContactoGroupActivity.group.getLocalActivityManager()
+	    // Creo la vista usando LocalActivityManager del SitioGroupActivity
+	    View view = ContactoGroupActivity.group.getLocalActivityManager()
 			        .startActivity("detalle_contacto", i
 			        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
 			        .getDecorView();
 
-	        // Remplazo la vista por la actual a cargar
-	        ContactoGroupActivity.group.replaceView(view);  
+	    // Remplazo la vista por la actual a cargar
+	    ContactoGroupActivity.group.replaceView(view);  
 
-	    }	    
+	}	    
 }

@@ -8,7 +8,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -22,10 +21,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.geored.frontoffice.activities.GCMIntentService;
 import com.geored.frontoffice.activities.R;
 import com.geored.frontoffice.activities.menu.MenuActivity;
 import com.geored.frontoffice.dto.UsuarioADTO;
-import com.geored.frontoffice.utiles.UtilesAndorid;
+import com.geored.frontoffice.utiles.UtilesSeguridadAndroid;
 import com.geored.frontoffice.wsclient.FactoryWS;
 import com.geored.frontoffice.wsclient.UsuarioWS;
 import com.google.android.gcm.GCMRegistrar;
@@ -33,6 +33,7 @@ import com.google.android.gcm.GCMRegistrar;
 public class RegistroActivity extends Activity {
 	
 	private UsuarioWS usuarioWS = FactoryWS.getInstancia().getUsuarioWS();
+	private static final String TAG = "RegistroActivity";
 	
 	private ImageView imageView;
     private Bitmap loadedImage;
@@ -71,36 +72,32 @@ public class RegistroActivity extends Activity {
     	usuarioADTO.setNombre(usuario.getText().toString());
     	usuarioADTO.setEmail(email.getText().toString());
     	usuarioADTO.setPass(pass.getText().toString());
+    	
     	if (urlImagen.getText() != null)
     	{	
     		usuarioADTO.setUrlImagen(urlImagen.getText().toString());
     	}
-    	    	
-//    	usuarioADTO.setNombre("Juan");
-//    	usuarioADTO.setEmail("juan@hotmail.com");
-//    	usuarioADTO.setPass("juanPass");
+    	
+//    	GCMIntentService.registerInGCMService(this);
+//    	
+//    	if (GCMRegistrar.isRegistered(this))
+//    	{
+//    		Log.d(TAG, "registered on server");
+//    	}
+//        regId = GCMRegistrar.getRegistrationId(this); 	
+    	usuarioADTO.setNombre("Juan");
+    	usuarioADTO.setEmail("juan@hotmail.com");
+    	usuarioADTO.setPass("juanPass");
+    	//usuarioADTO.setGcmRegId(regId);
 
-    	Long idUsuario = usuarioWS.insertar(usuarioADTO);
-			    	
-        //Comprobamos si está todo en orden para utilizar GCM
-        GCMRegistrar.checkDevice(RegistroActivity.this);
-        GCMRegistrar.checkManifest(RegistroActivity.this);
-        
-        //Si no estamos registrados --> Nos registramos en GCM
-        regId = GCMRegistrar.getRegistrationId(RegistroActivity.this);
-        if (regId.equals("")) 
-        {
-            GCMRegistrar.register(RegistroActivity.this, UtilesAndorid.ID_SENDER_GCM); //Sender ID
-        } 
-        else 
-        {
-            Log.v("GCMTest", "Ya registrado");
-        } 
+    	Long idUsuario = usuarioWS.insertar(usuarioADTO); 
         
     	//Si se registra correctamente lo redirecciona al menu, sino
     	//envia mensaje de error.
 		if(idUsuario != null)
 		{
+			usuarioADTO = usuarioWS.obtener(idUsuario);
+			UtilesSeguridadAndroid.setUsuarioAutenticado(getApplicationContext(), usuarioADTO);	
 	    	Intent menuActivity = new Intent (this, MenuActivity.class);
 	    	startActivity(menuActivity);
 		}	
@@ -125,9 +122,8 @@ public class RegistroActivity extends Activity {
     };
     
     
-    private void messageToast(int layout, int duration) {
-
-    	
+    private void messageToast(int layout, int duration) 
+    {	
 		LayoutInflater inflater = getLayoutInflater();		 
 		View layoutView = inflater.inflate(layout, null);
 		// set a message
