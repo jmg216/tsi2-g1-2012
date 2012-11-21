@@ -171,7 +171,7 @@ public class GestionSitioBean extends BaseBean implements Serializable
 			{
 				addBeanError("gestionSitioForm:descripcionSitio", "Obligatorio");
 				isValid = false;
-			}
+			}		
 			if(UtilesWeb.isNullOrEmpty(getSitioDTO().getUrlImagen()))
 			{
 				addBeanError("gestionSitioForm:imagenSitio", "Obligatorio");

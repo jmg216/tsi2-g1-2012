@@ -43,8 +43,6 @@ public class SitioServiceImpl implements SitioService
 		
 		Sitio sitioEntity = sitioDAO.toEntity(sitioDTO);
 		
-		sitioEntity.setListaTematicas(new ArrayList<Tematica>());
-		
 		asociarTematicas(sitioDTO, sitioEntity);
 		
 		sitioDAO.insertar(sitioEntity);
@@ -81,7 +79,15 @@ public class SitioServiceImpl implements SitioService
 	private void asociarTematicas(SitioDTO sitioDTO, Sitio sitioEntity) throws DaoException, NegocioException
 	{
 		// Cargo la lista de tematicas para el sitio
-		sitioEntity.getListaTematicas().clear();
+		if(sitioEntity.getListaTematicas() == null)
+		{
+			sitioEntity.setListaTematicas(new ArrayList<Tematica>());
+		}
+		else
+		{
+			sitioEntity.getListaTematicas().clear();
+		}
+		
 		if(sitioDTO.getListaTematicasDTO() != null)
 		{			
 			for(TematicaDTO tematicaDTO : sitioDTO.getListaTematicasDTO())

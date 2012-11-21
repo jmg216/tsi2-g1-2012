@@ -57,8 +57,6 @@ public class OfertaServiceImpl implements OfertaService
 		
 		ofertaEntity.setLocal(localEntity);
 		
-		ofertaEntity.setListaTematicas(new ArrayList<Tematica>());
-		
 		asociarTematicas(ofertaDTO, ofertaEntity);
 		
 		ofertaDAO.insertar(ofertaEntity);
@@ -103,7 +101,15 @@ public class OfertaServiceImpl implements OfertaService
 	private void asociarTematicas(OfertaDTO ofertaDTO, Oferta ofertaEntity) throws DaoException, NegocioException
 	{
 		// Cargo la lista de tematicas para la oferta
-		ofertaEntity.getListaTematicas().clear();
+		if(ofertaEntity.getListaTematicas() == null)
+		{
+			ofertaEntity.setListaTematicas(new ArrayList<Tematica>());
+		}
+		else
+		{
+			ofertaEntity.getListaTematicas().clear();
+		}
+		
 		if(ofertaDTO.getListaTematicasDTO() != null)
 		{			
 			for(TematicaDTO tematicaDTO : ofertaDTO.getListaTematicasDTO())

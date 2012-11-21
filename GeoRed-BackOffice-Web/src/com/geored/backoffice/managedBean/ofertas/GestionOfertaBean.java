@@ -199,6 +199,14 @@ public class GestionOfertaBean extends BaseBean implements Serializable
 				addBeanError("gestionOfertaForm:fechaFinOferta", "Obligatorio");
 				isValid = false;
 			}
+			if(getOfertaDTO().getFechaInicio() != null && getOfertaDTO().getFechaFin() != null)
+			{
+				if(getOfertaDTO().getFechaFin().before(getOfertaDTO().getFechaInicio()))
+				{
+					addBeanError("gestionOfertaForm:fechaFinOferta", "La fecha fin debe ser mayor a la inicial");
+					isValid = false;
+				}
+			}
 			if(UtilesWeb.isNullOrZero(getOfertaDTO().getIdLocal()))
 			{
 				addBeanError("gestionOfertaForm:localOferta", "Obligatorio");
