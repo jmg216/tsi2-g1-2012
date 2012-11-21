@@ -164,27 +164,27 @@ public class GestionSitioBean extends BaseBean implements Serializable
 		{
 			if(UtilesWeb.isNullOrEmpty(getSitioDTO().getNombre()))
 			{
-				addBeanError("'Nombre' es un campo obligatorio.");
+				addBeanError("gestionSitioForm:nombreSitio", "Obligatorio");
 				isValid = false;
 			}			
 			if(UtilesWeb.isNullOrEmpty(getSitioDTO().getDescripcion()))
 			{
-				addBeanError("'Descripción' es un campo obligatorio.");
+				addBeanError("gestionSitioForm:descripcionSitio", "Obligatorio");
 				isValid = false;
 			}
 			if(UtilesWeb.isNullOrEmpty(getSitioDTO().getUrlImagen()))
 			{
-				addBeanError("'URL Imagen' es un campo obligatorio.");
+				addBeanError("gestionSitioForm:imagenSitio", "Obligatorio");
 				isValid = false;
 			}
 			if(UtilesWeb.isNullOrEmpty(getSitioDTO().getUbicacionGeografica()))
 			{
-				addBeanError("'Ubicación Geográfica' es un campo obligatorio.");
+				addBeanError("gestionSitioForm:ubicacionSitio", "Obligatorio");
 				isValid = false;
 			}
 			if(tematicasSeleccionadas == null || tematicasSeleccionadas.isEmpty())
 			{
-				addBeanError("Debe seleccionar al menos una temática.");
+				addBeanError("gestionSitioForm:tematicasSitio", "Debe seleccionar al menos una.");
 				isValid = false;
 			}
 		}

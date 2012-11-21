@@ -77,13 +77,13 @@ public class LoginBean extends BaseBean implements Serializable
 		
 		if(UtilesWeb.isNullOrEmpty(getEmail()))
 		{
-			addBeanError("El campo 'E-mail' es obligatorio");
+			addBeanError("loginForm:emailLogin", "Obligatorio");
 			isValid = false;
 		}
 		
 		if(UtilesWeb.isNullOrEmpty(getPass()))
 		{
-			addBeanError("El campo 'Password' es obligatorio");
+			addBeanError("loginForm:passLogin", "Obligatorio");
 			isValid = false;
 		}
 		

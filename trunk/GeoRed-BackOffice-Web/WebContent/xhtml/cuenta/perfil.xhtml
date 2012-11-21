@@ -9,7 +9,7 @@
 	<h:body>
 		<ui:composition template="/xhtml/templates/layout.xhtml">
 			<ui:define name="content">	
-				<h:form>										
+				<h:form id="perfilForm">										
 					<h1 class="titulo-content">Mis datos</h1>
 					
 					<table>	
@@ -20,12 +20,16 @@
 						<tr>
 							<td><h:outputText value="E-mail:" /></td>
 							<td>	
-								<p:inputText value="#{perfilBean.administradorDTO.email}"/>																						
+								<p:inputText id="emailAdministrador" value="#{perfilBean.administradorDTO.email}"/>																						
+								<p:message for="emailAdministrador"/>
 							</td>
 						</tr>
 						<tr>
 							<td><h:outputText value="Nombre:" /></td>
-							<td><p:inputText value="#{perfilBean.administradorDTO.nombre}"/></td>
+							<td>
+								<p:inputText id="nombreAdministrador" value="#{perfilBean.administradorDTO.nombre}"/>
+								<p:message for="nombreAdministrador"/>
+							</td>
 						</tr>
 					</table>
 					<table>
@@ -35,15 +39,24 @@
 									<table>
 										<tr>
 											<td><h:outputText value="Contraseña actual:" /> </td>
-											<td><p:password value="#{perfilBean.contraseniaActual}"/></td>
+											<td>
+												<p:password id="contraseniaActual" value="#{perfilBean.contraseniaActual}"/>
+												<p:message for="contraseniaActual"/>
+											</td>
 										</tr>
 										<tr>
 											<td><h:outputText value="Nueva contraseña:" /> </td>
-											<td><p:password value="#{perfilBean.nuevaContrasenia}"/></td>
+											<td>
+												<p:password id="nuevaContrasenia" value="#{perfilBean.nuevaContrasenia}"/>
+												<p:message for="nuevaContrasenia"/>
+											</td>
 										</tr>
 										<tr>
 											<td><h:outputText value="Confirmar nueva contraseña:" /> </td>
-											<td><p:password value="#{perfilBean.confirmacionNuevaContrasenia}"/></td>
+											<td>
+												<p:password id="confirmacionNuevaContrasenia" value="#{perfilBean.confirmacionNuevaContrasenia}"/>
+												<h:message for="confirmacionNuevaContrasenia"/>
+											</td>
 										</tr>
 										<tr>
 											<td colspan="2" style="text-align: center;">

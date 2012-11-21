@@ -46,6 +46,20 @@ public class ListadoEventosBean extends BaseBean implements Serializable
 		} 
 	}
 	
+	public String eliminarEvento()
+	{
+		try
+		{
+			getEventoPort().eliminar(getIdEvento());
+		} 
+		catch (Exception e)
+		{
+			handleWSException(e);
+		}
+		
+		return SUCCESS;
+	}
+	
 	public String toGestionEvento()
 	{
 		return TO_GESTION_EVENTO;

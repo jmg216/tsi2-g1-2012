@@ -55,7 +55,9 @@
 						<tr>
 							<td><h:outputText value="Costo:" /></td>
 							<td>
-								<p:inputText id="costoOferta" value="#{gestionOfertaBean.ofertaDTO.costo}"/>
+								<p:inputText id="costoOferta" widgetVar="widgetCostoOferta" value="#{gestionOfertaBean.ofertaDTO.costo}">
+									<f:convertNumber pattern="#,##0.00"/>
+								</p:inputText>
 								<p:message for="costoOferta"/>
 							</td>
 						</tr>
@@ -71,7 +73,9 @@
 						<tr>
 							<td><h:outputText value="Fecha fin:" /></td>
 							<td>
-								<p:calendar id="fechaFinOferta" value="#{gestionOfertaBean.ofertaDTO.fechaFin}" pattern="dd/MM/yyyy HH:mm" />
+								<p:calendar id="fechaFinOferta" value="#{gestionOfertaBean.ofertaDTO.fechaFin}" pattern="dd/MM/yyyy HH:mm">
+									<f:converter converterId="com.geored.backoffice.converter.CalendarConverter"/>
+								</p:calendar>
 								<p:message for="fechaFinOferta"/>
 							</td>
 						</tr>
@@ -103,7 +107,7 @@
 								<p:commandButton value="Volver" action="#{gestionOfertaBean.toListadoOfertas()}"/>	
 							</li>
 							<li>
-								<p:commandButton value="Guardar" action="#{gestionOfertaBean.guardarOferta()}"/>	
+								<p:commandButton value="Guardar" action="#{gestionOfertaBean.guardarOferta()}" onclick="return preValidateOferta();"/>	
 							</li>
 						</ul>									
 					</div>
@@ -113,7 +117,20 @@
 							<p:graphicImage url="#{gestionOfertaBean.ofertaDTO.urlImagen}"/>
 						</p:dialog>
 					</c:if>					
-				</h:form>				
+				</h:form> 				
+				
+				<script type="text/javascript">
+					function preValidateOferta()
+					{
+						if(isNaN(widgetCostoOferta.jq.val().replace(",", "").replace(".","")))
+						{
+							alert("El costo de ofreta solo puede contener número");
+							return false;
+						}
+
+						return true;
+					}
+				</script>
 			</ui:define>
 		</ui:composition>
 	</h:body>

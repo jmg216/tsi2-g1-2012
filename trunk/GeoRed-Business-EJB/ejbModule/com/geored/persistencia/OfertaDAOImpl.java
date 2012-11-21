@@ -8,8 +8,10 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+import com.geored.dominio.Administrador;
 import com.geored.dominio.Oferta;
 import com.geored.dominio.Tematica;
 import com.geored.dominio.Usuario;
@@ -104,6 +106,37 @@ public class OfertaDAOImpl extends GenericDAOBase<Oferta, OfertaDTO> implements 
 	        }
 	     
 	        return listaOfertas;
+		}
+		catch(Throwable e)
+		{
+			throw new DaoException(e.getMessage());
+		}
+	}
+
+	@Override
+	public Object obtenerPorNombreYLocal(String nombre, Long idLocal, boolean toDTO) throws DaoException
+	{
+		try
+		{
+			Query query = em.createQuery("select o from com.geored.dominio.Oferta o where o.nombre = ?1 and o.local.id = ?2");        
+	        query.setParameter(1, nombre);
+	        query.setParameter(2, idLocal);
+	        
+	        try
+	        {
+	        	 Oferta ofertaEntity = (Oferta) query.getSingleResult();
+	        	 
+	        	 if(toDTO)
+	             {        	
+	             	return toDto(ofertaEntity);
+	             }
+	        	 
+	        	 return ofertaEntity;
+	        }
+	        catch(NoResultException e)
+	        {
+	        	return null;
+	        }
 		}
 		catch(Throwable e)
 		{

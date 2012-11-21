@@ -44,6 +44,20 @@ public class ListadoOfertasBean extends BaseBean implements Serializable
 		}
 	}
 	
+	public String eliminarOferta()
+	{
+		try
+		{
+			getOfertaPort().eliminar(getIdOferta());
+		} 
+		catch (Exception e)
+		{
+			handleWSException(e);
+		}
+		
+		return SUCCESS;
+	}
+	
 	public String toGestionOferta()
 	{
 		return TO_GESTION_OFERTA;

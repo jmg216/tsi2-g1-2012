@@ -48,6 +48,13 @@
 				            <h:outputText value="#{oferta.descripcion}" />  
 				        </p:column>
 				        
+				        <p:column style="width: 30px;">				        	
+				   			<h:commandLink action="#{listadoOfertasBean.eliminarOferta()}">
+				   				<h:graphicImage value="/resources/images/ico-eliminar.png"/>
+				           		<f:setPropertyActionListener target="#{listadoOfertasBean.idOferta}" value="#{oferta.id}"/>
+				           	</h:commandLink>
+				        </p:column>	
+				        
 				  </p:dataTable>
 				</h:form>
 			</ui:define>

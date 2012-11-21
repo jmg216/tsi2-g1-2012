@@ -10,7 +10,7 @@
 	<h:body>
 		<ui:composition template="/xhtml/templates/layout.xhtml">
 			<ui:define name="content">	
-				<h:form>					
+				<h:form id="gestionLocalForm">					
 					<c:set var="esModoEdicion" value="#{!utilesWeb.isNullOrZero(gestionLocalBean.localDTO.id)}"/>
 					
 					<h1 class="titulo-content">Gestión de Locales</h1>
@@ -28,11 +28,17 @@
 									</c:if>									
 									<tr>
 										<td><h:outputText value="Nombre:" /></td>
-										<td><p:inputText value="#{gestionLocalBean.localDTO.nombre}"/></td>
+										<td>
+											<p:inputText id="nombreLocal" value="#{gestionLocalBean.localDTO.nombre}"/>
+											<p:message for="nombreLocal"/>
+										</td>
 									</tr>
 									<tr>
 										<td><h:outputText value="Dirección:" /></td>
-										<td><p:inputText value="#{gestionLocalBean.localDTO.direccion}"/></td>
+										<td>
+											<p:inputText id="direccionLocal" value="#{gestionLocalBean.localDTO.direccion}"/>
+											<p:message for="direccionLocal"/>
+										</td>
 									</tr>																									
 								</table>
 							</td>
@@ -50,8 +56,11 @@
 									</c:if>
 									<tr>
 										<td><h:outputText value="Ubicación geográfica, click en el campo para cambiar:" /></td>
-										<td><p:inputText widgetVar="idUbicacionLocal" style="cursor: pointer;" value="#{gestionLocalBean.localDTO.ubicacionGeografica}" 
-											onfocus="showMapaSelector(this.id, refreshMapaLocal)" onclick="showMapaSelector(this.id, refreshMapaLocal)" onkeydown="return false;"/></td>
+										<td>
+											<p:inputText id="ubicacionLocal" widgetVar="widgetUbicacionLocal" style="cursor: pointer;" value="#{gestionLocalBean.localDTO.ubicacionGeografica}" 
+												onfocus="showMapaSelector(this.id, refreshMapaLocal)" onclick="showMapaSelector(this.id, refreshMapaLocal)" onkeydown="return false;"/>
+											<p:message for="ubicacionLocal"/>
+										</td>
 									</tr>
 								</table>
 							</td>
@@ -81,7 +90,7 @@
 							containerMapa.css("display", "block");		
 						}
 						
-						var splitUbicacionLocal = idUbicacionLocal.jq.val().split(",");
+						var splitUbicacionLocal = widgetUbicacionLocal.jq.val().split(",");
 						
 						var latitud = splitUbicacionLocal[0];
 						var longitud = splitUbicacionLocal[1];

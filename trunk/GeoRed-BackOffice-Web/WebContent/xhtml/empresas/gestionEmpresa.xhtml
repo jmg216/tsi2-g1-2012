@@ -5,50 +5,74 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 	<h:body>
 		<ui:composition template="/xhtml/templates/layout.xhtml">
 			<ui:define name="content">					
-				<h:form>					
+				<h:form id="gestionEmpresaForm">					
 					<c:set var="esAdminEmpresa" value="#{utilesWeb.esAdminEmpresa()}"/>
 					<c:set var="esModoEdicion" value="#{!utilesWeb.isNullOrZero(gestionEmpresaBean.empresaDTO.id)}"/>
 				
 					<h1 class="titulo-content">Gestión de Empresas</h1>
 					<h:inputHidden value="#{gestionEmpresaBean.empresaDTO.id}"/>	
-					<h:inputHidden value="#{gestionEmpresaBean.empresaDTO.idAdministrador}"/>	
 					
 					<c:choose>
 						<c:when test="#{esAdminEmpresa}">
+							<h:inputHidden value="#{gestionEmpresaBean.empresaDTO.idAdministrador}"/>
+							
 							<table>
 								<tr>
 									<td><h:outputText value="Id:" /></td>
-									<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.id}" readonly="true"/></td>
+									<td>
+										<p:inputText value="#{gestionEmpresaBean.empresaDTO.id}" readonly="true"/>
+									</td>
 								</tr>
 								<tr>
 									<td><h:outputText value="Nombre:" /></td>
-									<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.nombre}"/></td>
+									<td>
+										<p:inputText id="nombreEmpresa" value="#{gestionEmpresaBean.empresaDTO.nombre}"/>
+										<p:message for="nombreEmpresa"/>
+									</td>
 								</tr>
 								<tr>
 									<td><h:outputText value="Descripción:" /></td>
-									<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.descripcion}"/></td>
+									<td>
+										<p:inputText id="descripcionEmpresa" value="#{gestionEmpresaBean.empresaDTO.descripcion}"/>
+										<p:message for="descripcionEmpresa"/>
+									</td>									
 								</tr>
 								<tr>
 									<td><h:outputText value="Logo:" /></td>
-									<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.urlImagen}"/></td>									
-								</tr>					
-								<c:if test="#{!utilesWeb.isNullOrEmpty(gestionEmpresaBean.empresaDTO.urlImagen)}">
-									<tr>
-										<td></td>
-										<td><p:graphicImage url="#{gestionEmpresaBean.empresaDTO.urlImagen}" width="310px;" onclick="dlgFullImageEmpresa.show();" styleClass="black-shadow" style="cursor: pointer;"/></td>
-									</tr>
-								</c:if>
+									<td>
+										<p:inputText id="imagenEmpresa" value="#{gestionEmpresaBean.empresaDTO.urlImagen}"/>
+										<p:message for="imagenEmpresa"/>
+									</td>
+									<p:tooltip for="imagenEmpresa" showEvent="focus" hideEvent="blur">
+										<c:choose>
+											<c:when test="#{!utilesWeb.isNullOrEmpty(gestionEmpresaBean.empresaDTO.urlImagen)}">
+												<p:graphicImage url="#{gestionEmpresaBean.empresaDTO.urlImagen}" width="310px;" onclick="dlgFullImageEmpresa.show();" styleClass="black-shadow" style="cursor: pointer;"/>
+											</c:when>
+											<c:otherwise>
+												<h:outputText value="Debe ingresar una imagen" />
+											</c:otherwise>
+										</c:choose>											
+									</p:tooltip>									
+								</tr>											
 								<tr>
 									<td><h:outputText value="Locales:" /></td>
 									<td>
-										<p:dataList value="#{gestionEmpresaBean.empresaDTO.listaLocalesDTO}" var="local" itemType="square">  
-										    #{local.nombre} - #{local.direccion}
-										</p:dataList> 
+										<c:choose>
+											<c:when test="#{fn:length(gestionEmpresaBean.empresaDTO.listaLocalesDTO) > 0}">
+												<p:dataList value="#{gestionEmpresaBean.empresaDTO.listaLocalesDTO}" var="local" itemType="square">  
+												    #{local.nombre} - #{local.direccion}
+												</p:dataList> 
+											</c:when>
+											<c:otherwise>
+												No se han agregado locales
+											</c:otherwise>
+										</c:choose>										
 									</td>
 								</tr>
 							</table>		
@@ -63,24 +87,28 @@
 								</c:if>
 								<tr>
 									<td><h:outputText value="Nombre:" /></td>
-									<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.nombre}" readonly="#{esModoEdicion}"/></td>
+									<td>
+										<p:inputText id="nombreEmpresa" value="#{gestionEmpresaBean.empresaDTO.nombre}" readonly="#{esModoEdicion}"/>
+										<p:message for="nombreEmpresa"/>
+									</td>
 								</tr>
 								<tr>
 									<td><h:outputText value="Administrador:" /></td>
-									<c:choose>
-										<c:when test="#{!esModoEdicion}">
-											<td>								
-												<p:selectOneMenu value="#{gestionEmpresaBean.empresaDTO.idAdministrador}">
+									<td>
+										<c:choose>
+											<c:when test="#{!esModoEdicion}">
+												<p:selectOneMenu id="administradorEmpresa" value="#{gestionEmpresaBean.empresaDTO.idAdministrador}">
 													<f:selectItem itemLabel="---" itemValue="" />
 													<f:selectItems value="#{gestionEmpresaBean.listaAdministradores}" 
 														var="administrador" itemValue="#{administrador.id}" itemLabel="#{administrador.nombre}"/>
 												</p:selectOneMenu> 								
-											</td>						
-										</c:when>
-										<c:otherwise>
-											<td><p:inputText value="#{gestionEmpresaBean.empresaDTO.nombreAdministrador}" readonly="true"/></td>
-										</c:otherwise>
-									</c:choose>									
+											</c:when>
+											<c:otherwise>
+												<p:inputText id="administradorEmpresa" value="#{gestionEmpresaBean.empresaDTO.nombreAdministrador}" readonly="true"/>
+											</c:otherwise>
+										</c:choose>	
+										<p:message for="administradorEmpresa" />		
+									</td>						
 								</tr>
 							</table>
 						</c:otherwise>

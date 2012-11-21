@@ -10,7 +10,6 @@ import javax.ejb.TransactionManagementType;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
-import com.geored.dominio.Administrador;
 import com.geored.dominio.Local;
 import com.geored.dto.LocalDTO;
 import com.geored.dto.OfertaDTO;

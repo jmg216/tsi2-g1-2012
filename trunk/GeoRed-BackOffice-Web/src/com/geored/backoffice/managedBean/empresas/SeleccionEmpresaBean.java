@@ -29,7 +29,19 @@ public class SeleccionEmpresaBean extends BaseBean implements Serializable
 	
 	public SeleccionEmpresaBean()
 	{
-		listaEmpresas = Arrays.asList(UtilesWeb.obtenerUsuarioAutenticado().getListaEmpresasDTO());
+		try
+		{
+			EmpresaDTO[] arrayEmpresasDTO = getEmpresaPort().obtenerListadoPorAdministrador(UtilesWeb.obtenerUsuarioAutenticado().getId());
+			
+			if(arrayEmpresasDTO != null)
+			{
+				listaEmpresas = Arrays.asList(arrayEmpresasDTO);
+			}
+		}
+		catch(Exception e)
+		{
+			handleWSException(e);
+		}
 	}
 	
 	public String seleccionarEmpresa()
@@ -38,7 +50,7 @@ public class SeleccionEmpresaBean extends BaseBean implements Serializable
 		{
 			if(UtilesWeb.isNullOrZero(idEmpresa))
 			{
-				addBeanError("Debe seleccionar una empresa");
+				addBeanError("seleccionEmpresaForm:empresaSeleccionada", "Obligatorio");
 			}
 			else
 			{

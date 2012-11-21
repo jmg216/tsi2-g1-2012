@@ -101,24 +101,24 @@ public class PerfilBean extends BaseBean implements Serializable
 		{
 			if(UtilesWeb.isNullOrEmpty(contraseniaActual))
 			{
-				addBeanError("El campo 'Contraseña actual' es obligatorio");
+				addBeanError("perfilForm:contraseniaActual", "Obligatorio");
 				isValid = false;
 			}	
 			if(UtilesWeb.isNullOrEmpty(nuevaContrasenia))
 			{
-				addBeanError("El campo 'Nueva contraseña' es obligatorio");
+				addBeanError("perfilForm:nuevaContrasenia", "Obligatorio");
 				isValid = false;
 			}
 			if(UtilesWeb.isNullOrEmpty(confirmacionNuevaContrasenia))
 			{
-				addBeanError("El campo 'Confirmacion nueva contraseña' es obligatorio");
+				addBeanError("perfilForm:confirmacionNuevaContrasenia", "Obligatorio");
 				isValid = false;
 			}
 			if(!UtilesWeb.isNullOrEmpty(nuevaContrasenia) && !UtilesWeb.isNullOrEmpty(confirmacionNuevaContrasenia))
 			{
 				if(!nuevaContrasenia.equals(confirmacionNuevaContrasenia))
 				{
-					addBeanError("La nueva contrasenia no cohincide con la confirmación");
+					addBeanError("perfilForm:confirmacionNuevaContrasenia", "No cohincide con la nueva contraseña");
 					isValid = false;
 				}
 					
@@ -127,9 +127,14 @@ public class PerfilBean extends BaseBean implements Serializable
 		}
 		else if(opValidar == VALIDAR_GUARDAR)
 		{
+			if(UtilesWeb.isNullOrEmpty(getAdministradorDTO().getEmail()))
+			{
+				addBeanError("perfilNombre:emailAdministrador", "Obligatorio");
+				isValid = false;
+			}
 			if(UtilesWeb.isNullOrEmpty(getAdministradorDTO().getNombre()))
 			{
-				addBeanError("El campo 'Nombre' es obligatorio");
+				addBeanError("perfilForm:nombreAdministrador", "Obligatorio");
 				isValid = false;
 			}
 		}

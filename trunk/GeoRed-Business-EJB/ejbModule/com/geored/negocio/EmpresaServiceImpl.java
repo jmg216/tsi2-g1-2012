@@ -1,6 +1,5 @@
 package com.geored.negocio;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 

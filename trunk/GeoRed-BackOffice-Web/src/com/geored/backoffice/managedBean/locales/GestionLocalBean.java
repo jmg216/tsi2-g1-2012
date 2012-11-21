@@ -113,19 +113,19 @@ public class GestionLocalBean extends BaseBean implements Serializable
 		{
 			if(UtilesWeb.isNullOrEmpty(getLocalDTO().getNombre()))
 			{
-				addBeanError("El campo 'Nombre' es obligatorio.");
+				addBeanError("gestionLocalForm:nombreLocal", "Obligatorio");
 				isValid = false;
 			}		
 			
 			if(UtilesWeb.isNullOrEmpty(getLocalDTO().getDireccion()))
 			{
-				addBeanError("El campo 'Dirección' es obligatorio");
+				addBeanError("gestionLocalForm:direccionLocal", "Obligatorio");
 				isValid = false;
 			}
 			
 			if(UtilesWeb.isNullOrEmpty(getLocalDTO().getUbicacionGeografica()))
 			{
-				addBeanError("El campo 'Ubicación Geográfica' es obligatorio.");
+				addBeanError("gestionLocalForm:ubicacionLocal", "Obligatorio");
 				isValid = false;
 			}			
 		}
