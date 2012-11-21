@@ -11,7 +11,7 @@ public class EventoDTO
 	
 	private String descripcion;
 	
-	private String ubicacionGeogrica;
+	private String ubicacionGeografica;
 	
 	private Date fechaInicio;
 	
@@ -49,14 +49,14 @@ public class EventoDTO
 		this.descripcion = descripcion;
 	}
 
-	public String getUbicacionGeogrica()
+	public String getUbicacionGeografica()
 	{
-		return ubicacionGeogrica;
+		return ubicacionGeografica;
 	}
 
-	public void setUbicacionGeogrica(String ubicacionGeogrica)
+	public void setUbicacionGeografica(String ubicacionGeografica)
 	{
-		this.ubicacionGeogrica = ubicacionGeogrica;
+		this.ubicacionGeografica = ubicacionGeografica;
 	}
 
 	public Date getFechaInicio()

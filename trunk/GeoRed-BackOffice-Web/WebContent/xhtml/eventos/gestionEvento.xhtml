@@ -10,21 +10,87 @@
 	<h:body>
 		<ui:composition template="/xhtml/templates/layout.xhtml">
 			<ui:define name="content">	
-				<h:form>					
+				<h:form id="gestionEventoForm">					
 					<h1 class="titulo-content">Gestión de Eventos</h1>
 					
-					<table>
-						<h:inputHidden value="#{gestionEventoBean.eventoDTO.id}"/>
-						<c:if test="#{gestionEventoBean.eventoDTO.id > 0}">
-							<tr>
-								<td><h:outputText value="Id:" /></td>
-								<td><p:inputText value="#{gestionEventoBean.eventoDTO.id}" disabled="true"/></td>
-							</tr>
-						</c:if>																		
+					<table width="100%">
 						<tr>
-							<td><h:outputText value="Nombre:" /></td>
-							<td><p:inputText value="#{gestionEventoBean.eventoDTO.nombre}"/></td>
-						</tr>																
+							<td style="vertical-align: top;">
+								<table>
+									<h:inputHidden value="#{gestionEventoBean.eventoDTO.id}"/>
+									<c:if test="#{gestionEventoBean.eventoDTO.id > 0}">
+										<tr>
+											<td><h:outputText value="Id:" /></td>
+											<td><p:inputText value="#{gestionEventoBean.eventoDTO.id}" disabled="true"/></td>
+										</tr>
+									</c:if>																		
+									<tr>
+										<td><h:outputText value="Nombre:" /></td>
+										<td>
+											<p:inputText id="nombreEvento" value="#{gestionEventoBean.eventoDTO.nombre}"/>
+											<p:message for="nombreEvento" />
+										</td>
+									</tr>	
+									<tr>
+										<td><h:outputText value="Descripcion:" /></td>
+										<td>
+											<p:inputText id="descripcionSitio" value="#{gestionSitioBean.sitioDTO.descripcion}"/>
+											<p:message for="descripcionSitio"/>
+										</td>
+									</tr>	
+									<tr>
+										<td><h:outputText value="Fecha inicio:" /></td>
+										<td>
+											<p:calendar id="fechaInicioEvento" value="#{gestionEventoBean.eventoDTO.fechaInicio}" pattern="dd/MM/yyyy HH:mm">
+												<f:converter converterId="com.geored.backoffice.converter.CalendarConverter"/>
+											</p:calendar>
+											<p:message for="fechaInicioEvento"/>
+										</td>
+									</tr>
+									<tr>
+										<td><h:outputText value="Fecha fin:" /></td>
+										<td>
+											<p:calendar id="fechaFinEvento" value="#{gestionEventoBean.eventoDTO.fechaFin}" pattern="dd/MM/yyyy HH:mm">
+												<f:converter converterId="com.geored.backoffice.converter.CalendarConverter"/>
+											</p:calendar>
+											<p:message for="fechaFinEvento"/>
+										</td>
+									</tr>
+									
+									<tr>
+										<td style="vertical-align: top;"><h:outputText value="Temáticas:"/></td>
+										<td>
+											<p:selectManyCheckbox id="tematicasEvento" value="#{gestionEventoBean.tematicasSeleccionadas}" layout="pageDirection">  
+									            <f:selectItems value="#{gestionEventoBean.listaTematicas}" var="tematica" itemValue="#{tematica.id}" itemLabel="#{tematica.nombre}" />  
+									        </p:selectManyCheckbox>  
+									        <p:message for="tematicasEvento"/>
+										</td>
+									</tr>																					
+								</table>
+							</td>
+							<td style="vertical-align: top; width: 60%">
+								<table width="100%;">									
+									<tr>
+										<td colspan="2"><div id="containerMapaEvento" style="width: 100%; height: 350px; display: none;" class="black-shadow"></div></td>
+									</tr>
+									<c:if test="#{!utilesWeb.isNullOrEmpty(gestionEventoBean.eventoDTO.ubicacionGeografica)}">	
+										<script type="text/javascript">
+											$(function(){
+												refreshMapaSitio();	
+											})											
+										</script>
+									</c:if>
+									<tr>
+										<td><h:outputText value="Ubicación geográfica, click en el campo para cambiar:" /></td>
+										<td>
+											<p:inputText id="ubicacionEvento" widgetVar="widgetUbicacionEvento" style="cursor: pointer;" value="#{gestionEventoBean.eventoDTO.ubicacionGeografica}" 
+												onfocus="showMapaSelector(this.id, refreshMapaEvento)" onclick="showMapaSelector(this.id, refreshMapaEvento)" onkeydown="return false;"/>
+											<p:message for="ubicacionEvento"/>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
 					</table>
 					
 					<div class="areaBotones">

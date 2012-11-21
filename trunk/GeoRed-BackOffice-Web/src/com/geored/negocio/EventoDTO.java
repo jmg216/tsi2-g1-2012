@@ -20,7 +20,7 @@ public class EventoDTO  implements java.io.Serializable {
 
     private java.lang.String nombre;
 
-    private java.lang.String ubicacionGeogrica;
+    private java.lang.String ubicacionGeografica;
 
     public EventoDTO() {
     }
@@ -32,14 +32,14 @@ public class EventoDTO  implements java.io.Serializable {
            java.lang.Long id,
            com.geored.negocio.TematicaDTO[] listaTematicasDTO,
            java.lang.String nombre,
-           java.lang.String ubicacionGeogrica) {
+           java.lang.String ubicacionGeografica) {
            this.descripcion = descripcion;
            this.fechaFin = fechaFin;
            this.fechaInicio = fechaInicio;
            this.id = id;
            this.listaTematicasDTO = listaTematicasDTO;
            this.nombre = nombre;
-           this.ubicacionGeogrica = ubicacionGeogrica;
+           this.ubicacionGeografica = ubicacionGeografica;
     }
 
 
@@ -172,22 +172,22 @@ public class EventoDTO  implements java.io.Serializable {
 
 
     /**
-     * Gets the ubicacionGeogrica value for this EventoDTO.
+     * Gets the ubicacionGeografica value for this EventoDTO.
      * 
-     * @return ubicacionGeogrica
+     * @return ubicacionGeografica
      */
-    public java.lang.String getUbicacionGeogrica() {
-        return ubicacionGeogrica;
+    public java.lang.String getUbicacionGeografica() {
+        return ubicacionGeografica;
     }
 
 
     /**
-     * Sets the ubicacionGeogrica value for this EventoDTO.
+     * Sets the ubicacionGeografica value for this EventoDTO.
      * 
-     * @param ubicacionGeogrica
+     * @param ubicacionGeografica
      */
-    public void setUbicacionGeogrica(java.lang.String ubicacionGeogrica) {
-        this.ubicacionGeogrica = ubicacionGeogrica;
+    public void setUbicacionGeografica(java.lang.String ubicacionGeografica) {
+        this.ubicacionGeografica = ubicacionGeografica;
     }
 
     private java.lang.Object __equalsCalc = null;
@@ -220,9 +220,9 @@ public class EventoDTO  implements java.io.Serializable {
             ((this.nombre==null && other.getNombre()==null) || 
              (this.nombre!=null &&
               this.nombre.equals(other.getNombre()))) &&
-            ((this.ubicacionGeogrica==null && other.getUbicacionGeogrica()==null) || 
-             (this.ubicacionGeogrica!=null &&
-              this.ubicacionGeogrica.equals(other.getUbicacionGeogrica())));
+            ((this.ubicacionGeografica==null && other.getUbicacionGeografica()==null) || 
+             (this.ubicacionGeografica!=null &&
+              this.ubicacionGeografica.equals(other.getUbicacionGeografica())));
         __equalsCalc = null;
         return _equals;
     }
@@ -260,8 +260,8 @@ public class EventoDTO  implements java.io.Serializable {
         if (getNombre() != null) {
             _hashCode += getNombre().hashCode();
         }
-        if (getUbicacionGeogrica() != null) {
-            _hashCode += getUbicacionGeogrica().hashCode();
+        if (getUbicacionGeografica() != null) {
+            _hashCode += getUbicacionGeografica().hashCode();
         }
         __hashCodeCalc = false;
         return _hashCode;
@@ -317,8 +317,8 @@ public class EventoDTO  implements java.io.Serializable {
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("ubicacionGeogrica");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "ubicacionGeogrica"));
+        elemField.setFieldName("ubicacionGeografica");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "ubicacionGeografica"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
