@@ -47,7 +47,14 @@
 				            </f:facet>  
 				            <h:outputText value="#{evento.descripcion}" />  
 				        </p:column>
-				        			  
+				        		
+				        <p:column style="width: 30px;">				        	
+				   			<h:commandLink action="#{listadoEventosBean.eliminarEvento()}">
+				   				<h:graphicImage value="/resources/images/ico-eliminar.png"/>
+				           		<f:setPropertyActionListener target="#{listadoEventosBean.idEvento}" value="#{evento.id}"/>
+				           	</h:commandLink>
+				        </p:column>	
+				        	  
 				    </p:dataTable> 
 				</h:form>
 			</ui:define>

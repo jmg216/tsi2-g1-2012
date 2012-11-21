@@ -10,17 +10,18 @@
 	<h:body>
 		<ui:composition template="/xhtml/templates/layout.xhtml">
 			<ui:define name="content">	
-				<h:form>					
+				<h:form id="seleccionEmpresaForm">					
 					<h1 class="titulo-content">Seleccione la empresa a administrar</h1>
 					<table>
 						<tr>
 							<td><h:outputText value="Empresa:" /></td>
 							<td>
-								<p:selectOneMenu value="#{seleccionEmpresaBean.idEmpresa}">
+								<p:selectOneMenu id="empresaSeleccionada" value="#{seleccionEmpresaBean.idEmpresa}">
 									<f:selectItem itemLabel="---" itemValue="" />
 									<f:selectItems value="#{seleccionEmpresaBean.listaEmpresas}" 
 										var="empresa" itemValue="#{empresa.id}" itemLabel="#{empresa.nombre}"/>
 								</p:selectOneMenu>
+								<p:message for="empresaSeleccionada" />
 							</td>
 						</tr>
 					</table>		

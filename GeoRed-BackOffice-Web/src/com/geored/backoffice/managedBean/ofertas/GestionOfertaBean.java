@@ -74,7 +74,6 @@ public class GestionOfertaBean extends BaseBean implements Serializable
 		try
 		{
 			// Locales
-			
 			LocalDTO[] arrayLocalesDTO = getEmpresaPort().obtenerListadoLocalesPorEmpresa(UtilesWeb.obtenerEmpresaAdministrada().getId());
 					
 			if(arrayLocalesDTO != null)
@@ -88,7 +87,17 @@ public class GestionOfertaBean extends BaseBean implements Serializable
 			if(arrayTematicasDTO != null)
 			{
 				listaTematicas = Arrays.asList(arrayTematicasDTO);
-			}			
+			}	
+			
+			// Cargo los ids de las tematicas seleccionadas en el sitio
+			tematicasSeleccionadas = new ArrayList<String>();
+			if(ofertaDTO.getListaTematicasDTO() != null)
+			{
+				for(TematicaDTO tematicaDTO : ofertaDTO.getListaTematicasDTO())
+				{
+					tematicasSeleccionadas.add(tematicaDTO.getId().toString());
+				}
+			}		
 		} 
 		catch(Exception e)
 		{

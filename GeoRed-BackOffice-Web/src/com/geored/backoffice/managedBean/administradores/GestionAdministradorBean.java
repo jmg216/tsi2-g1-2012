@@ -134,17 +134,17 @@ public class GestionAdministradorBean extends BaseBean implements Serializable
 		{			
 			if(UtilesWeb.isNullOrEmpty(getAdministradorDTO().getEmail()))
 			{
-				addBeanError("'E-mail' es un campo obligatorio.");
+				addBeanError("gestionAdministradorForm:emailAdministrador", "Obligatorio");
 				isValid = false;
 			}
 			if(UtilesWeb.isNullOrEmpty(getAdministradorDTO().getNombre()))
 			{
-				addBeanError("'Nombre' es un campo obligatorio.");
+				addBeanError("gestionAdministradorForm:nombreAdministrador", "Obligatorio");
 				isValid = false;
 			}
 			if(UtilesWeb.isNullOrZero(getAdministradorDTO().getIdTipoAdministrador()))
 			{
-				addBeanError("'Tipo de Administrador' es un campo obligatorio.");
+				addBeanError("gestionAdministradorForm:tipoAdministrador", "Obligatorio");
 				isValid = false;
 			}
 		}

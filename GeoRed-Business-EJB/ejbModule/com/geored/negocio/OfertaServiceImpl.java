@@ -1,5 +1,6 @@
 package com.geored.negocio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -11,11 +12,16 @@ import javax.ejb.TransactionManagementType;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
+import com.geored.dominio.Local;
 import com.geored.dominio.Oferta;
+import com.geored.dominio.Tematica;
 import com.geored.dto.OfertaDTO;
+import com.geored.dto.TematicaDTO;
 import com.geored.exceptions.DaoException;
 import com.geored.exceptions.NegocioException;
+import com.geored.persistencia.LocalDAO;
 import com.geored.persistencia.OfertaDAO;
+import com.geored.persistencia.TematicaDAO;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -25,11 +31,35 @@ public class OfertaServiceImpl implements OfertaService
 	@EJB
 	private OfertaDAO ofertaDAO;
 	
+	@EJB
+	private LocalDAO localDAO;
+	
+	@EJB
+	private TematicaDAO tematicaDAO;
+	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
 	public Long insertar(OfertaDTO ofertaDTO) throws NegocioException, DaoException
 	{
+		if(ofertaDAO.obtenerPorNombreYLocal(ofertaDTO.getNombre(), ofertaDTO.getIdLocal(), false) != null)
+		{
+			throw new NegocioException("Ya existe una oferta con este nombre para el local indicado");
+		}
+		
 		Oferta ofertaEntity = ofertaDAO.toEntity(ofertaDTO);
+		
+		Local localEntity = (Local) localDAO.obtener(ofertaDTO.getIdLocal(), false);
+		
+		if(localEntity == null)
+		{
+			throw new NegocioException("Local no encontrado");
+		}
+		
+		ofertaEntity.setLocal(localEntity);
+		
+		ofertaEntity.setListaTematicas(new ArrayList<Tematica>());
+		
+		asociarTematicas(ofertaDTO, ofertaEntity);
 		
 		ofertaDAO.insertar(ofertaEntity);
 		
@@ -40,7 +70,14 @@ public class OfertaServiceImpl implements OfertaService
 	@WebMethod
 	public void actualizar(OfertaDTO ofertaDTO) throws NegocioException, DaoException
 	{
-		Oferta ofertaEntity = (Oferta) ofertaDAO.obtener(ofertaDTO.getId(), false);
+		Oferta ofertaEntity = (Oferta) ofertaDAO.obtenerPorNombreYLocal(ofertaDTO.getNombre(), ofertaDTO.getIdLocal(), false);
+		
+		if(ofertaEntity != null && !ofertaEntity.getId().equals(ofertaDTO.getId()))
+		{	
+			throw new NegocioException("Ya existe una oferta con este nombre para el local indicado");
+		}		
+				
+		ofertaEntity = (Oferta) ofertaDAO.obtener(ofertaDTO.getId(), false);
 		
 		if(ofertaEntity == null)
 		{
@@ -49,7 +86,38 @@ public class OfertaServiceImpl implements OfertaService
 		
 		ofertaDAO.toEntity(ofertaDTO, ofertaEntity);
 		
+		Local localEntity = (Local) localDAO.obtener(ofertaDTO.getIdLocal(), false);
+		
+		if(localEntity == null)
+		{
+			throw new NegocioException("Local no encontrado");
+		}
+		
+		ofertaEntity.setLocal(localEntity);
+		
+		asociarTematicas(ofertaDTO, ofertaEntity);
+		
 		ofertaDAO.actualizar(ofertaEntity);			
+	}
+	
+	private void asociarTematicas(OfertaDTO ofertaDTO, Oferta ofertaEntity) throws DaoException, NegocioException
+	{
+		// Cargo la lista de tematicas para la oferta
+		ofertaEntity.getListaTematicas().clear();
+		if(ofertaDTO.getListaTematicasDTO() != null)
+		{			
+			for(TematicaDTO tematicaDTO : ofertaDTO.getListaTematicasDTO())
+			{
+				Tematica tematica = (Tematica) tematicaDAO.obtener(tematicaDTO.getId(), false);
+				
+				if(tematica == null)
+				{
+					throw new NegocioException("La tematica (" + tematicaDTO.getId() + ") no existe");
+				}
+				
+				ofertaEntity.getListaTematicas().add(tematica);
+			}
+		}
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)

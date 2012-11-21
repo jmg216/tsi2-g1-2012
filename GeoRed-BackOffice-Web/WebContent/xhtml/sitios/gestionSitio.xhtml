@@ -10,7 +10,7 @@
 	<h:body>
 		<ui:composition template="/xhtml/templates/layout.xhtml">
 			<ui:define name="content">	
-				<h:form>					
+				<h:form id="gestionSitioForm">					
 					<c:set var="esModoEdicion" value="#{!utilesWeb.isNullOrZero(gestionSitioBean.sitioDTO.id)}"/>
 					
 					<h1 class="titulo-content">Gestión de Sitios</h1>
@@ -28,15 +28,24 @@
 									</c:if>									
 									<tr>
 										<td><h:outputText value="Nombre:" /></td>
-										<td><p:inputText value="#{gestionSitioBean.sitioDTO.nombre}"/></td>
+										<td>
+											<p:inputText id="nombreSitio" value="#{gestionSitioBean.sitioDTO.nombre}"/>
+											<p:message for="nombreSitio"/>
+										</td>
 									</tr>
 									<tr>
 										<td><h:outputText value="Descripcion:" /></td>
-										<td><p:inputText value="#{gestionSitioBean.sitioDTO.descripcion}"/></td>
+										<td>
+											<p:inputText id="descripcionSitio" value="#{gestionSitioBean.sitioDTO.descripcion}"/>
+											<p:message for="descripcionSitio"/>
+										</td>
 									</tr>																
 									<tr>
 										<td><h:outputText value="URL Imagen:" /></td>
-										<td><p:inputText id="imagenSitio" value="#{gestionSitioBean.sitioDTO.urlImagen}" style="cursor:pointer;"/></td>
+										<td>
+											<p:inputText id="imagenSitio" value="#{gestionSitioBean.sitioDTO.urlImagen}" style="cursor:pointer;"/>
+											<p:message for="imagenSitio"/>
+										</td>
 										<p:tooltip for="imagenSitio" showEvent="focus" hideEvent="blur">
 											<c:choose>
 												<c:when test="#{!utilesWeb.isNullOrEmpty(gestionSitioBean.sitioDTO.urlImagen)}">
@@ -51,9 +60,10 @@
 									<tr>
 										<td style="vertical-align: top;"><h:outputText value="Temáticas:"/></td>
 										<td>
-											<p:selectManyCheckbox value="#{gestionSitioBean.tematicasSeleccionadas}" layout="pageDirection">  
+											<p:selectManyCheckbox id="tematicasSitio" value="#{gestionSitioBean.tematicasSeleccionadas}" layout="pageDirection">  
 									            <f:selectItems value="#{gestionSitioBean.listaTematicas}" var="tematica" itemValue="#{tematica.id}" itemLabel="#{tematica.nombre}" />  
 									        </p:selectManyCheckbox>  
+									        <p:message for="tematicasSitio"/>
 										</td>
 									</tr>
 								</table>
@@ -72,8 +82,11 @@
 									</c:if>
 									<tr>
 										<td><h:outputText value="Ubicación geográfica, click en el campo para cambiar:" /></td>
-										<td><p:inputText widgetVar="idUbicacionSitio" style="cursor: pointer;" value="#{gestionSitioBean.sitioDTO.ubicacionGeografica}" 
-											onfocus="showMapaSelector(this.id, refreshMapaSitio)" onclick="showMapaSelector(this.id, refreshMapaSitio)" onkeydown="return false;"/></td>
+										<td>
+											<p:inputText id="ubicacionSitio" widgetVar="widgetUbicacionSitio" style="cursor: pointer;" value="#{gestionSitioBean.sitioDTO.ubicacionGeografica}" 
+												onfocus="showMapaSelector(this.id, refreshMapaSitio)" onclick="showMapaSelector(this.id, refreshMapaSitio)" onkeydown="return false;"/>
+											<p:message for="ubicacionSitio"/>
+										</td>
 									</tr>
 								</table>
 							</td>
@@ -108,7 +121,7 @@
 							containerMapa.css("display", "block");		
 						}
 						
-						var splitUbicacionSitio = idUbicacionSitio.jq.val().split(",");
+						var splitUbicacionSitio = widgetUbicacionSitio.jq.val().split(",");
 						
 						var latitud = splitUbicacionSitio[0];
 						var longitud = splitUbicacionSitio[1];

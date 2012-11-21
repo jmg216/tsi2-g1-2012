@@ -9,7 +9,7 @@
 	<h:body>
 		<ui:composition template="/xhtml/templates/layout.xhtml">
 			<ui:define name="content">					
-				<h:form>
+				<h:form id="loginForm">
 					<h1 class="titulo-content">Iniciar sesión</h1>
 					
 					<table>
@@ -18,7 +18,8 @@
 								<h:outputText value="Email:" />
 							</td>
 							<td>
-								<p:inputText value="#{loginBean.email}"/>
+								<p:inputText id="emailLogin" value="#{loginBean.email}"/>
+								<p:message for="emailLogin"/>
 							</td>
 						</tr>
 						
@@ -27,7 +28,8 @@
 								<h:outputText value="Password:" />
 							</td>
 							<td>
-								<p:password value="#{loginBean.pass}"/>
+								<p:password id="passLogin" value="#{loginBean.pass}"/>
+								<p:message for="passLogin"/>
 							</td>
 						</tr>
 					</table>

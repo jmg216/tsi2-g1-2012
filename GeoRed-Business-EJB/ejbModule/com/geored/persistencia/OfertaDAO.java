@@ -14,7 +14,9 @@ import com.geored.persistencia.core.GenericDAO;
 @Local
 public interface OfertaDAO extends GenericDAO<Oferta, OfertaDTO>
 {
-	public Object buscarOfertasPorTematicas(List<Tematica> tematicas, Usuario u,  boolean toDTO) throws DaoException;
+	public Object obtenerPorNombreYLocal(String nombre, Long idLocal, boolean toDTO) throws DaoException;
+	
+	public List buscarOfertasPorTematicas(List<Tematica> tematicas, Usuario u,  boolean toDTO) throws DaoException;
 	
 	public List obtenerListadoPorEmpresa(Long idEmpresa, boolean toDTO) throws DaoException;
 }

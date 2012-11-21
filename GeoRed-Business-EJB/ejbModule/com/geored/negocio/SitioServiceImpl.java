@@ -1,5 +1,6 @@
 package com.geored.negocio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -41,6 +42,8 @@ public class SitioServiceImpl implements SitioService
 		}
 		
 		Sitio sitioEntity = sitioDAO.toEntity(sitioDTO);
+		
+		sitioEntity.setListaTematicas(new ArrayList<Tematica>());
 		
 		asociarTematicas(sitioDTO, sitioEntity);
 		

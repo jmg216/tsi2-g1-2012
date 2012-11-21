@@ -126,18 +126,32 @@ public class GestionEmpresaBean extends BaseBean implements Serializable
 		{
 			if(UtilesWeb.isNullOrEmpty(getEmpresaDTO().getNombre()))
 			{
-				addBeanError("El campo 'Nombre' es obligatorio");
+				addBeanError("gestionEmpresaForm:nombreEmpresa", "Obligatorio");
 				isValid = false;
 			}
 			if(UtilesWeb.isNullOrZero(getEmpresaDTO().getIdAdministrador()))
 			{
-				addBeanError("El campo 'Administrador' es obligatorio");
+				addBeanError("gestionEmpresaForm:administradorEmpresa", "Obligatorio");
 				isValid = false;
 			}
 		}
 		else if(opValidar == VALIDAR_MODIFICAR)
 		{
-			
+			if(UtilesWeb.isNullOrEmpty(getEmpresaDTO().getNombre()))
+			{
+				addBeanError("gestionEmpresaForm:nombreEmpresa", "Obligatorio");
+				isValid = false;
+			}
+			if(UtilesWeb.isNullOrEmpty(getEmpresaDTO().getDescripcion()))
+			{
+				addBeanError("gestionEmpresaForm:descripcionEmpresa", "Obligatorio");
+				isValid = false;
+			}
+			if(UtilesWeb.isNullOrEmpty(getEmpresaDTO().getUrlImagen()))
+			{
+				addBeanError("gestionEmpresaForm:imagenEmpresa", "Obligatorio");
+				isValid = false;
+			}
 		}
 		
 		return isValid;
