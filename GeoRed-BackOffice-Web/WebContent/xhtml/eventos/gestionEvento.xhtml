@@ -34,8 +34,8 @@
 									<tr>
 										<td><h:outputText value="Descripcion:" /></td>
 										<td>
-											<p:inputText id="descripcionSitio" value="#{gestionSitioBean.sitioDTO.descripcion}"/>
-											<p:message for="descripcionSitio"/>
+											<p:inputText id="descripcionEvento" value="#{gestionEventoBean.eventoDTO.descripcion}"/>
+											<p:message for="descripcionEvento"/>
 										</td>
 									</tr>	
 									<tr>
@@ -76,7 +76,7 @@
 									<c:if test="#{!utilesWeb.isNullOrEmpty(gestionEventoBean.eventoDTO.ubicacionGeografica)}">	
 										<script type="text/javascript">
 											$(function(){
-												refreshMapaSitio();	
+												refreshMapaEvento();	
 											})											
 										</script>
 									</c:if>
@@ -103,7 +103,39 @@
 							</li>
 						</ul>									
 					</div>					
-				</h:form>				
+				</h:form>	
+				
+				<script type="text/javascript">
+					function refreshMapaEvento()
+					{
+						var containerMapa = $("#containerMapaEvento");
+
+						if(containerMapa.css("display") == "none")
+						{
+							containerMapa.css("display", "block");		
+						}
+						
+						var splitUbicacionEvento = widgetUbicacionEvento.jq.val().split(",");
+						
+						var latitud = splitUbicacionEvento[0];
+						var longitud = splitUbicacionEvento[1];
+
+						var latLngEvento = new google.maps.LatLng(latitud, longitud);
+						var myOptions = {
+					      zoom: 10,
+					      center: latLngEvento,
+					      mapTypeId: google.maps.MapTypeId.ROADMAP
+					    };
+					    
+					    var mapEvento = new google.maps.Map(containerMapa[0], myOptions);
+
+						// Agrego un marcador en el mapa
+					    new google.maps.Marker({
+					        position: latLngEvento,
+					        map: mapEvento
+					    });					    
+					}
+				</script>			
 			</ui:define>
 		</ui:composition>
 	</h:body>

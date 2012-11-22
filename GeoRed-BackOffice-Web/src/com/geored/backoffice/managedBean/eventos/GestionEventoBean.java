@@ -159,12 +159,12 @@ public class GestionEventoBean extends BaseBean implements Serializable
 		{
 			if(UtilesWeb.isNullOrEmpty(getEventoDTO().getNombre()))
 			{
-				addBeanError("gestionEventForm:nombreOferta", "Obligatorio");
+				addBeanError("gestionEventoForm:nombreEvento", "Obligatorio");
 				isValid = false;
 			}
 			if(UtilesWeb.isNullOrEmpty(getEventoDTO().getDescripcion()))
 			{
-				addBeanError("gestionEventoForm:descripcionOferta", "Obligatorio");
+				addBeanError("gestionEventoForm:descripcionEvento", "Obligatorio");
 				isValid = false;
 			}
 			if(getEventoDTO().getFechaInicio() == null)

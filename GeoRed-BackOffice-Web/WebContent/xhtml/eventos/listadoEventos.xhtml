@@ -47,6 +47,24 @@
 				            </f:facet>  
 				            <h:outputText value="#{evento.descripcion}" />  
 				        </p:column>
+				        
+     				    <p:column>  
+				            <f:facet name="header">  
+				                <h:outputText value="Fecha inicial" />  
+				            </f:facet>  
+				            <h:outputText value="#{evento.fechaInicio}">
+				            	<f:converter converterId="com.geored.backoffice.converter.CalendarConverter"/>
+				            </h:outputText> 
+				        </p:column>
+				        
+				        <p:column>  
+				            <f:facet name="header">  
+				                <h:outputText value="Fecha final" />  
+				            </f:facet>  
+				            <h:outputText value="#{evento.fechaFin}">
+				            	<f:converter converterId="com.geored.backoffice.converter.CalendarConverter"/>
+				            </h:outputText> 
+				        </p:column>
 				        		
 				        <p:column style="width: 30px;">				        	
 				   			<h:commandLink action="#{listadoEventosBean.eliminarEvento()}">
