@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="GEORED_UNIT" transaction-type="JTA">
+	    <jta-data-source>java:jboss/datasources/GeoRedDS</jta-data-source>
+		<class>com.geored.dominio.Amistad</class>
+		<class>com.geored.dominio.CheckIn</class>
+		<class>com.geored.dominio.Usuario</class>
+		<class>com.geored.dominio.Administrador</class>
+		<class>com.geored.dominio.Oferta</class>
+		<class>com.geored.dominio.Sitio</class>
+		<class>com.geored.dominio.Evento</class>
+		<class>com.geored.dominio.TipoAdministrador</class>
+		<class>com.geored.dominio.EvaluacionOferta</class>
+		<class>com.geored.dominio.Notificacion</class>
+		<class>com.geored.dominio.Tematica</class>
+		<class>com.geored.dominio.ContenidoSitio</class>
+		<class>com.geored.dominio.Local</class>
+		<class>com.geored.dominio.TipoNotificacion</class>
+		<class>com.geored.dominio.Empresa</class>
+		<class>com.geored.dominio.Compra</class>
+	</persistence-unit>
+</persistence>
