@@ -1,5 +1,6 @@
 package com.geored.frontoffice.activities.mapa;
 
+import java.nio.channels.Pipe;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -8,6 +9,7 @@ import com.geored.frontoffice.activities.sitio.SitioActivity;
 import com.geored.frontoffice.activities.sitio.SitioDetalleActivity;
 import com.geored.frontoffice.activities.sitio.SitioGroupActivity;
 import com.geored.frontoffice.dto.SitioADTO;
+import com.geored.frontoffice.utiles.UtilesAndorid;
 import com.geored.frontoffice.wsclient.FactoryWS;
 import com.geored.frontoffice.wsclient.SitioWS;
 import com.google.android.maps.GeoPoint;
@@ -18,6 +20,8 @@ import com.google.android.maps.MapView;
 import com.google.android.maps.MyLocationOverlay;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
+
+import android.R.string;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -31,17 +35,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
 
 public class MapGeoRedActivity extends MapActivity {
 
 	private SitioWS sitioWS = FactoryWS.getInstancia().getSitioWS();
-	private List<SitioADTO> listaSitios;
+	private List<SitioADTO> listaSitios = null;
 	private Button btnActualizar;
 	private LocationManager locManager;
 	private MapView mapView;
 	private MapController myMapController;
 	Location loc;	
 	private List<Overlay> mOverlays; //para agregar los overlays
+	private Integer km = 0;
+	private SeekBar seekBar;
+	private TextView valueSeekBar;
+	private Double miLatitud, miLongitud;
 	//mi ubicacion
 	//private MyLocationOverlay mOverlayLocation;//Funciona perfectamente en un dispositivo real
 	
@@ -54,7 +65,30 @@ public class MapGeoRedActivity extends MapActivity {
         myMapController = mapView.getController();
         mOverlays = mapView.getOverlays();
         //mOverlayLocation = new MyLocationOverlay(this, mapView);//Funciona perfectamente en un dispositivo real
-               
+        
+        
+        seekBar = (SeekBar) findViewById(R.id.seekBar1);
+        valueSeekBar = (TextView) findViewById(R.id.textSeekBar);
+        
+        seekBar.setOnSeekBarChangeListener( new OnSeekBarChangeListener()
+        {
+	        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
+	        {
+		        valueSeekBar.setText("Filtro del Radio de visualizacion " + progress + " Km");
+		        km = progress;
+	        }
+	
+	        public void onStartTrackingTouch(SeekBar seekBar)
+	        {
+	            // TODO Auto-generated method stub
+	        }
+	
+	        public void onStopTrackingTouch(SeekBar seekBar)
+	        {
+	            // TODO Auto-generated method stub
+	        }
+        });
+        
        btnActualizar = (Button)findViewById(R.id.BtnActualizar);      
        btnActualizar.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
@@ -142,6 +176,8 @@ public class MapGeoRedActivity extends MapActivity {
 			myMapController.setCenter(centro);
 			myMapController.setZoom(14); 
 			  
+			miLatitud = loc.getLatitude();
+			miLongitud = loc.getLongitude();
 			  //esto funca en un dispositivo real
 			//mOverlayLocation.enableMyLocation();
 		    //mOverlayLocation.enableCompass();
@@ -153,22 +189,25 @@ public class MapGeoRedActivity extends MapActivity {
 			mOverlays.clear();
 			mOverlays.add(markerMiUbicacion);
 			
-			Double d1 = loc.getLatitude();
-			Double d2 = loc.getLongitude();    
-		  	String lat =  Location.convert(d1,Location.FORMAT_DEGREES);
-		  	String lon = Location.convert(d2,Location.FORMAT_DEGREES);
-		  	MensajeBox("Aqui esta usted:   latitud: "+lat+"longitud: "+lon );
+			//testeo de coordenadas en la localizacion del usuario
+//			Double d1 = loc.getLatitude();
+//			Double d2 = loc.getLongitude();    
+//		  	String lat =  Location.convert(d1,Location.FORMAT_DEGREES);
+//		  	String lon = Location.convert(d2,Location.FORMAT_DEGREES);
+//		  	MensajeBox("Aqui esta usted:   latitud: "+lat+"longitud: "+lon );
 		  	
 		
 		  	MyItemizedOverlay markersSitio = new MyItemizedOverlay(getResources().getDrawable(R.drawable.marker3), this);
-			  listaSitios = sitioWS.obtenerListado();
-			  	Iterator<SitioADTO> it = listaSitios.iterator();
-			  	while (it.hasNext()) {
-			  		SitioADTO sitio = (SitioADTO) it.next();
-			  		markersSitio.addSitio(sitio);
-				}
-			  	mOverlays.add(markersSitio);
-			  	mapView.postInvalidate();
+			  
+		  	listaSitios = new ArrayList<SitioADTO>();
+		  	listaSitios = sitioWS.obtenerListado();
+			Iterator<SitioADTO> it = listaSitios.iterator();
+		  	while (it.hasNext()) {
+		  		SitioADTO sitio = (SitioADTO) it.next();
+		  		markersSitio.addSitio(sitio);
+			}
+		  	mOverlays.add(markersSitio);
+		  	//mapView.postInvalidate();
 		  	 	
 		  }
 		  else
@@ -197,18 +236,30 @@ public class MapGeoRedActivity extends MapActivity {
 	    	    addOverlay(overlayitem);
 	    	}
 	    
-	    public void addSitio(SitioADTO sitio) {
+	    public void addSitio(SitioADTO sitio) {	    	
 	    	try{
-	    		GeoPoint p = null;
-				Double longit , latit = null;
-				String aux= null;
-				aux = sitio.getUbicacionGeografica();
-				String[] coordes = aux.split(",");
-				latit = Double.parseDouble(coordes[0]);
-				longit = Double.parseDouble(coordes[1]);
-				p = new GeoPoint((int) (latit * 1E6), (int) (longit * 1E6));
-				OverlayItem overlayItem = new OverlayItem(p, "sitio: "+ sitio.getNombre(), "Descripcion: " +sitio.getDescripcion());
-				addOverlay(overlayItem);
+	    		Double dist;
+				String lati = String.valueOf(miLatitud);
+				String longi = String.valueOf(miLongitud);
+				
+				String Saux2 = sitio.getUbicacionGeografica();
+				String[] coordes2 = Saux2.split(",");
+				String lati2 = coordes2[0];
+				String longi2 = coordes2[1];
+		    	
+		    	dist = UtilesAndorid.CalcularDistanciaCoordenadas(lati, longi, lati2, longi2);
+		    	Double dKM = km.doubleValue();
+		    	if((dist <= dKM) || (km == 0)){
+	    			Double longit , latit = null;
+					String aux= null;
+					aux = sitio.getUbicacionGeografica();
+					String[] coordes = aux.split(",");
+					latit = Double.parseDouble(coordes[0]);
+					longit = Double.parseDouble(coordes[1]);
+					GeoPoint p = new GeoPoint((int) (latit * 1E6), (int) (longit * 1E6));
+					OverlayItem overlayItem = new OverlayItem(p, "sitio: "+ sitio.getNombre(), "Descripcion: " +sitio.getDescripcion());
+					addOverlay(overlayItem);
+		    	}
 	    	} catch (Exception e) {
 	    		MensajeBox("Error de Datos de Ubicacion para el sitio: " + sitio.getNombre());
 				}	    	    
@@ -225,12 +276,12 @@ public class MapGeoRedActivity extends MapActivity {
 	    }
 	    
 	    protected final boolean onTap(final int index) {
+
 	    	if(index==0){ //index de mi ubicacion
 	        MensajeBox(mOverlays.get(index).getTitle() + mOverlays.get(index).getSnippet());
 	    	}
-	        // Código específico de un ejemplo
-	        //mContext.startActivity(new IntentParada(mContext, mParadas.get(index).getId()));
-	        if(index!=0){	        
+
+	    	else{	        
 	        	AlertDialog.Builder builder = new AlertDialog.Builder(mContext);    
 	        	builder.setMessage( mOverlays.get(index).getTitle() + mOverlays.get(index).getSnippet())            
 	        		.setCancelable(false)            
