@@ -57,6 +57,15 @@
 				            </h:outputText> 
 				        </p:column>
 				        
+				        <p:column>  
+				            <f:facet name="header">  
+				                <h:outputText value="Fecha final" />  
+				            </f:facet>  
+				            <h:outputText value="#{oferta.fechaFin}">
+				            	<f:converter converterId="com.geored.backoffice.converter.CalendarConverter"/>
+				            </h:outputText> 
+				        </p:column>
+				        
 				        <p:column style="width: 30px;">				        	
 				   			<h:commandLink action="#{listadoOfertasBean.eliminarOferta()}">
 				   				<h:graphicImage value="/resources/images/ico-eliminar.png"/>

@@ -11,8 +11,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import com.geored.dominio.Evento;
-import com.geored.dominio.Oferta;
-import com.geored.dominio.Tematica;
 import com.geored.dto.EventoDTO;
 import com.geored.dto.TematicaDTO;
 import com.geored.exceptions.DaoException;
@@ -43,6 +41,7 @@ public class EventoDAOImpl extends GenericDAOBase<Evento, EventoDTO> implements 
 		target.setDescripcion(source.getDescripcion());
 		target.setFechaInicio(source.getFechaInicio());
 		target.setFechaFin(source.getFechaFin());
+		target.setUbicacionGeografica(source.getUbicacionGeografica());
 		
 		target.setListaTematicasDTO(new ArrayList<TematicaDTO>());
 		if(source.getListaTematicas() != null)
