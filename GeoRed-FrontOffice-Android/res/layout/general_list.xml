@@ -3,7 +3,13 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:orientation="vertical" >
- 
+
+    <Button
+        android:id="@+id/invitarAmigo"
+        android:layout_width="fill_parent"
+        android:layout_height="38dp"
+        android:text="Invita un amigo a utilizar la aplicacion" />
+    
 	<EditText
 		android:id="@+id/buscador_texto"
 		android:inputType="text"
