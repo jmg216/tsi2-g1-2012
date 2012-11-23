@@ -20,7 +20,9 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -100,6 +102,20 @@ public class ContactoActivity extends ListActivity {
 		    }
 		}
 	    c_adapter.notifyDataSetChanged();
+	    
+	    Button mail = (Button) findViewById(R.id.invitarAmigo);
+	    mail.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+				String[] recipients = new String[]{"Colocar mail de Amigo"};
+				emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, recipients);
+				emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "GeoRedUy");
+				emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Hey te invito a utilizar GeoRedUy. Enlace de la Aplicacion: https://play.google.com/store/apps/details?id=com.geored");
+				emailIntent.setType("message/rfc822");
+				startActivity(Intent.createChooser(emailIntent, "GeoRedUy"));
+			}
+		});                    
+    
 	 }
 	    
     @Override
