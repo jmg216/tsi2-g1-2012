@@ -14,6 +14,8 @@ public class UsuarioDTO
 	
 	private String urlImagen;
 	
+	private String gcmRegId;
+	
 	private List<TematicaDTO> listaTematicasDTO;
 	
 	public Long getId()
@@ -56,7 +58,6 @@ public class UsuarioDTO
 		this.pass = pass;
 	}
 
-
 	public String getUrlImagen()
 	{
 		return urlImagen;
@@ -65,6 +66,16 @@ public class UsuarioDTO
 	public void setUrlImagen(String urlImagen)
 	{
 		this.urlImagen = urlImagen;
+	}
+
+	public String getGcmRegId() 
+	{
+		return gcmRegId;
+	}
+
+	public void setGcmRegId(String gcmRegId) 
+	{
+		this.gcmRegId = gcmRegId;
 	}
 
 	public List<TematicaDTO> getListaTematicasDTO()

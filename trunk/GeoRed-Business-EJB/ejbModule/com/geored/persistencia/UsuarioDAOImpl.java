@@ -30,6 +30,7 @@ public class UsuarioDAOImpl extends GenericDAOBase<Usuario, UsuarioDTO> implemen
 		target.setEmail(source.getEmail());
 		target.setPass(source.getPass());
 		target.setNombre(source.getNombre());
+		target.setGcmRegId(source.getGcmRegId());
 		target.setUrlImagen(source.getUrlImagen());
 	}
 
@@ -40,6 +41,7 @@ public class UsuarioDAOImpl extends GenericDAOBase<Usuario, UsuarioDTO> implemen
 		target.setEmail(source.getEmail());
 		target.setPass(source.getPass());
 		target.setNombre(source.getNombre());
+		target.setGcmRegId(source.getGcmRegId());
 		target.setUrlImagen(source.getUrlImagen());
 		
 		target.setListaTematicasDTO(new ArrayList<TematicaDTO>());

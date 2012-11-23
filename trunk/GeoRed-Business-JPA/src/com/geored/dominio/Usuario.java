@@ -37,6 +37,9 @@ public class Usuario implements Serializable
 	@Column(name="NOMBRE", nullable=false)
 	private String nombre;
 	
+	@Column(name="GCMREGID")
+	private String gcmRegId;	
+	
 	@Column(name="URL_IMAGEN")
 	private String urlImagen;
 	
@@ -90,6 +93,16 @@ public class Usuario implements Serializable
 	public void setNombre(String nombre)
 	{
 		this.nombre = nombre;
+	}
+
+	public String getGcmRegId() 
+	{
+		return gcmRegId;
+	}
+
+	public void setGcmRegId(String gcmRegId) 
+	{
+		this.gcmRegId = gcmRegId;
 	}
 
 	public String getUrlImagen()
