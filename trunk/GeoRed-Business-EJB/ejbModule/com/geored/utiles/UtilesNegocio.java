@@ -1,5 +1,21 @@
 package com.geored.utiles;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+
+import com.geored.dominio.Administrador;
+
 public class UtilesNegocio
 {
 	public static final Long ID_ADMIN_PRINCIPAL = 1L;
@@ -31,5 +47,67 @@ public class UtilesNegocio
     {
 		return x * (Math.PI / 180);
     }
+	
+	//Metodo que envia el mail al usuario administrador de la empresa
+	public static void enviarMailAdministrador (Administrador administrador, String nombreEmpresa) {
+		
+		Properties propiedades = new Properties();
+		propiedades.setProperty("mail.smtp.host", "smtp.gmail.com");
+		propiedades.setProperty("mail.smtp.starttls.enable", "true");
+		propiedades.setProperty("mail.smtp.port", "587");
+		propiedades.setProperty("mail.smtp.auth","true");
+		propiedades.setProperty("mail.debug", "true");
+		
+		Session session = Session.getInstance(propiedades, new Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication () {
+				return new PasswordAuthentication("tsi2.g1@gmail.com", "admintsi2");
+			}
+		});
+		
+		MimeMessage mensaje = new MimeMessage(session);
+		
+		try {
+			
+			mensaje.setFrom(new InternetAddress("tsi2.g1@gmail.com", "GeoReduy - Grupo 01"));
+			mensaje.addRecipient(Message.RecipientType.TO, new InternetAddress(administrador.getEmail()));
+			mensaje.setSubject("Hola " + administrador.getNombre() + "! ");
+			
+			MimeMultipart mp = new MimeMultipart();
+			MimeBodyPart mpl = new MimeBodyPart();
+			
+			String html = 
+					"<html>"+
+		            "<head><title></title></head>"+
+		            "<body>"+
+		            "Se te ha asignado la empresa: " + "<b>" + nombreEmpresa + "</b>" + " para que la administres" +
+                    "<br><br>" + "Entra a esta direccion: <br>" +
+                    "<a href = http://localhost:8080/GeoRed-BackOffice-Web> GeoRedUy - Grupo 1 </a>" + "<br><br>" +
+                    "E inicia sesion con tu usuario y contraseña provistos en este email: " + "<br><br>" +
+                    
+                    "<b>Nombre de Usuario:</b> " + administrador.getEmail() + "<br>" +
+                    "<b>Password: </b>" + "admin" +  "<br><br>" +
+                    
+                    "Te recomendamos cambiar el password una vez hayas ingresado..." +  "<br><br>" +
+                    "Atentamente. <b>Grupo 01</b>" +
+                    "</body>" +
+                    "</html>";
+			
+			mpl.setContent(html, "text/html");
+			
+			mp.addBodyPart(mpl);
+			mensaje.setContent(mp);
+			
+			Transport.send(mensaje);
+	
+		} catch (UnsupportedEncodingException e) {
+			
+			e.printStackTrace();
+			
+		} catch (MessagingException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
 
 }
