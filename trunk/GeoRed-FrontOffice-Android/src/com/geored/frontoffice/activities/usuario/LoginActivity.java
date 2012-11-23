@@ -27,6 +27,7 @@ import com.geored.frontoffice.utiles.UtilesSeguridadAndroid;
 import com.geored.frontoffice.wsclient.FactoryWS;
 import com.geored.frontoffice.wsclient.GlobalWS;
 import com.geored.frontoffice.wsclient.UsuarioWS;
+import com.google.android.gcm.GCMRegistrar;
 
 public class LoginActivity extends Activity implements OnClickListener  {
 
@@ -61,14 +62,10 @@ public class LoginActivity extends Activity implements OnClickListener  {
     	String email = txtEmail.getText().toString();
     	String pass = txtPass.getText().toString();
     	
-    	email = "juan@gmail.com";
-    	pass = "juan";
-    	
+    	email = "juan2@hotmail.com";
+    	pass = "juanPass";
+
     	UsuarioADTO usuarioADTO = usuarioWS.obtenerPorEmailYPass(email, pass);
-    	
-    	//Asi instancio para obtener la lista de tematicas...
-    	List<TematicaADTO> tematicas = new ArrayList<TematicaADTO>();
-    	tematicas = globalWS.obtenerListadoTematicas();
     	
     	if (usuarioADTO != null)
     	{

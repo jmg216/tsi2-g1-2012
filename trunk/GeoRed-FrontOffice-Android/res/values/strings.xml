@@ -33,6 +33,8 @@
 	
 	<!-- Notificaciones -->
 	<string name="notificaciones">Notificaciones</string>
+	<string name="activar">Activar</string>
+	<string name="desactivar">Desactivar</string>
 	
 	<!-- Mapa -->
 	<string name="mapa">Mapa</string>

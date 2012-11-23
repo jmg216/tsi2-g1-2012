@@ -32,9 +32,7 @@ import com.google.android.gcm.GCMRegistrar;
 
 public class RegistroActivity extends Activity {
 	
-	private UsuarioWS usuarioWS = FactoryWS.getInstancia().getUsuarioWS();
-	private static final String TAG = "RegistroActivity";
-	
+	private UsuarioWS usuarioWS = FactoryWS.getInstancia().getUsuarioWS();	
 	private ImageView imageView;
     private Bitmap loadedImage;
 
@@ -59,8 +57,7 @@ public class RegistroActivity extends Activity {
     
     public void registroUsuario (View v) throws IOException, XmlPullParserException
     {
-    	final String regId;
-    	
+    	String regId = null;
     	
     	EditText usuario = (EditText) this.findViewById(R.id.txtNombreUsuario);
     	EditText email = (EditText) this.findViewById(R.id.txtEmail);
@@ -77,18 +74,11 @@ public class RegistroActivity extends Activity {
     	{	
     		usuarioADTO.setUrlImagen(urlImagen.getText().toString());
     	}
-    	
-//    	GCMIntentService.registerInGCMService(this);
-//    	
-//    	if (GCMRegistrar.isRegistered(this))
-//    	{
-//    		Log.d(TAG, "registered on server");
-//    	}
-//        regId = GCMRegistrar.getRegistrationId(this); 	
+        
     	usuarioADTO.setNombre("Juan");
     	usuarioADTO.setEmail("juan@hotmail.com");
     	usuarioADTO.setPass("juanPass");
-    	//usuarioADTO.setGcmRegId(regId);
+    	usuarioADTO.setGcmRegId(regId);
 
     	Long idUsuario = usuarioWS.insertar(usuarioADTO); 
         
