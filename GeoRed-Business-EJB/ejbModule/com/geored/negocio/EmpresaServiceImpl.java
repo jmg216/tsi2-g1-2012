@@ -22,6 +22,7 @@ import com.geored.exceptions.NegocioException;
 import com.geored.persistencia.AdministradorDAO;
 import com.geored.persistencia.EmpresaDAO;
 import com.geored.persistencia.LocalDAO;
+import com.geored.utiles.UtilesNegocio;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -60,6 +61,8 @@ public class EmpresaServiceImpl implements EmpresaService
 		empresaEntity.setAdministrador(adminEntity);
 
 		empresaDAO.insertar(empresaEntity);
+		
+		UtilesNegocio.enviarMailAdministrador(adminEntity, empresaEntity.getNombre());
 		
 		return empresaEntity.getId();
 	}
