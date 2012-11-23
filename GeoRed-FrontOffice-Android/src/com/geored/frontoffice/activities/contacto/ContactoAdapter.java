@@ -44,9 +44,18 @@ public class ContactoAdapter extends ArrayAdapter<UsuarioADTO> {
                     
                     tt.setText(usuario.getNombre());                            
                     bt.setText(usuario.getEmail());
-                    //iv.setImageResource(R.drawable.contact);
-                    Bitmap bm = BitMapImageConverter.getImageBitmap(usuario.getUrlImagen());
-                    iv.setImageBitmap(bm);
+
+                    //Si el usuario no tiene imagen para su perfil se le asigna una por defecto.
+                    //Las imagenes tiene que ser URLs
+                    if (!usuario.getUrlImagen().contains("http"))
+                    {
+                    	iv.setImageResource(R.drawable.contact);
+                    }
+                    else
+                    {
+                    	Bitmap bm = BitMapImageConverter.getImageBitmap(usuario.getUrlImagen());	
+                    	iv.setImageBitmap(bm);
+                    }                                        
             }
             
             return v;

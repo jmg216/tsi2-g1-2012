@@ -85,41 +85,48 @@ public class TematicaADTO extends com.geored.dto.TematicaDTO implements KvmSeria
 							}
 						}												
 						else if (fieldsADTO[indiceFields].getType().equals(String.class))
-						{
-							if (response.getProperty(fieldsADTO[indiceFields].getName()) != null)
-							{							
-								method = this.getClass().getSuperclass().getDeclaredMethod(set + capitalizedFieldName, fieldsADTO[indiceFields].getType());
-							
-								method.invoke(this, response.getProperty(fieldsADTO[indiceFields].getName()).toString());
+						{	
+							if (response.hasProperty(fieldsADTO[indiceFields].getName()))
+							{
+								if (response.getProperty(fieldsADTO[indiceFields].getName()) != null)
+								{							
+									method = this.getClass().getSuperclass().getDeclaredMethod(set + capitalizedFieldName, fieldsADTO[indiceFields].getType());
+								
+									method.invoke(this, response.getProperty(fieldsADTO[indiceFields].getName()).toString());
+								}
 							}
-							
 							indiceFields ++;
 						}
 						
 						else if (fieldsADTO[indiceFields].getType().equals(Long.class))
 						{	
-							if (response.getProperty(fieldsADTO[indiceFields].getName()) != null)
-							{							
-								method = this.getClass().getSuperclass().getDeclaredMethod(set + capitalizedFieldName, fieldsADTO[indiceFields].getType());
-
-								method.invoke(this, Long.valueOf(response.getProperty(fieldsADTO[indiceFields].getName()).toString()));
-							}
+							if (response.hasProperty(fieldsADTO[indiceFields].getName()))
+							{		
+								if (response.getProperty(fieldsADTO[indiceFields].getName()) != null)
+								{							
+									method = this.getClass().getSuperclass().getDeclaredMethod(set + capitalizedFieldName, fieldsADTO[indiceFields].getType());
+	
+									method.invoke(this, Long.valueOf(response.getProperty(fieldsADTO[indiceFields].getName()).toString()));
+								}
+							}	
 							
 							indiceFields ++;
 						}
 						
 						else if (fieldsADTO[indiceFields].getType().equals(int.class))
 						{
-							if (response.getProperty(fieldsADTO[indiceFields].getName()) != null)
-							{							
-								method = this.getClass().getSuperclass().getDeclaredMethod(set + capitalizedFieldName, fieldsADTO[indiceFields].getType());							
-
-								method.invoke(this, Integer.valueOf(response.getProperty(fieldsADTO[indiceFields].getName()).toString()));
-							}
+							if (response.hasProperty(fieldsADTO[indiceFields].getName()))
+							{
+								if (response.getProperty(fieldsADTO[indiceFields].getName()) != null)
+								{							
+									method = this.getClass().getSuperclass().getDeclaredMethod(set + capitalizedFieldName, fieldsADTO[indiceFields].getType());							
+	
+									method.invoke(this, Integer.valueOf(response.getProperty(fieldsADTO[indiceFields].getName()).toString()));
+								}
+							}	
 							
 							indiceFields ++;
-						}
-						
+						}						
 					} 
 			        catch (IllegalArgumentException e)
 					{
