@@ -5,7 +5,7 @@ insert into geored.tipo_administrador (ID, NOMBRE) values (1, 'Aplicación');
 insert into geored.tipo_administrador (ID, NOMBRE) values (2, 'Empresa');
 
 /* Administrador aplicacion */
-insert into geored.administrador (ID, EMAIL, NOMBRE, PASS, TIPO_ADMINISTRADOR_FK) values (1, 'admin@geored.com', 'admin', '21232f297a57a5a743894a0e4a801fc3', 1);
+insert into geored.administrador (ID, EMAIL, NOMBRE, PASS, TIPO_ADMINISTRADOR_FK) values (1, 'tsi2.g1@gmail.com', 'admin', '21232f297a57a5a743894a0e4a801fc3', 1);
 
 /* Administrador de Empresa Beauty */
 insert into geored.administrador (ID, EMAIL, NOMBRE, PASS, TIPO_ADMINISTRADOR_FK) values (2, 'maxi.silveraf@gmail.com', 'Maximiliano Silvera', '21232f297a57a5a743894a0e4a801fc3', 2);

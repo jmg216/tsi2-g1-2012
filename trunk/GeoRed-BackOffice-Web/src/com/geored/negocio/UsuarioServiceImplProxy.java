@@ -50,10 +50,10 @@ public class UsuarioServiceImplProxy implements com.geored.negocio.UsuarioServic
     return usuarioServiceImpl.obtenerListadoCheckIns();
   }
   
-  public void actualizar(com.geored.negocio.UsuarioDTO arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+  public void actualizar(com.geored.negocio.UsuarioDTO usuarioDTO) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
     if (usuarioServiceImpl == null)
       _initUsuarioServiceImplProxy();
-    usuarioServiceImpl.actualizar(arg0);
+    usuarioServiceImpl.actualizar(usuarioDTO);
   }
   
   public com.geored.negocio.UsuarioDTO[] obtenerListado() throws java.rmi.RemoteException, com.geored.negocio.DaoException{
@@ -62,28 +62,28 @@ public class UsuarioServiceImplProxy implements com.geored.negocio.UsuarioServic
     return usuarioServiceImpl.obtenerListado();
   }
   
-  public com.geored.negocio.UsuarioDTO obtenerPorEmailYPass(java.lang.String arg0, java.lang.String arg1) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+  public com.geored.negocio.UsuarioDTO obtenerPorEmailYPass(java.lang.String email, java.lang.String pass) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
     if (usuarioServiceImpl == null)
       _initUsuarioServiceImplProxy();
-    return usuarioServiceImpl.obtenerPorEmailYPass(arg0, arg1);
+    return usuarioServiceImpl.obtenerPorEmailYPass(email, pass);
   }
   
-  public void eliminar(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+  public void eliminar(java.lang.Long idUsuario) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
     if (usuarioServiceImpl == null)
       _initUsuarioServiceImplProxy();
-    usuarioServiceImpl.eliminar(arg0);
+    usuarioServiceImpl.eliminar(idUsuario);
   }
   
-  public java.lang.Long insertar(com.geored.negocio.UsuarioDTO arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+  public java.lang.Long insertar(com.geored.negocio.UsuarioDTO usuarioDTO) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
     if (usuarioServiceImpl == null)
       _initUsuarioServiceImplProxy();
-    return usuarioServiceImpl.insertar(arg0);
+    return usuarioServiceImpl.insertar(usuarioDTO);
   }
   
-  public com.geored.negocio.UsuarioDTO obtener(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+  public com.geored.negocio.UsuarioDTO obtener(java.lang.Long idUsuario) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
     if (usuarioServiceImpl == null)
       _initUsuarioServiceImplProxy();
-    return usuarioServiceImpl.obtener(arg0);
+    return usuarioServiceImpl.obtener(idUsuario);
   }
   
   

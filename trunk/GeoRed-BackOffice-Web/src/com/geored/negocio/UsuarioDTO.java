@@ -10,6 +10,8 @@ package com.geored.negocio;
 public class UsuarioDTO  implements java.io.Serializable {
     private java.lang.String email;
 
+    private java.lang.String gcmRegId;
+
     private java.lang.Long id;
 
     private com.geored.negocio.TematicaDTO[] listaTematicasDTO;
@@ -25,12 +27,14 @@ public class UsuarioDTO  implements java.io.Serializable {
 
     public UsuarioDTO(
            java.lang.String email,
+           java.lang.String gcmRegId,
            java.lang.Long id,
            com.geored.negocio.TematicaDTO[] listaTematicasDTO,
            java.lang.String nombre,
            java.lang.String pass,
            java.lang.String urlImagen) {
            this.email = email;
+           this.gcmRegId = gcmRegId;
            this.id = id;
            this.listaTematicasDTO = listaTematicasDTO;
            this.nombre = nombre;
@@ -56,6 +60,26 @@ public class UsuarioDTO  implements java.io.Serializable {
      */
     public void setEmail(java.lang.String email) {
         this.email = email;
+    }
+
+
+    /**
+     * Gets the gcmRegId value for this UsuarioDTO.
+     * 
+     * @return gcmRegId
+     */
+    public java.lang.String getGcmRegId() {
+        return gcmRegId;
+    }
+
+
+    /**
+     * Sets the gcmRegId value for this UsuarioDTO.
+     * 
+     * @param gcmRegId
+     */
+    public void setGcmRegId(java.lang.String gcmRegId) {
+        this.gcmRegId = gcmRegId;
     }
 
 
@@ -181,6 +205,9 @@ public class UsuarioDTO  implements java.io.Serializable {
             ((this.email==null && other.getEmail()==null) || 
              (this.email!=null &&
               this.email.equals(other.getEmail()))) &&
+            ((this.gcmRegId==null && other.getGcmRegId()==null) || 
+             (this.gcmRegId!=null &&
+              this.gcmRegId.equals(other.getGcmRegId()))) &&
             ((this.id==null && other.getId()==null) || 
              (this.id!=null &&
               this.id.equals(other.getId()))) &&
@@ -209,6 +236,9 @@ public class UsuarioDTO  implements java.io.Serializable {
         int _hashCode = 1;
         if (getEmail() != null) {
             _hashCode += getEmail().hashCode();
+        }
+        if (getGcmRegId() != null) {
+            _hashCode += getGcmRegId().hashCode();
         }
         if (getId() != null) {
             _hashCode += getId().hashCode();
@@ -246,6 +276,13 @@ public class UsuarioDTO  implements java.io.Serializable {
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("email");
         elemField.setXmlName(new javax.xml.namespace.QName("", "email"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("gcmRegId");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "gcmRegId"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
