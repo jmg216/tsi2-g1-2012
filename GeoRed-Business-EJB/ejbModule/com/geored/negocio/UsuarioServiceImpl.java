@@ -9,6 +9,7 @@ import javax.ejb.TransactionAttributeType;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebService;
 
 import com.geored.dominio.Usuario;
@@ -31,8 +32,8 @@ public class UsuarioServiceImpl implements UsuarioService
 	private CheckInDAO checkInDAO;
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	@WebMethod
-	public Long insertar(UsuarioDTO usuarioDTO) throws NegocioException, DaoException
+	@WebMethod(operationName="insertar")
+	public Long insertar(@WebParam(name="usuarioDTO") UsuarioDTO usuarioDTO) throws NegocioException, DaoException
 	{
 		Usuario usuarioEntity = usuarioDAO.toEntity(usuarioDTO);
 		
@@ -42,8 +43,8 @@ public class UsuarioServiceImpl implements UsuarioService
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	@WebMethod
-	public void actualizar(UsuarioDTO usuarioDTO) throws NegocioException, DaoException
+	@WebMethod(operationName="actualizar")
+	public void actualizar(@WebParam(name="usuarioDTO") UsuarioDTO usuarioDTO) throws NegocioException, DaoException
 	{
 		Usuario usuarioEntity = (Usuario) usuarioDAO.obtener(usuarioDTO.getId(), false);
 		
@@ -58,8 +59,8 @@ public class UsuarioServiceImpl implements UsuarioService
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	@WebMethod 
-	public void eliminar(Long idUsuario) throws NegocioException, DaoException
+	@WebMethod(operationName="eliminar") 
+	public void eliminar(@WebParam(name="idUsuario") Long idUsuario) throws NegocioException, DaoException
 	{
 		Usuario usuarioEntity = (Usuario) usuarioDAO.obtener(idUsuario, false);
 		
@@ -72,8 +73,8 @@ public class UsuarioServiceImpl implements UsuarioService
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
-	@WebMethod
-	public UsuarioDTO obtener(Long idUsuario) throws NegocioException, DaoException
+	@WebMethod(operationName="obtener")
+	public UsuarioDTO obtener(@WebParam(name="idUsuario") Long idUsuario) throws NegocioException, DaoException
 	{
 		UsuarioDTO usuarioDTO = (UsuarioDTO) usuarioDAO.obtener(idUsuario, true);
 		
@@ -86,15 +87,15 @@ public class UsuarioServiceImpl implements UsuarioService
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
-	@WebMethod
+	@WebMethod(operationName="obtenerListado")
 	public List<UsuarioDTO> obtenerListado() throws DaoException
 	{
 		return usuarioDAO.obtenerListado(true);
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
-	@WebMethod
-	public UsuarioDTO obtenerPorEmailYPass(String email, String pass) throws NegocioException, DaoException
+	@WebMethod(operationName="obtenerPorEmailYPass")
+	public UsuarioDTO obtenerPorEmailYPass(@WebParam(name="email") String email, @WebParam(name="pass") String pass) throws NegocioException, DaoException
 	{
 		UsuarioDTO usuarioDTO = (UsuarioDTO) usuarioDAO.obtenerUsuarioPorEmailYPass(email, pass, true);
 		
@@ -107,7 +108,7 @@ public class UsuarioServiceImpl implements UsuarioService
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
-	@WebMethod
+	@WebMethod(operationName="obtenerListadoCheckIns")
 	public List<CheckInDTO> obtenerListadoCheckIns() throws DaoException
 	{
 		return checkInDAO.obtenerListado(true);
