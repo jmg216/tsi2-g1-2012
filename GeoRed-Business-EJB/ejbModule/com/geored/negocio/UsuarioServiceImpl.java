@@ -19,6 +19,7 @@ import com.geored.exceptions.DaoException;
 import com.geored.exceptions.NegocioException;
 import com.geored.persistencia.CheckInDAO;
 import com.geored.persistencia.UsuarioDAO;
+import com.google.gson.Gson;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -30,6 +31,60 @@ public class UsuarioServiceImpl implements UsuarioService
 	
 	@EJB
 	private CheckInDAO checkInDAO;
+	
+	@WebMethod(operationName="androidInvocation")
+	public String androidInvocation(@WebParam(name="jsonBody") String jsonBody, @WebParam(name="methodName") String methodName) throws NegocioException, DaoException
+	{
+		Gson gson = new Gson();
+		
+		if(methodName.equals("insertar"))
+		{
+			UsuarioDTO usuarioDTO = gson.fromJson(jsonBody, UsuarioDTO.class);
+			
+			Long idUsuario = insertar(usuarioDTO);
+			
+			return gson.toJson(idUsuario);
+		}
+		else if(methodName.equals("actualizar"))
+		{
+			UsuarioDTO usuarioDTO = gson.fromJson(jsonBody, UsuarioDTO.class);
+			
+			actualizar(usuarioDTO);
+		}
+		else if(methodName.equals("eliminar"))
+		{
+			Long idUsuario = gson.fromJson(jsonBody, Long.class);
+			
+			eliminar(idUsuario);
+		}
+		else if(methodName.equals("obtener"))
+		{
+			Long idUsuario = gson.fromJson(jsonBody, Long.class);
+			
+			UsuarioDTO usuarioDTO = obtener(idUsuario);
+			
+			return gson.toJson(usuarioDTO);
+		}
+		else if(methodName.equals("obtenerListado"))
+		{
+			return gson.toJson(obtenerListado());
+		}
+		else if(methodName.equals("obtenerPorEmailYPass"))
+		{
+			String email = gson.fromJson(jsonBody, String.class);
+			String pass = gson.fromJson(jsonBody, String.class);
+			
+			UsuarioDTO usuarioDTO = obtenerPorEmailYPass(email, pass);
+			
+			return gson.toJson(usuarioDTO);
+		}
+		else if(methodName.equals("obtenerListadoCheckIns"))
+		{
+			return gson.toJson(obtenerListadoCheckIns());
+		}
+	
+		return "";
+	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod(operationName="insertar")
