@@ -57,7 +57,7 @@ public class RegistroActivity extends Activity {
     
     public void registroUsuario (View v) throws IOException, XmlPullParserException
     {
-    	String regId = null;
+    	//String regId = null;
     	
     	EditText usuario = (EditText) this.findViewById(R.id.txtNombreUsuario);
     	EditText email = (EditText) this.findViewById(R.id.txtEmail);
@@ -74,11 +74,11 @@ public class RegistroActivity extends Activity {
     	{	
     		usuarioADTO.setUrlImagen(urlImagen.getText().toString());
     	}
-        
-    	usuarioADTO.setNombre("Juan");
-    	usuarioADTO.setEmail("juan@hotmail.com");
-    	usuarioADTO.setPass("juanPass");
-    	usuarioADTO.setGcmRegId(regId);
+    	
+//    	usuarioADTO.setNombre("Juan");
+//    	usuarioADTO.setEmail("juan@hotmail.com");
+//    	usuarioADTO.setPass("juanPass");
+//    	usuarioADTO.setGcmRegId(regId);
 
     	Long idUsuario = usuarioWS.insertar(usuarioADTO); 
         

@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.PowerManager;
 import android.util.Log;
 
@@ -19,9 +20,8 @@ public class GCMIntentService extends GCMBaseIntentService
 {
 	private UsuarioWS usuarioWS = FactoryWS.getInstancia().getUsuarioWS();	
 	private static final String TAG = "GCMIntentServiceGeored";
-    private static final Object LOCK = GCMIntentService.class;	
-	private static PowerManager.WakeLock sWakeLock;
-	
+    //private static final Object LOCK = GCMIntentService.class;	
+	//private static PowerManager.WakeLock sWakeLock;
 	
 	public GCMIntentService() 
 	{		
@@ -124,12 +124,21 @@ public class GCMIntentService extends GCMBaseIntentService
 	@Override
 	protected void onMessage(Context context, Intent intent) 
 	{
-		String msg = intent.getExtras().getString("msg");
+		String msg = intent.getExtras().getString("message");
 		Log.d(TAG, "Mensaje: " + msg);
-		mostrarNotificacion(context, msg);
+		sendGCMIntent(context, msg);
+		
 	}
 	
-	
+    private void sendGCMIntent(Context ctx, String message) {
+        
+        Intent broadcastIntent = new Intent();
+        broadcastIntent.setAction("GCM_RECEIVED_ACTION");         
+        broadcastIntent.putExtra("gcm", message);       
+        ctx.sendBroadcast(broadcastIntent);
+        mostrarNotificacion(ctx, message);
+         
+    }	
 
 	/**
 	 * Se llamará al recibirse una respuesta correcta a la petición de registro e 
@@ -155,31 +164,14 @@ public class GCMIntentService extends GCMBaseIntentService
 	{
 		Log.d(TAG, "REGISTRATION: Unregistered.");
 		//desregistrar en el servidor
-	}	
-	
-	
-	
-	
-    /*Handling Intents sent by GCM*/
-    static void runIntentInService(Context context, Intent intent) {
-        synchronized (LOCK) {
-            if (sWakeLock == null) {
-                PowerManager pm = (PowerManager) context
-                        .getSystemService(Context.POWER_SERVICE);
-                sWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
-                        "my_wakelock");
-            }
-        }
-        sWakeLock.acquire();
-        intent.setClassName(context, GCMIntentService.class.getName());
-        context.startService(intent);
-    }	
+	}		
     
     /**
      * Metodo para mostrar notificaciones. Modificarlo.
      * */
 	private static void mostrarNotificacion(Context context, String msg)
 	{
+		
 	    //Obtenemos una referencia al servicio de notificaciones
 	    String ns = Context.NOTIFICATION_SERVICE;
 	    NotificationManager notManager = (NotificationManager) context.getSystemService(ns);

@@ -59,6 +59,8 @@
 	              android:theme="@style/CustomTheme">
 	    </activity>	 	    
 	    
+	    <activity android:name=".contacto.ContactoChatActivity"></activity>
+	    
 	    <activity android:name=".contacto.ContactoGroupActivity"></activity>	    
 	    	    	    	
 	    <activity android:name=".sitio.SitioActivity"
