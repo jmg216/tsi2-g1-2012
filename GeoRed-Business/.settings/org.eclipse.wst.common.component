@@ -15,5 +15,11 @@
         <dependent-module archiveName="gson-2.2.2.jar" deploy-path="lib" handle="module:/classpath/lib/EarContent/lib/gson-2.2.2.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="gcm-server.jar" deploy-path="lib" handle="module:/classpath/lib/EarContent/lib/gcm-server.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="json-simple-1.1.1.jar" deploy-path="lib" handle="module:/classpath/lib/EarContent/lib/json-simple-1.1.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>
