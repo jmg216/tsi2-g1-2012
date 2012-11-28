@@ -20,7 +20,12 @@
 		
 	<!-- Contactos -->
 	<string name="contactos">Contactos</string>
+	<string name="chat">Chat</string>
+	<string name="enviar">Enviar</string>
 	
+	
+	<!-- Chat -->
+	<string name="mensajes">Mensajes</string>
 	
 	<!-- Sitios -->
 	<string name="sitios">Sitios</string>

@@ -127,7 +127,7 @@ public class ContactoActivity extends ListActivity {
 	        
 	    UsuarioADTO contactoSeleccionado = (UsuarioADTO) getListAdapter().getItem(position);
 	        
-	    i.putExtra("nombreContacto", contactoSeleccionado.getNombre());  
+	    i.putExtra("idContactoSeleccionado", contactoSeleccionado.getId());
 	        
 	    // Creo la vista usando LocalActivityManager del SitioGroupActivity
 	    View view = ContactoGroupActivity.group.getLocalActivityManager()

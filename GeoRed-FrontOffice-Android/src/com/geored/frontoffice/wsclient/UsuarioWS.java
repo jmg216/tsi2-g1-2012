@@ -90,10 +90,18 @@ public class UsuarioWS
 		
 		SoapObject response = (SoapObject) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, wsdlMethodName, email, pass);
 
-    	UsuarioADTO usuarioADTO = new UsuarioADTO();
-    	
-    	usuarioADTO.parseUsuarioADTO(response);
-    			
-		return usuarioADTO;
+		if (response == null)
+		{
+			return null;
+		}
+		else
+		{
+	    	UsuarioADTO usuarioADTO = new UsuarioADTO();
+	    	
+	    	usuarioADTO.parseUsuarioADTO(response);
+	    			
+			return usuarioADTO;			
+		}
+
 	}
 }
