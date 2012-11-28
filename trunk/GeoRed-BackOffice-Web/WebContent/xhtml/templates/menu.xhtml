@@ -20,7 +20,7 @@
 	            <p:menuitem value="Ofertas" url="/xhtml/ofertas/listadoOfertas.xhtml" rendered="#{esAdminEmpresa}" /> 
 			</p:submenu>
 			
-			<p:submenu label="Reportes">
+			<p:submenu label="Reportes"  rendered="#{!esAdminEmpresa}" >
 				<p:menuitem value="Check-In" url="/xhtml/reportes/reporteCheckIn.xhtml" />  	         
     	        <p:menuitem value="Compras" url="/xhtml/reportes/reporteCompras.xhtml" />  
 			</p:submenu>
