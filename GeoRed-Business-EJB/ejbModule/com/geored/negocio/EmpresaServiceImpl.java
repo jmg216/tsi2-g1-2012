@@ -10,6 +10,7 @@ import javax.ejb.TransactionAttributeType;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebService;
 
 import com.geored.dominio.Administrador;
@@ -22,7 +23,9 @@ import com.geored.exceptions.NegocioException;
 import com.geored.persistencia.AdministradorDAO;
 import com.geored.persistencia.EmpresaDAO;
 import com.geored.persistencia.LocalDAO;
+import com.geored.utiles.JsonParamsMap;
 import com.geored.utiles.UtilesNegocio;
+import com.google.gson.Gson;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -37,6 +40,84 @@ public class EmpresaServiceImpl implements EmpresaService
 	
 	@EJB 
 	private AdministradorDAO administradorDAO;
+	
+	@WebMethod(operationName="androidInvocation")
+	public String androidInvocation(@WebParam(name="methodName") String methodName, @WebParam(name="methodParams") String methodParams) throws NegocioException, DaoException
+	{		
+		JsonParamsMap params = new JsonParamsMap(methodParams);
+		
+		if(methodName.equals("insertar"))
+		{		
+			EmpresaDTO empresaDTO = (EmpresaDTO) params.getParam("empresaDTO", EmpresaDTO.class);
+			
+			return new Gson().toJson(insertar(empresaDTO));
+		}
+		else if(methodName.equals("actualizar"))
+		{		
+			EmpresaDTO empresaDTO = (EmpresaDTO) params.getParam("empresaDTO", EmpresaDTO.class);
+			
+			actualizar(empresaDTO);
+		} 
+		else if(methodName.equals("eliminar"))
+		{		
+			Long idEmpresa = (Long) params.getParam("idEmpresa", Long.class);
+			
+			eliminar(idEmpresa);
+		}
+		else if(methodName.equals("obtener"))
+		{		
+			Long idEmpresa = (Long) params.getParam("idEmpresa", Long.class);
+			
+			return new Gson().toJson(obtener(idEmpresa));
+		}
+		else if(methodName.equals("obtenerListado"))
+		{		
+			return new Gson().toJson(obtenerListado());
+		}
+		else if(methodName.equals("obtenerListadoPorAdministrador"))
+		{		
+			Long idAdministrador = (Long) params.getParam("idAdministrador", Long.class);
+			
+			return new Gson().toJson(obtenerListadoPorAdministrador(idAdministrador));
+		}
+		else if(methodName.equals("insertarLocal"))
+		{		
+			LocalDTO localDTO = (LocalDTO) params.getParam("localDTO", LocalDTO.class);
+			
+			return new Gson().toJson(insertarLocal(localDTO));
+		}
+		else if(methodName.equals("actualizarLocal"))
+		{		
+			LocalDTO localDTO = (LocalDTO) params.getParam("localDTO", LocalDTO.class);
+			
+			actualizarLocal(localDTO);
+		} 
+		else if(methodName.equals("eliminarLocal"))
+		{		
+			Long idLocal = (Long) params.getParam("idLocal", Long.class);
+			
+			eliminarLocal(idLocal);
+		}
+		else if(methodName.equals("obtenerLocal"))
+		{		
+			Long idLocal = (Long) params.getParam("idLocal", Long.class);
+			
+			return new Gson().toJson(obtenerLocal(idLocal));
+		}
+		else if(methodName.equals("obtenerListadoLocales"))
+		{		
+			return new Gson().toJson(obtenerListadoLocales());
+		}
+		else if(methodName.equals("obtenerListadoLocalesPorEmpresa"))
+		{		
+			Long idEmpresa= (Long) params.getParam("idEmpresa", Long.class);
+			
+			return new Gson().toJson(obtenerListadoLocalesPorEmpresa(idEmpresa));
+		}
+		
+		
+		return "";
+	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod

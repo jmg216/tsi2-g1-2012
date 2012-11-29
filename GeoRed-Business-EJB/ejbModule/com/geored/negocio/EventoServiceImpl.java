@@ -10,6 +10,7 @@ import javax.ejb.TransactionAttributeType;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebService;
 
 import com.geored.dominio.Evento;
@@ -20,6 +21,8 @@ import com.geored.exceptions.DaoException;
 import com.geored.exceptions.NegocioException;
 import com.geored.persistencia.EventoDAO;
 import com.geored.persistencia.TematicaDAO;
+import com.geored.utiles.JsonParamsMap;
+import com.google.gson.Gson;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -31,6 +34,43 @@ public class EventoServiceImpl implements EventoService
 	
 	@EJB
 	private TematicaDAO tematicaDAO;
+	
+	@WebMethod(operationName="androidInvocation")
+	public String androidInvocation(@WebParam(name="methodName") String methodName, @WebParam(name="methodParams") String methodParams) throws NegocioException, DaoException
+	{		
+		JsonParamsMap params = new JsonParamsMap(methodParams);
+		
+		if(methodName.equals("insertar"))
+		{		
+			EventoDTO eventoDTO = (EventoDTO) params.getParam("eventoDTO", EventoDTO.class);
+			
+			return new Gson().toJson(insertar(eventoDTO));
+		}
+		else if(methodName.equals("actualizar"))
+		{		
+			EventoDTO eventoDTO = (EventoDTO) params.getParam("eventoDTO", EventoDTO.class);
+			
+			actualizar(eventoDTO);
+		} 
+		else if(methodName.equals("eliminar"))
+		{		
+			Long idEvento = (Long) params.getParam("idEvento", Long.class);
+			
+			eliminar(idEvento);
+		}
+		else if(methodName.equals("obtener"))
+		{		
+			Long idEvento = (Long) params.getParam("idEvento", Long.class);
+			
+			return new Gson().toJson(obtener(idEvento));
+		}
+		else if(methodName.equals("obtenerListado"))
+		{		
+			return new Gson().toJson(obtenerListado());
+		}
+		
+		return "";
+	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod

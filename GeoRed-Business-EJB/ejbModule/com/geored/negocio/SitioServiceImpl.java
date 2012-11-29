@@ -10,6 +10,7 @@ import javax.ejb.TransactionAttributeType;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebService;
 
 import com.geored.dominio.Sitio;
@@ -20,6 +21,8 @@ import com.geored.exceptions.DaoException;
 import com.geored.exceptions.NegocioException;
 import com.geored.persistencia.SitioDAO;
 import com.geored.persistencia.TematicaDAO;
+import com.geored.utiles.JsonParamsMap;
+import com.google.gson.Gson;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -31,6 +34,43 @@ public class SitioServiceImpl implements SitioService
 	
 	@EJB
 	private TematicaDAO tematicaDAO;
+	
+	@WebMethod(operationName="androidInvocation")
+	public String androidInvocation(@WebParam(name="methodName") String methodName, @WebParam(name="methodParams") String methodParams) throws NegocioException, DaoException
+	{		
+		JsonParamsMap params = new JsonParamsMap(methodParams);
+		
+		if(methodName.equals("insertar"))
+		{		
+			SitioDTO sitioDTO = (SitioDTO) params.getParam("sitioDTO", SitioDTO.class);
+			
+			return new Gson().toJson(insertar(sitioDTO));
+		}
+		else if(methodName.equals("actualizar"))
+		{		
+			SitioDTO sitioDTO = (SitioDTO) params.getParam("sitioDTO", SitioDTO.class);
+			
+			actualizar(sitioDTO);
+		} 
+		else if(methodName.equals("eliminar"))
+		{		
+			Long idSitio = (Long) params.getParam("idSitio", Long.class);
+			
+			eliminar(idSitio);
+		}
+		else if(methodName.equals("obtener"))
+		{		
+			Long idSitio = (Long) params.getParam("idSitio", Long.class);
+			
+			return new Gson().toJson(obtener(idSitio));
+		}
+		else if(methodName.equals("obtenerListado"))
+		{		
+			return new Gson().toJson(obtenerListado());
+		}
+		
+		return "";
+	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod

@@ -19,6 +19,7 @@ import com.geored.exceptions.DaoException;
 import com.geored.exceptions.NegocioException;
 import com.geored.persistencia.CheckInDAO;
 import com.geored.persistencia.UsuarioDAO;
+import com.geored.utiles.JsonParamsMap;
 import com.google.gson.Gson;
 
 @Stateless
@@ -33,54 +34,54 @@ public class UsuarioServiceImpl implements UsuarioService
 	private CheckInDAO checkInDAO;
 	
 	@WebMethod(operationName="androidInvocation")
-	public String androidInvocation(@WebParam(name="jsonBody") String jsonBody, @WebParam(name="methodName") String methodName) throws NegocioException, DaoException
-	{
-		Gson gson = new Gson();
+	public String androidInvocation(@WebParam(name="methodName") String methodName, @WebParam(name="methodParams") String methodParams) throws NegocioException, DaoException
+	{		
+		JsonParamsMap params = new JsonParamsMap(methodParams);
 		
 		if(methodName.equals("insertar"))
-		{
-			UsuarioDTO usuarioDTO = gson.fromJson(jsonBody, UsuarioDTO.class);
+		{		
+			UsuarioDTO usuarioDTO = (UsuarioDTO) params.getParam("usuariODTO", UsuarioDTO.class);
 			
-			Long idUsuario = insertar(usuarioDTO);
+			Long idUsuario = insertar((UsuarioDTO) usuarioDTO);
 			
-			return gson.toJson(idUsuario);
+			return new Gson().toJson(idUsuario);
 		}
 		else if(methodName.equals("actualizar"))
 		{
-			UsuarioDTO usuarioDTO = gson.fromJson(jsonBody, UsuarioDTO.class);
+			UsuarioDTO usuarioDTO = (UsuarioDTO) params.getParam("usuariODTO", UsuarioDTO.class);
 			
 			actualizar(usuarioDTO);
 		}
 		else if(methodName.equals("eliminar"))
 		{
-			Long idUsuario = gson.fromJson(jsonBody, Long.class);
+			Long idUsuario = (Long) params.getParam("idUsuario", Long.class);
 			
 			eliminar(idUsuario);
 		}
 		else if(methodName.equals("obtener"))
 		{
-			Long idUsuario = gson.fromJson(jsonBody, Long.class);
+			Long idUsuario = (Long) params.getParam("idUsuario", Long.class);
 			
-			UsuarioDTO usuarioDTO = obtener(idUsuario);
+			UsuarioDTO usuarioDTO = obtener(null);
 			
-			return gson.toJson(usuarioDTO);
+			return new Gson().toJson(usuarioDTO);
 		}
 		else if(methodName.equals("obtenerListado"))
 		{
-			return gson.toJson(obtenerListado());
+			return new Gson().toJson(obtenerListado());
 		}
 		else if(methodName.equals("obtenerPorEmailYPass"))
 		{
-			String email = gson.fromJson(jsonBody, String.class);
-			String pass = gson.fromJson(jsonBody, String.class);
+			String email = (String) params.getParam("email", String.class);
+			String pass = (String) params.getParam("pass", String.class);
 			
 			UsuarioDTO usuarioDTO = obtenerPorEmailYPass(email, pass);
 			
-			return gson.toJson(usuarioDTO);
+			return new Gson().toJson(usuarioDTO);
 		}
 		else if(methodName.equals("obtenerListadoCheckIns"))
 		{
-			return gson.toJson(obtenerListadoCheckIns());
+			return new Gson().toJson(obtenerListadoCheckIns());
 		}
 	
 		return "";

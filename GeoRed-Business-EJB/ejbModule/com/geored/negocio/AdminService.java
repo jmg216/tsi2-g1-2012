@@ -11,6 +11,9 @@ import com.geored.exceptions.NegocioException;
 @Local
 public interface AdminService 
 {
+	// Metodo que atiende las solicitudes con contenido JSON, parsea e invoca el metodo correspondiente
+	public String androidInvocation(String methodName, String methodParams) throws NegocioException, DaoException;
+		
 	public Long insertar(AdministradorDTO administradorDTO) throws NegocioException, DaoException;
 	
 	public void actualizar(AdministradorDTO administradorDTO)  throws NegocioException, DaoException;
