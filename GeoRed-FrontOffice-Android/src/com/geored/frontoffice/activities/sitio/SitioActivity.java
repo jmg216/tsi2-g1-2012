@@ -4,12 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.geored.frontoffice.activities.R;
-import com.geored.frontoffice.dto.SitioADTO;
-import com.geored.frontoffice.wsclient.SitioWS;
-import com.geored.frontoffice.wsclient.FactoryWS;
-
-import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -20,14 +14,18 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
+
+import com.geored.dto.SitioDTO;
+import com.geored.frontoffice.activities.R;
+import com.geored.frontoffice.wsclient.FactoryWS;
+import com.geored.frontoffice.wsclient.SitioWS;
 
 public class SitioActivity extends ListActivity {
 	
 	private SitioWS sitioWS = FactoryWS.getInstancia().getSitioWS();
 	
-    private List<SitioADTO> sitios = null;
-    private List<SitioADTO> sitios_aux = null;
+    private List<SitioDTO> sitios = null;
+    private List<SitioDTO> sitios_aux = null;
     private SitioAdapter s_adapter;
     private EditText edit_search_text;
     private Context context;
@@ -39,7 +37,7 @@ public class SitioActivity extends ListActivity {
     	
     	Resources res = getResources();
     	
-    	sitios = new ArrayList<SitioADTO>();
+    	sitios = new ArrayList<SitioDTO>();
     	
 	    s_adapter = new SitioAdapter(this, R.layout.row_contact_list, sitios);
         
@@ -55,13 +53,13 @@ public class SitioActivity extends ListActivity {
 				
 				int largo_texto = edit_search_text.getText().length();
 				
-				sitios_aux = new ArrayList<SitioADTO>();
+				sitios_aux = new ArrayList<SitioDTO>();
 				
 				Iterator it =  sitios.iterator();
 				
 				while (it.hasNext())
 				{
-					SitioADTO sitio = (SitioADTO) it.next();
+					SitioDTO sitio = (SitioDTO) it.next();
 					
 					if (largo_texto <= sitio.getNombre().length())
 					{
@@ -108,7 +106,7 @@ public class SitioActivity extends ListActivity {
         
         Intent i = new Intent(this, SitioDetalleActivity.class);
         
-        SitioADTO sitioSeleccionado = (SitioADTO) getListAdapter().getItem(position);
+        SitioDTO sitioSeleccionado = (SitioDTO) getListAdapter().getItem(position);
         
         i.putExtra("nombreSitio", sitioSeleccionado.getNombre());  
         i.putExtra("imagenSitio", sitioSeleccionado.getUrlImagen());

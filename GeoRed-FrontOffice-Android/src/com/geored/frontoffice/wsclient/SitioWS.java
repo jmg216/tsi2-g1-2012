@@ -1,75 +1,48 @@
 package com.geored.frontoffice.wsclient;
 
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Vector;
+import java.util.Map;
 
-import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapPrimitive;
-
-import com.geored.frontoffice.dto.SitioADTO;
+import com.geored.dto.SitioDTO;
 import com.geored.frontoffice.utiles.UtilesAndorid;
 
 public class SitioWS 
 {
-
-	public Long insertar(SitioADTO sitioADTO)
+	public Long insertar(SitioDTO sitioDTO)
 	{
-		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("sitioDTO", sitioDTO);
 		
-		SoapPrimitive response = (SoapPrimitive) WSProxyClient.call(UtilesAndorid.URL_WS_SITIO, wsdlMethodName, sitioADTO);
-    	
-		return Long.valueOf(response.toString());
+		return (Long) WSProxyClient.call(UtilesAndorid.URL_WS_SITIO, "insertar", params, Long.class);
 	}
 	
-	public void actualizar(SitioADTO sitioADTO)
+	public void actualizar(SitioDTO sitioDTO)
 	{
-		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("sitioDTO", sitioDTO);
 		
-    	WSProxyClient.call(UtilesAndorid.URL_WS_SITIO, wsdlMethodName, sitioADTO);		
+    	WSProxyClient.call(UtilesAndorid.URL_WS_SITIO, "actualizar", params, null);		
 	}
 	
 	public void eliminar(Long idSitio)
 	{
-		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("idSitio", idSitio);
 		
-    	WSProxyClient.call(UtilesAndorid.URL_WS_SITIO, wsdlMethodName, idSitio);			
+    	WSProxyClient.call(UtilesAndorid.URL_WS_SITIO, "eliminar", params, null);			
 	}
 	
-	public SitioADTO obtener(Long idSitio)
+	public SitioDTO obtener(Long idSitio)
 	{
-		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("idSitio", idSitio);
 		
-		SoapObject response = (SoapObject) WSProxyClient.call(UtilesAndorid.URL_WS_SITIO, wsdlMethodName, idSitio);
-		
-		SitioADTO sitioADTO = new SitioADTO();
-		
-		sitioADTO.parseSitioADTO(response);
-		
-		return sitioADTO;
+		return (SitioDTO) WSProxyClient.call(UtilesAndorid.URL_WS_SITIO, "obtener", params, SitioDTO.class);
 	}
 	
-	public List<SitioADTO> obtenerListado()
+	public List<SitioDTO> obtenerListado()
 	{
-		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
-		
-		Vector  response = (Vector) WSProxyClient.call(UtilesAndorid.URL_WS_SITIO, wsdlMethodName);
-				
-		SitioADTO[] sitiosADTO = new SitioADTO[response.size()];
-		
-		for (int i = 0; i < sitiosADTO.length; i++) 
-		{
-			SoapObject info = (SoapObject) response.get(i);
-			
-			SitioADTO sitio = new SitioADTO();
-			
-			sitio.parseSitioADTO(info);
-			
-            sitiosADTO[i] = sitio;			
-		}
-		
-		List<SitioADTO> listaSitios = Arrays.asList(sitiosADTO);
-		
-		return listaSitios;
+		return (List<SitioDTO>) WSProxyClient.call(UtilesAndorid.URL_WS_SITIO, "obtenerListado", null, List.class);
 	}
 }

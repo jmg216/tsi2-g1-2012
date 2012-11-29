@@ -1,8 +1,6 @@
 package com.geored.frontoffice.activities.usuario;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -19,15 +17,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.geored.dto.UsuarioDTO;
 import com.geored.frontoffice.activities.R;
 import com.geored.frontoffice.activities.menu.MenuActivity;
-import com.geored.frontoffice.dto.TematicaADTO;
-import com.geored.frontoffice.dto.UsuarioADTO;
 import com.geored.frontoffice.utiles.UtilesSeguridadAndroid;
 import com.geored.frontoffice.wsclient.FactoryWS;
 import com.geored.frontoffice.wsclient.GlobalWS;
 import com.geored.frontoffice.wsclient.UsuarioWS;
-import com.google.android.gcm.GCMRegistrar;
 
 public class LoginActivity extends Activity implements OnClickListener  {
 
@@ -62,14 +58,14 @@ public class LoginActivity extends Activity implements OnClickListener  {
     	String email = txtEmail.getText().toString();
     	String pass = txtPass.getText().toString();
     	
-//    	email = "juan2@hotmail.com";
-//    	pass = "juanPass";
+//    	email = "juan@gmail.com";
+//    	pass = "juan";
 
-    	UsuarioADTO usuarioADTO = usuarioWS.obtenerPorEmailYPass(email, pass);
+    	UsuarioDTO usuarioDTO = usuarioWS.obtenerPorEmailYPass(email, pass);
     	
-    	if (usuarioADTO != null)
+    	if (usuarioDTO != null)
     	{
-    		UtilesSeguridadAndroid.setUsuarioAutenticado(getApplicationContext(), usuarioADTO);	
+    		UtilesSeguridadAndroid.setUsuarioAutenticado(getApplicationContext(), usuarioDTO);	
     		
 	    	Intent menuActivity = new Intent (this, MenuActivity.class);
 	    	startActivity(menuActivity);

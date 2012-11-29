@@ -1,27 +1,9 @@
 package com.geored.frontoffice.activities.mapa;
 
-import java.nio.channels.Pipe;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import com.geored.frontoffice.activities.R;
-import com.geored.frontoffice.activities.sitio.SitioActivity;
-import com.geored.frontoffice.activities.sitio.SitioDetalleActivity;
-import com.geored.frontoffice.activities.sitio.SitioGroupActivity;
-import com.geored.frontoffice.dto.SitioADTO;
-import com.geored.frontoffice.utiles.UtilesAndorid;
-import com.geored.frontoffice.wsclient.FactoryWS;
-import com.geored.frontoffice.wsclient.SitioWS;
-import com.google.android.maps.GeoPoint;
-import com.google.android.maps.ItemizedOverlay;
-import com.google.android.maps.MapActivity;
-import com.google.android.maps.MapController;
-import com.google.android.maps.MapView;
-import com.google.android.maps.MyLocationOverlay;
-import com.google.android.maps.Overlay;
-import com.google.android.maps.OverlayItem;
 
-import android.R.string;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -39,10 +21,24 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
+import com.geored.dto.SitioDTO;
+import com.geored.frontoffice.activities.R;
+import com.geored.frontoffice.activities.sitio.SitioDetalleActivity;
+import com.geored.frontoffice.utiles.UtilesAndorid;
+import com.geored.frontoffice.wsclient.FactoryWS;
+import com.geored.frontoffice.wsclient.SitioWS;
+import com.google.android.maps.GeoPoint;
+import com.google.android.maps.ItemizedOverlay;
+import com.google.android.maps.MapActivity;
+import com.google.android.maps.MapController;
+import com.google.android.maps.MapView;
+import com.google.android.maps.Overlay;
+import com.google.android.maps.OverlayItem;
+
 public class MapGeoRedActivity extends MapActivity {
 
 	private SitioWS sitioWS = FactoryWS.getInstancia().getSitioWS();
-	private List<SitioADTO> listaSitios = null;
+	private List<SitioDTO> listaSitios = null;
 	private Button btnActualizar;
 	private LocationManager locManager;
 	private MapView mapView;
@@ -199,11 +195,11 @@ public class MapGeoRedActivity extends MapActivity {
 		
 		  	MyItemizedOverlay markersSitio = new MyItemizedOverlay(getResources().getDrawable(R.drawable.marker3), this);
 			  
-		  	listaSitios = new ArrayList<SitioADTO>();
+		  	listaSitios = new ArrayList<SitioDTO>();
 		  	listaSitios = sitioWS.obtenerListado();
-			Iterator<SitioADTO> it = listaSitios.iterator();
+			Iterator<SitioDTO> it = listaSitios.iterator();
 		  	while (it.hasNext()) {
-		  		SitioADTO sitio = (SitioADTO) it.next();
+		  		SitioDTO sitio = (SitioDTO) it.next();
 		  		markersSitio.addSitio(sitio);
 			}
 		  	mOverlays.add(markersSitio);
@@ -236,7 +232,7 @@ public class MapGeoRedActivity extends MapActivity {
 	    	    addOverlay(overlayitem);
 	    	}
 	    
-	    public void addSitio(SitioADTO sitio) {	    	
+	    public void addSitio(SitioDTO sitio) {	    	
 	    	try{
 	    		Double dist;
 				String lati = String.valueOf(miLatitud);
@@ -289,7 +285,7 @@ public class MapGeoRedActivity extends MapActivity {
 	        				new DialogInterface.OnClickListener() {                        
 	        					public void onClick(DialogInterface dialog, int id) {                            
 	        						Intent i = new Intent(mContext, SitioDetalleActivity.class);
-	        				        SitioADTO sitioSeleccionado = (SitioADTO) listaSitios.get(index);
+	        				        SitioDTO sitioSeleccionado = (SitioDTO) listaSitios.get(index);
 	        				        
 	        				        i.putExtra("nombreSitio", sitioSeleccionado.getNombre());  
 	        				        i.putExtra("imagenSitio", sitioSeleccionado.getUrlImagen());

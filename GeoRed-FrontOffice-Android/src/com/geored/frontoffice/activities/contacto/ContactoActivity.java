@@ -4,13 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.geored.frontoffice.activities.R;
-import com.geored.frontoffice.dto.UsuarioADTO;
-import com.geored.frontoffice.wsclient.FactoryWS;
-import com.geored.frontoffice.wsclient.UsuarioWS;
-
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -21,19 +14,22 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
+
+import com.geored.dto.UsuarioDTO;
+import com.geored.frontoffice.activities.R;
+import com.geored.frontoffice.wsclient.FactoryWS;
+import com.geored.frontoffice.wsclient.UsuarioWS;
 
 public class ContactoActivity extends ListActivity {
 	
 	private UsuarioWS usuarioWS = FactoryWS.getInstancia().getUsuarioWS();
 	
     private ProgressDialog m_ProgressDialog = null; 
-    private List<UsuarioADTO> usuarios = null;
-    private List<UsuarioADTO> usuarios_aux = null;
+    private List<UsuarioDTO> usuarios = null;
+    private List<UsuarioDTO> usuarios_aux = null;
     private ContactoAdapter c_adapter;
     private Runnable viewUsuarios;
     private EditText edit_search_text;
@@ -47,7 +43,7 @@ public class ContactoActivity extends ListActivity {
 	    
 	    Resources res = getResources();
         
-	    usuarios = new ArrayList<UsuarioADTO>();
+	    usuarios = new ArrayList<UsuarioDTO>();
         
 	    c_adapter = new ContactoAdapter(this, R.layout.row_contact_list, usuarios);
         
@@ -63,13 +59,13 @@ public class ContactoActivity extends ListActivity {
 				
 				int largo_texto = edit_search_text.getText().length();
 				
-				usuarios_aux = new ArrayList<UsuarioADTO>();
+				usuarios_aux = new ArrayList<UsuarioDTO>();
 				
 				Iterator it =  usuarios.iterator();
 				
 				while (it.hasNext())
 				{
-					UsuarioADTO usu = (UsuarioADTO) it.next();
+					UsuarioDTO usu = (UsuarioDTO) it.next();
 					
 					if (largo_texto <= usu.getNombre().length())
 					{
@@ -125,7 +121,7 @@ public class ContactoActivity extends ListActivity {
 	    	
 	    Intent i = new Intent(this, ContactoDetalleActivity.class);
 	        
-	    UsuarioADTO contactoSeleccionado = (UsuarioADTO) getListAdapter().getItem(position);
+	    UsuarioDTO contactoSeleccionado = (UsuarioDTO) getListAdapter().getItem(position);
 	        
 	    i.putExtra("idContactoSeleccionado", contactoSeleccionado.getId());
 	        

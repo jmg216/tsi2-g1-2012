@@ -5,11 +5,9 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.os.PowerManager;
 import android.util.Log;
 
-import com.geored.frontoffice.dto.UsuarioADTO;
+import com.geored.dto.UsuarioDTO;
 import com.geored.frontoffice.utiles.UtilesSeguridadAndroid;
 import com.geored.frontoffice.wsclient.FactoryWS;
 import com.geored.frontoffice.wsclient.UsuarioWS;
@@ -148,10 +146,10 @@ public class GCMIntentService extends GCMBaseIntentService
 	protected void onRegistered(Context context, String regId) 
 	{
     	Log.d(TAG, "REGISTRATION: Registrado OK.");
-    	UsuarioADTO usuarioADTO = UtilesSeguridadAndroid.getUsuarioAutenticado(this);    	
-    	usuarioADTO = usuarioWS.obtener(usuarioADTO.getId());
-    	usuarioADTO.setGcmRegId(regId);
-    	usuarioWS.actualizar(usuarioADTO);    	
+    	UsuarioDTO usuarioDTO = UtilesSeguridadAndroid.getUsuarioAutenticado(this);    	
+    	usuarioDTO = usuarioWS.obtener(usuarioDTO.getId());
+    	usuarioDTO.setGcmRegId(regId);
+    	usuarioWS.actualizar(usuarioDTO);    	
 	}	
 	
 	

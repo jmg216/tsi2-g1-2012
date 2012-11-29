@@ -1,107 +1,62 @@
 package com.geored.frontoffice.wsclient;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
-import org.ksoap2.SoapEnvelope;
-import org.ksoap2.serialization.KvmSerializable;
 import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapPrimitive;
 
-import com.geored.frontoffice.dto.TematicaADTO;
-import com.geored.frontoffice.dto.UsuarioADTO;
+import com.geored.dto.UsuarioDTO;
 import com.geored.frontoffice.utiles.UtilesAndorid;
 
 public class UsuarioWS
 {
-	public Long insertar(UsuarioADTO usuarioADTO)
+	public Long insertar(UsuarioDTO usuarioDTO)
 	{
-		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("usuarioDTO", usuarioDTO);
 		
-		SoapPrimitive response = (SoapPrimitive) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, wsdlMethodName, usuarioADTO);
-    	
-		return Long.valueOf(response.toString());
+		return (Long) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, "insertar", params, Long.class);
 	}
 	
-	public void actualizar(UsuarioADTO usuarioADTO)
+	public void actualizar(UsuarioDTO usuarioDTO)
 	{
-		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("usuarioDTO", usuarioDTO);
 		
-    	WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, wsdlMethodName, usuarioADTO);		
+    	WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, "actualizar", params, null);		
 	}
 	
 	public void eliminar(Long idUsuario)
 	{
-		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
-		
-		WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, wsdlMethodName, idUsuario);
-	}
-	
-	public UsuarioADTO obtener(Long idUsuario)
-	{
-		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
-		
-		SoapObject response = (SoapObject) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, wsdlMethodName, idUsuario);
-		
-		UsuarioADTO usuarioADTO = new UsuarioADTO();
-		
-		if (response == null)
-		{
-			return null;
-		}
-		else
-		{
-			usuarioADTO.parseUsuarioADTO(response);
-		}
-		
-		return usuarioADTO;
-	}
-	
-	public List<UsuarioADTO> obtenerListado()
-	{
-		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
-		
-		Vector  response = (Vector) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, wsdlMethodName);
-
-		UsuarioADTO[] usuariosADTO = new UsuarioADTO[response.size()];
-
-		for (int i = 0; i < usuariosADTO.length; i++) 
-		{		
-			SoapObject info = (SoapObject) response.get(i);
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("idUsuario", idUsuario);
 			
-			UsuarioADTO usuario = new UsuarioADTO();
-
-			usuario.parseUsuarioADTO(info);
-        	
-            usuariosADTO[i] = usuario;			
-		}
-		
-		List<UsuarioADTO> listaUsuarios = Arrays.asList(usuariosADTO);
-		
-		return listaUsuarios;
-		
+		WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, "eliminar", params, null);
 	}
 	
-	public UsuarioADTO obtenerPorEmailYPass(String email, String pass)
+	public UsuarioDTO obtener(Long idUsuario)
 	{
-		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("idUsuario", idUsuario);
 		
-		SoapObject response = (SoapObject) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, wsdlMethodName, email, pass);
-
-		if (response == null)
-		{
-			return null;
-		}
-		else
-		{
-	    	UsuarioADTO usuarioADTO = new UsuarioADTO();
-	    	
-	    	usuarioADTO.parseUsuarioADTO(response);
-	    			
-			return usuarioADTO;			
-		}
+		return (UsuarioDTO) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, "obtener", params, UsuarioDTO.class);
+	}
+	
+	public List<UsuarioDTO> obtenerListado()
+	{		
+		return (List<UsuarioDTO>) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, "obtenerListado", null, List.class);
+	}
+	
+	public UsuarioDTO obtenerPorEmailYPass(String email, String pass)
+	{
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("email", email);
+		params.put("pass", pass);
+		
+		return (UsuarioDTO) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, "obtenerPorEmailYPass", params, UsuarioDTO.class);
 
 	}
 }

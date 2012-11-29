@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.geored.dto.UsuarioDTO;
 import com.geored.frontoffice.activities.R;
-import com.geored.frontoffice.dto.UsuarioADTO;
 import com.geored.frontoffice.utiles.BitMapImageConverter;
 import com.geored.frontoffice.wsclient.FactoryWS;
 import com.geored.frontoffice.wsclient.UsuarioWS;
@@ -25,21 +25,21 @@ public class ContactoDetalleActivity extends Activity
 		Bundle extras = getIntent().getExtras();
 		Long idContacto = extras.getLong("idContactoSeleccionado");
 		
-		UsuarioADTO usuarioADTO = usuarioWS.obtener(idContacto);
+		UsuarioDTO usuarioDTO = usuarioWS.obtener(idContacto);
 		
     	TextView tt = (TextView) this.findViewById(R.id.nombre_perfil_contacto);
         TextView bt = (TextView) this.findViewById(R.id.email_perfil_contacto);
         ImageView it = (ImageView) this.findViewById(R.id.foto_perfil_contacto);
         
-        tt.setText(usuarioADTO.getNombre());
-        bt.setText(usuarioADTO.getEmail()); 
-        if (!usuarioADTO.getUrlImagen().contains("http"))
+        tt.setText(usuarioDTO.getNombre());
+        bt.setText(usuarioDTO.getEmail()); 
+        if (!usuarioDTO.getUrlImagen().contains("http"))
         {
         	it.setImageResource(R.drawable.contact);
         }
         else
         {
-        	it.setImageBitmap(BitMapImageConverter.getImageBitmap(usuarioADTO.getUrlImagen()));	
+        	it.setImageBitmap(BitMapImageConverter.getImageBitmap(usuarioDTO.getUrlImagen()));	
         }        
     }
     
