@@ -9,16 +9,20 @@ import javax.ejb.TransactionAttributeType;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebService;
 
 import com.geored.dominio.Administrador;
 import com.geored.dominio.TipoAdministrador;
 import com.geored.dto.AdministradorDTO;
+import com.geored.dto.AdministradorDTO;
 import com.geored.exceptions.DaoException;
 import com.geored.exceptions.NegocioException;
 import com.geored.persistencia.AdministradorDAO;
 import com.geored.persistencia.TipoAdministradorDAO;
+import com.geored.utiles.JsonParamsMap;
 import com.geored.utiles.UtilesNegocio;
+import com.google.gson.Gson;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -30,6 +34,43 @@ public class AdminServiceImpl implements AdminService
 	
 	@EJB
 	private TipoAdministradorDAO tipoAdministradorDAO;
+	
+	@WebMethod(operationName="androidInvocation")
+	public String androidInvocation(@WebParam(name="methodName") String methodName, @WebParam(name="methodParams") String methodParams) throws NegocioException, DaoException
+	{		
+		JsonParamsMap params = new JsonParamsMap(methodParams);
+		
+		if(methodName.equals("insertar"))
+		{		
+			AdministradorDTO administradorDTO = (AdministradorDTO) params.getParam("administradorDTO", AdministradorDTO.class);
+			
+			return new Gson().toJson(insertar(administradorDTO));
+		}
+		else if(methodName.equals("actualizar"))
+		{		
+			AdministradorDTO administradorDTO = (AdministradorDTO) params.getParam("administradorDTO", AdministradorDTO.class);
+			
+			actualizar(administradorDTO);
+		} 
+		else if(methodName.equals("eliminar"))
+		{		
+			Long idAdministrador = (Long) params.getParam("idAdministrador", Long.class);
+			
+			eliminar(idAdministrador);
+		}
+		else if(methodName.equals("obtener"))
+		{		
+			Long idAdministrador = (Long) params.getParam("idAdministrador", Long.class);
+			
+			return new Gson().toJson(obtener(idAdministrador));
+		}
+		else if(methodName.equals("obtenerListado"))
+		{		
+			return new Gson().toJson(obtenerListado());
+		}
+		
+		return "";
+	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod

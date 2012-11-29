@@ -11,6 +11,9 @@ import com.geored.exceptions.NegocioException;
 @Local
 public interface OfertaService
 {
+	// Metodo que atiende las solicitudes con contenido JSON, parsea e invoca el metodo correspondiente
+	public String androidInvocation(String methodName, String methodParams) throws NegocioException, DaoException;
+		
 	public Long insertar(OfertaDTO ofertaDTO)  throws NegocioException, DaoException;
 	
 	public void actualizar(OfertaDTO ofertaDTO)  throws NegocioException, DaoException;
