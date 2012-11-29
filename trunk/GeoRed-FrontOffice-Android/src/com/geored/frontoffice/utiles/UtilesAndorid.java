@@ -1,10 +1,10 @@
 package com.geored.frontoffice.utiles;
 
-public class UtilesAndorid {
-
-	public static final String IP_PUERTO="10.0.2.2:8080";
-	
+public class UtilesAndorid 
+{
 	public static final double radioTierraKm = 6371;
+	
+	public static final String IP_PUERTO="10.0.2.2:8080";
 	
 	public static final String URL_WS_USUARIO = "http://" + IP_PUERTO +"/GeoRed-Business-EJB/UsuarioServiceImpl?wsdl";
 	public static final String URL_WS_SITIO   = "http://" + IP_PUERTO +"/GeoRed-Business-EJB/SitioServiceImpl?wsdl";
@@ -22,7 +22,6 @@ public class UtilesAndorid {
         double lon1 = Rad(Double.parseDouble(strLon1));
         double lat2 = Rad(Double.parseDouble(strLat2));
         double lon2 = Rad(Double.parseDouble(strLon2));
-
 
         // Calculo la diferencia de distancias en radianes
         double dLat = lat2 - lat1;

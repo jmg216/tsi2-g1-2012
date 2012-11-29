@@ -3,6 +3,7 @@ package com.geored.frontoffice.activities.usuario;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -11,7 +12,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,14 +21,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.geored.frontoffice.activities.GCMIntentService;
+import com.geored.dto.TematicaDTO;
+import com.geored.dto.UsuarioDTO;
 import com.geored.frontoffice.activities.R;
 import com.geored.frontoffice.activities.menu.MenuActivity;
-import com.geored.frontoffice.dto.UsuarioADTO;
 import com.geored.frontoffice.utiles.UtilesSeguridadAndroid;
 import com.geored.frontoffice.wsclient.FactoryWS;
 import com.geored.frontoffice.wsclient.UsuarioWS;
-import com.google.android.gcm.GCMRegistrar;
 
 public class RegistroActivity extends Activity {
 	
@@ -64,30 +63,42 @@ public class RegistroActivity extends Activity {
     	EditText pass = (EditText) this.findViewById(R.id.txtPassword);   
     	EditText urlImagen = (EditText) this.findViewById(R.id.txtUrlImagen);//PARA PASAR LA URL
     	
-    	UsuarioADTO usuarioADTO = new UsuarioADTO();
+    	UsuarioDTO usuarioDTO = new UsuarioDTO();
     	
-    	usuarioADTO.setNombre(usuario.getText().toString());
-    	usuarioADTO.setEmail(email.getText().toString());
-    	usuarioADTO.setPass(pass.getText().toString());
+    	usuarioDTO.setNombre(usuario.getText().toString());
+    	usuarioDTO.setEmail(email.getText().toString());
+    	usuarioDTO.setPass(pass.getText().toString());
     	
     	if (urlImagen.getText() != null)
     	{	
-    		usuarioADTO.setUrlImagen(urlImagen.getText().toString());
+    		usuarioDTO.setUrlImagen(urlImagen.getText().toString());
     	}
     	
-//    	usuarioADTO.setNombre("Juan");
-//    	usuarioADTO.setEmail("juan@hotmail.com");
-//    	usuarioADTO.setPass("juanPass");
-//    	usuarioADTO.setGcmRegId(regId);
-
-    	Long idUsuario = usuarioWS.insertar(usuarioADTO); 
+//    	usuarioDTO.setNombre("Juan");
+//    	usuarioDTO.setEmail("juan@hotmail.com");
+//    	usuarioDTO.setPass("juanPass");
+//    	usuarioDTO.setListaTematicasDTO(new ArrayList<TematicaDTO>());
+    	
+//    	TematicaDTO tematica1 = new TematicaDTO();
+//    	tematica1.setId(1L);
+//    	tematica1.setNombre("1");
+//    	tematica1.setDescripcion("1");
+//    	usuarioDTO.getListaTematicasDTO().add(tematica1);
+//    	
+//    	TematicaDTO tematica2 = new TematicaDTO();
+//    	tematica2.setId(2L);
+//    	tematica2.setNombre("2");
+//    	tematica2.setDescripcion("2");
+//    	usuarioDTO.getListaTematicasDTO().add(tematica2);
+    	
+    	Long idUsuario = usuarioWS.insertar(usuarioDTO); 
         
     	//Si se registra correctamente lo redirecciona al menu, sino
     	//envia mensaje de error.
 		if(idUsuario != null)
 		{
-			usuarioADTO = usuarioWS.obtener(idUsuario);
-			UtilesSeguridadAndroid.setUsuarioAutenticado(getApplicationContext(), usuarioADTO);	
+			usuarioDTO = usuarioWS.obtener(idUsuario);
+			UtilesSeguridadAndroid.setUsuarioAutenticado(getApplicationContext(), usuarioDTO);	
 	    	Intent menuActivity = new Intent (this, MenuActivity.class);
 	    	startActivity(menuActivity);
 		}	

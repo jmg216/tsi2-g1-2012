@@ -1,11 +1,10 @@
 package com.geored.frontoffice.utiles;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-import com.geored.frontoffice.dto.UsuarioADTO;
+import com.geored.dto.UsuarioDTO;
 
 public class UtilesSeguridadAndroid{
 	
@@ -13,7 +12,7 @@ public class UtilesSeguridadAndroid{
 	public static final String API_KEY = "AIzaSyA-sjjWHPR2JIHEipdGAFKH8rLcK25Od1A";
 	public static final String ID_SENDER_GCM = "121239138891";
 	
-	public static void setUsuarioAutenticado(Context context, UsuarioADTO usuarioADTO)
+	public static void setUsuarioAutenticado(Context context, UsuarioDTO usuarioADTO)
 	{
 		
 		SharedPreferences prefs = context.getSharedPreferences(KEY_USER_PREFERENCE ,Context.MODE_PRIVATE);
@@ -25,7 +24,7 @@ public class UtilesSeguridadAndroid{
 		editor.commit();
 	}
 	
-	public static UsuarioADTO getUsuarioAutenticado(Context context)
+	public static UsuarioDTO getUsuarioAutenticado(Context context)
 	{
 		SharedPreferences prefs = context.getSharedPreferences(KEY_USER_PREFERENCE ,Context.MODE_PRIVATE);
 		
@@ -33,7 +32,7 @@ public class UtilesSeguridadAndroid{
     	String nombre = prefs.getString("nombreUser", "");
     	String email = prefs.getString("emailUser", "");
     	
-    	UsuarioADTO usuarioADTO = new UsuarioADTO();
+    	UsuarioDTO usuarioADTO = new UsuarioDTO();
     	usuarioADTO.setId(id);
     	usuarioADTO.setNombre(nombre);
     	usuarioADTO.setEmail(email);

@@ -1,96 +1,48 @@
 package com.geored.frontoffice.wsclient;
 
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Vector;
+import java.util.Map;
 
-import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapPrimitive;
-
-import com.geored.frontoffice.dto.EmpresaADTO;
+import com.geored.dto.EmpresaDTO;
 import com.geored.frontoffice.utiles.UtilesAndorid;
 
 public class EmpresaWS
 {		
-	public Long insertar(EmpresaADTO empresaADTO)
+	public Long insertar(EmpresaDTO empresaDTO)
 	{
-		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("empresaDTO", empresaDTO);
 		
-		SoapPrimitive response = (SoapPrimitive) WSProxyClient.call(UtilesAndorid.URL_WS_EMPRESA, wsdlMethodName, empresaADTO);
-    	
-		return Long.valueOf(response.toString());
+		return (Long) WSProxyClient.call(UtilesAndorid.URL_WS_EMPRESA, "insertar", params, Long.class);
 	}
 	
-	public void actualizar(EmpresaADTO empresaADTO)
+	public void actualizar(EmpresaDTO empresaDTO)
 	{
-		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("empresaDTO", empresaDTO);
 		
-    	WSProxyClient.call(UtilesAndorid.URL_WS_EMPRESA, wsdlMethodName, empresaADTO);		
+    	WSProxyClient.call(UtilesAndorid.URL_WS_EMPRESA, "actualizar", params, null);		
 	}
 	
 	public void eliminar(Long idEmpresa)
 	{
-		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("idEmpresa", idEmpresa);
 		
-    	WSProxyClient.call(UtilesAndorid.URL_WS_EMPRESA, wsdlMethodName, idEmpresa);		
+    	WSProxyClient.call(UtilesAndorid.URL_WS_EMPRESA, "eliminar", params, null);			
 	}
 	
-	public EmpresaADTO obtener(Long idEmpresa)
+	public EmpresaDTO obtener(Long idEmpresa)
 	{
-		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("idEmpresa", idEmpresa);
 		
-		SoapObject response = (SoapObject) WSProxyClient.call(UtilesAndorid.URL_WS_EMPRESA, wsdlMethodName, idEmpresa);
-		
-		EmpresaADTO empresaADTO = new EmpresaADTO();
-		
-		if (response == null)
-		{
-			return null;
-		}
-		else
-		{
-			//TODO ver orden de las properies
-			
-        	empresaADTO.setDescripcion(response.getProperty(0).toString());
-        	empresaADTO.setId(Long.parseLong(response.getProperty(1).toString()));
-        	empresaADTO.setUrlImagen(response.getProperty(3).toString());
-        	empresaADTO.setNombre(response.getProperty(4).toString());
-        	empresaADTO.setNombreAdministrador(response.getProperty(5).toString());
-        	
-        	//TODO  empresaADTO.setFechaCreacion(fechaCreacion) ver como carajo parsear la fecha
-		}
-		
-		return empresaADTO;
+		return (EmpresaDTO) WSProxyClient.call(UtilesAndorid.URL_WS_EMPRESA, "obtener", params, EmpresaDTO.class);
 	}
 	
-	public List<EmpresaADTO> obtenerListado()
+	public List<EmpresaDTO> obtenerListado()
 	{
-		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
-		
-		Vector  response = (Vector) WSProxyClient.call(UtilesAndorid.URL_WS_EMPRESA, wsdlMethodName);
-				
-		EmpresaADTO[] empresasADTO = new EmpresaADTO[response.size()];
-		
-		for (int i = 0; i < empresasADTO.length; i++) 
-		{
-			SoapObject info = (SoapObject) response.get(i);
-			
-			EmpresaADTO empresa = new EmpresaADTO();
-			
-			//TODO ver orden de las properies
-			
-        	empresa.setDescripcion(info.getProperty(0).toString());
-        	empresa.setId(Long.parseLong(info.getProperty(1).toString()));
-        	empresa.setUrlImagen(info.getProperty(3).toString());
-        	empresa.setNombre(info.getProperty(4).toString());
-        	
-        	//TODO  empresaADTO.setFechaCreacion(fechaCreacion) ver como carajo parsear la fecha
-        	
-        	empresasADTO[i] = empresa;			
-		}
-		
-		List<EmpresaADTO> listaEmpresas = Arrays.asList(empresasADTO);
-		
-		return listaEmpresas;
+		return (List<EmpresaDTO>) WSProxyClient.call(UtilesAndorid.URL_WS_EMPRESA, "obtenerListado", null, List.class);
 	}
 }

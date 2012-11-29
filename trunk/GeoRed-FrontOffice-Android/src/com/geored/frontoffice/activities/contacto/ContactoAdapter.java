@@ -2,10 +2,6 @@ package com.geored.frontoffice.activities.contacto;
 
 import java.util.List;
 
-import com.geored.frontoffice.activities.R;
-import com.geored.frontoffice.dto.UsuarioADTO;
-import com.geored.frontoffice.utiles.BitMapImageConverter;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
@@ -15,11 +11,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ContactoAdapter extends ArrayAdapter<UsuarioADTO> {
-	
-    private List<UsuarioADTO> items;
+import com.geored.dto.UsuarioDTO;
+import com.geored.frontoffice.activities.R;
+import com.geored.frontoffice.utiles.BitMapImageConverter;
 
-    public ContactoAdapter(Context context, int textViewResourceId, List<UsuarioADTO> items) {
+public class ContactoAdapter extends ArrayAdapter<UsuarioDTO> {
+	
+    private List<UsuarioDTO> items;
+
+    public ContactoAdapter(Context context, int textViewResourceId, List<UsuarioDTO> items) {
             super(context, textViewResourceId, items);
             this.items = items;
     }
@@ -34,7 +34,7 @@ public class ContactoAdapter extends ArrayAdapter<UsuarioADTO> {
                 v = inflater.inflate(R.layout.row_contact_list, null);
             }
             
-            UsuarioADTO usuario = items.get(position);
+            UsuarioDTO usuario = items.get(position);
             
             if (usuario != null) 
             {

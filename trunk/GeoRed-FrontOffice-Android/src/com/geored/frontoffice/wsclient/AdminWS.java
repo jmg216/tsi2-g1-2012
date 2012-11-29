@@ -1,63 +1,48 @@
 package com.geored.frontoffice.wsclient;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapPrimitive;
-
-import com.geored.frontoffice.dto.AdministradorADTO;
+import com.geored.dto.AdministradorDTO;
 import com.geored.frontoffice.utiles.UtilesAndorid;
 
 public class AdminWS
 {
-	public Long insertar(AdministradorADTO administradorADTO)
+	public Long insertar(AdministradorDTO administradorDTO)
 	{
-		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("administradorDTO", administradorDTO);
 		
-		SoapPrimitive response = (SoapPrimitive) WSProxyClient.call(UtilesAndorid.URL_WS_ADMIN, wsdlMethodName, administradorADTO);
-    	
-		return Long.valueOf(response.toString());
+		return (Long) WSProxyClient.call(UtilesAndorid.URL_WS_ADMIN, "insertar", params, Long.class);
 	}
 	
-	public void actualizar(AdministradorADTO administradorADTO)
+	public void actualizar(AdministradorDTO administradorDTO)
 	{
-		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("administradorDTO", administradorDTO);
 		
-    	WSProxyClient.call(UtilesAndorid.URL_WS_ADMIN, wsdlMethodName, administradorADTO);		
+    	WSProxyClient.call(UtilesAndorid.URL_WS_ADMIN, "actualizar", params, null);		
 	}
 	
 	public void eliminar(Long idAdministrador)
 	{
-		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("idAdministrador", idAdministrador);
 		
-    	WSProxyClient.call(UtilesAndorid.URL_WS_ADMIN, wsdlMethodName, idAdministrador);		
+    	WSProxyClient.call(UtilesAndorid.URL_WS_ADMIN, "eliminar", params, null);			
 	}
 	
-	public AdministradorADTO obtener(Long idAdministrador)
+	public AdministradorDTO obtener(Long idAdministrador)
 	{
-		String wsdlMethodName = Thread.currentThread().getStackTrace()[2].getMethodName();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("idAdministrador", idAdministrador);
 		
-		SoapObject response = (SoapObject) WSProxyClient.call(UtilesAndorid.URL_WS_ADMIN, wsdlMethodName, idAdministrador);
-		
-		AdministradorADTO administradorADTO = new AdministradorADTO();
-		
-		if (response == null)
-		{
-			return null;
-		}
-		else
-		{
-        	administradorADTO.setEmail((response.getProperty(0).toString()));
-        	administradorADTO.setId(Long.parseLong(response.getProperty(1).toString()));
-        	administradorADTO.setNombre(response.getProperty(2).toString());
-        	administradorADTO.setPass(response.getProperty(3).toString());   
-		}
-		
-		return administradorADTO;
+		return (AdministradorDTO) WSProxyClient.call(UtilesAndorid.URL_WS_ADMIN, "obtener", params, AdministradorDTO.class);
 	}
 	
-	public List<AdministradorADTO> obtenerListado()
+	public List<AdministradorDTO> obtenerListado()
 	{
-		return null;
-	}	
+		return (List<AdministradorDTO>) WSProxyClient.call(UtilesAndorid.URL_WS_ADMIN, "obtenerListado", null, List.class);
+	}
 }

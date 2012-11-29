@@ -2,12 +2,7 @@ package com.geored.frontoffice.activities.sitio;
 
 import java.util.List;
 
-import com.geored.frontoffice.activities.R;
-import com.geored.frontoffice.dto.SitioADTO;
-import com.geored.frontoffice.utiles.BitMapImageConverter;
-
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +11,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class SitioAdapter extends ArrayAdapter<SitioADTO>  {
+import com.geored.dto.SitioDTO;
+import com.geored.frontoffice.activities.R;
+import com.geored.frontoffice.utiles.BitMapImageConverter;
 
-	private List<SitioADTO> items;
+public class SitioAdapter extends ArrayAdapter<SitioDTO>  {
+
+	private List<SitioDTO> items;
 	
-	public SitioAdapter(Context context, int textViewResourceId, List<SitioADTO> items) {
+	public SitioAdapter(Context context, int textViewResourceId, List<SitioDTO> items) {
 		super(context, textViewResourceId, items);
 		this.items = items;
 	}
@@ -35,7 +34,7 @@ public class SitioAdapter extends ArrayAdapter<SitioADTO>  {
                 v = inflater.inflate(R.layout.row_contact_list, null);
             }
             
-            SitioADTO sitio = items.get(position);
+            SitioDTO sitio = items.get(position);
             if (sitio != null) 
             {
                     TextView tt = (TextView) v.findViewById(R.id.toptext);
