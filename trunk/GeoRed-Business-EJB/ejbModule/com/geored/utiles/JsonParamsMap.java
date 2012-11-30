@@ -1,5 +1,6 @@
 package com.geored.utiles;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import com.google.gson.Gson;
@@ -14,14 +15,21 @@ public class JsonParamsMap
 	{
 		gson = new Gson();
 		
-		// Parseo y corrijo los objetos
-		jsonParams = gson.fromJson(jsonString, Map.class);
-		
-		for(String keyParam : jsonParams.keySet())
+		if(UtilesNegocio.isNullOrEmpty(jsonString))
 		{
-			String jsonParam = gson.toJson(jsonParams.get(keyParam));			
+			jsonParams = new HashMap<String, String>();
+		}
+		else
+		{
+			// Parseo y corrijo los objetos
+			jsonParams = gson.fromJson(jsonString, Map.class);
 			
-			jsonParams.put(keyParam, jsonParam);
+			for(String keyParam : jsonParams.keySet())
+			{
+				String jsonParam = gson.toJson(jsonParams.get(keyParam));			
+				
+				jsonParams.put(keyParam, jsonParam);
+			}
 		}
 	}
 	
