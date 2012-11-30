@@ -9,6 +9,6 @@ public class GlobalWS
 {
 	public List<TematicaDTO> obtenerListadoTematicas()
 	{
-		return (List<TematicaDTO>) WSProxyClient.call(UtilesAndorid.URL_WS_GLOBAL, "obtenerListadoTematicas", null, List.class);
+		return (List<TematicaDTO>) WSProxyClient.call(UtilesAndorid.URL_WS_GLOBAL, "obtenerListadoTematicas", null, List.class, TematicaDTO.class);
 	}
 }

@@ -14,7 +14,7 @@ public class EmpresaWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("empresaDTO", empresaDTO);
 		
-		return (Long) WSProxyClient.call(UtilesAndorid.URL_WS_EMPRESA, "insertar", params, Long.class);
+		return (Long) WSProxyClient.call(UtilesAndorid.URL_WS_EMPRESA, "insertar", params, Long.class, null);
 	}
 	
 	public void actualizar(EmpresaDTO empresaDTO)
@@ -22,7 +22,7 @@ public class EmpresaWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("empresaDTO", empresaDTO);
 		
-    	WSProxyClient.call(UtilesAndorid.URL_WS_EMPRESA, "actualizar", params, null);		
+    	WSProxyClient.call(UtilesAndorid.URL_WS_EMPRESA, "actualizar", params, null, null);		
 	}
 	
 	public void eliminar(Long idEmpresa)
@@ -30,7 +30,7 @@ public class EmpresaWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("idEmpresa", idEmpresa);
 		
-    	WSProxyClient.call(UtilesAndorid.URL_WS_EMPRESA, "eliminar", params, null);			
+    	WSProxyClient.call(UtilesAndorid.URL_WS_EMPRESA, "eliminar", params, null, null);			
 	}
 	
 	public EmpresaDTO obtener(Long idEmpresa)
@@ -38,11 +38,11 @@ public class EmpresaWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("idEmpresa", idEmpresa);
 		
-		return (EmpresaDTO) WSProxyClient.call(UtilesAndorid.URL_WS_EMPRESA, "obtener", params, EmpresaDTO.class);
+		return (EmpresaDTO) WSProxyClient.call(UtilesAndorid.URL_WS_EMPRESA, "obtener", params, EmpresaDTO.class, null);
 	}
 	
 	public List<EmpresaDTO> obtenerListado()
 	{
-		return (List<EmpresaDTO>) WSProxyClient.call(UtilesAndorid.URL_WS_EMPRESA, "obtenerListado", null, List.class);
+		return (List<EmpresaDTO>) WSProxyClient.call(UtilesAndorid.URL_WS_EMPRESA, "obtenerListado", null, List.class, EmpresaDTO.class);
 	}
 }

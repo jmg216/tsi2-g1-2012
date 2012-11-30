@@ -1,12 +1,8 @@
 package com.geored.frontoffice.wsclient;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
-
-import org.ksoap2.serialization.SoapObject;
 
 import com.geored.dto.UsuarioDTO;
 import com.geored.frontoffice.utiles.UtilesAndorid;
@@ -18,7 +14,7 @@ public class UsuarioWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("usuarioDTO", usuarioDTO);
 		
-		return (Long) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, "insertar", params, Long.class);
+		return (Long) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, "insertar", params, Long.class, null);
 	}
 	
 	public void actualizar(UsuarioDTO usuarioDTO)
@@ -26,7 +22,7 @@ public class UsuarioWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("usuarioDTO", usuarioDTO);
 		
-    	WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, "actualizar", params, null);		
+    	WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, "actualizar", params, null, null);		
 	}
 	
 	public void eliminar(Long idUsuario)
@@ -34,7 +30,7 @@ public class UsuarioWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("idUsuario", idUsuario);
 			
-		WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, "eliminar", params, null);
+		WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, "eliminar", params, null, null);
 	}
 	
 	public UsuarioDTO obtener(Long idUsuario)
@@ -42,12 +38,12 @@ public class UsuarioWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("idUsuario", idUsuario);
 		
-		return (UsuarioDTO) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, "obtener", params, UsuarioDTO.class);
+		return (UsuarioDTO) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, "obtener", params, UsuarioDTO.class, null);
 	}
 	
 	public List<UsuarioDTO> obtenerListado()
 	{		
-		return (List<UsuarioDTO>) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, "obtenerListado", null, List.class);
+		return (List<UsuarioDTO>) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, "obtenerListado", null, List.class, UsuarioDTO.class);
 	}
 	
 	public UsuarioDTO obtenerPorEmailYPass(String email, String pass)
@@ -56,7 +52,7 @@ public class UsuarioWS
 		params.put("email", email);
 		params.put("pass", pass);
 		
-		return (UsuarioDTO) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, "obtenerPorEmailYPass", params, UsuarioDTO.class);
+		return (UsuarioDTO) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, "obtenerPorEmailYPass", params, UsuarioDTO.class, null);
 
 	}
 }

@@ -14,7 +14,7 @@ public class AdminWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("administradorDTO", administradorDTO);
 		
-		return (Long) WSProxyClient.call(UtilesAndorid.URL_WS_ADMIN, "insertar", params, Long.class);
+		return (Long) WSProxyClient.call(UtilesAndorid.URL_WS_ADMIN, "insertar", params, Long.class, null);
 	}
 	
 	public void actualizar(AdministradorDTO administradorDTO)
@@ -22,7 +22,7 @@ public class AdminWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("administradorDTO", administradorDTO);
 		
-    	WSProxyClient.call(UtilesAndorid.URL_WS_ADMIN, "actualizar", params, null);		
+    	WSProxyClient.call(UtilesAndorid.URL_WS_ADMIN, "actualizar", params, null, null);		
 	}
 	
 	public void eliminar(Long idAdministrador)
@@ -30,7 +30,7 @@ public class AdminWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("idAdministrador", idAdministrador);
 		
-    	WSProxyClient.call(UtilesAndorid.URL_WS_ADMIN, "eliminar", params, null);			
+    	WSProxyClient.call(UtilesAndorid.URL_WS_ADMIN, "eliminar", params, null, null);			
 	}
 	
 	public AdministradorDTO obtener(Long idAdministrador)
@@ -38,11 +38,11 @@ public class AdminWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("idAdministrador", idAdministrador);
 		
-		return (AdministradorDTO) WSProxyClient.call(UtilesAndorid.URL_WS_ADMIN, "obtener", params, AdministradorDTO.class);
+		return (AdministradorDTO) WSProxyClient.call(UtilesAndorid.URL_WS_ADMIN, "obtener", params, AdministradorDTO.class, null);
 	}
 	
 	public List<AdministradorDTO> obtenerListado()
 	{
-		return (List<AdministradorDTO>) WSProxyClient.call(UtilesAndorid.URL_WS_ADMIN, "obtenerListado", null, List.class);
+		return (List<AdministradorDTO>) WSProxyClient.call(UtilesAndorid.URL_WS_ADMIN, "obtenerListado", null, List.class, AdministradorDTO.class);
 	}
 }

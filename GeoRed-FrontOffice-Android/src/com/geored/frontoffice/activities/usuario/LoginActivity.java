@@ -58,8 +58,8 @@ public class LoginActivity extends Activity implements OnClickListener  {
     	String email = txtEmail.getText().toString();
     	String pass = txtPass.getText().toString();
     	
-//    	email = "juan@gmail.com";
-//    	pass = "juan";
+    	email = "juan@gmail.com";
+    	pass = "juan";
 
     	UsuarioDTO usuarioDTO = usuarioWS.obtenerPorEmailYPass(email, pass);
     	
