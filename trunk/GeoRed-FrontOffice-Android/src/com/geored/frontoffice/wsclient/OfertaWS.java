@@ -14,7 +14,7 @@ public class OfertaWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("ofertaDTO", ofertaDTO);
 		
-		return (Long) WSProxyClient.call(UtilesAndorid.URL_WS_OFERTA, "insertar", params, Long.class);
+		return (Long) WSProxyClient.call(UtilesAndorid.URL_WS_OFERTA, "insertar", params, Long.class, null);
 	}
 	
 	public void actualizar(OfertaDTO ofertaDTO)
@@ -22,7 +22,7 @@ public class OfertaWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("ofertaDTO", ofertaDTO);
 		
-    	WSProxyClient.call(UtilesAndorid.URL_WS_OFERTA, "actualizar", params, null);		
+    	WSProxyClient.call(UtilesAndorid.URL_WS_OFERTA, "actualizar", params, null, null);		
 	}
 	
 	public void eliminar(Long idOferta)
@@ -30,7 +30,7 @@ public class OfertaWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("idOferta", idOferta);
 		
-    	WSProxyClient.call(UtilesAndorid.URL_WS_OFERTA, "eliminar", params, null);			
+    	WSProxyClient.call(UtilesAndorid.URL_WS_OFERTA, "eliminar", params, null, null);			
 	}
 	
 	public OfertaDTO obtener(Long idOferta)
@@ -38,11 +38,11 @@ public class OfertaWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("idOferta", idOferta);
 		
-		return (OfertaDTO) WSProxyClient.call(UtilesAndorid.URL_WS_OFERTA, "obtener", params, OfertaDTO.class);
+		return (OfertaDTO) WSProxyClient.call(UtilesAndorid.URL_WS_OFERTA, "obtener", params, OfertaDTO.class, null);
 	}
 	
 	public List<OfertaDTO> obtenerListado()
 	{
-		return (List<OfertaDTO>) WSProxyClient.call(UtilesAndorid.URL_WS_OFERTA, "obtenerListado", null, List.class);
+		return (List<OfertaDTO>) WSProxyClient.call(UtilesAndorid.URL_WS_OFERTA, "obtenerListado", null, List.class, OfertaDTO.class);
 	}
 }

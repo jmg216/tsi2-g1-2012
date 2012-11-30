@@ -1,5 +1,8 @@
 package com.geored.frontoffice.wsclient;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.ksoap2.SoapEnvelope;
@@ -20,15 +23,11 @@ public class WSProxyClient
 	public static final String NAMESPACE = "http://negocio.geored.com/";
 	public static final String SOAP_ACTION = "";	
 	
-	public static Object call(String url, String methodName, Object... params)
-	{
-		return null;
-	}
-	
 	/**
-     * Metodo que invoca los WebServices del Backend
+     * Metodo que invoca los WebServices del Backend.
+     * ListType sera distino de null, si returnType == java.util.List.class
      * */
-    public static Object call(String urlWS, String methodName, Map<String, Object> params, Class<?> returnType)
+    public static Object call(String urlWS, String methodName, Map<String, Object> params, Type returnType, Type listReturnType)
     {
     	// RequestObject
     	SoapObject requestObject = new SoapObject(NAMESPACE, "androidInvocation");
@@ -74,8 +73,24 @@ public class WSProxyClient
     			SoapPrimitive soapPrimitiveObject = (SoapPrimitive) response;
     			
     			if(returnType != null)
-        		{    			
-            		return gson.fromJson(soapPrimitiveObject.toString(), returnType);    		
+        		{    		
+    				Object retorno = gson.fromJson(soapPrimitiveObject.toString(), returnType);
+    				
+    				if(returnType.equals(List.class))
+    				{   
+    					List<Object> listaRetorno = new ArrayList<Object>();
+    					
+    					for(Object currObj : (List) retorno)
+    					{
+    						currObj = gson.toJson(currObj);
+    						
+    						listaRetorno.add(gson.fromJson((String) currObj, listReturnType));
+    					}
+    					
+    					retorno = listaRetorno;
+    				}
+    			    
+    				return retorno;
         		}
     		}    		    		
          }

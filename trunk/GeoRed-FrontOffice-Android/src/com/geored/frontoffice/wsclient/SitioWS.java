@@ -14,7 +14,7 @@ public class SitioWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("sitioDTO", sitioDTO);
 		
-		return (Long) WSProxyClient.call(UtilesAndorid.URL_WS_SITIO, "insertar", params, Long.class);
+		return (Long) WSProxyClient.call(UtilesAndorid.URL_WS_SITIO, "insertar", params, Long.class, null);
 	}
 	
 	public void actualizar(SitioDTO sitioDTO)
@@ -22,7 +22,7 @@ public class SitioWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("sitioDTO", sitioDTO);
 		
-    	WSProxyClient.call(UtilesAndorid.URL_WS_SITIO, "actualizar", params, null);		
+    	WSProxyClient.call(UtilesAndorid.URL_WS_SITIO, "actualizar", params, null, null);		
 	}
 	
 	public void eliminar(Long idSitio)
@@ -30,7 +30,7 @@ public class SitioWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("idSitio", idSitio);
 		
-    	WSProxyClient.call(UtilesAndorid.URL_WS_SITIO, "eliminar", params, null);			
+    	WSProxyClient.call(UtilesAndorid.URL_WS_SITIO, "eliminar", params, null, null);			
 	}
 	
 	public SitioDTO obtener(Long idSitio)
@@ -38,11 +38,11 @@ public class SitioWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("idSitio", idSitio);
 		
-		return (SitioDTO) WSProxyClient.call(UtilesAndorid.URL_WS_SITIO, "obtener", params, SitioDTO.class);
+		return (SitioDTO) WSProxyClient.call(UtilesAndorid.URL_WS_SITIO, "obtener", params, SitioDTO.class, null);
 	}
 	
 	public List<SitioDTO> obtenerListado()
 	{
-		return (List<SitioDTO>) WSProxyClient.call(UtilesAndorid.URL_WS_SITIO, "obtenerListado", null, List.class);
+		return (List<SitioDTO>) WSProxyClient.call(UtilesAndorid.URL_WS_SITIO, "obtenerListado", null, List.class, SitioDTO.class);
 	}
 }
