@@ -107,7 +107,11 @@ public class UtilesNegocio
 			
 			e.printStackTrace();
 		}
-		
+	}
+	
+	public static boolean isNullOrEmpty(String value)
+	{
+		return value == null || (value != null && value.length() == 0);
 	}
 
 }
