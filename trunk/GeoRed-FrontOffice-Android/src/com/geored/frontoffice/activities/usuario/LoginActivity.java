@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.geored.dto.UsuarioDTO;
 import com.geored.frontoffice.activities.R;
 import com.geored.frontoffice.activities.menu.MenuActivity;
+import com.geored.frontoffice.utiles.AlertaDialogManager;
 import com.geored.frontoffice.utiles.UtilesSeguridadAndroid;
 import com.geored.frontoffice.wsclient.FactoryWS;
 import com.geored.frontoffice.wsclient.GlobalWS;
@@ -29,14 +30,6 @@ public class LoginActivity extends Activity implements OnClickListener  {
 
 	
 	private UsuarioWS usuarioWS = FactoryWS.getInstancia().getUsuarioWS();
-	private GlobalWS globalWS = FactoryWS.getInstancia().getGlobalWS();
-	
-	private static final int TIEMPO_MENSAJE = 300000;
-	
-	private ProgressDialog m_ProgressDialog = null; 
-	private Runnable viewMenu;
-	
-	private Resources res;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,7 +38,6 @@ public class LoginActivity extends Activity implements OnClickListener  {
         
         TextView registro = (TextView) findViewById(R.id.linkRegistro);
         registro.setOnClickListener(this);
-        res = getResources();
         
     }
     
@@ -69,8 +61,7 @@ public class LoginActivity extends Activity implements OnClickListener  {
     	}
     	else
     	{
-    		messageToast(R.layout.custom_toast_message, TIEMPO_MENSAJE);
-    		
+    		AlertaDialogManager.showAlertDialog(this, getResources().getString(R.string.login), getResources().getString(R.string.error_login), false);
         	Intent registroActivity = new Intent (this, RegistroActivity.class);
         	startActivity(registroActivity);
     	}
@@ -82,21 +73,4 @@ public class LoginActivity extends Activity implements OnClickListener  {
     	Intent registroActivity = new Intent (this, RegistroActivity.class);
     	startActivity(registroActivity);			
 	}
-	
-    private void messageToast(int layout, int duration) 
-    {
-    	Resources res = getResources();
-		LayoutInflater inflater = getLayoutInflater();		 
-		View layoutView = inflater.inflate(layout, null);
-		// set a message
-		TextView text = (TextView) layoutView.findViewById(R.id.text);
-		text.setText(res.getString(R.string.error_login));    	
-    	//Toast
-    	Toast toast = new Toast(getApplicationContext()); 
-    	toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-    	toast.setDuration(duration);
-    	toast.setView(layoutView);
-    	toast.show();
-    }	
-
 }

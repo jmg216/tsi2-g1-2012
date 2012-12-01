@@ -2,9 +2,11 @@ package com.geored.frontoffice.activities.notificacion;
 
 import com.geored.frontoffice.activities.GCMIntentService;
 import com.geored.frontoffice.activities.R;
+import com.geored.frontoffice.utiles.AlertaDialogManager;
 import com.google.android.gcm.GCMRegistrar;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +16,7 @@ public class NotificacionesActivity extends Activity
 {
 	private static final String TAG = "RegistroActivity";
 	
+	//private Resources res = getResources();
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) 
@@ -26,15 +29,17 @@ public class NotificacionesActivity extends Activity
      * Invocado al momento de activar notificaciones en el tab Notificaciones.
      * */
     public void activarNotificaciones (View v)
-    {
-    	
-    	//Registro la aplicacion en GCM
-    	GCMIntentService.registerGCMService(this);
-    	
+    {    	
     	if (GCMRegistrar.isRegistered(this))
     	{
-    		//mandar toast mensaje de ya registro
-    	} 	  	    	
+    		AlertaDialogManager.showAlertDialog(this, getResources().getString(R.string.notificaciones), getResources().getString(R.string.notificacionesYaActivadas), true);
+    	}
+    	else
+    	{
+        	//Registro la aplicacion en GCM
+        	GCMIntentService.registerGCMService(this);   
+        	AlertaDialogManager.showAlertDialog(this, getResources().getString(R.string.notificaciones), getResources().getString(R.string.notificacionesActivadas), true);
+    	}
     }
     
     /**
@@ -45,11 +50,11 @@ public class NotificacionesActivity extends Activity
     	if (GCMRegistrar.isRegistered(this))
     	{
     		GCMIntentService.desregistrarGCMService(this);
-    		//mostrar alert usuario resregistrado.
+    		AlertaDialogManager.showAlertDialog(this, getResources().getString(R.string.notificaciones), getResources().getString(R.string.notificacionesDesactivadas), true);
     	}
     	else
     	{
-    		//mandar mensaje usuario no registrado.
+    		AlertaDialogManager.showAlertDialog(this, getResources().getString(R.string.notificaciones), getResources().getString(R.string.notificacionesNoActivas), false);
     	}
     	
     }
