@@ -4,6 +4,7 @@
     <string name="title_activity_main">GeoRedUy</string>
     
     <!-- Login -->
+    <string name="login">Login</string>
     <string name="usuario">Usuario</string>
 	<string name="password">Password</string>
 	<string name="ingresar">Ingresar</string>
@@ -56,4 +57,8 @@
 	<string name="error_login">Debes registrarte para utilizar esta aplicación. Registrate ahora!</string>
 	<string name="cargando">Cargando&#8230;</string>
 	<string name="obteniendo_datos">Obteniendo datos&#8230;</string>
+	<string name="notificacionesYaActivadas">Las notificaciones ya se encuentran activas.</string>
+	<string name="notificacionesNoActivas">Las notificaciones no se encuentran activas.</string>
+	<string name="notificacionesActivadas">Notificaciones activadas correctamente.</string>
+	<string name="notificacionesDesactivadas">Notificaciones desactivadas correctamente.</string>
 </resources>

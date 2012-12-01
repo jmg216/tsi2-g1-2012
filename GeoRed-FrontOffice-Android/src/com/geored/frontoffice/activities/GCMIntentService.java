@@ -18,8 +18,6 @@ public class GCMIntentService extends GCMBaseIntentService
 {
 	private UsuarioWS usuarioWS = FactoryWS.getInstancia().getUsuarioWS();	
 	private static final String TAG = "GCMIntentServiceGeored";
-    //private static final Object LOCK = GCMIntentService.class;	
-	//private static PowerManager.WakeLock sWakeLock;
 	
 	public GCMIntentService() 
 	{		

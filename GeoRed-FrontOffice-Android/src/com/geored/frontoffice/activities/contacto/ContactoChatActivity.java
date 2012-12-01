@@ -25,7 +25,8 @@ public class ContactoChatActivity extends Activity
 		messageText.requestFocus();	
 		
 		Bundle extras = this.getIntent().getExtras();		
-		//String msg = extras.getString("mensaje");
+		Long idContacto = extras.getLong("idContactoSeleccionado");
+		String nombreContacto = extras.getString("nombreContactoSeleccionado");
 		
 		//if (msg != null) 
 		//{
@@ -41,11 +42,11 @@ public class ContactoChatActivity extends Activity
 	/**
 	 * Muestra el mensaje y nombre del usuario en la ventana principal del chat.
 	 * */
-	private void appendToMessageHistory(String username, String message) 
+	private void appendToMessageHistory(String nombreUsuario, String mensaje) 
 	{
-		if (username != null && message != null) {
-			messageHistoryText.append(username + ":\n");								
-			messageHistoryText.append(message + "\n");	
+		if (nombreUsuario != null && mensaje != null) {
+			messageHistoryText.append(nombreUsuario + ":\n");								
+			messageHistoryText.append(nombreUsuario + "\n");	
 		}
 	}
 }
