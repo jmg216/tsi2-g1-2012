@@ -19,6 +19,8 @@ import com.geored.exceptions.DaoException;
 import com.geored.exceptions.NegocioException;
 import com.geored.persistencia.CheckInDAO;
 import com.geored.persistencia.UsuarioDAO;
+import com.geored.utiles.AndroidGCMPushNotification;
+import com.geored.utiles.UtilesNegocio;
 import com.geored.utiles.JsonParamsMap;
 import com.google.gson.Gson;
 
@@ -36,7 +38,11 @@ public class UsuarioServiceImpl implements UsuarioService
 	@WebMethod(operationName="androidInvocation")
 	public String androidInvocation(@WebParam(name="methodName") String methodName, @WebParam(name="methodParams") String methodParams) throws NegocioException, DaoException
 	{		
-		JsonParamsMap params = new JsonParamsMap(methodParams);
+		JsonParamsMap params = null;
+		if (!methodParams.isEmpty())
+		{
+			params = new JsonParamsMap(methodParams);
+		}
 		
 		if(methodName.equals("insertar"))
 		{		
@@ -62,7 +68,7 @@ public class UsuarioServiceImpl implements UsuarioService
 		{
 			Long idUsuario = (Long) params.getParam("idUsuario", Long.class);
 			
-			UsuarioDTO usuarioDTO = obtener(null);
+			UsuarioDTO usuarioDTO = obtener(idUsuario);
 			
 			return new Gson().toJson(usuarioDTO);
 		}
@@ -159,8 +165,20 @@ public class UsuarioServiceImpl implements UsuarioService
 		{
 			throw new NegocioException("Usuario no encontrado");
 		}
+		else
+		{
+			AndroidGCMPushNotification.enviarNotificaciones("10", usuarioDTO.getGcmRegId(), "Se ha logueado correctamente.");
+		}
 		
 		return usuarioDTO;
+	}
+	
+	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+	@WebMethod(operationName="sendMessageFromClient")
+	public void sendMessageFromClient(@WebParam(name="idUsuarioSend") Long idUsuarioSend, @WebParam (name="idUsuarioRecieve")Long idUsuarioRecieve, @WebParam(name="mensaje") String mensaje) throws NegocioException, DaoException
+	{
+		Usuario usuario = (Usuario) usuarioDAO.obtener(idUsuarioRecieve, false);
+		AndroidGCMPushNotification.enviarNotificaciones("10", usuario.getGcmRegId(), mensaje);
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
