@@ -1,5 +1,8 @@
 package com.geored.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AmistadDTO
 {
 	private Long id;
@@ -11,6 +14,8 @@ public class AmistadDTO
 	private Long idUsuarioB;
 	
 	private String nombreUsuarioB;
+	
+	private List<MensajeAmistadDTO> listaMensajesDTO = new ArrayList<MensajeAmistadDTO>();
 
 	public Long getId()
 	{
@@ -60,5 +65,15 @@ public class AmistadDTO
 	public void setNombreUsuarioB(String nombreUsuarioB)
 	{
 		this.nombreUsuarioB = nombreUsuarioB;
+	}
+
+	public List<MensajeAmistadDTO> getListaMensajesDTO()
+	{
+		return listaMensajesDTO;
+	}
+
+	public void setListaMensajesDTO(List<MensajeAmistadDTO> listaMensajesDTO)
+	{
+		this.listaMensajesDTO = listaMensajesDTO;
 	}
 }
