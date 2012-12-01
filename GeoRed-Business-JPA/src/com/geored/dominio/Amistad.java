@@ -1,6 +1,8 @@
 package com.geored.dominio;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -33,6 +36,9 @@ public class Amistad implements Serializable
 	@JoinColumn(name="USUARIO_B_FK", nullable=false)
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Usuario usuarioB;
+	
+	@OneToMany(mappedBy="amistad", fetch=FetchType.LAZY)
+	private List<MensajeAmistad> listaMensajes = new ArrayList<MensajeAmistad>();
 
 	public Long getId()
 	{

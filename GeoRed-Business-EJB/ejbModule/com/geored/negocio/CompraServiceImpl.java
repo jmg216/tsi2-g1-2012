@@ -16,7 +16,6 @@ import com.geored.dominio.Compra;
 import com.geored.dominio.Oferta;
 import com.geored.dominio.Usuario;
 import com.geored.dto.CompraDTO;
-import com.geored.dto.CompraDTO;
 import com.geored.exceptions.DaoException;
 import com.geored.exceptions.NegocioException;
 import com.geored.persistencia.CompraDAO;
@@ -78,7 +77,7 @@ public class CompraServiceImpl implements CompraService
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public Long insertar(CompraDTO compraDTO) throws NegocioException, DaoException
+	public Long insertar(@WebParam(name="compraDTO") CompraDTO compraDTO) throws NegocioException, DaoException
 	{
 		
 		Compra compraEntity = compraDAO.toEntity(compraDTO);
@@ -108,7 +107,7 @@ public class CompraServiceImpl implements CompraService
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public void actualizar(CompraDTO compraDTO) throws NegocioException, DaoException
+	public void actualizar(@WebParam(name="compraDTO") CompraDTO compraDTO) throws NegocioException, DaoException
 	{
 		Compra compraEntity = (Compra) compraDAO.obtener(compraDTO.getId(), false);
 		
@@ -142,7 +141,7 @@ public class CompraServiceImpl implements CompraService
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public void eliminar(Long idCompra) throws NegocioException, DaoException
+	public void eliminar(@WebParam(name="idCompra") Long idCompra) throws NegocioException, DaoException
 	{
 		Compra compraEntity = (Compra) compraDAO.obtener(idCompra, false);
 		
@@ -156,7 +155,7 @@ public class CompraServiceImpl implements CompraService
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
-	public CompraDTO obtener(Long idCompra) throws NegocioException, DaoException
+	public CompraDTO obtener(@WebParam(name="idCompra") Long idCompra) throws NegocioException, DaoException
 	{
 		CompraDTO compraDTO = (CompraDTO) compraDAO.obtener(idCompra, true);
 		
@@ -177,7 +176,7 @@ public class CompraServiceImpl implements CompraService
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
-	public List<CompraDTO> obtenerListadoPorOferta(Long idOferta) throws DaoException
+	public List<CompraDTO> obtenerListadoPorOferta(@WebParam(name="idOferta") Long idOferta) throws DaoException
 	{
 		return compraDAO.obtenerListadoPorOferta(idOferta, true);
 	}

@@ -121,7 +121,7 @@ public class EmpresaServiceImpl implements EmpresaService
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public Long insertar(EmpresaDTO empresaDTO)  throws NegocioException, DaoException
+	public Long insertar(@WebParam(name="empresaDTO") EmpresaDTO empresaDTO)  throws NegocioException, DaoException
 	{
 		if(empresaDAO.obtenerPorNombre(empresaDTO.getNombre(), false) != null)
 		{
@@ -150,7 +150,7 @@ public class EmpresaServiceImpl implements EmpresaService
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public void actualizar(EmpresaDTO empresaDTO)  throws NegocioException, DaoException
+	public void actualizar(@WebParam(name="empresaDTO") EmpresaDTO empresaDTO)  throws NegocioException, DaoException
 	{
 		Empresa empresaEntity = (Empresa) empresaDAO.obtenerPorNombre(empresaDTO.getNombre(), false);
 		
@@ -173,7 +173,7 @@ public class EmpresaServiceImpl implements EmpresaService
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public void eliminar(Long idEmpresa)  throws NegocioException, DaoException
+	public void eliminar(@WebParam(name="idEmpres") Long idEmpresa)  throws NegocioException, DaoException
 	{
 		Empresa empresaEntity = (Empresa) empresaDAO.obtener(idEmpresa, false);
 		
@@ -192,7 +192,7 @@ public class EmpresaServiceImpl implements EmpresaService
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
-	public EmpresaDTO obtener(Long idEmpresa)  throws NegocioException, DaoException
+	public EmpresaDTO obtener(@WebParam(name="idEmpresa") Long idEmpresa)  throws NegocioException, DaoException
 	{
 		EmpresaDTO empresaDTO = (EmpresaDTO) empresaDAO.obtener(idEmpresa, true);
 		
@@ -213,7 +213,7 @@ public class EmpresaServiceImpl implements EmpresaService
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
-	public LocalDTO obtenerLocal(Long idLocal) throws NegocioException, DaoException
+	public LocalDTO obtenerLocal(@WebParam(name="idLocal") Long idLocal) throws NegocioException, DaoException
 	{
 		LocalDTO localDTO = (LocalDTO) localDAO.obtener(idLocal, true);
 		
@@ -227,7 +227,7 @@ public class EmpresaServiceImpl implements EmpresaService
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public Long insertarLocal(LocalDTO localDTO) throws NegocioException, DaoException
+	public Long insertarLocal(@WebParam(name="localDTO") LocalDTO localDTO) throws NegocioException, DaoException
 	{
 		if(localDAO.obtenerLocalPorNombreYEmpresa(localDTO.getNombre(), localDTO.getIdEmpresa(), false) != null)
 		{
@@ -255,7 +255,7 @@ public class EmpresaServiceImpl implements EmpresaService
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public void actualizarLocal(LocalDTO localDTO) throws NegocioException, DaoException
+	public void actualizarLocal(@WebParam(name="localDTO") LocalDTO localDTO) throws NegocioException, DaoException
 	{
 		Local localEntity = (Local) localDAO.obtenerLocalPorNombreYEmpresa(localDTO.getNombre(), localDTO.getIdEmpresa(), false); 
 		
@@ -278,7 +278,7 @@ public class EmpresaServiceImpl implements EmpresaService
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public void eliminarLocal(Long idLocal) throws NegocioException, DaoException
+	public void eliminarLocal(@WebParam(name="idLocal") Long idLocal) throws NegocioException, DaoException
 	{
 		Local localEntity = (Local) localDAO.obtener(idLocal, false);
 		
@@ -304,14 +304,14 @@ public class EmpresaServiceImpl implements EmpresaService
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
-	public List<EmpresaDTO> obtenerListadoPorAdministrador(Long idAdministrador) throws DaoException
+	public List<EmpresaDTO> obtenerListadoPorAdministrador(@WebParam(name="idAdministrador") Long idAdministrador) throws DaoException
 	{
 		return empresaDAO.obtenerListadoPorAdministrador(idAdministrador, true);
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
-	public List<LocalDTO> obtenerListadoLocalesPorEmpresa(Long idEmpresa) throws DaoException
+	public List<LocalDTO> obtenerListadoLocalesPorEmpresa(@WebParam(name="idEmpres") Long idEmpresa) throws DaoException
 	{
 		return localDAO.obtenerListadoPorEmpresa(idEmpresa, true);
 	}

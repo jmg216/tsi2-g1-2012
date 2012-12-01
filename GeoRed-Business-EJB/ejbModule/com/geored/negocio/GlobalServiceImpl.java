@@ -12,7 +12,6 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
-import com.geored.dto.OfertaDTO;
 import com.geored.dto.TematicaDTO;
 import com.geored.dto.TipoAdministradorDTO;
 import com.geored.dto.TipoNotificacionDTO;

@@ -15,7 +15,6 @@ import javax.jws.WebService;
 import com.geored.dominio.Administrador;
 import com.geored.dominio.TipoAdministrador;
 import com.geored.dto.AdministradorDTO;
-import com.geored.dto.AdministradorDTO;
 import com.geored.exceptions.DaoException;
 import com.geored.exceptions.NegocioException;
 import com.geored.persistencia.AdministradorDAO;
@@ -74,7 +73,7 @@ public class AdminServiceImpl implements AdminService
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public Long insertar(AdministradorDTO administradorDTO) throws NegocioException, DaoException
+	public Long insertar(@WebParam(name="administradorDTO") AdministradorDTO administradorDTO) throws NegocioException, DaoException
 	{
 		//Verifico no exista otro administrador con el mismo email
 		if(administradorDAO.obtenerAdminPorEmail(administradorDTO.getEmail(), false) != null)
@@ -100,7 +99,7 @@ public class AdminServiceImpl implements AdminService
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public void actualizar(AdministradorDTO administradorDTO) throws NegocioException, DaoException
+	public void actualizar(@WebParam(name="administradorDTO") AdministradorDTO administradorDTO) throws NegocioException, DaoException
 	{
 		//Verifico no exista otro administrador con el mismo email
 		Administrador administradorEntity = (Administrador) administradorDAO.obtenerAdminPorEmail(administradorDTO.getEmail(), false);
@@ -124,7 +123,7 @@ public class AdminServiceImpl implements AdminService
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED) 
 	@WebMethod
-	public void eliminar(Long idAdministrador) throws NegocioException, DaoException
+	public void eliminar(@WebParam(name="idAdministrador") Long idAdministrador) throws NegocioException, DaoException
 	{
 		if(UtilesNegocio.ID_ADMIN_PRINCIPAL.equals(idAdministrador))
 		{
@@ -156,7 +155,7 @@ public class AdminServiceImpl implements AdminService
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
-	public AdministradorDTO obtener(Long idAdministrador) throws NegocioException, DaoException
+	public AdministradorDTO obtener(@WebParam(name="idAdministrador") Long idAdministrador) throws NegocioException, DaoException
 	{
 		AdministradorDTO administradorDTO = (AdministradorDTO) administradorDAO.obtener(idAdministrador, true);
 		
@@ -176,7 +175,7 @@ public class AdminServiceImpl implements AdminService
 	}
 
 	@Override
-	public AdministradorDTO obtenerAdminPorEmailYPass(String email, String pass) throws NegocioException, DaoException
+	public AdministradorDTO obtenerAdminPorEmailYPass(@WebParam(name="email") String email, @WebParam(name="pass") String pass) throws NegocioException, DaoException
 	{
 		AdministradorDTO adminDTO = (AdministradorDTO) administradorDAO.obtenerAdminPorEmailYPass(email, pass, true);
 		
@@ -189,7 +188,7 @@ public class AdminServiceImpl implements AdminService
 	}
 
 	@Override
-	public List<AdministradorDTO> obtenerListadoPorTipo(Long idTipoAdmin) throws DaoException
+	public List<AdministradorDTO> obtenerListadoPorTipo(@WebParam(name="idTipoAdmin") Long idTipoAdmin) throws DaoException
 	{
 		return administradorDAO.obtenerListadoPorTipo(idTipoAdmin, true);
 	}

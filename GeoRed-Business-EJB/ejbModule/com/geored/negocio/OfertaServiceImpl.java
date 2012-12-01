@@ -17,7 +17,6 @@ import com.geored.dominio.Local;
 import com.geored.dominio.Oferta;
 import com.geored.dominio.Tematica;
 import com.geored.dto.OfertaDTO;
-import com.geored.dto.SitioDTO;
 import com.geored.dto.TematicaDTO;
 import com.geored.exceptions.DaoException;
 import com.geored.exceptions.NegocioException;
@@ -80,7 +79,7 @@ public class OfertaServiceImpl implements OfertaService
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public Long insertar(OfertaDTO ofertaDTO) throws NegocioException, DaoException
+	public Long insertar(@WebParam(name="ofertaDTO") OfertaDTO ofertaDTO) throws NegocioException, DaoException
 	{
 		if(ofertaDAO.obtenerPorNombreYLocal(ofertaDTO.getNombre(), ofertaDTO.getIdLocal(), false) != null)
 		{
@@ -107,7 +106,7 @@ public class OfertaServiceImpl implements OfertaService
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public void actualizar(OfertaDTO ofertaDTO) throws NegocioException, DaoException
+	public void actualizar(@WebParam(name="ofertaDTO") OfertaDTO ofertaDTO) throws NegocioException, DaoException
 	{
 		Oferta ofertaEntity = (Oferta) ofertaDAO.obtenerPorNombreYLocal(ofertaDTO.getNombre(), ofertaDTO.getIdLocal(), false);
 		
@@ -169,7 +168,7 @@ public class OfertaServiceImpl implements OfertaService
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public void eliminar(Long idOferta) throws NegocioException, DaoException
+	public void eliminar(@WebParam(name="idOferta") Long idOferta) throws NegocioException, DaoException
 	{
 		Oferta ofertaEntity = (Oferta) ofertaDAO.obtener(idOferta, false);
 		
@@ -183,7 +182,7 @@ public class OfertaServiceImpl implements OfertaService
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
-	public OfertaDTO obtener(Long idOferta) throws NegocioException, DaoException
+	public OfertaDTO obtener(@WebParam(name="idOferta") Long idOferta) throws NegocioException, DaoException
 	{
 		OfertaDTO ofertaDTO = (OfertaDTO) ofertaDAO.obtener(idOferta, true);
 		
@@ -204,7 +203,7 @@ public class OfertaServiceImpl implements OfertaService
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
-	public List<OfertaDTO> obtenerListadoPorEmpresa(Long idEmpresa) throws DaoException
+	public List<OfertaDTO> obtenerListadoPorEmpresa(@WebParam(name="idEmpresa") Long idEmpresa) throws DaoException
 	{
 		return ofertaDAO.obtenerListadoPorEmpresa(idEmpresa, true);
 	}

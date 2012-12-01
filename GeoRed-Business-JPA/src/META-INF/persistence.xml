@@ -18,5 +18,6 @@
 		<class>com.geored.dominio.TipoNotificacion</class>
 		<class>com.geored.dominio.Empresa</class>
 		<class>com.geored.dominio.Compra</class>
+		<class>com.geored.dominio.MensajeAmistad</class>
 	</persistence-unit>
 </persistence>

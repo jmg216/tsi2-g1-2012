@@ -8,9 +8,10 @@
 package com.geored.negocio;
 
 public interface SitioServiceImpl extends java.rmi.Remote {
-    public void actualizar(com.geored.negocio.SitioDTO arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
+    public java.lang.String androidInvocation(java.lang.String methodName, java.lang.String methodParams) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
+    public void actualizar(com.geored.negocio.SitioDTO sitioDTO) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
     public com.geored.negocio.SitioDTO[] obtenerListado() throws java.rmi.RemoteException, com.geored.negocio.DaoException;
-    public void eliminar(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
-    public java.lang.Long insertar(com.geored.negocio.SitioDTO arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
-    public com.geored.negocio.SitioDTO obtener(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
+    public void eliminar(java.lang.Long idSitio) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
+    public java.lang.Long insertar(com.geored.negocio.SitioDTO sitioDTO) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
+    public com.geored.negocio.SitioDTO obtener(java.lang.Long idSitio) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
 }

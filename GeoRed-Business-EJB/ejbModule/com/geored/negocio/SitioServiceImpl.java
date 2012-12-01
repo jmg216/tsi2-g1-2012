@@ -74,7 +74,7 @@ public class SitioServiceImpl implements SitioService
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public Long insertar(SitioDTO sitioDTO) throws NegocioException, DaoException
+	public Long insertar(@WebParam(name="sitioDTO") SitioDTO sitioDTO) throws NegocioException, DaoException
 	{
 		if(sitioDAO.obtenerSitioPorNombre(sitioDTO.getNombre(), false) != null)
 		{
@@ -92,7 +92,7 @@ public class SitioServiceImpl implements SitioService
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public void actualizar(SitioDTO sitioDTO) throws NegocioException, DaoException
+	public void actualizar(@WebParam(name="sitioDTO") SitioDTO sitioDTO) throws NegocioException, DaoException
 	{
 		Sitio sitioEntity = (Sitio) sitioDAO.obtenerSitioPorNombre(sitioDTO.getNombre(), false);
 		
@@ -146,7 +146,7 @@ public class SitioServiceImpl implements SitioService
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public void eliminar(Long idSitio) throws NegocioException, DaoException
+	public void eliminar(@WebParam(name="idSitio") Long idSitio) throws NegocioException, DaoException
 	{
 		Sitio sitioEntity = (Sitio) sitioDAO.obtener(idSitio, false);
 		
@@ -165,7 +165,7 @@ public class SitioServiceImpl implements SitioService
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
-	public SitioDTO obtener(Long idSitio) throws NegocioException, DaoException
+	public SitioDTO obtener(@WebParam(name="idSitio") Long idSitio) throws NegocioException, DaoException
 	{
 		SitioDTO sitioDTO = (SitioDTO) sitioDAO.obtener(idSitio, true);
 		

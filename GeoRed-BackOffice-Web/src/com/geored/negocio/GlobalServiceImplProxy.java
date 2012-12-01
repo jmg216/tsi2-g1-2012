@@ -44,6 +44,12 @@ public class GlobalServiceImplProxy implements com.geored.negocio.GlobalServiceI
     return globalServiceImpl;
   }
   
+  public java.lang.String androidInvocation(java.lang.String methodName, java.lang.String methodParams) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+    if (globalServiceImpl == null)
+      _initGlobalServiceImplProxy();
+    return globalServiceImpl.androidInvocation(methodName, methodParams);
+  }
+  
   public com.geored.negocio.TematicaDTO[] obtenerListadoTematicas() throws java.rmi.RemoteException, com.geored.negocio.DaoException{
     if (globalServiceImpl == null)
       _initGlobalServiceImplProxy();

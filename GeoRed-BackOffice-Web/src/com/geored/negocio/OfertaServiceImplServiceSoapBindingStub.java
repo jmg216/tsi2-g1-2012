@@ -16,7 +16,7 @@ public class OfertaServiceImplServiceSoapBindingStub extends org.apache.axis.cli
     static org.apache.axis.description.OperationDesc [] _operations;
 
     static {
-        _operations = new org.apache.axis.description.OperationDesc[6];
+        _operations = new org.apache.axis.description.OperationDesc[7];
         _initOperationDesc1();
     }
 
@@ -24,11 +24,16 @@ public class OfertaServiceImplServiceSoapBindingStub extends org.apache.axis.cli
         org.apache.axis.description.OperationDesc oper;
         org.apache.axis.description.ParameterDesc param;
         oper = new org.apache.axis.description.OperationDesc();
-        oper.setName("actualizar");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "arg0"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://negocio.geored.com/", "ofertaDTO"), com.geored.negocio.OfertaDTO.class, false, false);
+        oper.setName("androidInvocation");
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "methodName"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
         param.setOmittable(true);
         oper.addParameter(param);
-        oper.setReturnType(org.apache.axis.encoding.XMLType.AXIS_VOID);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "methodParams"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
+        param.setOmittable(true);
+        oper.addParameter(param);
+        oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        oper.setReturnClass(java.lang.String.class);
+        oper.setReturnQName(new javax.xml.namespace.QName("", "return"));
         oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
         oper.addFault(new org.apache.axis.description.FaultDesc(
@@ -46,23 +51,8 @@ public class OfertaServiceImplServiceSoapBindingStub extends org.apache.axis.cli
         _operations[0] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
-        oper.setName("obtenerListado");
-        oper.setReturnType(new javax.xml.namespace.QName("http://negocio.geored.com/", "ofertaDTO"));
-        oper.setReturnClass(com.geored.negocio.OfertaDTO[].class);
-        oper.setReturnQName(new javax.xml.namespace.QName("", "return"));
-        oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
-        oper.setUse(org.apache.axis.constants.Use.LITERAL);
-        oper.addFault(new org.apache.axis.description.FaultDesc(
-                      new javax.xml.namespace.QName("http://negocio.geored.com/", "DaoException"),
-                      "com.geored.negocio.DaoException",
-                      new javax.xml.namespace.QName("http://negocio.geored.com/", "DaoException"), 
-                      true
-                     ));
-        _operations[1] = oper;
-
-        oper = new org.apache.axis.description.OperationDesc();
-        oper.setName("eliminar");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "arg0"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"), java.lang.Long.class, false, false);
+        oper.setName("actualizar");
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "ofertaDTO"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://negocio.geored.com/", "ofertaDTO"), com.geored.negocio.OfertaDTO.class, false, false);
         param.setOmittable(true);
         oper.addParameter(param);
         oper.setReturnType(org.apache.axis.encoding.XMLType.AXIS_VOID);
@@ -80,11 +70,48 @@ public class OfertaServiceImplServiceSoapBindingStub extends org.apache.axis.cli
                       new javax.xml.namespace.QName("http://negocio.geored.com/", "DaoException"), 
                       true
                      ));
+        _operations[1] = oper;
+
+        oper = new org.apache.axis.description.OperationDesc();
+        oper.setName("obtenerListado");
+        oper.setReturnType(new javax.xml.namespace.QName("http://negocio.geored.com/", "ofertaDTO"));
+        oper.setReturnClass(com.geored.negocio.OfertaDTO[].class);
+        oper.setReturnQName(new javax.xml.namespace.QName("", "return"));
+        oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
+        oper.setUse(org.apache.axis.constants.Use.LITERAL);
+        oper.addFault(new org.apache.axis.description.FaultDesc(
+                      new javax.xml.namespace.QName("http://negocio.geored.com/", "DaoException"),
+                      "com.geored.negocio.DaoException",
+                      new javax.xml.namespace.QName("http://negocio.geored.com/", "DaoException"), 
+                      true
+                     ));
         _operations[2] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
+        oper.setName("eliminar");
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "idOferta"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"), java.lang.Long.class, false, false);
+        param.setOmittable(true);
+        oper.addParameter(param);
+        oper.setReturnType(org.apache.axis.encoding.XMLType.AXIS_VOID);
+        oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
+        oper.setUse(org.apache.axis.constants.Use.LITERAL);
+        oper.addFault(new org.apache.axis.description.FaultDesc(
+                      new javax.xml.namespace.QName("http://negocio.geored.com/", "NegocioException"),
+                      "com.geored.negocio.NegocioException",
+                      new javax.xml.namespace.QName("http://negocio.geored.com/", "NegocioException"), 
+                      true
+                     ));
+        oper.addFault(new org.apache.axis.description.FaultDesc(
+                      new javax.xml.namespace.QName("http://negocio.geored.com/", "DaoException"),
+                      "com.geored.negocio.DaoException",
+                      new javax.xml.namespace.QName("http://negocio.geored.com/", "DaoException"), 
+                      true
+                     ));
+        _operations[3] = oper;
+
+        oper = new org.apache.axis.description.OperationDesc();
         oper.setName("insertar");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "arg0"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://negocio.geored.com/", "ofertaDTO"), com.geored.negocio.OfertaDTO.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "ofertaDTO"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://negocio.geored.com/", "ofertaDTO"), com.geored.negocio.OfertaDTO.class, false, false);
         param.setOmittable(true);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
@@ -104,11 +131,11 @@ public class OfertaServiceImplServiceSoapBindingStub extends org.apache.axis.cli
                       new javax.xml.namespace.QName("http://negocio.geored.com/", "DaoException"), 
                       true
                      ));
-        _operations[3] = oper;
+        _operations[4] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("obtener");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "arg0"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"), java.lang.Long.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "idOferta"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"), java.lang.Long.class, false, false);
         param.setOmittable(true);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("http://negocio.geored.com/", "ofertaDTO"));
@@ -128,11 +155,11 @@ public class OfertaServiceImplServiceSoapBindingStub extends org.apache.axis.cli
                       new javax.xml.namespace.QName("http://negocio.geored.com/", "DaoException"), 
                       true
                      ));
-        _operations[4] = oper;
+        _operations[5] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("obtenerListadoPorEmpresa");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "arg0"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"), java.lang.Long.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "idEmpresa"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"), java.lang.Long.class, false, false);
         param.setOmittable(true);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("http://negocio.geored.com/", "ofertaDTO"));
@@ -146,7 +173,7 @@ public class OfertaServiceImplServiceSoapBindingStub extends org.apache.axis.cli
                       new javax.xml.namespace.QName("http://negocio.geored.com/", "DaoException"), 
                       true
                      ));
-        _operations[5] = oper;
+        _operations[6] = oper;
 
     }
 
@@ -273,7 +300,7 @@ public class OfertaServiceImplServiceSoapBindingStub extends org.apache.axis.cli
         }
     }
 
-    public void actualizar(com.geored.negocio.OfertaDTO arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException {
+    public java.lang.String androidInvocation(java.lang.String methodName, java.lang.String methodParams) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -285,11 +312,56 @@ public class OfertaServiceImplServiceSoapBindingStub extends org.apache.axis.cli
         _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
         _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
         _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
+        _call.setOperationName(new javax.xml.namespace.QName("http://negocio.geored.com/", "androidInvocation"));
+
+        setRequestHeaders(_call);
+        setAttachments(_call);
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {methodName, methodParams});
+
+        if (_resp instanceof java.rmi.RemoteException) {
+            throw (java.rmi.RemoteException)_resp;
+        }
+        else {
+            extractAttachments(_call);
+            try {
+                return (java.lang.String) _resp;
+            } catch (java.lang.Exception _exception) {
+                return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
+            }
+        }
+  } catch (org.apache.axis.AxisFault axisFaultException) {
+    if (axisFaultException.detail != null) {
+        if (axisFaultException.detail instanceof java.rmi.RemoteException) {
+              throw (java.rmi.RemoteException) axisFaultException.detail;
+         }
+        if (axisFaultException.detail instanceof com.geored.negocio.NegocioException) {
+              throw (com.geored.negocio.NegocioException) axisFaultException.detail;
+         }
+        if (axisFaultException.detail instanceof com.geored.negocio.DaoException) {
+              throw (com.geored.negocio.DaoException) axisFaultException.detail;
+         }
+   }
+  throw axisFaultException;
+}
+    }
+
+    public void actualizar(com.geored.negocio.OfertaDTO ofertaDTO) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException {
+        if (super.cachedEndpoint == null) {
+            throw new org.apache.axis.NoEndPointException();
+        }
+        org.apache.axis.client.Call _call = createCall();
+        _call.setOperation(_operations[1]);
+        _call.setUseSOAPAction(true);
+        _call.setSOAPActionURI("");
+        _call.setEncodingStyle(null);
+        _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
+        _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
+        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
         _call.setOperationName(new javax.xml.namespace.QName("http://negocio.geored.com/", "actualizar"));
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {arg0});
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {ofertaDTO});
 
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;
@@ -316,7 +388,7 @@ public class OfertaServiceImplServiceSoapBindingStub extends org.apache.axis.cli
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[1]);
+        _call.setOperation(_operations[2]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -353,12 +425,12 @@ public class OfertaServiceImplServiceSoapBindingStub extends org.apache.axis.cli
 }
     }
 
-    public void eliminar(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException {
+    public void eliminar(java.lang.Long idOferta) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[2]);
+        _call.setOperation(_operations[3]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -369,7 +441,7 @@ public class OfertaServiceImplServiceSoapBindingStub extends org.apache.axis.cli
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {arg0});
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {idOferta});
 
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;
@@ -391,12 +463,12 @@ public class OfertaServiceImplServiceSoapBindingStub extends org.apache.axis.cli
 }
     }
 
-    public java.lang.Long insertar(com.geored.negocio.OfertaDTO arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException {
+    public java.lang.Long insertar(com.geored.negocio.OfertaDTO ofertaDTO) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[3]);
+        _call.setOperation(_operations[4]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -407,7 +479,7 @@ public class OfertaServiceImplServiceSoapBindingStub extends org.apache.axis.cli
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {arg0});
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {ofertaDTO});
 
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;
@@ -436,12 +508,12 @@ public class OfertaServiceImplServiceSoapBindingStub extends org.apache.axis.cli
 }
     }
 
-    public com.geored.negocio.OfertaDTO obtener(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException {
+    public com.geored.negocio.OfertaDTO obtener(java.lang.Long idOferta) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[4]);
+        _call.setOperation(_operations[5]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -452,7 +524,7 @@ public class OfertaServiceImplServiceSoapBindingStub extends org.apache.axis.cli
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {arg0});
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {idOferta});
 
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;
@@ -481,12 +553,12 @@ public class OfertaServiceImplServiceSoapBindingStub extends org.apache.axis.cli
 }
     }
 
-    public com.geored.negocio.OfertaDTO[] obtenerListadoPorEmpresa(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.DaoException {
+    public com.geored.negocio.OfertaDTO[] obtenerListadoPorEmpresa(java.lang.Long idEmpresa) throws java.rmi.RemoteException, com.geored.negocio.DaoException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[5]);
+        _call.setOperation(_operations[6]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -497,7 +569,7 @@ public class OfertaServiceImplServiceSoapBindingStub extends org.apache.axis.cli
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {arg0});
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {idEmpresa});
 
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;
