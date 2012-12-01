@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<h:body>
+		<ui:composition template="/xhtml/templates/layout.xhtml">
+			<ui:define name="content">	
+				<h:form id="gestionEventoForm">					
+					<h1 class="titulo-content">Gestión de Eventos</h1>
+					
+					<table width="100%">
+						<tr>
+							<td style="vertical-align: top;">
+								<table>
+									<h:inputHidden value="#{gestionEventoBean.eventoDTO.id}"/>
+									<c:if test="#{gestionEventoBean.eventoDTO.id > 0}">
+										<tr>
+											<td><h:outputText value="Id:" /></td>
+											<td><p:inputText value="#{gestionEventoBean.eventoDTO.id}" disabled="true"/></td>
+										</tr>
+									</c:if>																		
+									<tr>
+										<td><h:outputText value="Nombre:" /></td>
+										<td>
+											<p:inputText id="nombreEvento" value="#{gestionEventoBean.eventoDTO.nombre}"/>
+											<p:message for="nombreEvento" />
+										</td>
+									</tr>	
+									<tr>
+										<td><h:outputText value="Descripcion:" /></td>
+										<td>
+											<p:inputText id="descripcionEvento" value="#{gestionEventoBean.eventoDTO.descripcion}"/>
+											<p:message for="descripcionEvento"/>
+										</td>
+									</tr>	
+									<tr>
+										<td><h:outputText value="Fecha inicio:" /></td>
+										<td>
+											<p:calendar id="fechaInicioEvento" value="#{gestionEventoBean.eventoDTO.fechaInicio}" pattern="dd/MM/yyyy HH:mm">
+												<f:converter converterId="com.geored.backoffice.converter.CalendarConverter"/>
+											</p:calendar>
+											<p:message for="fechaInicioEvento"/>
+										</td>
+									</tr>
+									<tr>
+										<td><h:outputText value="Fecha fin:" /></td>
+										<td>
+											<p:calendar id="fechaFinEvento" value="#{gestionEventoBean.eventoDTO.fechaFin}" pattern="dd/MM/yyyy HH:mm">
+												<f:converter converterId="com.geored.backoffice.converter.CalendarConverter"/>
+											</p:calendar>
+											<p:message for="fechaFinEvento"/>
+										</td>
+									</tr>
+									
+									<tr>
+										<td style="vertical-align: top;"><h:outputText value="Temáticas:"/></td>
+										<td>
+											<p:selectManyCheckbox id="tematicasEvento" value="#{gestionEventoBean.tematicasSeleccionadas}" layout="pageDirection">  
+									            <f:selectItems value="#{gestionEventoBean.listaTematicas}" var="tematica" itemValue="#{tematica.id}" itemLabel="#{tematica.nombre}" />  
+									        </p:selectManyCheckbox>  
+									        <p:message for="tematicasEvento"/>
+										</td>
+									</tr>																					
+								</table>
+							</td>
+							<td style="vertical-align: top; width: 60%">
+								<table width="100%;">									
+									<tr>
+										<td colspan="2"><div id="containerMapaEvento" style="width: 100%; height: 350px; display: none;" class="black-shadow"></div></td>
+									</tr>
+									<c:if test="#{!utilesWeb.isNullOrEmpty(gestionEventoBean.eventoDTO.ubicacionGeografica)}">	
+										<script type="text/javascript">
+											$(function(){
+												refreshMapaEvento();	
+											})											
+										</script>
+									</c:if>
+									<tr>
+										<td><h:outputText value="Ubicación geográfica, click en el campo para cambiar:" /></td>
+										<td>
+											<p:inputText id="ubicacionEvento" widgetVar="widgetUbicacionEvento" style="cursor: pointer;" value="#{gestionEventoBean.eventoDTO.ubicacionGeografica}" 
+												onfocus="showMapaSelector(this.id, refreshMapaEvento)" onclick="showMapaSelector(this.id, refreshMapaEvento)" onkeydown="return false;"/>
+											<p:message for="ubicacionEvento"/>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+					
+					<div class="areaBotones">
+						<ul>
+							<li>
+								<p:commandButton value="Volver" action="#{gestionEventoBean.toListadoEventos()}"/>	
+							</li>
+							<li>
+								<p:commandButton value="Guardar" action="#{gestionEventoBean.guardarEvento()}"/>	
+							</li>
+						</ul>									
+					</div>					
+				</h:form>	
+				
+				<script type="text/javascript">
+					function refreshMapaEvento()
+					{
+						var containerMapa = $("#containerMapaEvento");
+
+						if(containerMapa.css("display") == "none")
+						{
+							containerMapa.css("display", "block");		
+						}
+						
+						var splitUbicacionEvento = widgetUbicacionEvento.jq.val().split(",");
+						
+						var latitud = splitUbicacionEvento[0];
+						var longitud = splitUbicacionEvento[1];
+
+						var latLngEvento = new google.maps.LatLng(latitud, longitud);
+						var myOptions = {
+					      zoom: 10,
+					      center: latLngEvento,
+					      mapTypeId: google.maps.MapTypeId.ROADMAP
+					    };
+					    
+					    var mapEvento = new google.maps.Map(containerMapa[0], myOptions);
+
+						// Agrego un marcador en el mapa
+					    new google.maps.Marker({
+					        position: latLngEvento,
+					        map: mapEvento
+					    });					    
+					}
+				</script>			
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>	

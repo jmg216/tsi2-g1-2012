@@ -1,0 +1,127 @@
+body
+{
+    font-size: 12px;
+    font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif !important;
+    color: #000000;
+    text-align: justify;
+    margin: 0px;    
+}
+
+input, select, textarea
+{
+    font-size: 12px;
+    border: 1px #000000 solid;
+    font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif !important;
+	width: 300px;     
+}
+
+#page
+{
+	width: 70%;
+	margin-left: auto;
+	margin-right: auto;	
+}
+
+#header
+{
+	width: 100%;
+	height: 80px;
+}
+
+#content
+{
+	width: 100%;
+	min-height: 300px;
+	margin: 10px 5px 0px 5px;
+}
+
+#footer
+{
+	background-color: #FFFFFF;
+	width: 71%;
+	height: 40px;	
+	position: fixed;
+	bottom: 0px;
+	text-align: right;
+	font-size: 11px;
+	margin-top: 10px;
+}
+
+.ui-menuitem-text
+{
+	font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif !important;
+}
+
+.session-status-container
+{
+	position: absolute;
+	right: 15%;
+	top: 50px;
+}
+
+.simple-link
+{
+	text-decoration: none;
+	color: #000000;
+	font-weight: bold;
+}
+
+.titulo-content
+{
+	font-size: 18px;
+	font-weight: bold;
+	font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif !important;
+}
+
+.areaBotones
+{
+	margin-top: 30px;
+	margin-bottom: 10px;
+	background-color: #DEEDF8;
+	width: 100%;
+	text-align: right;
+	border-radius: 5px 5px 5px 5px;
+	box-shadow: 0px 0px 10px #4A8EC6;
+   -webkit-box-shadow: 0px 0px 10px #4A8EC6;
+   -moz-box-shadow: 0px 5px 10px #4A8EC6;
+}
+
+.areaBotones ul
+{
+	margin: 0px 10px 0px 0px;
+	padding: 0px;
+	list-style: none;
+	padding-top: 5px;
+	padding-bottom: 5px;		
+}
+
+.areaBotones ul li
+{
+	display: inline;
+	padding: 5px 0px 5px 0px;
+}
+
+.black-shadow
+{
+	box-shadow: 0px 0px 10px #262626;
+	-webkit-box-shadow: 0px 0px 10px #262626;
+	-moz-box-shadow: 0px 5px 10px #262626
+}
+
+.container-bienvenido ul
+{
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+.container-bienvenido ul li
+{
+	display: inline;
+	float: left;
+	padding-left: 5px;
+	padding-right: 5px;
+	height: 20px;
+	line-height: 20px;
+	border-left: 1px solid #000000;
+}

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:orientation="vertical"
+    android:padding="10dp" 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/celeste">
+    
+    <TextView   
+        android:layout_width="match_parent"
+       	android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/azul"
+        android:text="@string/mensajes"/>
+    
+    <EditText 	
+        android:id="@+id/messageHistory"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inputType="none"
+        android:focusable="false"
+        android:clickable="true"	
+        android:layout_weight="1"
+        android:gravity="top"
+        android:scrollbars="vertical"
+        android:scrollbarSize="10dp"/> 
+        
+    <LinearLayout 
+        android:orientation="horizontal"
+    	android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:layout_weight="4">
+		
+			<EditText
+			    android:id="@+id/message"
+			    android:layout_width="227dp"
+			    android:layout_height="match_parent"
+			    android:gravity="top"
+			    android:inputType="none" />
+		      			 		  
+		    <Button 
+		        android:id="@+id/enviarButton"
+		        android:layout_width="match_parent"
+		        android:layout_height="match_parent"
+		        android:layout_weight="4"
+		        android:text="@string/enviar"
+		        android:onClick="enviarMensaje"/>   
+	</LinearLayout>
+
+</LinearLayout>
