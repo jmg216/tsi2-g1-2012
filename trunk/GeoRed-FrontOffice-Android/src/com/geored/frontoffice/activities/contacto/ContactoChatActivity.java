@@ -25,16 +25,27 @@ public class ContactoChatActivity extends Activity
 		messageText.requestFocus();	
 		
 		Bundle extras = this.getIntent().getExtras();		
-		String msg = extras.getString("mensaje");
+		//String msg = extras.getString("mensaje");
 		
-		if (msg != null) 
-		{
-		}		
+		//if (msg != null) 
+		//{
+		//S}		
 		
 	}
 	
 	public void enviarMensaje(View view)
 	{
 		
+	}
+	
+	/**
+	 * Muestra el mensaje y nombre del usuario en la ventana principal del chat.
+	 * */
+	private void appendToMessageHistory(String username, String message) 
+	{
+		if (username != null && message != null) {
+			messageHistoryText.append(username + ":\n");								
+			messageHistoryText.append(message + "\n");	
+		}
 	}
 }

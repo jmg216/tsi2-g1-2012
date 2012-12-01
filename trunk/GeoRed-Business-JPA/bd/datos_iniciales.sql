@@ -75,7 +75,7 @@ insert into geored.sitio_tematica (TEMATICA_FK, SITIO_FK) values (3, 6);
 /* Usuarios de la aplicación */
 insert into geored.usuario (ID, EMAIL, NOMBRE, PASS, URL_IMAGEN) values (1, 'vanessa@gmail.com', 'Vanessa Revetria', 'vanessa', 'https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-ash4/405360_10151190370950526_1747813305_n.jpg');
 
-insert into geored.usuario (ID, EMAIL, NOMBRE, PASS, URL_IMAGEN) values (2, 'juan@gmail.com', 'Juan Miraballes', 'juan', 'https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-snc7/399982_285605288159727_192778982_n.jpg');
+insert into geored.usuario (ID, EMAIL, NOMBRE, PASS, URL_IMAGEN) values (2, 'juanma.miraballes@gmail.com', 'Juan Miraballes', 'juan', 'https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-snc7/399982_285605288159727_192778982_n.jpg');
 
 insert into geored.usuario (ID, EMAIL, NOMBRE, PASS, URL_IMAGEN) values (3, 'maximiliano@gmail.com', 'Maximiliano silvera', 'Maximiliano', 'https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-ash3/576335_3810865271033_638128563_n.jpg');
 

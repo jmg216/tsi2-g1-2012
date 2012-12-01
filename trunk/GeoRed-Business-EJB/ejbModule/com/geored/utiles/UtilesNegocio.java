@@ -20,6 +20,11 @@ public class UtilesNegocio
 {
 	public static final Long ID_ADMIN_PRINCIPAL = 1L;
 	
+	public static final String PROYECT_ID = "121239138891";
+	
+	public static final String API_KEY_GCM = "AIzaSyA-sjjWHPR2JIHEipdGAFKH8rLcK25Od1A";
+	
+	
 	public static final double radioTierraKm = 6371;
 	
 	public static double CalcularDistanciaCoordenadas(String strLat1, String strLon1, String strLat2, String strLon2)
