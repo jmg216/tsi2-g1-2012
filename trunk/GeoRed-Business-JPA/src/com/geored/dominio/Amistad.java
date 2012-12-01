@@ -69,6 +69,14 @@ public class Amistad implements Serializable
 	{
 		this.usuarioB = usuarioB;
 	}
-	
-	
+
+	public List<MensajeAmistad> getListaMensajes()
+	{
+		return listaMensajes;
+	}
+
+	public void setListaMensajes(List<MensajeAmistad> listaMensajes)
+	{
+		this.listaMensajes = listaMensajes;
+	}
 }

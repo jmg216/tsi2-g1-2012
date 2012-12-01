@@ -1,5 +1,6 @@
 package com.geored.persistencia;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
@@ -12,6 +13,9 @@ import com.geored.persistencia.core.GenericDAOBase;
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class AmistadDAOImpl extends GenericDAOBase<Amistad, AmistadDTO> implements AmistadDAO
 {
+	@EJB
+	private MensajeAmistadDAO mensajeAmistadDAO;
+	
 	@Override
 	public void toEntity(AmistadDTO source, Amistad target)
 	{		
@@ -33,5 +37,10 @@ public class AmistadDAOImpl extends GenericDAOBase<Amistad, AmistadDTO> implemen
 			target.setIdUsuarioB(source.getUsuarioB().getId());
 			target.setNombreUsuarioB(source.getUsuarioB().getNombre());
 		}	
+		
+		if(source.getListaMensajes() != null)
+		{
+			target.setListaMensajesDTO(mensajeAmistadDAO.toDtoList(source.getListaMensajes()));
+		}
 	}	
 }
