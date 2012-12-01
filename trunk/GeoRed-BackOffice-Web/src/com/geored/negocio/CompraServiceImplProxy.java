@@ -44,10 +44,16 @@ public class CompraServiceImplProxy implements com.geored.negocio.CompraServiceI
     return compraServiceImpl;
   }
   
-  public void actualizar(com.geored.negocio.CompraDTO arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+  public java.lang.String androidInvocation(java.lang.String methodName, java.lang.String methodParams) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
     if (compraServiceImpl == null)
       _initCompraServiceImplProxy();
-    compraServiceImpl.actualizar(arg0);
+    return compraServiceImpl.androidInvocation(methodName, methodParams);
+  }
+  
+  public void actualizar(com.geored.negocio.CompraDTO compraDTO) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+    if (compraServiceImpl == null)
+      _initCompraServiceImplProxy();
+    compraServiceImpl.actualizar(compraDTO);
   }
   
   public com.geored.negocio.CompraDTO[] obtenerListado() throws java.rmi.RemoteException, com.geored.negocio.DaoException{
@@ -56,28 +62,28 @@ public class CompraServiceImplProxy implements com.geored.negocio.CompraServiceI
     return compraServiceImpl.obtenerListado();
   }
   
-  public void eliminar(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+  public com.geored.negocio.CompraDTO[] obtenerListadoPorOferta(java.lang.Long idOferta) throws java.rmi.RemoteException, com.geored.negocio.DaoException{
     if (compraServiceImpl == null)
       _initCompraServiceImplProxy();
-    compraServiceImpl.eliminar(arg0);
+    return compraServiceImpl.obtenerListadoPorOferta(idOferta);
   }
   
-  public java.lang.Long insertar(com.geored.negocio.CompraDTO arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+  public void eliminar(java.lang.Long idCompra) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
     if (compraServiceImpl == null)
       _initCompraServiceImplProxy();
-    return compraServiceImpl.insertar(arg0);
+    compraServiceImpl.eliminar(idCompra);
   }
   
-  public com.geored.negocio.CompraDTO obtener(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+  public java.lang.Long insertar(com.geored.negocio.CompraDTO compraDTO) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
     if (compraServiceImpl == null)
       _initCompraServiceImplProxy();
-    return compraServiceImpl.obtener(arg0);
+    return compraServiceImpl.insertar(compraDTO);
   }
   
-  public com.geored.negocio.CompraDTO[] obtenerListadoPorOferta(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.DaoException{
+  public com.geored.negocio.CompraDTO obtener(java.lang.Long idCompra) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
     if (compraServiceImpl == null)
       _initCompraServiceImplProxy();
-    return compraServiceImpl.obtenerListadoPorOferta(arg0);
+    return compraServiceImpl.obtener(idCompra);
   }
   
   

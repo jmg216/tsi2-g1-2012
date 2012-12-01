@@ -74,7 +74,7 @@ public class EventoServiceImpl implements EventoService
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public Long insertar(EventoDTO eventoDTO)  throws NegocioException, DaoException
+	public Long insertar(@WebParam(name="eventoDTO") EventoDTO eventoDTO)  throws NegocioException, DaoException
 	{	
 		if(eventoDAO.obtenerPorNombre(eventoDTO.getNombre(), false) != null)
 		{
@@ -92,7 +92,7 @@ public class EventoServiceImpl implements EventoService
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public void actualizar(EventoDTO eventoDTO)  throws NegocioException, DaoException
+	public void actualizar(@WebParam(name="eventoDTO") EventoDTO eventoDTO)  throws NegocioException, DaoException
 	{
 		try
 		{
@@ -145,7 +145,7 @@ public class EventoServiceImpl implements EventoService
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public void eliminar(Long idEvento)  throws NegocioException, DaoException
+	public void eliminar(@WebParam(name="idEvento") Long idEvento)  throws NegocioException, DaoException
 	{
 		Evento eventoEntity = (Evento) eventoDAO.obtener(idEvento, false);
 		
@@ -159,7 +159,7 @@ public class EventoServiceImpl implements EventoService
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
-	public EventoDTO obtener(Long idEvento)  throws NegocioException, DaoException
+	public EventoDTO obtener(@WebParam(name="idEvento") Long idEvento)  throws NegocioException, DaoException
 	{
 		EventoDTO eventoDTO = (EventoDTO) eventoDAO.obtener(idEvento, true);
 		

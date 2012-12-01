@@ -1,5 +1,6 @@
 package com.geored.negocio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -12,15 +13,27 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
+import com.geored.dominio.Amistad;
+import com.geored.dominio.MensajeAmistad;
+import com.geored.dominio.Notificacion;
+import com.geored.dominio.Tematica;
+import com.geored.dominio.TipoNotificacion;
 import com.geored.dominio.Usuario;
 import com.geored.dto.CheckInDTO;
+import com.geored.dto.MensajeAmistadDTO;
+import com.geored.dto.NotificacionDTO;
+import com.geored.dto.TematicaDTO;
 import com.geored.dto.UsuarioDTO;
 import com.geored.exceptions.DaoException;
 import com.geored.exceptions.NegocioException;
+import com.geored.persistencia.AmistadDAO;
 import com.geored.persistencia.CheckInDAO;
+import com.geored.persistencia.MensajeAmistadDAO;
+import com.geored.persistencia.NotificacionDAO;
+import com.geored.persistencia.TematicaDAO;
+import com.geored.persistencia.TipoNotificacionDAO;
 import com.geored.persistencia.UsuarioDAO;
 import com.geored.utiles.AndroidGCMPushNotification;
-import com.geored.utiles.UtilesNegocio;
 import com.geored.utiles.JsonParamsMap;
 import com.google.gson.Gson;
 
@@ -35,14 +48,25 @@ public class UsuarioServiceImpl implements UsuarioService
 	@EJB
 	private CheckInDAO checkInDAO;
 	
+	@EJB
+	private MensajeAmistadDAO mensajeAmistadDAO;
+	
+	@EJB
+	private AmistadDAO amistadDAO;
+	
+	@EJB
+	private NotificacionDAO notificacionDAO;
+	
+	@EJB
+	private TipoNotificacionDAO tipoNotificacionDAO;
+	
+	@EJB
+	private TematicaDAO tematicaDAO;
+	
 	@WebMethod(operationName="androidInvocation")
 	public String androidInvocation(@WebParam(name="methodName") String methodName, @WebParam(name="methodParams") String methodParams) throws NegocioException, DaoException
 	{		
-		JsonParamsMap params = null;
-		if (!methodParams.isEmpty())
-		{
-			params = new JsonParamsMap(methodParams);
-		}
+		JsonParamsMap params = new JsonParamsMap(methodParams);
 		
 		if(methodName.equals("insertar"))
 		{		
@@ -89,6 +113,22 @@ public class UsuarioServiceImpl implements UsuarioService
 		{
 			return new Gson().toJson(obtenerListadoCheckIns());
 		}
+		else if(methodName.equals("enviarMensajeChat"))
+		{
+			MensajeAmistadDTO mensajeAmistadDTO = (MensajeAmistadDTO) params.getParam("mensajeAmistadDTO", MensajeAmistadDTO.class);
+			
+			Long idMensaje = enviarMensajeChat(mensajeAmistadDTO);
+			
+			return new Gson().toJson(idMensaje);
+		}
+		else if(methodName.equals("enviarNotificacion"))
+		{
+			NotificacionDTO notificacionDTO = (NotificacionDTO) params.getParam("notificacionDTO", NotificacionDTO.class);
+			
+			Long idNotificacion = enviarNotificacion(notificacionDTO);
+			
+			return new Gson().toJson(idNotificacion);
+		}
 	
 		return "";
 	}
@@ -97,7 +137,14 @@ public class UsuarioServiceImpl implements UsuarioService
 	@WebMethod(operationName="insertar")
 	public Long insertar(@WebParam(name="usuarioDTO") UsuarioDTO usuarioDTO) throws NegocioException, DaoException
 	{
+		if(usuarioDAO.obtenerUsuarioPorEmail(usuarioDTO.getEmail(), false) != null)
+		{
+			throw new NegocioException("Ya existe un usuario con este mail");
+		}
+		
 		Usuario usuarioEntity = usuarioDAO.toEntity(usuarioDTO);
+		
+		asociarTematicas(usuarioDTO, usuarioEntity);
 		
 		usuarioDAO.insertar(usuarioEntity);
 		
@@ -108,7 +155,14 @@ public class UsuarioServiceImpl implements UsuarioService
 	@WebMethod(operationName="actualizar")
 	public void actualizar(@WebParam(name="usuarioDTO") UsuarioDTO usuarioDTO) throws NegocioException, DaoException
 	{
-		Usuario usuarioEntity = (Usuario) usuarioDAO.obtener(usuarioDTO.getId(), false);
+		Usuario usuarioEntity = (Usuario) usuarioDAO.obtenerUsuarioPorEmail(usuarioDTO.getEmail(), false); 
+				
+		if(usuarioEntity != null && !usuarioEntity.getId().equals(usuarioDTO.getId()))
+		{
+			throw new NegocioException("Ya existe un usuario con este email");
+		}
+		
+		usuarioEntity = (Usuario) usuarioDAO.obtener(usuarioDTO.getId(), false);
 		
 		if(usuarioEntity == null)
 		{
@@ -117,7 +171,37 @@ public class UsuarioServiceImpl implements UsuarioService
 		
 		usuarioDAO.toEntity(usuarioDTO, usuarioEntity);
 		
+		asociarTematicas(usuarioDTO, usuarioEntity);
+		
 		usuarioDAO.actualizar(usuarioEntity);			
+	}
+	
+	private void asociarTematicas(UsuarioDTO usuarioDTO, Usuario usuarioEntity) throws DaoException, NegocioException
+	{
+		// Cargo la lista de tematicas para el sitio
+		if(usuarioEntity.getListaTematicas() == null)
+		{
+			usuarioEntity.setListaTematicas(new ArrayList<Tematica>());
+		}
+		else
+		{
+			usuarioEntity.getListaTematicas().clear();
+		}
+		
+		if(usuarioDTO.getListaTematicasDTO() != null)
+		{			
+			for(TematicaDTO tematicaDTO : usuarioDTO.getListaTematicasDTO())
+			{
+				Tematica tematica = (Tematica) tematicaDAO.obtener(tematicaDTO.getId(), false);
+				
+				if(tematica == null)
+				{
+					throw new NegocioException("La tematica (" + tematicaDTO.getId() + ") no existe");
+				}
+				
+				usuarioEntity.getListaTematicas().add(tematica);
+			}
+		}
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -172,19 +256,78 @@ public class UsuarioServiceImpl implements UsuarioService
 		
 		return usuarioDTO;
 	}
-	
-	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
-	@WebMethod(operationName="sendMessageFromClient")
-	public void sendMessageFromClient(@WebParam(name="idUsuarioSend") Long idUsuarioSend, @WebParam (name="idUsuarioRecieve")Long idUsuarioRecieve, @WebParam(name="mensaje") String mensaje) throws NegocioException, DaoException
-	{
-		Usuario usuario = (Usuario) usuarioDAO.obtener(idUsuarioRecieve, false);
-		AndroidGCMPushNotification.enviarNotificaciones("10", usuario.getGcmRegId(), mensaje);
-	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod(operationName="obtenerListadoCheckIns")
 	public List<CheckInDTO> obtenerListadoCheckIns() throws DaoException
 	{
 		return checkInDAO.obtenerListado(true);
+	}
+
+	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+	@WebMethod(operationName="enviarMensajeChat")
+	public Long enviarMensajeChat(@WebParam(name="mensajeAmistadDTO") MensajeAmistadDTO mensajeAmistadDTO) throws NegocioException, DaoException
+	{
+		MensajeAmistad mensajeAmistad = mensajeAmistadDAO.toEntity(mensajeAmistadDTO);
+		
+		Amistad amistad = (Amistad) amistadDAO.obtener(mensajeAmistadDTO.getIdAmistad(), false);
+		
+		if(amistad == null)
+		{
+			throw new NegocioException("Amistad no encontrada");
+		}
+		
+		Usuario remitente = (Usuario) usuarioDAO.obtener(mensajeAmistadDTO.getIdRemitente(), false);
+		
+		if(remitente == null)
+		{
+			throw new NegocioException("Remitente no encontrado");
+		}
+		
+		mensajeAmistad.setAmistad(amistad);
+		
+		mensajeAmistad.setRemitente(remitente);
+		
+		mensajeAmistadDAO.insertar(mensajeAmistad);
+		
+		Long idDestinatario = amistad.getUsuarioA().getId();
+		
+		if(idDestinatario.equals(remitente.getId()))
+		{
+			idDestinatario = amistad.getUsuarioB().getId();
+		}
+		
+		AndroidGCMPushNotification.enviarNotificaciones("10", idDestinatario.toString(), mensajeAmistad.getMensaje());
+		
+		return mensajeAmistad.getId();
+	}
+
+	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+	@WebMethod(operationName="enviarNotificacion")
+	public Long enviarNotificacion(@WebParam(name="notificacionDTO") NotificacionDTO notificacionDTO) throws NegocioException, DaoException
+	{
+		Notificacion notificacion = notificacionDAO.toEntity(notificacionDTO);
+		
+		TipoNotificacion tipoNotificacion = (TipoNotificacion) notificacionDAO.obtener(notificacionDTO.getIdTipoNotificacion(), false);
+		
+		if(tipoNotificacion == null)
+		{
+			throw new NegocioException("Tipo de notificacion no encontrada");
+		}
+		
+		Usuario usuario = (Usuario) usuarioDAO.obtener(notificacionDTO.getIdUsuario(), false);
+		
+		if(usuario == null)
+		{
+			throw new NegocioException("Usuario no encontrado");
+		}
+		
+		notificacion.setTipoNotificacion(tipoNotificacion);
+		
+		notificacion.setUsuario(usuario);
+		
+		notificacionDAO.insertar(notificacion);
+		
+		return notificacion.getId();
 	}	
 }

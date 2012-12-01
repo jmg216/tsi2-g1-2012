@@ -5,6 +5,8 @@ import java.util.List;
 import javax.ejb.Local;
 
 import com.geored.dto.CheckInDTO;
+import com.geored.dto.MensajeAmistadDTO;
+import com.geored.dto.NotificacionDTO;
 import com.geored.dto.UsuarioDTO;
 import com.geored.exceptions.DaoException;
 import com.geored.exceptions.NegocioException;
@@ -27,8 +29,11 @@ public interface UsuarioService
 	
 	public UsuarioDTO obtenerPorEmailYPass(String email, String pass) throws NegocioException, DaoException;
 	
-	public void sendMessageFromClient(Long idUsuarioSend, Long idUsuarioRecieve, String mensaje) throws NegocioException, DaoException;
-	
 	// OPERACIONES CON CHECK-INS
 	public List<CheckInDTO> obtenerListadoCheckIns() throws DaoException;
-}
+	
+	// OPERACIONES MENSAJES Y NOTIFICACIONES
+	public Long enviarMensajeChat(MensajeAmistadDTO mensajeAmistadDTO) throws NegocioException, DaoException;
+	
+	public Long enviarNotificacion(NotificacionDTO notificacionDTO) throws NegocioException, DaoException;
+} 

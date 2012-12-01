@@ -44,6 +44,18 @@ public class UsuarioServiceImplProxy implements com.geored.negocio.UsuarioServic
     return usuarioServiceImpl;
   }
   
+  public java.lang.String androidInvocation(java.lang.String methodName, java.lang.String methodParams) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+    if (usuarioServiceImpl == null)
+      _initUsuarioServiceImplProxy();
+    return usuarioServiceImpl.androidInvocation(methodName, methodParams);
+  }
+  
+  public java.lang.Long enviarMensajeChat(com.geored.negocio.MensajeAmistadDTO mensajeAmistadDTO) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+    if (usuarioServiceImpl == null)
+      _initUsuarioServiceImplProxy();
+    return usuarioServiceImpl.enviarMensajeChat(mensajeAmistadDTO);
+  }
+  
   public com.geored.negocio.CheckInDTO[] obtenerListadoCheckIns() throws java.rmi.RemoteException, com.geored.negocio.DaoException{
     if (usuarioServiceImpl == null)
       _initUsuarioServiceImplProxy();
@@ -84,6 +96,12 @@ public class UsuarioServiceImplProxy implements com.geored.negocio.UsuarioServic
     if (usuarioServiceImpl == null)
       _initUsuarioServiceImplProxy();
     return usuarioServiceImpl.obtener(idUsuario);
+  }
+  
+  public java.lang.Long enviarNotificacion(com.geored.negocio.NotificacionDTO notificacionDTO) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+    if (usuarioServiceImpl == null)
+      _initUsuarioServiceImplProxy();
+    return usuarioServiceImpl.enviarNotificacion(notificacionDTO);
   }
   
   

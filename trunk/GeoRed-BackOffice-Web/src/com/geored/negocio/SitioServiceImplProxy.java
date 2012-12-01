@@ -44,10 +44,16 @@ public class SitioServiceImplProxy implements com.geored.negocio.SitioServiceImp
     return sitioServiceImpl;
   }
   
-  public void actualizar(com.geored.negocio.SitioDTO arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+  public java.lang.String androidInvocation(java.lang.String methodName, java.lang.String methodParams) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
     if (sitioServiceImpl == null)
       _initSitioServiceImplProxy();
-    sitioServiceImpl.actualizar(arg0);
+    return sitioServiceImpl.androidInvocation(methodName, methodParams);
+  }
+  
+  public void actualizar(com.geored.negocio.SitioDTO sitioDTO) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+    if (sitioServiceImpl == null)
+      _initSitioServiceImplProxy();
+    sitioServiceImpl.actualizar(sitioDTO);
   }
   
   public com.geored.negocio.SitioDTO[] obtenerListado() throws java.rmi.RemoteException, com.geored.negocio.DaoException{
@@ -56,22 +62,22 @@ public class SitioServiceImplProxy implements com.geored.negocio.SitioServiceImp
     return sitioServiceImpl.obtenerListado();
   }
   
-  public void eliminar(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+  public void eliminar(java.lang.Long idSitio) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
     if (sitioServiceImpl == null)
       _initSitioServiceImplProxy();
-    sitioServiceImpl.eliminar(arg0);
+    sitioServiceImpl.eliminar(idSitio);
   }
   
-  public java.lang.Long insertar(com.geored.negocio.SitioDTO arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+  public java.lang.Long insertar(com.geored.negocio.SitioDTO sitioDTO) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
     if (sitioServiceImpl == null)
       _initSitioServiceImplProxy();
-    return sitioServiceImpl.insertar(arg0);
+    return sitioServiceImpl.insertar(sitioDTO);
   }
   
-  public com.geored.negocio.SitioDTO obtener(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+  public com.geored.negocio.SitioDTO obtener(java.lang.Long idSitio) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
     if (sitioServiceImpl == null)
       _initSitioServiceImplProxy();
-    return sitioServiceImpl.obtener(arg0);
+    return sitioServiceImpl.obtener(idSitio);
   }
   
   

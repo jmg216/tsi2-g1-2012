@@ -8,10 +8,11 @@
 package com.geored.negocio;
 
 public interface CompraServiceImpl extends java.rmi.Remote {
-    public void actualizar(com.geored.negocio.CompraDTO arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
+    public java.lang.String androidInvocation(java.lang.String methodName, java.lang.String methodParams) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
+    public void actualizar(com.geored.negocio.CompraDTO compraDTO) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
     public com.geored.negocio.CompraDTO[] obtenerListado() throws java.rmi.RemoteException, com.geored.negocio.DaoException;
-    public com.geored.negocio.CompraDTO[] obtenerListadoPorOferta(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.DaoException;
-    public void eliminar(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
-    public java.lang.Long insertar(com.geored.negocio.CompraDTO arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
-    public com.geored.negocio.CompraDTO obtener(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
+    public com.geored.negocio.CompraDTO[] obtenerListadoPorOferta(java.lang.Long idOferta) throws java.rmi.RemoteException, com.geored.negocio.DaoException;
+    public void eliminar(java.lang.Long idCompra) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
+    public java.lang.Long insertar(com.geored.negocio.CompraDTO compraDTO) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
+    public com.geored.negocio.CompraDTO obtener(java.lang.Long idCompra) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
 }

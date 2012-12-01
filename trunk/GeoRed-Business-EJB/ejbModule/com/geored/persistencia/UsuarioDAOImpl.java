@@ -12,6 +12,7 @@ import com.geored.dominio.Usuario;
 import com.geored.dto.TematicaDTO;
 import com.geored.dto.UsuarioDTO;
 import com.geored.exceptions.DaoException;
+import com.geored.exceptions.NegocioException;
 import com.geored.persistencia.core.GenericDAOBase;
 
 @Stateless
@@ -70,8 +71,30 @@ public class UsuarioDAOImpl extends GenericDAOBase<Usuario, UsuarioDTO> implemen
 		}
 		catch(Throwable e)
 		{
-			throw new DaoException(e.getMessage());
-		
+			throw new DaoException(e.getMessage());		
 		}		
     }
+
+	@Override
+	public Object obtenerUsuarioPorEmail(String email, boolean toDTO) throws NegocioException, DaoException
+	{
+		try
+		{
+			Query query = em.createQuery("select u from com.geored.dominio.Usuario u where u.email = ?1");        
+	        query.setParameter(1, email);        
+	        
+	        Usuario usuarioEntity = ((Usuario) query.getSingleResult());
+	        
+	        if(toDTO)
+	        {
+	             return toDto(usuarioEntity);
+	        }
+	       
+	        return usuarioEntity;
+		}
+		catch(Throwable e)
+		{
+			throw new DaoException(e.getMessage());		
+		}	
+	}
 }

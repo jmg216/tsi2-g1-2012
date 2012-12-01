@@ -44,10 +44,16 @@ public class OfertaServiceImplProxy implements com.geored.negocio.OfertaServiceI
     return ofertaServiceImpl;
   }
   
-  public void actualizar(com.geored.negocio.OfertaDTO arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+  public java.lang.String androidInvocation(java.lang.String methodName, java.lang.String methodParams) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
     if (ofertaServiceImpl == null)
       _initOfertaServiceImplProxy();
-    ofertaServiceImpl.actualizar(arg0);
+    return ofertaServiceImpl.androidInvocation(methodName, methodParams);
+  }
+  
+  public void actualizar(com.geored.negocio.OfertaDTO ofertaDTO) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+    if (ofertaServiceImpl == null)
+      _initOfertaServiceImplProxy();
+    ofertaServiceImpl.actualizar(ofertaDTO);
   }
   
   public com.geored.negocio.OfertaDTO[] obtenerListado() throws java.rmi.RemoteException, com.geored.negocio.DaoException{
@@ -56,28 +62,28 @@ public class OfertaServiceImplProxy implements com.geored.negocio.OfertaServiceI
     return ofertaServiceImpl.obtenerListado();
   }
   
-  public void eliminar(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+  public void eliminar(java.lang.Long idOferta) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
     if (ofertaServiceImpl == null)
       _initOfertaServiceImplProxy();
-    ofertaServiceImpl.eliminar(arg0);
+    ofertaServiceImpl.eliminar(idOferta);
   }
   
-  public java.lang.Long insertar(com.geored.negocio.OfertaDTO arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+  public java.lang.Long insertar(com.geored.negocio.OfertaDTO ofertaDTO) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
     if (ofertaServiceImpl == null)
       _initOfertaServiceImplProxy();
-    return ofertaServiceImpl.insertar(arg0);
+    return ofertaServiceImpl.insertar(ofertaDTO);
   }
   
-  public com.geored.negocio.OfertaDTO[] obtenerListadoPorEmpresa(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.DaoException{
+  public com.geored.negocio.OfertaDTO[] obtenerListadoPorEmpresa(java.lang.Long idEmpresa) throws java.rmi.RemoteException, com.geored.negocio.DaoException{
     if (ofertaServiceImpl == null)
       _initOfertaServiceImplProxy();
-    return ofertaServiceImpl.obtenerListadoPorEmpresa(arg0);
+    return ofertaServiceImpl.obtenerListadoPorEmpresa(idEmpresa);
   }
   
-  public com.geored.negocio.OfertaDTO obtener(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+  public com.geored.negocio.OfertaDTO obtener(java.lang.Long idOferta) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
     if (ofertaServiceImpl == null)
       _initOfertaServiceImplProxy();
-    return ofertaServiceImpl.obtener(arg0);
+    return ofertaServiceImpl.obtener(idOferta);
   }
   
   
