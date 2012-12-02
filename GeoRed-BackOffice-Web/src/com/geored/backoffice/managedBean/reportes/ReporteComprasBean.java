@@ -53,9 +53,6 @@ public class ReporteComprasBean extends BaseBean implements Serializable
 			OfertaDTO [] arrayOfertas = getOfertaPort().obtenerListado();
 			
 			listadoOfertas = Arrays.asList(arrayOfertas);
-			listadoCompras = new ArrayList<CompraDTO>();
-			
-			
 			pieModel = new PieChartModel();
 			
 			//Conversion de Date To Calendar
@@ -67,16 +64,26 @@ public class ReporteComprasBean extends BaseBean implements Serializable
 			for (OfertaDTO oferta: listadoOfertas)
 			{
 				CompraDTO[] arrayComprasOferta = getCompraPort().obtenerListadoPorOferta(oferta.getId());
-				listadoComprasOferta = Arrays.asList(arrayComprasOferta);
 				
-				for(CompraDTO compra: listadoComprasOferta)
+				if(arrayComprasOferta != null)
 				{
-					if(compra.getFechaCreacion().after(fechaIni) && compra.getFechaCreacion().before(fechaFi)) 
+					listadoComprasOferta = Arrays.asList(arrayComprasOferta);
+					listadoCompras = new ArrayList<CompraDTO>();
+					
+					for(CompraDTO compra: listadoComprasOferta)
 					{
-						listadoCompras.add(compra);
-						pieModel.set(oferta.getNombre(), listadoCompras.size());
-						
+						if(compra.getFechaCreacion().after(fechaIni) && compra.getFechaCreacion().before(fechaFi)) 
+						{
+							listadoCompras.add(compra);
+							pieModel.set(oferta.getNombre(), listadoCompras.size());
+							
+						}
 					}
+					
+				}
+				else 
+				{
+					continue;
 				}
 					
 			}
