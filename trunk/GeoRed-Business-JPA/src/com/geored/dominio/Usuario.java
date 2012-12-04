@@ -43,6 +43,12 @@ public class Usuario implements Serializable
 	@Column(name="URL_IMAGEN")
 	private String urlImagen;
 	
+	@Column(name="UBICACION_ACTUAL")
+	private String ubicacionActual;
+	
+	@Column(name="CONECTADO")
+	private Boolean conectado;
+	
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="usuario_tematica",
 	joinColumns =

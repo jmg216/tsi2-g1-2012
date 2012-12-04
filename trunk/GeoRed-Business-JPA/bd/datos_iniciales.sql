@@ -44,6 +44,17 @@ insert into geored.sitio (ID, DESCRIPCION, NOMBRE, UBICACION_GEOGRAFICA, URL_IMA
 
 /*CONFIGURACIÓN*/
 
+/*Tipos de notificacion*/
+insert into geored.tipo_notificacion (ID, NOMBRE) values (1, 'Nueva oferta cercana');
+
+insert into geored.tipo_notificacion (ID, NOMBRE) values (2, 'Nueva sitio cercano');
+
+insert into geored.tipo_notificacion (ID, NOMBRE) values (3, 'Nuevo evento cercano');
+
+insert into geored.tipo_notificacion (ID, NOMBRE) values (4, 'Check-in amigo cercano');
+
+insert into geored.tipo_notificacion (ID, NOMBRE) values (5, 'Solicitud de amistad');
+
 /*Tematicas*/
 insert into geored.tematica (ID, DESCRIPCION, NOMBRE) values (1, 'Lugar para ir de compras', 'Centro Comercial');
 
@@ -56,7 +67,6 @@ insert into geored.tematica (ID, DESCRIPCION, NOMBRE) values (4, 'Plaza publica'
 insert into geored.tematica (ID, DESCRIPCION, NOMBRE) values (5, 'Lugar para salir de noche', 'Club Nocturno');
 
 insert into geored.tematica (ID, DESCRIPCION, NOMBRE) values (6, 'Ir de peliculas', 'Cine');
-
 
 /*Tematicas de Sitios*/
 insert into geored.sitio_tematica (TEMATICA_FK, SITIO_FK) values (3, 1);
