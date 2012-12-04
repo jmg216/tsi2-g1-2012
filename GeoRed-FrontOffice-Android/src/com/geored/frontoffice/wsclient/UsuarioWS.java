@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.geored.dto.MensajeAmistadDTO;
 import com.geored.dto.UsuarioDTO;
 import com.geored.frontoffice.utiles.UtilesAndorid;
 
@@ -54,5 +55,13 @@ public class UsuarioWS
 		
 		return (UsuarioDTO) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, "obtenerPorEmailYPass", params, UsuarioDTO.class, null);
 
+	}
+	
+	public Long enviarMensajeChat(MensajeAmistadDTO mensajeAmistadDTO)
+	{
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("mensajeAmistadDTO", mensajeAmistadDTO);
+		
+    	return (Long) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, "enviarMensajeChat", params, null, null);			
 	}
 }

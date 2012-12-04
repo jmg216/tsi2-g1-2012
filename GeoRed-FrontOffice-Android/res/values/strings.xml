@@ -14,19 +14,22 @@
 	<string name="title_activity_registro">Registro GeoRedUy</string>
 	<string name="nombreUsuario">Usuario</string>
 	<string name="email">Email</string>
-	<string name="registro">Registrar</string>
+	<string name="registro">Registro</string>
 	<string name="title_activity_menu">Menú GeoRedUy</string>
 	<string name="perolataImagen">Ingrese la URL de su foto de Perfil</string>
 	<string name="perolataImagenBoton">Click Aqui para cargar Foto</string>
+	<string name="errorRegistrando">Error al registrar.</string>
+	<string name="errorCargandoImagen">Error cargando la imagen seleccione una url de imagen válida.</string>
 		
 	<!-- Contactos -->
-	<string name="contactos">Contactos</string>
-	<string name="chat">Chat</string>
+	<string name="contactos">Contactos</string>	
 	<string name="enviar">Enviar</string>
 	
 	
 	<!-- Chat -->
+	<string name="chat">Chat</string>
 	<string name="mensajes">Mensajes</string>
+	<string name="errorEnvioMensaje">Error al enviar mensaje.</string>
 	
 	<!-- Sitios -->
 	<string name="sitios">Sitios</string>
