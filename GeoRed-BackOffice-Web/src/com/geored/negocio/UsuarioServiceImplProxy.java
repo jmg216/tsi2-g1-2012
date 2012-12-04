@@ -44,6 +44,12 @@ public class UsuarioServiceImplProxy implements com.geored.negocio.UsuarioServic
     return usuarioServiceImpl;
   }
   
+  public com.geored.negocio.UsuarioDTO[] obtenerListadoAmigos(java.lang.Long arg0, boolean arg1) throws java.rmi.RemoteException, com.geored.negocio.DaoException{
+    if (usuarioServiceImpl == null)
+      _initUsuarioServiceImplProxy();
+    return usuarioServiceImpl.obtenerListadoAmigos(arg0, arg1);
+  }
+  
   public java.lang.String androidInvocation(java.lang.String methodName, java.lang.String methodParams) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
     if (usuarioServiceImpl == null)
       _initUsuarioServiceImplProxy();
@@ -102,6 +108,12 @@ public class UsuarioServiceImplProxy implements com.geored.negocio.UsuarioServic
     if (usuarioServiceImpl == null)
       _initUsuarioServiceImplProxy();
     return usuarioServiceImpl.enviarNotificacion(notificacionDTO);
+  }
+  
+  public com.geored.negocio.UsuarioDTO[] obtenerListadoConectados() throws java.rmi.RemoteException, com.geored.negocio.DaoException{
+    if (usuarioServiceImpl == null)
+      _initUsuarioServiceImplProxy();
+    return usuarioServiceImpl.obtenerListadoConectados();
   }
   
   

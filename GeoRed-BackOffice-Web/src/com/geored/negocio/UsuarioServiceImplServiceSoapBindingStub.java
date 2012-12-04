@@ -16,8 +16,9 @@ public class UsuarioServiceImplServiceSoapBindingStub extends org.apache.axis.cl
     static org.apache.axis.description.OperationDesc [] _operations;
 
     static {
-        _operations = new org.apache.axis.description.OperationDesc[10];
+        _operations = new org.apache.axis.description.OperationDesc[12];
         _initOperationDesc1();
+        _initOperationDesc2();
     }
 
     private static void _initOperationDesc1(){
@@ -51,6 +52,26 @@ public class UsuarioServiceImplServiceSoapBindingStub extends org.apache.axis.cl
         _operations[0] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
+        oper.setName("obtenerListadoAmigos");
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "arg0"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"), java.lang.Long.class, false, false);
+        param.setOmittable(true);
+        oper.addParameter(param);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "arg1"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"), boolean.class, false, false);
+        oper.addParameter(param);
+        oper.setReturnType(new javax.xml.namespace.QName("http://negocio.geored.com/", "usuarioDTO"));
+        oper.setReturnClass(com.geored.negocio.UsuarioDTO[].class);
+        oper.setReturnQName(new javax.xml.namespace.QName("", "return"));
+        oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
+        oper.setUse(org.apache.axis.constants.Use.LITERAL);
+        oper.addFault(new org.apache.axis.description.FaultDesc(
+                      new javax.xml.namespace.QName("http://negocio.geored.com/", "DaoException"),
+                      "com.geored.negocio.DaoException",
+                      new javax.xml.namespace.QName("http://negocio.geored.com/", "DaoException"), 
+                      true
+                     ));
+        _operations[1] = oper;
+
+        oper = new org.apache.axis.description.OperationDesc();
         oper.setName("enviarMensajeChat");
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "mensajeAmistadDTO"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://negocio.geored.com/", "mensajeAmistadDTO"), com.geored.negocio.MensajeAmistadDTO.class, false, false);
         param.setOmittable(true);
@@ -72,7 +93,7 @@ public class UsuarioServiceImplServiceSoapBindingStub extends org.apache.axis.cl
                       new javax.xml.namespace.QName("http://negocio.geored.com/", "DaoException"), 
                       true
                      ));
-        _operations[1] = oper;
+        _operations[2] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("obtenerListadoCheckIns");
@@ -87,7 +108,7 @@ public class UsuarioServiceImplServiceSoapBindingStub extends org.apache.axis.cl
                       new javax.xml.namespace.QName("http://negocio.geored.com/", "DaoException"), 
                       true
                      ));
-        _operations[2] = oper;
+        _operations[3] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("actualizar");
@@ -109,7 +130,7 @@ public class UsuarioServiceImplServiceSoapBindingStub extends org.apache.axis.cl
                       new javax.xml.namespace.QName("http://negocio.geored.com/", "DaoException"), 
                       true
                      ));
-        _operations[3] = oper;
+        _operations[4] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("obtenerListado");
@@ -124,7 +145,7 @@ public class UsuarioServiceImplServiceSoapBindingStub extends org.apache.axis.cl
                       new javax.xml.namespace.QName("http://negocio.geored.com/", "DaoException"), 
                       true
                      ));
-        _operations[4] = oper;
+        _operations[5] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("eliminar");
@@ -146,7 +167,7 @@ public class UsuarioServiceImplServiceSoapBindingStub extends org.apache.axis.cl
                       new javax.xml.namespace.QName("http://negocio.geored.com/", "DaoException"), 
                       true
                      ));
-        _operations[5] = oper;
+        _operations[6] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("obtenerPorEmailYPass");
@@ -173,7 +194,7 @@ public class UsuarioServiceImplServiceSoapBindingStub extends org.apache.axis.cl
                       new javax.xml.namespace.QName("http://negocio.geored.com/", "DaoException"), 
                       true
                      ));
-        _operations[6] = oper;
+        _operations[7] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("insertar");
@@ -197,7 +218,7 @@ public class UsuarioServiceImplServiceSoapBindingStub extends org.apache.axis.cl
                       new javax.xml.namespace.QName("http://negocio.geored.com/", "DaoException"), 
                       true
                      ));
-        _operations[7] = oper;
+        _operations[8] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("obtener");
@@ -221,8 +242,13 @@ public class UsuarioServiceImplServiceSoapBindingStub extends org.apache.axis.cl
                       new javax.xml.namespace.QName("http://negocio.geored.com/", "DaoException"), 
                       true
                      ));
-        _operations[8] = oper;
+        _operations[9] = oper;
 
+    }
+
+    private static void _initOperationDesc2(){
+        org.apache.axis.description.OperationDesc oper;
+        org.apache.axis.description.ParameterDesc param;
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("enviarNotificacion");
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "notificacionDTO"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://negocio.geored.com/", "notificacionDTO"), com.geored.negocio.NotificacionDTO.class, false, false);
@@ -245,7 +271,22 @@ public class UsuarioServiceImplServiceSoapBindingStub extends org.apache.axis.cl
                       new javax.xml.namespace.QName("http://negocio.geored.com/", "DaoException"), 
                       true
                      ));
-        _operations[9] = oper;
+        _operations[10] = oper;
+
+        oper = new org.apache.axis.description.OperationDesc();
+        oper.setName("obtenerListadoConectados");
+        oper.setReturnType(new javax.xml.namespace.QName("http://negocio.geored.com/", "usuarioDTO"));
+        oper.setReturnClass(com.geored.negocio.UsuarioDTO[].class);
+        oper.setReturnQName(new javax.xml.namespace.QName("", "return"));
+        oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
+        oper.setUse(org.apache.axis.constants.Use.LITERAL);
+        oper.addFault(new org.apache.axis.description.FaultDesc(
+                      new javax.xml.namespace.QName("http://negocio.geored.com/", "DaoException"),
+                      "com.geored.negocio.DaoException",
+                      new javax.xml.namespace.QName("http://negocio.geored.com/", "DaoException"), 
+                      true
+                     ));
+        _operations[11] = oper;
 
     }
 
@@ -438,12 +479,54 @@ public class UsuarioServiceImplServiceSoapBindingStub extends org.apache.axis.cl
 }
     }
 
-    public java.lang.Long enviarMensajeChat(com.geored.negocio.MensajeAmistadDTO mensajeAmistadDTO) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException {
+    public com.geored.negocio.UsuarioDTO[] obtenerListadoAmigos(java.lang.Long arg0, boolean arg1) throws java.rmi.RemoteException, com.geored.negocio.DaoException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
         _call.setOperation(_operations[1]);
+        _call.setUseSOAPAction(true);
+        _call.setSOAPActionURI("");
+        _call.setEncodingStyle(null);
+        _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
+        _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
+        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
+        _call.setOperationName(new javax.xml.namespace.QName("http://negocio.geored.com/", "obtenerListadoAmigos"));
+
+        setRequestHeaders(_call);
+        setAttachments(_call);
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {arg0, new java.lang.Boolean(arg1)});
+
+        if (_resp instanceof java.rmi.RemoteException) {
+            throw (java.rmi.RemoteException)_resp;
+        }
+        else {
+            extractAttachments(_call);
+            try {
+                return (com.geored.negocio.UsuarioDTO[]) _resp;
+            } catch (java.lang.Exception _exception) {
+                return (com.geored.negocio.UsuarioDTO[]) org.apache.axis.utils.JavaUtils.convert(_resp, com.geored.negocio.UsuarioDTO[].class);
+            }
+        }
+  } catch (org.apache.axis.AxisFault axisFaultException) {
+    if (axisFaultException.detail != null) {
+        if (axisFaultException.detail instanceof java.rmi.RemoteException) {
+              throw (java.rmi.RemoteException) axisFaultException.detail;
+         }
+        if (axisFaultException.detail instanceof com.geored.negocio.DaoException) {
+              throw (com.geored.negocio.DaoException) axisFaultException.detail;
+         }
+   }
+  throw axisFaultException;
+}
+    }
+
+    public java.lang.Long enviarMensajeChat(com.geored.negocio.MensajeAmistadDTO mensajeAmistadDTO) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException {
+        if (super.cachedEndpoint == null) {
+            throw new org.apache.axis.NoEndPointException();
+        }
+        org.apache.axis.client.Call _call = createCall();
+        _call.setOperation(_operations[2]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -488,7 +571,7 @@ public class UsuarioServiceImplServiceSoapBindingStub extends org.apache.axis.cl
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[2]);
+        _call.setOperation(_operations[3]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -530,7 +613,7 @@ public class UsuarioServiceImplServiceSoapBindingStub extends org.apache.axis.cl
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[3]);
+        _call.setOperation(_operations[4]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -568,7 +651,7 @@ public class UsuarioServiceImplServiceSoapBindingStub extends org.apache.axis.cl
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[4]);
+        _call.setOperation(_operations[5]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -610,7 +693,7 @@ public class UsuarioServiceImplServiceSoapBindingStub extends org.apache.axis.cl
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[5]);
+        _call.setOperation(_operations[6]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -648,7 +731,7 @@ public class UsuarioServiceImplServiceSoapBindingStub extends org.apache.axis.cl
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[6]);
+        _call.setOperation(_operations[7]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -693,7 +776,7 @@ public class UsuarioServiceImplServiceSoapBindingStub extends org.apache.axis.cl
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[7]);
+        _call.setOperation(_operations[8]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -738,7 +821,7 @@ public class UsuarioServiceImplServiceSoapBindingStub extends org.apache.axis.cl
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[8]);
+        _call.setOperation(_operations[9]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -783,7 +866,7 @@ public class UsuarioServiceImplServiceSoapBindingStub extends org.apache.axis.cl
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[9]);
+        _call.setOperation(_operations[10]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -814,6 +897,48 @@ public class UsuarioServiceImplServiceSoapBindingStub extends org.apache.axis.cl
          }
         if (axisFaultException.detail instanceof com.geored.negocio.NegocioException) {
               throw (com.geored.negocio.NegocioException) axisFaultException.detail;
+         }
+        if (axisFaultException.detail instanceof com.geored.negocio.DaoException) {
+              throw (com.geored.negocio.DaoException) axisFaultException.detail;
+         }
+   }
+  throw axisFaultException;
+}
+    }
+
+    public com.geored.negocio.UsuarioDTO[] obtenerListadoConectados() throws java.rmi.RemoteException, com.geored.negocio.DaoException {
+        if (super.cachedEndpoint == null) {
+            throw new org.apache.axis.NoEndPointException();
+        }
+        org.apache.axis.client.Call _call = createCall();
+        _call.setOperation(_operations[11]);
+        _call.setUseSOAPAction(true);
+        _call.setSOAPActionURI("");
+        _call.setEncodingStyle(null);
+        _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
+        _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
+        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
+        _call.setOperationName(new javax.xml.namespace.QName("http://negocio.geored.com/", "obtenerListadoConectados"));
+
+        setRequestHeaders(_call);
+        setAttachments(_call);
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {});
+
+        if (_resp instanceof java.rmi.RemoteException) {
+            throw (java.rmi.RemoteException)_resp;
+        }
+        else {
+            extractAttachments(_call);
+            try {
+                return (com.geored.negocio.UsuarioDTO[]) _resp;
+            } catch (java.lang.Exception _exception) {
+                return (com.geored.negocio.UsuarioDTO[]) org.apache.axis.utils.JavaUtils.convert(_resp, com.geored.negocio.UsuarioDTO[].class);
+            }
+        }
+  } catch (org.apache.axis.AxisFault axisFaultException) {
+    if (axisFaultException.detail != null) {
+        if (axisFaultException.detail instanceof java.rmi.RemoteException) {
+              throw (java.rmi.RemoteException) axisFaultException.detail;
          }
         if (axisFaultException.detail instanceof com.geored.negocio.DaoException) {
               throw (com.geored.negocio.DaoException) axisFaultException.detail;

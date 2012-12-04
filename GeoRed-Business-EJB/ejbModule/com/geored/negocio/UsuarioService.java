@@ -27,6 +27,8 @@ public interface UsuarioService
 	
 	public List<UsuarioDTO> obtenerListado() throws DaoException;
 	
+	public List<UsuarioDTO> obtenerListadoConectados() throws DaoException;
+	
 	public UsuarioDTO obtenerPorEmailYPass(String email, String pass) throws NegocioException, DaoException;
 	
 	// OPERACIONES CON CHECK-INS
@@ -36,4 +38,7 @@ public interface UsuarioService
 	public Long enviarMensajeChat(MensajeAmistadDTO mensajeAmistadDTO) throws NegocioException, DaoException;
 	
 	public Long enviarNotificacion(NotificacionDTO notificacionDTO) throws NegocioException, DaoException;
-} 
+	
+	// OPERACIONES CON AMISTADES
+	public List<UsuarioDTO> obtenerListadoAmigos(Long idUsuario, boolean soloConectados) throws DaoException;
+}

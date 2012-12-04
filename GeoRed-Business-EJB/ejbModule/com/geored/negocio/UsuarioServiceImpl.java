@@ -129,6 +129,17 @@ public class UsuarioServiceImpl implements UsuarioService
 			
 			return new Gson().toJson(idNotificacion);
 		}
+		else if(methodName.equals("obtenerListadoConectados"))
+		{	
+			return new Gson().toJson(obtenerListadoConectados());
+		}
+		else if(methodName.equals("obtenerListadoAmigos"))
+		{	
+			Long idUsuario = (Long) params.getParam("idUsuario", Long.class);
+			Boolean soloConectados = (Boolean) params.getParam("soloConectados", Boolean.class);
+			
+			return new Gson().toJson(obtenerListadoAmigos(idUsuario, soloConectados));
+		}
 	
 		return "";
 	}
@@ -329,5 +340,38 @@ public class UsuarioServiceImpl implements UsuarioService
 		notificacionDAO.insertar(notificacion);
 		
 		return notificacion.getId();
+	}
+
+	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+	@WebMethod(operationName="obtenerListadoConectados")
+	public List<UsuarioDTO> obtenerListadoConectados() throws DaoException
+	{
+		return usuarioDAO.obtenerListadoConectados(true);
+	}
+
+	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+	@WebMethod(operationName="obtenerListadoAmigos")
+	public List<UsuarioDTO> obtenerListadoAmigos(Long idUsuario, boolean soloConectados) throws DaoException
+	{
+		List<UsuarioDTO> usuariosDTOamigos = new ArrayList<>();
+		
+		List<Amistad> amistades = amistadDAO.obtenerAmistadesUsuario(idUsuario, soloConectados, false);
+		
+		if(amistades != null)
+		{
+			for(Amistad amistad : amistades)
+			{
+				if(amistad.getUsuarioA().getId().equals(idUsuario))
+				{
+					usuariosDTOamigos.add(usuarioDAO.toDto(amistad.getUsuarioA()));
+				}
+				else
+				{
+					usuariosDTOamigos.add(usuarioDAO.toDto(amistad.getUsuarioB()));	
+				}
+			}
+		}
+		
+		return usuariosDTOamigos;
 	}	
 }

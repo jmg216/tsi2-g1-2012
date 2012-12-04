@@ -1,6 +1,7 @@
 package com.geored.persistencia;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -96,5 +97,27 @@ public class UsuarioDAOImpl extends GenericDAOBase<Usuario, UsuarioDTO> implemen
 		{
 			throw new DaoException(e.getMessage());		
 		}	
+	}
+
+	@Override
+	public List obtenerListadoConectados(boolean toDTO) throws DaoException
+	{
+		try
+		{
+			Query query = em.createQuery("select u from com.geored.dominio.Usuario u where u.conectado = 1");        
+	        
+	        List listaUsuarios = query.getResultList();
+	        
+	        if(toDTO)
+	        {
+	             return toDtoList(listaUsuarios);
+	        }
+	       
+	        return listaUsuarios;
+		}
+		catch(Throwable e)
+		{
+			throw new DaoException(e.getMessage());		
+		}
 	}
 }
