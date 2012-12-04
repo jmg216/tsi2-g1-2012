@@ -25,6 +25,7 @@ import com.geored.dto.TematicaDTO;
 import com.geored.dto.UsuarioDTO;
 import com.geored.frontoffice.activities.R;
 import com.geored.frontoffice.activities.menu.MenuActivity;
+import com.geored.frontoffice.utiles.AlertaDialogManager;
 import com.geored.frontoffice.utiles.UtilesSeguridadAndroid;
 import com.geored.frontoffice.wsclient.FactoryWS;
 import com.geored.frontoffice.wsclient.UsuarioWS;
@@ -45,8 +46,10 @@ public class RegistroActivity extends Activity {
     	TextView btnCargaFoto = (TextView) this.findViewById(R.id.txtCarga);
     	final EditText urlImagen = (EditText) this.findViewById(R.id.txtUrlImagen);
     	
-    	btnCargaFoto.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
+    	btnCargaFoto.setOnClickListener(new OnClickListener() 
+    	{
+			public void onClick(View v) 
+			{
 				cargarImagen(urlImagen.getText().toString());
 				//Pueden probar hardcodeando una url como esta de aca abajo y comentan la llamada de arriba, igual lo probe y anda de flama
 				//cargarImagen("http://t2.gstatic.com/images?q=tbn:ANd9GcTos1E4Rss6VKIBKCFJCJKVSXy-d1Q8PiXC9Fraz-tTi1PeW8lzdA");
@@ -74,23 +77,6 @@ public class RegistroActivity extends Activity {
     		usuarioDTO.setUrlImagen(urlImagen.getText().toString());
     	}
     	
-//    	usuarioDTO.setNombre("Juan");
-//    	usuarioDTO.setEmail("juan@hotmail.com");
-//    	usuarioDTO.setPass("juanPass");
-//    	usuarioDTO.setListaTematicasDTO(new ArrayList<TematicaDTO>());
-    	
-//    	TematicaDTO tematica1 = new TematicaDTO();
-//    	tematica1.setId(1L);
-//    	tematica1.setNombre("1");
-//    	tematica1.setDescripcion("1");
-//    	usuarioDTO.getListaTematicasDTO().add(tematica1);
-//    	
-//    	TematicaDTO tematica2 = new TematicaDTO();
-//    	tematica2.setId(2L);
-//    	tematica2.setNombre("2");
-//    	tematica2.setDescripcion("2");
-//    	usuarioDTO.getListaTematicasDTO().add(tematica2);
-    	
     	Long idUsuario = usuarioWS.insertar(usuarioDTO); 
         
     	//Si se registra correctamente lo redirecciona al menu, sino
@@ -104,11 +90,12 @@ public class RegistroActivity extends Activity {
 		}	
 		else
 		{
-			messageToast(R.layout.custom_toast_message, Toast.LENGTH_SHORT);
+			AlertaDialogManager.showAlertDialog(this, getResources().getString(R.string.registro), getResources().getString(R.string.errorRegistrando), false);
 		}
     }
     
-    private void cargarImagen(String imageHttpAddress){
+    private void cargarImagen(String imageHttpAddress)
+    {
     	URL imageUrl = null;
         try {
             imageUrl = new URL(imageHttpAddress);
@@ -116,26 +103,12 @@ public class RegistroActivity extends Activity {
             conn.connect();
             loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
             imageView.setImageBitmap(loadedImage);
-        } catch (IOException e) {
+        } 
+        catch (IOException e) 
+        {
             Toast.makeText(getApplicationContext(), "Error cargando la imagen seleccione una url de imagen válida ", Toast.LENGTH_LONG).show();
+            AlertaDialogManager.showAlertDialog(this, getResources().getString(R.string.registro), getResources().getString(R.string.errorCargandoImagen), false);
             e.printStackTrace();
         }
     };
-    
-    
-    private void messageToast(int layout, int duration) 
-    {	
-		LayoutInflater inflater = getLayoutInflater();		 
-		View layoutView = inflater.inflate(layout, null);
-		// set a message
-		TextView text = (TextView) layoutView.findViewById(R.id.text);
-		text.setText("Button is clicked!");    	
-    	//Toast
-    	Toast toast = new Toast(getApplicationContext()); 
-    	toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-    	toast.setDuration(duration);
-    	toast.setView(layoutView);
-    	toast.show();
-
-    }
 }

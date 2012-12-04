@@ -78,7 +78,7 @@ public class UsuarioServiceImpl implements UsuarioService
 		}
 		else if(methodName.equals("actualizar"))
 		{
-			UsuarioDTO usuarioDTO = (UsuarioDTO) params.getParam("usuariODTO", UsuarioDTO.class);
+			UsuarioDTO usuarioDTO = (UsuarioDTO) params.getParam("usuarioDTO", UsuarioDTO.class);
 			
 			actualizar(usuarioDTO);
 		}
@@ -177,7 +177,7 @@ public class UsuarioServiceImpl implements UsuarioService
 		
 		if(usuarioEntity == null)
 		{
-			throw new NegocioException("Oferta no encontrada");
+			throw new NegocioException("Usuario no encontrada");
 		}
 		
 		usuarioDAO.toEntity(usuarioDTO, usuarioEntity);
@@ -262,7 +262,9 @@ public class UsuarioServiceImpl implements UsuarioService
 		}
 		else
 		{
-			AndroidGCMPushNotification.enviarNotificaciones("10", usuarioDTO.getGcmRegId(), "Se ha logueado correctamente.");
+			List<String> androidTargets = new ArrayList<String>();
+			androidTargets.add(usuarioDTO.getGcmRegId());
+			AndroidGCMPushNotification.enviarNotificaciones("10", androidTargets, 0L ,"Se ha logueado correctamente.");
 		}
 		
 		return usuarioDTO;
@@ -280,6 +282,8 @@ public class UsuarioServiceImpl implements UsuarioService
 	public Long enviarMensajeChat(@WebParam(name="mensajeAmistadDTO") MensajeAmistadDTO mensajeAmistadDTO) throws NegocioException, DaoException
 	{
 		MensajeAmistad mensajeAmistad = mensajeAmistadDAO.toEntity(mensajeAmistadDTO);
+		
+		mensajeAmistadDTO = mensajeAmistadDAO.toDto(mensajeAmistad);
 		
 		Amistad amistad = (Amistad) amistadDAO.obtener(mensajeAmistadDTO.getIdAmistad(), false);
 		
@@ -303,12 +307,9 @@ public class UsuarioServiceImpl implements UsuarioService
 		
 		Long idDestinatario = amistad.getUsuarioA().getId();
 		
-		if(idDestinatario.equals(remitente.getId()))
-		{
-			idDestinatario = amistad.getUsuarioB().getId();
-		}
+		UsuarioDTO usuario = obtener(idDestinatario);
 		
-		AndroidGCMPushNotification.enviarNotificaciones("10", idDestinatario.toString(), mensajeAmistad.getMensaje());
+		AndroidGCMPushNotification.enviarMensajeChatGCM("10", usuario.getGcmRegId(), mensajeAmistadDTO);
 		
 		return mensajeAmistad.getId();
 	}
@@ -373,5 +374,6 @@ public class UsuarioServiceImpl implements UsuarioService
 		}
 		
 		return usuariosDTOamigos;
-	}	
+	}
+		
 }

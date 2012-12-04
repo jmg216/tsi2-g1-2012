@@ -17,6 +17,8 @@ public class ContactoDetalleActivity extends Activity
 {	
 	private UsuarioWS usuarioWS = FactoryWS.getInstancia().getUsuarioWS();
 	
+	private UsuarioDTO usuarioDTO;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -25,7 +27,7 @@ public class ContactoDetalleActivity extends Activity
 		Bundle extras = getIntent().getExtras();
 		Long idContacto = extras.getLong("idContactoSeleccionado");
 		
-		UsuarioDTO usuarioDTO = usuarioWS.obtener(idContacto);
+		usuarioDTO = usuarioWS.obtener(idContacto);
 		
     	TextView tt = (TextView) this.findViewById(R.id.nombre_perfil_contacto);
         TextView bt = (TextView) this.findViewById(R.id.email_perfil_contacto);
@@ -46,7 +48,9 @@ public class ContactoDetalleActivity extends Activity
     public void abrirChat (View v)
     {
     	Intent i = new Intent(this, ContactoChatActivity.class);
-    	
+		
+	    i.putExtra("idContactoToChat", usuarioDTO.getId());	    
+	    i.putExtra("nombreContactoToChat", usuarioDTO.getNombre());
 	    // Creo la vista usando LocalActivityManager del SitioGroupActivity
 	    View view = ContactoGroupActivity.group.getLocalActivityManager()
 			        .startActivity("contacto_chat", i

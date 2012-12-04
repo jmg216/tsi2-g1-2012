@@ -7,12 +7,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.geored.dto.MensajeAmistadDTO;
 import com.geored.dto.UsuarioDTO;
 import com.geored.frontoffice.utiles.UtilesSeguridadAndroid;
 import com.geored.frontoffice.wsclient.FactoryWS;
 import com.geored.frontoffice.wsclient.UsuarioWS;
 import com.google.android.gcm.GCMBaseIntentService;
 import com.google.android.gcm.GCMRegistrar;
+import com.google.gson.Gson;
 
 public class GCMIntentService extends GCMBaseIntentService
 {
@@ -120,9 +122,14 @@ public class GCMIntentService extends GCMBaseIntentService
 	@Override
 	protected void onMessage(Context context, Intent intent) 
 	{
-		String msg = intent.getExtras().getString("message");
-		Log.d(TAG, "Mensaje: " + msg);
-		sendGCMIntent(context, msg);
+		 String msg = intent.getExtras().getString("message");
+		 
+		 Gson gson = new Gson();  
+		 
+		 //TODO Resolver como diferenciar si el mensaje en de chat o de una notificacion.
+		 Object retorno = gson.fromJson(msg, MensajeAmistadDTO.class);
+		 
+		 sendGCMIntent(context, msg);
 		
 	}
 	
