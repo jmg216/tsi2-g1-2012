@@ -99,7 +99,9 @@ public class UsuarioDAOImpl extends GenericDAOBase<Usuario, UsuarioDTO> implemen
 		}
 		catch(Throwable e)
 		{
-			throw new DaoException(e.getMessage());		
+			return null;
+			//throw new DaoException(e.getMessage());	
+			
 		}	
 	}
 
