@@ -41,4 +41,6 @@ public interface UsuarioService
 	
 	// OPERACIONES CON AMISTADES
 	public List<UsuarioDTO> obtenerListadoAmigos(Long idUsuario, boolean soloConectados) throws DaoException;
+	
+	public Boolean sonAmigos(Long idUsuario, Long idAmigo) throws DaoException;
 }

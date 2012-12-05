@@ -140,6 +140,14 @@ public class UsuarioServiceImpl implements UsuarioService
 			
 			return new Gson().toJson(obtenerListadoAmigos(idUsuario, soloConectados));
 		}
+		else if (methodName.equals("sonAmigos"))
+		{
+			Long idUsuario = (Long) params.getParam("idUsuario", Long.class);
+			Long idAmigo = (Long) params.getParam("idAmigo", Long.class);
+			
+			return new Gson().toJson(sonAmigos(idUsuario, idAmigo));
+		}
+			
 	
 		return "";
 	}
@@ -375,5 +383,13 @@ public class UsuarioServiceImpl implements UsuarioService
 		
 		return usuariosDTOamigos;
 	}
+	
+	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+	@WebMethod(operationName="sonAmigos")
+	public Boolean sonAmigos(Long idUsuario, Long idAmigo) throws DaoException
+	{
+		
+		return Boolean.valueOf(amistadDAO.sonAmigos(idUsuario, idAmigo));
+	}	
 		
 }
