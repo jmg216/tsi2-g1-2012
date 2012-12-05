@@ -78,4 +78,26 @@ public class AmistadDAOImpl extends GenericDAOBase<Amistad, AmistadDTO> implemen
 			throw new DaoException(e.getMessage());		
 		}
 	}	
+	
+	
+	@Override
+	public boolean sonAmigos(Long idUsuario, Long idAmigo) throws DaoException
+	{
+		try
+		{
+			String strQuery = "select a from com.geored.dominio.Amistad a where ((a.usuarioA.id = ?1 and a.usuarioB.id = ?2) or (a.usuarioA.id = ?2 and a.usuarioB.id = ?1))";			
+			
+			Query query = em.createQuery(strQuery);        
+	        query.setParameter(1, idUsuario);        
+	        query.setParameter(2, idAmigo); 
+	        
+	        return (query.getSingleResult() != null);
+	        
+		}
+		catch(Throwable e)
+		{
+			//throw new DaoException(e.getMessage());		
+			return false;
+		}
+	}		
 }
