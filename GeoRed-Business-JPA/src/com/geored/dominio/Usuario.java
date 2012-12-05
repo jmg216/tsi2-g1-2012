@@ -70,6 +70,26 @@ public class Usuario implements Serializable
 	{
 		this.id = id;
 	}
+	
+	public String getUbicacionActual() 
+	{
+		return ubicacionActual;
+	}
+
+	public void setUbicacionActual(String ubicacionActual) 
+	{
+		this.ubicacionActual = ubicacionActual;
+	}
+
+	public Boolean getConectado() 
+	{
+		return conectado;
+	}
+
+	public void setConectado(Boolean conectado) 
+	{
+		this.conectado = conectado;
+	}
 
 	public String getEmail()
 	{

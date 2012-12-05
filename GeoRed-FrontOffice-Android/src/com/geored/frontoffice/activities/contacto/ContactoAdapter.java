@@ -41,10 +41,11 @@ public class ContactoAdapter extends ArrayAdapter<UsuarioDTO> {
                     TextView tt = (TextView) v.findViewById(R.id.toptext);
                     TextView bt = (TextView) v.findViewById(R.id.bottomtext);
                     ImageView iv = (ImageView) v.findViewById(R.id.icon);
+                    ImageView ic = (ImageView) v.findViewById(R.id.ic_conectado);
                     
                     tt.setText(usuario.getNombre());                            
                     bt.setText(usuario.getEmail());
-
+                    
                     //Si el usuario no tiene imagen para su perfil se le asigna una por defecto.
                     //Las imagenes tiene que ser URLs
                     if (!usuario.getUrlImagen().contains("http"))
@@ -55,7 +56,16 @@ public class ContactoAdapter extends ArrayAdapter<UsuarioDTO> {
                     {
                     	Bitmap bm = BitMapImageConverter.getImageBitmap(usuario.getUrlImagen());	
                     	iv.setImageBitmap(bm);
-                    }                                        
+                    }                         
+                    
+                    if (usuario.getConectado().booleanValue())
+                    {
+                    	ic.setImageResource(R.drawable.greenstar);
+                    }
+                    else
+                    {
+                    	ic.setImageResource(R.drawable.graystar);
+                    }
             }
             
             return v;

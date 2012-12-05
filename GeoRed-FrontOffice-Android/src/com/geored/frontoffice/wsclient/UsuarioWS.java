@@ -64,4 +64,13 @@ public class UsuarioWS
 		
     	return (Long) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, "enviarMensajeChat", params, null, null);			
 	}
+	
+	public List<UsuarioDTO> obtenerListadoAmigos(Long idUsuario, boolean soloConectados) 
+	{
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("idUsuario", idUsuario);
+		params.put("soloConectados", soloConectados);
+		
+		return (List<UsuarioDTO>) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, "obtenerListadoAmigos", params, List.class, UsuarioDTO.class);
+	}
 }

@@ -41,8 +41,17 @@
 	        android:layout_toRightOf="@+id/thumbnail"                        
             android:singleLine="true"
             android:ellipsize="marquee"/>
+    
+    <ImageView 
+        	android:id="@+id/ic_conectado"
+        	android:layout_width="20dp"
+	        android:layout_height="20dp"
+	        android:layout_marginRight="35dp"
+	        android:layout_alignParentRight="true"
+	        android:layout_centerVertical="true"/>       
         
     <ImageView 
+        	android:id="@+id/next"
         	android:layout_width="30dp"
 	        android:layout_height="30dp"
 	        android:src="@drawable/next"

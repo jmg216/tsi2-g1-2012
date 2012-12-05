@@ -6,6 +6,8 @@ public class UsuarioDTO
 {
 	private Long id;
 	
+	private Boolean conectado;
+	
 	private String email;
 	
 	private String pass;
@@ -15,6 +17,8 @@ public class UsuarioDTO
 	private String urlImagen;
 	
 	private String gcmRegId;
+	
+	private String ubicacionActual;
 	
 	private List<TematicaDTO> listaTematicasDTO;
 	
@@ -26,6 +30,16 @@ public class UsuarioDTO
 	public void setId(Long id)
 	{
 		this.id = id;
+	}
+	
+	public Boolean getConectado() 
+	{
+		return conectado;
+	}
+
+	public void setConectado(Boolean conectado) 
+	{
+		this.conectado = conectado;
 	}
 
 	public String getNombre()
@@ -76,6 +90,16 @@ public class UsuarioDTO
 	public void setGcmRegId(String gcmRegId) 
 	{
 		this.gcmRegId = gcmRegId;
+	}
+	
+	public String getUbicacionActual() 
+	{
+		return ubicacionActual;
+	}
+
+	public void setUbicacionActual(String ubicacionActual) 
+	{
+		this.ubicacionActual = ubicacionActual;
 	}
 
 	public List<TematicaDTO> getListaTematicasDTO()
