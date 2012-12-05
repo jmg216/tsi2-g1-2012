@@ -70,7 +70,7 @@ public class UsuarioServiceImpl implements UsuarioService
 		
 		if(methodName.equals("insertar"))
 		{		
-			UsuarioDTO usuarioDTO = (UsuarioDTO) params.getParam("usuariODTO", UsuarioDTO.class);
+			UsuarioDTO usuarioDTO = (UsuarioDTO) params.getParam("usuarioDTO", UsuarioDTO.class);
 			
 			Long idUsuario = insertar((UsuarioDTO) usuarioDTO);
 			
