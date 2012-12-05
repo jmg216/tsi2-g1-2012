@@ -20,6 +20,7 @@ import android.widget.ListView;
 
 import com.geored.dto.UsuarioDTO;
 import com.geored.frontoffice.activities.R;
+import com.geored.frontoffice.utiles.UtilesSeguridadAndroid;
 import com.geored.frontoffice.wsclient.FactoryWS;
 import com.geored.frontoffice.wsclient.UsuarioWS;
 
@@ -86,8 +87,7 @@ public class ContactoActivity extends ListActivity {
 			
         });  
         
-	    usuarios = usuarioWS.obtenerListado();
-	
+	    usuarios = usuarioWS.obtenerListado();	
 	    if(usuarios != null && usuarios.size() > 0)
 		{
 	    	c_adapter.notifyDataSetChanged();
