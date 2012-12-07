@@ -15,6 +15,7 @@ import javax.jws.WebService;
 import com.geored.dto.TematicaDTO;
 import com.geored.dto.TipoAdministradorDTO;
 import com.geored.dto.TipoNotificacionDTO;
+import com.geored.dto.UsuarioDTO;
 import com.geored.exceptions.DaoException;
 import com.geored.exceptions.NegocioException;
 import com.geored.persistencia.TematicaDAO;
@@ -54,6 +55,14 @@ public class GlobalServiceImpl implements GlobalService
 		{
 			return new Gson().toJson(obtenerListadoTiposNotificaciones());
 		}
+		else if (methodName.equals("obtenerTipoNotificacionPorId"))
+		{
+			Long idTipoNotificacion = (Long) params.getParam("idTipoNotificacion", Long.class);
+			
+			TipoNotificacionDTO tipoNotificacionDTO = obtenerTipoNotificacionPorId(idTipoNotificacion);
+			
+			return new Gson().toJson(tipoNotificacionDTO);			
+		}
 		
 		return "";
 	}
@@ -78,4 +87,12 @@ public class GlobalServiceImpl implements GlobalService
 	{
 		return tipoNotificacionDAO.obtenerListado(true);
 	}
+	
+	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+	@WebMethod
+	public TipoNotificacionDTO obtenerTipoNotificacionPorId(Long idTipoNotificacion) throws DaoException
+	{
+		return (TipoNotificacionDTO) tipoNotificacionDAO.obtener(idTipoNotificacion, true);
+	}	
+	
 }

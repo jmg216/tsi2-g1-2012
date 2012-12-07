@@ -268,12 +268,6 @@ public class UsuarioServiceImpl implements UsuarioService
 		{
 			throw new NegocioException("Usuario no encontrado");
 		}
-		else
-		{
-			List<String> androidTargets = new ArrayList<String>();
-			androidTargets.add(usuarioDTO.getGcmRegId());
-			AndroidGCMPushNotification.enviarNotificaciones("10", androidTargets, 0L ,"Se ha logueado correctamente.");
-		}
 		
 		return usuarioDTO;
 	}
@@ -347,6 +341,12 @@ public class UsuarioServiceImpl implements UsuarioService
 		notificacion.setUsuarioDestino(usuarioDestino);
 		
 		notificacionDAO.insertar(notificacion);
+		
+		notificacionDTO.setId(notificacion.getId());
+		
+		List<String> androidTargets = new ArrayList<String>();
+		androidTargets.add(usuarioDestino.getGcmRegId());
+		AndroidGCMPushNotification.enviarNotificaciones("10", androidTargets, notificacionDTO);		
 		
 		return notificacion.getId();
 	}
