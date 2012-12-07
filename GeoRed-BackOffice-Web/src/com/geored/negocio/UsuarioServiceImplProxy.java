@@ -44,10 +44,10 @@ public class UsuarioServiceImplProxy implements com.geored.negocio.UsuarioServic
     return usuarioServiceImpl;
   }
   
-  public com.geored.negocio.UsuarioDTO[] obtenerListadoAmigos(java.lang.Long arg0, boolean arg1) throws java.rmi.RemoteException, com.geored.negocio.DaoException{
+  public com.geored.negocio.UsuarioDTO[] obtenerListadoAmigos(java.lang.Long idUsuario, boolean soloConectados) throws java.rmi.RemoteException, com.geored.negocio.DaoException{
     if (usuarioServiceImpl == null)
       _initUsuarioServiceImplProxy();
-    return usuarioServiceImpl.obtenerListadoAmigos(arg0, arg1);
+    return usuarioServiceImpl.obtenerListadoAmigos(idUsuario, soloConectados);
   }
   
   public java.lang.String androidInvocation(java.lang.String methodName, java.lang.String methodParams) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
@@ -98,6 +98,18 @@ public class UsuarioServiceImplProxy implements com.geored.negocio.UsuarioServic
     return usuarioServiceImpl.insertar(usuarioDTO);
   }
   
+  public void eliminarAmistad(java.lang.Long idAmistad) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+    if (usuarioServiceImpl == null)
+      _initUsuarioServiceImplProxy();
+    usuarioServiceImpl.eliminarAmistad(idAmistad);
+  }
+  
+  public com.geored.negocio.AmistadDTO obtenerAmistadPorUsuarios(java.lang.Long idUsuarioA, java.lang.Long idUsuarioB) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+    if (usuarioServiceImpl == null)
+      _initUsuarioServiceImplProxy();
+    return usuarioServiceImpl.obtenerAmistadPorUsuarios(idUsuarioA, idUsuarioB);
+  }
+  
   public com.geored.negocio.UsuarioDTO obtener(java.lang.Long idUsuario) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
     if (usuarioServiceImpl == null)
       _initUsuarioServiceImplProxy();
@@ -108,6 +120,12 @@ public class UsuarioServiceImplProxy implements com.geored.negocio.UsuarioServic
     if (usuarioServiceImpl == null)
       _initUsuarioServiceImplProxy();
     return usuarioServiceImpl.enviarNotificacion(notificacionDTO);
+  }
+  
+  public java.lang.Long insertarAmistad(com.geored.negocio.AmistadDTO amistadDTO) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+    if (usuarioServiceImpl == null)
+      _initUsuarioServiceImplProxy();
+    return usuarioServiceImpl.insertarAmistad(amistadDTO);
   }
   
   public com.geored.negocio.UsuarioDTO[] obtenerListadoConectados() throws java.rmi.RemoteException, com.geored.negocio.DaoException{

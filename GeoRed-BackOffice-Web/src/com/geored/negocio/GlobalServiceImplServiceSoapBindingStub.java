@@ -16,7 +16,7 @@ public class GlobalServiceImplServiceSoapBindingStub extends org.apache.axis.cli
     static org.apache.axis.description.OperationDesc [] _operations;
 
     static {
-        _operations = new org.apache.axis.description.OperationDesc[4];
+        _operations = new org.apache.axis.description.OperationDesc[5];
         _initOperationDesc1();
     }
 
@@ -94,6 +94,24 @@ public class GlobalServiceImplServiceSoapBindingStub extends org.apache.axis.cli
                       true
                      ));
         _operations[3] = oper;
+
+        oper = new org.apache.axis.description.OperationDesc();
+        oper.setName("obtenerTipoNotificacionPorId");
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "arg0"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"), java.lang.Long.class, false, false);
+        param.setOmittable(true);
+        oper.addParameter(param);
+        oper.setReturnType(new javax.xml.namespace.QName("http://negocio.geored.com/", "tipoNotificacionDTO"));
+        oper.setReturnClass(com.geored.negocio.TipoNotificacionDTO.class);
+        oper.setReturnQName(new javax.xml.namespace.QName("", "return"));
+        oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
+        oper.setUse(org.apache.axis.constants.Use.LITERAL);
+        oper.addFault(new org.apache.axis.description.FaultDesc(
+                      new javax.xml.namespace.QName("http://negocio.geored.com/", "DaoException"),
+                      "com.geored.negocio.DaoException",
+                      new javax.xml.namespace.QName("http://negocio.geored.com/", "DaoException"), 
+                      true
+                     ));
+        _operations[4] = oper;
 
     }
 
@@ -383,6 +401,48 @@ public class GlobalServiceImplServiceSoapBindingStub extends org.apache.axis.cli
                 return (com.geored.negocio.TipoNotificacionDTO[]) _resp;
             } catch (java.lang.Exception _exception) {
                 return (com.geored.negocio.TipoNotificacionDTO[]) org.apache.axis.utils.JavaUtils.convert(_resp, com.geored.negocio.TipoNotificacionDTO[].class);
+            }
+        }
+  } catch (org.apache.axis.AxisFault axisFaultException) {
+    if (axisFaultException.detail != null) {
+        if (axisFaultException.detail instanceof java.rmi.RemoteException) {
+              throw (java.rmi.RemoteException) axisFaultException.detail;
+         }
+        if (axisFaultException.detail instanceof com.geored.negocio.DaoException) {
+              throw (com.geored.negocio.DaoException) axisFaultException.detail;
+         }
+   }
+  throw axisFaultException;
+}
+    }
+
+    public com.geored.negocio.TipoNotificacionDTO obtenerTipoNotificacionPorId(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.DaoException {
+        if (super.cachedEndpoint == null) {
+            throw new org.apache.axis.NoEndPointException();
+        }
+        org.apache.axis.client.Call _call = createCall();
+        _call.setOperation(_operations[4]);
+        _call.setUseSOAPAction(true);
+        _call.setSOAPActionURI("");
+        _call.setEncodingStyle(null);
+        _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
+        _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
+        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
+        _call.setOperationName(new javax.xml.namespace.QName("http://negocio.geored.com/", "obtenerTipoNotificacionPorId"));
+
+        setRequestHeaders(_call);
+        setAttachments(_call);
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {arg0});
+
+        if (_resp instanceof java.rmi.RemoteException) {
+            throw (java.rmi.RemoteException)_resp;
+        }
+        else {
+            extractAttachments(_call);
+            try {
+                return (com.geored.negocio.TipoNotificacionDTO) _resp;
+            } catch (java.lang.Exception _exception) {
+                return (com.geored.negocio.TipoNotificacionDTO) org.apache.axis.utils.JavaUtils.convert(_resp, com.geored.negocio.TipoNotificacionDTO.class);
             }
         }
   } catch (org.apache.axis.AxisFault axisFaultException) {

@@ -19,6 +19,7 @@ import com.geored.dominio.Notificacion;
 import com.geored.dominio.Tematica;
 import com.geored.dominio.TipoNotificacion;
 import com.geored.dominio.Usuario;
+import com.geored.dto.AmistadDTO;
 import com.geored.dto.CheckInDTO;
 import com.geored.dto.MensajeAmistadDTO;
 import com.geored.dto.NotificacionDTO;
@@ -140,14 +141,32 @@ public class UsuarioServiceImpl implements UsuarioService
 			
 			return new Gson().toJson(obtenerListadoAmigos(idUsuario, soloConectados));
 		}
-		else if (methodName.equals("sonAmigos"))
+		else if (methodName.equals("obtenerAmistadPorUsuarios"))
 		{
-			Long idUsuario = (Long) params.getParam("idUsuario", Long.class);
-			Long idAmigo = (Long) params.getParam("idAmigo", Long.class);
+			Long idUsuarioA = (Long) params.getParam("idUsuarioA", Long.class);
+			Long idUsuarioB = (Long) params.getParam("idUsuarioB", Long.class);
 			
-			return new Gson().toJson(sonAmigos(idUsuario, idAmigo));
+			return new Gson().toJson(obtenerAmistadPorUsuarios(idUsuarioA, idUsuarioB));
 		}
+		else if (methodName.equals("obtenerAmistadPorUsuarios"))
+		{
+			Long idUsuarioA = (Long) params.getParam("idUsuarioA", Long.class);
+			Long idUsuarioB = (Long) params.getParam("idUsuarioB", Long.class);
 			
+			return new Gson().toJson(obtenerAmistadPorUsuarios(idUsuarioA, idUsuarioB));
+		}
+		else if (methodName.equals("insertarAmistad"))
+		{
+			AmistadDTO amistadDTO = (AmistadDTO) params.getParam("amistadDTO", AmistadDTO.class);
+			
+			return new Gson().toJson(insertarAmistad(amistadDTO));
+		}
+		else if (methodName.equals("eliminarAmistad"))
+		{
+			AmistadDTO amistadDTO = (AmistadDTO) params.getParam("amistadDTO", AmistadDTO.class);
+			
+			return new Gson().toJson(insertarAmistad(amistadDTO));
+		}
 	
 		return "";
 	}
@@ -360,7 +379,7 @@ public class UsuarioServiceImpl implements UsuarioService
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod(operationName="obtenerListadoAmigos")
-	public List<UsuarioDTO> obtenerListadoAmigos(Long idUsuario, boolean soloConectados) throws DaoException
+	public List<UsuarioDTO> obtenerListadoAmigos(@WebParam(name="idUsuario") Long idUsuario, @WebParam(name="soloConectados") boolean soloConectados) throws DaoException
 	{
 		List<UsuarioDTO> usuariosDTOamigos = new ArrayList<>();
 		
@@ -385,11 +404,54 @@ public class UsuarioServiceImpl implements UsuarioService
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
-	@WebMethod(operationName="sonAmigos")
-	public Boolean sonAmigos(Long idUsuario, Long idAmigo) throws DaoException
-	{
+	@WebMethod(operationName="obtenerAmistadPorUsuarios")
+	public AmistadDTO obtenerAmistadPorUsuarios(@WebParam(name="idUsuarioA") Long idUsuarioA, @WebParam(name="idUsuarioB") Long idUsuarioB) throws NegocioException, DaoException
+	{		
+		AmistadDTO amistadDTO = (AmistadDTO) amistadDAO.obtenerAmistadPorUsuarios(idUsuarioA, idUsuarioB, true);
 		
-		return Boolean.valueOf(amistadDAO.sonAmigos(idUsuario, idAmigo));
+		if(amistadDTO == null)
+		{
+			throw new NegocioException("Amistad no encontrada");
+		}
+		
+		return amistadDTO;
+	}
+
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	@WebMethod(operationName="insertarAmistad")
+	public Long insertarAmistad(@WebParam(name="amistadDTO") AmistadDTO amistadDTO) throws NegocioException, DaoException
+	{
+		Amistad amistad = amistadDAO.toEntity(amistadDTO);
+		
+		Usuario usuarioA = (Usuario) usuarioDAO.obtener(amistadDTO.getIdUsuarioA(), true);
+		
+		Usuario usuarioB = (Usuario) usuarioDAO.obtener(amistadDTO.getIdUsuarioB(), true);
+		
+		if(usuarioA == null || usuarioB == null)
+		{
+			throw new NegocioException("Usuario no encontrado");
+		}
+		
+		amistad.setUsuarioA(usuarioA);
+		
+		amistad.setUsuarioB(usuarioB);
+		
+		amistadDAO.insertar(amistad);
+		
+		return amistad.getId();
+	}
+
+	@Override
+	public void eliminarAmistad(@WebParam(name="idAmistad") Long idAmistad) throws NegocioException, DaoException
+	{
+		Amistad amistad = (Amistad) amistadDAO.obtener(idAmistad, false);
+		
+		if(amistad == null)
+		{
+			throw new NegocioException("Amistad no encontrada");
+		}
+		
+		amistadDAO.eliminar(amistad);
 	}	
 		
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import com.geored.dto.AmistadDTO;
 import com.geored.dto.CheckInDTO;
 import com.geored.dto.MensajeAmistadDTO;
 import com.geored.dto.NotificacionDTO;
@@ -42,5 +43,9 @@ public interface UsuarioService
 	// OPERACIONES CON AMISTADES
 	public List<UsuarioDTO> obtenerListadoAmigos(Long idUsuario, boolean soloConectados) throws DaoException;
 	
-	public Boolean sonAmigos(Long idUsuario, Long idAmigo) throws DaoException;
+	public AmistadDTO obtenerAmistadPorUsuarios(Long idUsuarioA, Long idUsuariOB) throws NegocioException, DaoException;
+	
+	public Long insertarAmistad(AmistadDTO amistadDTO) throws NegocioException, DaoException;
+	
+	public void eliminarAmistad(Long idAmistad) throws NegocioException, DaoException;
 }

@@ -8,6 +8,8 @@
 package com.geored.negocio;
 
 public class UsuarioDTO  implements java.io.Serializable {
+    private java.lang.Boolean conectado;
+
     private java.lang.String email;
 
     private java.lang.String gcmRegId;
@@ -20,26 +22,52 @@ public class UsuarioDTO  implements java.io.Serializable {
 
     private java.lang.String pass;
 
+    private java.lang.String ubicacionActual;
+
     private java.lang.String urlImagen;
 
     public UsuarioDTO() {
     }
 
     public UsuarioDTO(
+           java.lang.Boolean conectado,
            java.lang.String email,
            java.lang.String gcmRegId,
            java.lang.Long id,
            com.geored.negocio.TematicaDTO[] listaTematicasDTO,
            java.lang.String nombre,
            java.lang.String pass,
+           java.lang.String ubicacionActual,
            java.lang.String urlImagen) {
+           this.conectado = conectado;
            this.email = email;
            this.gcmRegId = gcmRegId;
            this.id = id;
            this.listaTematicasDTO = listaTematicasDTO;
            this.nombre = nombre;
            this.pass = pass;
+           this.ubicacionActual = ubicacionActual;
            this.urlImagen = urlImagen;
+    }
+
+
+    /**
+     * Gets the conectado value for this UsuarioDTO.
+     * 
+     * @return conectado
+     */
+    public java.lang.Boolean getConectado() {
+        return conectado;
+    }
+
+
+    /**
+     * Sets the conectado value for this UsuarioDTO.
+     * 
+     * @param conectado
+     */
+    public void setConectado(java.lang.Boolean conectado) {
+        this.conectado = conectado;
     }
 
 
@@ -172,6 +200,26 @@ public class UsuarioDTO  implements java.io.Serializable {
 
 
     /**
+     * Gets the ubicacionActual value for this UsuarioDTO.
+     * 
+     * @return ubicacionActual
+     */
+    public java.lang.String getUbicacionActual() {
+        return ubicacionActual;
+    }
+
+
+    /**
+     * Sets the ubicacionActual value for this UsuarioDTO.
+     * 
+     * @param ubicacionActual
+     */
+    public void setUbicacionActual(java.lang.String ubicacionActual) {
+        this.ubicacionActual = ubicacionActual;
+    }
+
+
+    /**
      * Gets the urlImagen value for this UsuarioDTO.
      * 
      * @return urlImagen
@@ -202,6 +250,9 @@ public class UsuarioDTO  implements java.io.Serializable {
         __equalsCalc = obj;
         boolean _equals;
         _equals = true && 
+            ((this.conectado==null && other.getConectado()==null) || 
+             (this.conectado!=null &&
+              this.conectado.equals(other.getConectado()))) &&
             ((this.email==null && other.getEmail()==null) || 
              (this.email!=null &&
               this.email.equals(other.getEmail()))) &&
@@ -220,6 +271,9 @@ public class UsuarioDTO  implements java.io.Serializable {
             ((this.pass==null && other.getPass()==null) || 
              (this.pass!=null &&
               this.pass.equals(other.getPass()))) &&
+            ((this.ubicacionActual==null && other.getUbicacionActual()==null) || 
+             (this.ubicacionActual!=null &&
+              this.ubicacionActual.equals(other.getUbicacionActual()))) &&
             ((this.urlImagen==null && other.getUrlImagen()==null) || 
              (this.urlImagen!=null &&
               this.urlImagen.equals(other.getUrlImagen())));
@@ -234,6 +288,9 @@ public class UsuarioDTO  implements java.io.Serializable {
         }
         __hashCodeCalc = true;
         int _hashCode = 1;
+        if (getConectado() != null) {
+            _hashCode += getConectado().hashCode();
+        }
         if (getEmail() != null) {
             _hashCode += getEmail().hashCode();
         }
@@ -260,6 +317,9 @@ public class UsuarioDTO  implements java.io.Serializable {
         if (getPass() != null) {
             _hashCode += getPass().hashCode();
         }
+        if (getUbicacionActual() != null) {
+            _hashCode += getUbicacionActual().hashCode();
+        }
         if (getUrlImagen() != null) {
             _hashCode += getUrlImagen().hashCode();
         }
@@ -274,6 +334,13 @@ public class UsuarioDTO  implements java.io.Serializable {
     static {
         typeDesc.setXmlType(new javax.xml.namespace.QName("http://negocio.geored.com/", "usuarioDTO"));
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("conectado");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "conectado"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("email");
         elemField.setXmlName(new javax.xml.namespace.QName("", "email"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
@@ -312,6 +379,13 @@ public class UsuarioDTO  implements java.io.Serializable {
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("pass");
         elemField.setXmlName(new javax.xml.namespace.QName("", "pass"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("ubicacionActual");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "ubicacionActual"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);

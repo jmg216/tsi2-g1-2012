@@ -12,4 +12,5 @@ public interface GlobalServiceImpl extends java.rmi.Remote {
     public com.geored.negocio.TematicaDTO[] obtenerListadoTematicas() throws java.rmi.RemoteException, com.geored.negocio.DaoException;
     public com.geored.negocio.TipoAdministradorDTO[] obtenerListadoTiposAdministradores() throws java.rmi.RemoteException, com.geored.negocio.DaoException;
     public com.geored.negocio.TipoNotificacionDTO[] obtenerListadoTiposNotificaciones() throws java.rmi.RemoteException, com.geored.negocio.DaoException;
+    public com.geored.negocio.TipoNotificacionDTO obtenerTipoNotificacionPorId(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.DaoException;
 }

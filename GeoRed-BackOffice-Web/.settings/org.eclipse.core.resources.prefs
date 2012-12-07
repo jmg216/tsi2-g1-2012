@@ -4,6 +4,7 @@ encoding//src/com/geored/negocio/AdminServiceImplService.java=UTF-8
 encoding//src/com/geored/negocio/AdminServiceImplServiceLocator.java=UTF-8
 encoding//src/com/geored/negocio/AdminServiceImplServiceSoapBindingStub.java=UTF-8
 encoding//src/com/geored/negocio/AdministradorDTO.java=UTF-8
+encoding//src/com/geored/negocio/AmistadDTO.java=UTF-8
 encoding//src/com/geored/negocio/CheckInDTO.java=UTF-8
 encoding//src/com/geored/negocio/CompraDTO.java=UTF-8
 encoding//src/com/geored/negocio/CompraServiceImpl.java=UTF-8
