@@ -1,10 +1,10 @@
 package com.geored.utiles;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.geored.dto.MensajeAmistadDTO;
+import com.geored.dto.NotificacionDTO;
 import com.geored.exceptions.NegocioException;
 import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.MulticastResult;
@@ -23,12 +23,17 @@ public class AndroidGCMPushNotification
 	 * @throws NegocioException 
 	 * @throws IOException 
 	 * */
-	public static boolean enviarNotificaciones(String collapseKey, List<String> androidTargets, Long idRemitente, String message) throws NegocioException
+	public static boolean enviarNotificaciones(String collapseKey, List<String> androidTargets, NotificacionDTO notificacionDTO) throws NegocioException
 	{			
 			//Instancia de com.android.gcm.server.Sender que realiza la transmision
 			//de los mensajes a Google Cloud Messaging Service.
 			//Se le pasa el API KEY obtenido de code.google.com
 	        Sender sender = new Sender(UtilesNegocio.API_KEY_GCM);
+	        
+	        String message = new Gson().toJson(notificacionDTO);
+	        
+	        //Marco como notificacion C: mensaje del chat, N: notificacion.
+	        message = "N" + message;
 	        
 	        // Mensaje que contiene los datos que seran transmitidos.
 	        Message message1 = new Message.Builder()
@@ -75,6 +80,9 @@ public class AndroidGCMPushNotification
 	        Sender sender = new Sender(UtilesNegocio.API_KEY_GCM);
 	        
 	        String message = new Gson().toJson(msjAmistadoDTO);
+	        
+	        //Marco como mensaje al chat. C: mensaje del chat, N: notificacion.
+	        message = "C" + message;
 	        
 	        // Mensaje que contiene los datos que seran transmitidos.
 	        Message message1 = new Message.Builder()
