@@ -1,11 +1,15 @@
 package com.geored.persistencia;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
+import javax.persistence.Query;
 
 import com.geored.dominio.Notificacion;
 import com.geored.dto.NotificacionDTO;
+import com.geored.exceptions.DaoException;
 import com.geored.persistencia.core.GenericDAOBase;
 
 @Stateless
@@ -17,8 +21,8 @@ public class NotificacionDAOImpl extends GenericDAOBase<Notificacion, Notificaci
 	public void toEntity(NotificacionDTO source, Notificacion target)
 	{
 		target.setDescripcion(source.getDescripcion());
-		target.setLeida(source.isLeida());
-		
+		target.setLeida(source.isLeida());	
+		target.setIdObjeto(source.getIdObjeto());
 	}
 
 	@Override
@@ -27,6 +31,7 @@ public class NotificacionDAOImpl extends GenericDAOBase<Notificacion, Notificaci
 		target.setId(source.getId());
 		target.setDescripcion(source.getDescripcion());
 		target.setLeida(source.isLeida());
+		target.setIdObjeto(source.getIdObjeto());
 		
 		if(source.getUsuarioDestino() != null)
 		{
@@ -38,6 +43,28 @@ public class NotificacionDAOImpl extends GenericDAOBase<Notificacion, Notificaci
 		{
 			target.setIdTipoNotificacion(source.getTipoNotificacion().getId());
 			target.setNombreTipoNotificacion(source.getTipoNotificacion().getNombre());
+		}
+	}
+
+	@Override
+	public List obtenerListadoPorTipoYUsuarioDestino(Long idTipoNotificacion, Long idUsuarioDestino, boolean toDTO) throws DaoException
+	{
+		try
+		{
+			Query query = em.createQuery("select n from com.geored.dominio.Notificacion n where n.tipoNotificacion.id = ?1 and n.usuarioDestino.id = ?2");        
+	        
+	        List listaNotificaciones = query.getResultList();
+	        
+	        if(toDTO)
+	        {
+	             return toDtoList(listaNotificaciones);
+	        }
+	       
+	        return listaNotificaciones;
+		}
+		catch(Throwable e)
+		{
+			throw new DaoException(e.getMessage());		
 		}
 	}
 }

@@ -8,6 +8,8 @@ public class NotificacionDTO
 	
 	private boolean leida;
 	
+	private String idObjeto;
+	
 	private Long idUsuarioDestino;
 	
 	private String nombreUsuarioDestino;
@@ -84,5 +86,15 @@ public class NotificacionDTO
 	public void setNombreTipoNotificacion(String nombreTipoNotificacion)
 	{
 		this.nombreTipoNotificacion = nombreTipoNotificacion;
+	}
+
+	public String getIdObjeto()
+	{
+		return idObjeto;
+	}
+
+	public void setIdObjeto(String idObjeto)
+	{
+		this.idObjeto = idObjeto;
 	}
 }

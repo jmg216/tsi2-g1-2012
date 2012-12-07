@@ -13,8 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="notificacion")
-public class Notificacion implements Serializable 
+@Table(name = "notificacion")
+public class Notificacion implements Serializable
 {
 	/**
 	 * 
@@ -22,24 +22,27 @@ public class Notificacion implements Serializable
 	private static final long serialVersionUID = -8408536548407729536L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ID", nullable=false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID", nullable = false)
 	private Long id;
-	
-	@Column(name="DESCRIPCION", nullable=false)
+
+	@Column(name = "DESCRIPCION", nullable = false)
 	private String descripcion;
-	
-	@Column(name="LEIDA", nullable=false)
+
+	@Column(name = "LEIDA", nullable = false)
 	private boolean leida;
-	
-	@JoinColumn(name="USUARIO_DESTINO_FK", nullable=false)
-	@ManyToOne(fetch=FetchType.LAZY)
+
+	@Column(name = "ID_OBJETO", nullable = false)
+	private String idObjeto;
+
+	@JoinColumn(name = "USUARIO_DESTINO_FK", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Usuario usuarioDestino;
 
-	@JoinColumn(name="TIPO_NOTIFICACION_FK", nullable=false)
-	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name = "TIPO_NOTIFICACION_FK", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private TipoNotificacion tipoNotificacion;
-	
+
 	public Long getId()
 	{
 		return id;
@@ -68,6 +71,16 @@ public class Notificacion implements Serializable
 	public void setLeida(boolean leida)
 	{
 		this.leida = leida;
+	}
+
+	public String getIdObjeto()
+	{
+		return idObjeto;
+	}
+
+	public void setIdObjeto(String idObjeto)
+	{
+		this.idObjeto = idObjeto;
 	}
 
 	public Usuario getUsuarioDestino()
