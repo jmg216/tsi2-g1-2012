@@ -335,16 +335,16 @@ public class UsuarioServiceImpl implements UsuarioService
 			throw new NegocioException("Tipo de notificacion no encontrada");
 		}
 		
-		Usuario usuario = (Usuario) usuarioDAO.obtener(notificacionDTO.getIdUsuario(), false);
+		Usuario usuarioDestino = (Usuario) usuarioDAO.obtener(notificacionDTO.getIdUsuarioDestino(), false);
 		
-		if(usuario == null)
+		if(usuarioDestino == null)
 		{
 			throw new NegocioException("Usuario no encontrado");
 		}
 		
 		notificacion.setTipoNotificacion(tipoNotificacion);
 		
-		notificacion.setUsuario(usuario);
+		notificacion.setUsuarioDestino(usuarioDestino);
 		
 		notificacionDAO.insertar(notificacion);
 		
