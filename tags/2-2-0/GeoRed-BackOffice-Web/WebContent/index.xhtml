@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:body>
+		<ui:composition template="/xhtml/templates/layout.xhtml">
+			<ui:define name="content">	
+				<table cellpadding="10px">
+					<tr>
+						<td>
+							<p:graphicImage value="/resources/images/logo-geored.png"/>
+						</td>
+						<td style="vertical-align: top;">						
+							<h:outputText value="Bienvenido a Back Office GeoRed.uy ..." style="font-size: 18px; font-weight: bold;"/> <br/><br/>
+							<h:outputText value="GeoRed.uy es una red social basada en la ubicacion geografica de los usuarios para Uruguay.
+                            					 Aqui tendrá funcionalidades de administracion y permitirá a las empresas configurar su ofertas por medio de herramientas provistas en el sistema." />  
+                        </td>
+                    </tr>
+                </table>
+			</ui:define> 
+		</ui:composition>
+	</h:body>
+	
+</html>

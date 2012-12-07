@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    
+   		<RelativeLayout
+   		    android:layout_width="match_parent"
+   		    android:layout_height="120dp"
+   		    android:background="@drawable/gradient_bg_header">
+		    <LinearLayout
+		        android:id="@+id/perfil_contacto_thumbnail"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:padding="2dip"
+		        android:layout_marginTop="2dp"
+		        android:layout_marginLeft="2dp"
+		        android:layout_alignParentLeft="true"
+		        android:background="@drawable/image_bg"
+		        android:layout_marginRight="2dip" >
+
+		        <ImageView
+		            android:id="@+id/foto_perfil_contacto"
+		            android:layout_width="110dp"
+		            android:layout_height="110dp"
+		            android:padding="2dip" />
+   
+			</LinearLayout>
+			
+			<TextView
+				android:id="@+id/nombre_perfil_contacto"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_alignTop="@+id/perfil_contacto_thumbnail"
+			    android:layout_toRightOf="@+id/perfil_contacto_thumbnail"
+				android:typeface="sans"
+				android:textSize="15sp"
+				android:textStyle="bold" 
+				android:textColor="@color/letras_oscuras"       	            
+			    android:gravity="center_vertical"/>
+			        
+			<TextView
+			    android:id="@+id/email_perfil_contacto"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"		    
+			    android:layout_below="@id/nombre_perfil_contacto"
+				android:textSize="10sp"
+				android:layout_marginTop="1dip"
+				android:layout_toRightOf="@+id/perfil_contacto_thumbnail"  
+				android:textColor="@color/letras_claras"                      
+			    android:singleLine="true"
+			    android:ellipsize="marquee"/>
+			   		    
+   		</RelativeLayout>
+   		
+   		 <LinearLayout 
+		     android:layout_width="match_parent"
+		     android:layout_height="wrap_content"
+		     android:orientation="vertical">
+
+	         <Button
+	             android:id="@+id/boton_chat"
+	             android:layout_width="match_parent"
+	             android:layout_height="45dp"
+	             android:background="@drawable/gradient_bg_color"
+	             android:ellipsize="start"
+	             android:onClick="abrirChat"
+	             android:text="@string/chat"
+	             android:typeface="sans" />
+			
+		</LinearLayout>
+     
+</LinearLayout>

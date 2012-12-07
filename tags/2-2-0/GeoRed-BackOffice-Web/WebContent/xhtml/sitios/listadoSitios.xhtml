@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body>
+		<ui:composition template="/xhtml/templates/layout.xhtml">
+			<ui:define name="content">	
+				<h:form>				
+					<h1 class="titulo-content">Listado de Sitios</h1>
+					
+					<div class="areaBotones">
+						<ul>
+							<li>
+								<p:commandButton value="Crear" action="#{listadoSitiosBean.toGestionSitio()}"/>
+							</li>
+						</ul>
+					</div>
+					
+					<p:dataTable id="dataTableSitios" var="sitio" value="#{listadoSitiosBean.listaSitios}"  
+				                 paginator="true" rows="10"  
+				                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+				                 rowsPerPageTemplate="5,10,15">  
+				  
+				  		<p:column>  
+				            <f:facet name="header">  
+				                <h:outputText value="ID" />  
+				            </f:facet>  
+				           	<h:commandLink action="#{listadoSitiosBean.toGestionSitio()}" value="#{sitio.id}">
+				           		 <f:setPropertyActionListener target="#{listadoSitiosBean.idSitio}" value="#{sitio.id}"/>
+				           	</h:commandLink>
+				        </p:column>
+				        
+				        <p:column>  
+				            <f:facet name="header">  
+				                <h:outputText value="Nombre" />  
+				            </f:facet>  
+				            <h:outputText value="#{sitio.nombre}" />  
+				        </p:column>  
+				  
+				        <p:column>  
+				            <f:facet name="header">  
+				                <h:outputText value="Descripcion" />  
+				            </f:facet>  
+				            <h:outputText value="#{sitio.descripcion}" />  
+				        </p:column>
+				        	
+				        <p:column style="width: 30px;">				        	
+				   			<h:commandLink action="#{listadoSitiosBean.eliminarSitio()}">
+				   				<h:graphicImage value="/resources/images/ico-eliminar.png"/>
+				           		<f:setPropertyActionListener target="#{listadoSitiosBean.idSitio}" value="#{sitio.id}"/>
+				           	</h:commandLink>
+				        </p:column>				  
+				    </p:dataTable> 
+				</h:form>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>	

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<h:body>
+		<ui:composition template="/xhtml/templates/layout.xhtml">
+			<ui:define name="content">	
+				<h:form id="seleccionEmpresaForm">					
+					<h1 class="titulo-content">Seleccione la empresa a administrar</h1>
+					<table>
+						<tr>
+							<td><h:outputText value="Empresa:" /></td>
+							<td>
+								<p:selectOneMenu id="empresaSeleccionada" value="#{seleccionEmpresaBean.idEmpresa}">
+									<f:selectItem itemLabel="---" itemValue="" />
+									<f:selectItems value="#{seleccionEmpresaBean.listaEmpresas}" 
+										var="empresa" itemValue="#{empresa.id}" itemLabel="#{empresa.nombre}"/>
+								</p:selectOneMenu>
+								<p:message for="empresaSeleccionada" />
+							</td>
+						</tr>
+					</table>		
+					
+					<div class="areaBotones">
+						<ul>				
+							<li>								
+								<p:commandButton value="Seleccionar" action="#{seleccionEmpresaBean.seleccionarEmpresa()}"/>	
+							</li>
+						</ul>									
+					</div>				
+				</h:form>				
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>	

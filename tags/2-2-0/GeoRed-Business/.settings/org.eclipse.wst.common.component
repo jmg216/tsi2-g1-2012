@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="GeoRed-Business">
+        <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
+        <dependent-module archiveName="GeoRed-Business-EJB.jar" deploy-path="/" handle="module:/resource/GeoRed-Business-EJB/GeoRed-Business-EJB">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="GeoRed-Business-JPA.jar" deploy-path="/lib" handle="module:/resource/GeoRed-Business-JPA/GeoRed-Business-JPA">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="GeoRed-Commons.jar" deploy-path="/lib" handle="module:/resource/GeoRed-Commons/GeoRed-Commons">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="gson-2.2.2.jar" deploy-path="lib" handle="module:/classpath/lib/EarContent/lib/gson-2.2.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="gcm-server.jar" deploy-path="lib" handle="module:/classpath/lib/EarContent/lib/gcm-server.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="json-simple-1.1.1.jar" deploy-path="lib" handle="module:/classpath/lib/EarContent/lib/json-simple-1.1.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+    </wb-module>
+</project-modules>
