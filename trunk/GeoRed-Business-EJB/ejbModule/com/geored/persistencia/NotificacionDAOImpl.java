@@ -16,19 +16,22 @@ public class NotificacionDAOImpl extends GenericDAOBase<Notificacion, Notificaci
 	@Override
 	public void toEntity(NotificacionDTO source, Notificacion target)
 	{
-		target.setNombre(source.getNombre());
+		target.setDescripcion(source.getDescripcion());
+		target.setLeida(source.isLeida());
+		
 	}
 
 	@Override
 	public void toDto(Notificacion source, NotificacionDTO target)
 	{
 		target.setId(source.getId());
-		target.setNombre(source.getNombre());
+		target.setDescripcion(source.getDescripcion());
+		target.setLeida(source.isLeida());
 		
-		if(source.getUsuario() != null)
+		if(source.getUsuarioDestino() != null)
 		{
-			target.setIdUsuario(source.getUsuario().getId());
-			target.setNombreUsuario(source.getUsuario().getNombre());
+			target.setIdUsuarioDestino(source.getUsuarioDestino().getId());
+			target.setNombreUsuarioDestino(source.getUsuarioDestino().getNombre());
 		}
 		
 		if(source.getTipoNotificacion() != null)

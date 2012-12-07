@@ -26,12 +26,15 @@ public class Notificacion implements Serializable
 	@Column(name="ID", nullable=false)
 	private Long id;
 	
-	@Column(name="NOMBRE", nullable=false)
-	private String nombre;
+	@Column(name="DESCRIPCION", nullable=false)
+	private String descripcion;
 	
-	@JoinColumn(name="USUARIO_FK", nullable=false)
+	@Column(name="LEIDA", nullable=false)
+	private boolean leida;
+	
+	@JoinColumn(name="USUARIO_DESTINO_FK", nullable=false)
 	@ManyToOne(fetch=FetchType.LAZY)
-	private Usuario usuario;
+	private Usuario usuarioDestino;
 
 	@JoinColumn(name="TIPO_NOTIFICACION_FK", nullable=false)
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -47,24 +50,34 @@ public class Notificacion implements Serializable
 		this.id = id;
 	}
 
-	public String getNombre()
+	public String getDescripcion()
 	{
-		return nombre;
+		return descripcion;
 	}
 
-	public void setNombre(String nombre)
+	public void setDescripcion(String descripcion)
 	{
-		this.nombre = nombre;
+		this.descripcion = descripcion;
 	}
 
-	public Usuario getUsuario()
+	public boolean isLeida()
 	{
-		return usuario;
+		return leida;
 	}
 
-	public void setUsuario(Usuario usuario)
+	public void setLeida(boolean leida)
 	{
-		this.usuario = usuario;
+		this.leida = leida;
+	}
+
+	public Usuario getUsuarioDestino()
+	{
+		return usuarioDestino;
+	}
+
+	public void setUsuarioDestino(Usuario usuarioDestino)
+	{
+		this.usuarioDestino = usuarioDestino;
 	}
 
 	public TipoNotificacion getTipoNotificacion()

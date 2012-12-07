@@ -4,16 +4,18 @@ public class NotificacionDTO
 {
 	private Long id;
 	
-	private String nombre;
+	private String descripcion;
 	
-	private Long idUsuario;
+	private boolean leida;
 	
-	private String nombreUsuario;
+	private Long idUsuarioDestino;
+	
+	private String nombreUsuarioDestino;
 
 	private Long idTipoNotificacion;
 	
 	private String nombreTipoNotificacion;
-	
+
 	public Long getId()
 	{
 		return id;
@@ -24,34 +26,44 @@ public class NotificacionDTO
 		this.id = id;
 	}
 
-	public String getNombre()
+	public String getDescripcion()
 	{
-		return nombre;
+		return descripcion;
 	}
 
-	public void setNombre(String nombre)
+	public void setDescripcion(String descripcion)
 	{
-		this.nombre = nombre;
+		this.descripcion = descripcion;
 	}
 
-	public Long getIdUsuario()
+	public boolean isLeida()
 	{
-		return idUsuario;
+		return leida;
 	}
 
-	public void setIdUsuario(Long idUsuario)
+	public void setLeida(boolean leida)
 	{
-		this.idUsuario = idUsuario;
+		this.leida = leida;
 	}
 
-	public String getNombreUsuario()
+	public Long getIdUsuarioDestino()
 	{
-		return nombreUsuario;
+		return idUsuarioDestino;
 	}
 
-	public void setNombreUsuario(String nombreUsuario)
+	public void setIdUsuarioDestino(Long idUsuarioDestino)
 	{
-		this.nombreUsuario = nombreUsuario;
+		this.idUsuarioDestino = idUsuarioDestino;
+	}
+
+	public String getNombreUsuarioDestino()
+	{
+		return nombreUsuarioDestino;
+	}
+
+	public void setNombreUsuarioDestino(String nombreUsuarioDestino)
+	{
+		this.nombreUsuarioDestino = nombreUsuarioDestino;
 	}
 
 	public Long getIdTipoNotificacion()
