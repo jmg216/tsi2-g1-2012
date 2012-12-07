@@ -68,5 +68,11 @@ public class GlobalServiceImplProxy implements com.geored.negocio.GlobalServiceI
     return globalServiceImpl.obtenerListadoTiposNotificaciones();
   }
   
+  public com.geored.negocio.TipoNotificacionDTO obtenerTipoNotificacionPorId(java.lang.Long arg0) throws java.rmi.RemoteException, com.geored.negocio.DaoException{
+    if (globalServiceImpl == null)
+      _initGlobalServiceImplProxy();
+    return globalServiceImpl.obtenerTipoNotificacionPorId(arg0);
+  }
+  
   
 }

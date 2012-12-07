@@ -14,5 +14,5 @@ public interface AmistadDAO extends GenericDAO<Amistad, AmistadDTO>
 {
 	public List obtenerAmistadesUsuario(Long idUsuario, boolean soloConectados, boolean toDTO) throws DaoException;
 	
-	public boolean sonAmigos(Long idUsuario, Long idAmigo) throws DaoException;
+	public Object obtenerAmistadPorUsuarios(Long idUsuarioA, Long idUsuarioB, boolean toDTO) throws DaoException;
 }
