@@ -130,6 +130,13 @@ public class UsuarioServiceImpl implements UsuarioService
 			
 			return new Gson().toJson(idNotificacion);
 		}
+		else if(methodName.equals("obtenerListadoPorTipoYUsuarioDestino"))
+		{
+			Long idTipoNotificacion = (Long) params.getParam("idTipoNotificacion", Long.class);
+			Long idUsuarioDestino = (Long) params.getParam("idUsuarioDestino", Long.class);
+			
+			return new Gson().toJson(obtenerListadoPorTipoYUsuarioDestino(idTipoNotificacion, idUsuarioDestino));
+		}
 		else if(methodName.equals("obtenerListadoConectados"))
 		{	
 			return new Gson().toJson(obtenerListadoConectados());
@@ -147,14 +154,7 @@ public class UsuarioServiceImpl implements UsuarioService
 			Long idUsuarioB = (Long) params.getParam("idUsuarioB", Long.class);
 			
 			return new Gson().toJson(obtenerAmistadPorUsuarios(idUsuarioA, idUsuarioB));
-		}
-		else if (methodName.equals("obtenerAmistadPorUsuarios"))
-		{
-			Long idUsuarioA = (Long) params.getParam("idUsuarioA", Long.class);
-			Long idUsuarioB = (Long) params.getParam("idUsuarioB", Long.class);
-			
-			return new Gson().toJson(obtenerAmistadPorUsuarios(idUsuarioA, idUsuarioB));
-		}
+		}		
 		else if (methodName.equals("insertarAmistad"))
 		{
 			AmistadDTO amistadDTO = (AmistadDTO) params.getParam("amistadDTO", AmistadDTO.class);
@@ -163,9 +163,9 @@ public class UsuarioServiceImpl implements UsuarioService
 		}
 		else if (methodName.equals("eliminarAmistad"))
 		{
-			AmistadDTO amistadDTO = (AmistadDTO) params.getParam("amistadDTO", AmistadDTO.class);
+			Long idAmistad = (Long) params.getParam("idAmistad", Long.class);
 			
-			return new Gson().toJson(insertarAmistad(amistadDTO));
+			eliminarAmistad(idAmistad);
 		}
 	
 		return "";
@@ -441,7 +441,8 @@ public class UsuarioServiceImpl implements UsuarioService
 		return amistad.getId();
 	}
 
-	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	@WebMethod(operationName="eliminarAmistad")
 	public void eliminarAmistad(@WebParam(name="idAmistad") Long idAmistad) throws NegocioException, DaoException
 	{
 		Amistad amistad = (Amistad) amistadDAO.obtener(idAmistad, false);
@@ -452,6 +453,13 @@ public class UsuarioServiceImpl implements UsuarioService
 		}
 		
 		amistadDAO.eliminar(amistad);
+	}
+
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	@WebMethod(operationName="obtenerListadoPorTipoYUsuarioDestino")
+	public List<NotificacionDTO> obtenerListadoPorTipoYUsuarioDestino(@WebParam(name="idTipoNotificacion") Long idTipoNotificacion, @WebParam(name="idUsuarioDestino") Long idUsuarioDestino) throws DaoException
+	{
+		return notificacionDAO.obtenerListadoPorTipoYUsuarioDestino(idTipoNotificacion, idUsuarioDestino, true);
 	}	
 		
 }
