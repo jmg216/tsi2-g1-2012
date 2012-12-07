@@ -27,6 +27,12 @@ values (2, 'La pizza del mondo es un clásico de este restaurante de minutas y co
 insert into geored.empresa (ID, DESCRIPCION, FECHA_CREACION, NOMBRE, URL_IMAGEN,  ADMINISTRADOR_FK)
 values (3, 'El Teatro Solís es hoy el mayor referente patrimonial de las artes escénicas de Uruguay y su primer escenario.', '2012-12-22', 'Teatro Solis', 'http://www.ithu.edu.uy/imagenes/teatro-solis.jpg', 4);
 
+/*Locales de Ill Mondo de la Pizza*/
+insert into geored.local (ID, DIRECCION, NOMBRE, UBICACION_GEOGRAFICA, EMPRESA_FK) values (1, '18 de Julio 922 esq. Convención', 'Local Centro' , '-34.905326, -56.185323', 2);
+
+insert into geored.local (ID, DIRECCION, NOMBRE, UBICACION_GEOGRAFICA, EMPRESA_FK) values (2, '21 de Setiembre 2816 esq. Ellauri', 'Local Pocitos' , '-34.918839,-56.156144', 2);
+
+insert into geored.local (ID, DIRECCION, NOMBRE, UBICACION_GEOGRAFICA, EMPRESA_FK) values (3, '8 de Octubre 3401 esq. Bv. Batlle y Ordoñez', 'Local Union' , '-34.87896,-56.147776', 2);
 
 /*Sitio de interés*/
 insert into geored.sitio (ID, DESCRIPCION, NOMBRE, UBICACION_GEOGRAFICA, URL_IMAGEN) values (1, 'Buen lugar para hacer ejercicio', 'Gym Astro', '-34.883611, -56.181944', 'http://theawkwardpint.files.wordpress.com/2012/05/93_1.jpeg');
