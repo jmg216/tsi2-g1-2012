@@ -8,10 +8,13 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.geored.dto.MensajeAmistadDTO;
+import com.geored.dto.NotificacionDTO;
 import com.geored.dto.UsuarioDTO;
+import com.geored.frontoffice.activities.contacto.ContactoChatActivity;
 import com.geored.frontoffice.utiles.UtilesSeguridadAndroid;
 import com.geored.frontoffice.wsclient.FactoryWS;
 import com.geored.frontoffice.wsclient.UsuarioWS;
+import com.geored.utiles.ConstantesGenerales;
 import com.google.android.gcm.GCMBaseIntentService;
 import com.google.android.gcm.GCMRegistrar;
 import com.google.gson.Gson;
@@ -124,23 +127,45 @@ public class GCMIntentService extends GCMBaseIntentService
 	{
 		 String msg = intent.getExtras().getString("message");
 		 
+		 String gsonMessage = msg.substring(1);
+		 String codigoTipo = msg.substring(0, 1);
+		 
 		 Gson gson = new Gson();  
 		 
 		 //TODO Resolver como diferenciar si el mensaje en de chat o de una notificacion.
-		 Object retorno = gson.fromJson(msg, MensajeAmistadDTO.class);
+		 if (codigoTipo.equals(ConstantesGenerales.TiposCodigoMensaje.CHAT))
+		 {
+			 MensajeAmistadDTO mensajeAmistadDTO= gson.fromJson(gsonMessage, MensajeAmistadDTO.class);
+			 
+			 sendGCMIntentMensajeAmistad(context, mensajeAmistadDTO);
+		 }
 		 
-		 sendGCMIntent(context, msg);
-		
+		 if (codigoTipo.equals(ConstantesGenerales.TiposCodigoMensaje.NOTIFICACION))
+		 {
+			 NotificacionDTO notificacionDTO = gson.fromJson(gsonMessage, NotificacionDTO.class);
+			 sendGCMIntentNotificacion(context, notificacionDTO);
+		 }		 		
 	}
 	
-    private void sendGCMIntent(Context ctx, String message) {
+    private void sendGCMIntentNotificacion(Context ctx, NotificacionDTO notificacion) 
+    {
         
         Intent broadcastIntent = new Intent();
         broadcastIntent.setAction("GCM_RECEIVED_ACTION");         
-        broadcastIntent.putExtra("gcm", message);       
+        broadcastIntent.putExtra("msjNotificacion", notificacion.getDescripcion());       
         ctx.sendBroadcast(broadcastIntent);
-        mostrarNotificacion(ctx, message);
-         
+        mostrarNotificacion(ctx, notificacion.getDescripcion());         
+    }		
+	
+    private void sendGCMIntentMensajeAmistad(Context ctx, MensajeAmistadDTO mensajeAmistad) 
+    {
+        
+        Intent broadcastIntent = new Intent();
+        broadcastIntent.setAction("GCM_RECEIVED_ACTION");         
+        broadcastIntent.putExtra("msjChat", mensajeAmistad.getMensaje());       
+        ctx.sendBroadcast(broadcastIntent);
+        getApplicationContext();
+        mostrarNotificacion(ctx, mensajeAmistad.getMensaje());         
     }	
 
 	/**

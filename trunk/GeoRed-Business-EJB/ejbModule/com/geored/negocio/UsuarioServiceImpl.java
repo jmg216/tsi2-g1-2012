@@ -304,8 +304,6 @@ public class UsuarioServiceImpl implements UsuarioService
 	{
 		MensajeAmistad mensajeAmistad = mensajeAmistadDAO.toEntity(mensajeAmistadDTO);
 		
-		mensajeAmistadDTO = mensajeAmistadDAO.toDto(mensajeAmistad);
-		
 		Amistad amistad = (Amistad) amistadDAO.obtener(mensajeAmistadDTO.getIdAmistad(), false);
 		
 		if(amistad == null)
@@ -324,13 +322,18 @@ public class UsuarioServiceImpl implements UsuarioService
 		
 		mensajeAmistad.setRemitente(remitente);
 		
-		mensajeAmistadDAO.insertar(mensajeAmistad);
+		mensajeAmistad = mensajeAmistadDAO.insertar(mensajeAmistad);
+		
+		mensajeAmistadDTO = mensajeAmistadDAO.toDto(mensajeAmistad);
 		
 		Long idDestinatario = amistad.getUsuarioA().getId();
 		
 		UsuarioDTO usuario = obtener(idDestinatario);
 		
-		AndroidGCMPushNotification.enviarMensajeChatGCM("10", usuario.getGcmRegId(), mensajeAmistadDTO);
+		List<String> androidTargets = new ArrayList<String>();
+		androidTargets.add(usuario.getGcmRegId());
+		
+		AndroidGCMPushNotification.enviarMensajeChatGCM("10", androidTargets, mensajeAmistadDTO);
 		
 		return mensajeAmistad.getId();
 	}
@@ -341,7 +344,7 @@ public class UsuarioServiceImpl implements UsuarioService
 	{
 		Notificacion notificacion = notificacionDAO.toEntity(notificacionDTO);
 		
-		TipoNotificacion tipoNotificacion = (TipoNotificacion) notificacionDAO.obtener(notificacionDTO.getIdTipoNotificacion(), false);
+		TipoNotificacion tipoNotificacion = (TipoNotificacion) tipoNotificacionDAO.obtener(notificacionDTO.getIdTipoNotificacion(), false);
 		
 		if(tipoNotificacion == null)
 		{

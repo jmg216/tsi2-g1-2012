@@ -12,6 +12,8 @@ public class UtilesSeguridadAndroid{
 	public static final String API_KEY = "AIzaSyA-sjjWHPR2JIHEipdGAFKH8rLcK25Od1A";
 	public static final String ID_SENDER_GCM = "121239138891";
 	
+	private static UsuarioDTO usuarioDTO;
+	
 	public static void setUsuarioAutenticado(Context context, UsuarioDTO usuarioADTO)
 	{
 		
@@ -32,7 +34,7 @@ public class UtilesSeguridadAndroid{
     	String nombre = prefs.getString("nombreUser", "");
     	String email = prefs.getString("emailUser", "");
     	
-    	UsuarioDTO usuarioADTO = new UsuarioDTO();
+    	UsuarioDTO usuarioADTO = getUsuarioDTO();
     	usuarioADTO.setId(id);
     	usuarioADTO.setNombre(nombre);
     	usuarioADTO.setEmail(email);
@@ -47,5 +49,14 @@ public class UtilesSeguridadAndroid{
 		
 		editor.clear();
 		editor.commit();
+	}
+	
+	protected static UsuarioDTO getUsuarioDTO()
+	{
+		if (usuarioDTO == null)
+		{
+			usuarioDTO = new UsuarioDTO();
+		}
+		return usuarioDTO;
 	}
 }

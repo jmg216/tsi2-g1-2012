@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.geored.dto.AmistadDTO;
 import com.geored.dto.MensajeAmistadDTO;
+import com.geored.dto.NotificacionDTO;
 import com.geored.dto.UsuarioDTO;
 import com.geored.frontoffice.utiles.UtilesAndorid;
 
@@ -54,7 +56,6 @@ public class UsuarioWS
 		params.put("pass", pass);
 		
 		return (UsuarioDTO) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, "obtenerPorEmailYPass", params, UsuarioDTO.class, null);
-
 	}
 	
 	public Long enviarMensajeChat(MensajeAmistadDTO mensajeAmistadDTO)
@@ -72,5 +73,28 @@ public class UsuarioWS
 		params.put("soloConectados", soloConectados);
 		
 		return (List<UsuarioDTO>) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, "obtenerListadoAmigos", params, List.class, UsuarioDTO.class);
+	}
+	
+	public AmistadDTO obtenerAmistadPorUsuarios(Long idUsuarioA, Long idUsuarioB)
+	{
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("idUsuarioA", idUsuarioA);
+		params.put("idUsuarioB", idUsuarioB);
+		
+		return (AmistadDTO) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, "obtenerAmistadPorUsuarios", params, AmistadDTO.class, null);
+	}
+	
+	public void eliminarAmistad(Long idAmistad)
+	{
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("idAmistad", idAmistad);
+	}
+	
+	public Long enviarNotificacion(NotificacionDTO notificacionDTO)
+	{
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("notificacionDTO", notificacionDTO);
+		
+    	return (Long) WSProxyClient.call(UtilesAndorid.URL_WS_USUARIO, "enviarNotificacion", params, null, null);			
 	}
 }

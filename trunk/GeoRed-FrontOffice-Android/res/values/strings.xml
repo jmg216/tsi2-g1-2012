@@ -18,12 +18,13 @@
 	<string name="title_activity_menu">Menú GeoRedUy</string>
 	<string name="perolataImagen">Ingrese la URL de su foto de Perfil</string>
 	<string name="perolataImagenBoton">Click Aqui para cargar Foto</string>
-	<string name="errorRegistrando">Error al registrar.</string>
-	<string name="errorCargandoImagen">Error cargando la imagen seleccione una url de imagen válida.</string>
+	<string name="errorRegistrando">Error al registrar.</string>	
 		
 	<!-- Contactos -->
 	<string name="contactos">Contactos</string>	
 	<string name="enviar">Enviar</string>
+	<string name="agregarContacto">Agregar amigo</string>
+	<string name="eliminarContacto">Eliminar amigo</string>
 	
 	
 	<!-- Chat -->
@@ -64,4 +65,11 @@
 	<string name="notificacionesNoActivas">Las notificaciones no se encuentran activas.</string>
 	<string name="notificacionesActivadas">Notificaciones activadas correctamente.</string>
 	<string name="notificacionesDesactivadas">Notificaciones desactivadas correctamente.</string>
+	<string name="errorCargandoImagen">Error cargando la imagen seleccione una url de imagen válida.</string>
+	<string name="informacion">Información</string>
+	<string name="info_activar_notificacion">Debe activar el servicio de notificaciones para acceder a esta funcionalidad.</string>
+	<string name="info_agregar_amistad">Debe ser amigo del contacto seleccionado para acceder a esta funcionalidad.</string>
+	<string name="solicitud_amistad_enviada">Solicitud de amistado enviada.</string>
+	<string name="amistad_eliminada">Amistad eliminada.</string>
+	
 </resources>

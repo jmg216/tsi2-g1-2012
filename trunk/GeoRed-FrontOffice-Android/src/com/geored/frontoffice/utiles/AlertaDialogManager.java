@@ -26,6 +26,11 @@ public class AlertaDialogManager
             // Iconos de Alerta
             alertDialog.setIcon((estado) ? R.drawable.success_icon : R.drawable.error_icon);
         }
+        else
+        {
+        	//Info icon
+        	alertDialog.setIcon(R.drawable.info_icon);
+        }
         
         alertDialog.setButton("OK", new DialogInterface.OnClickListener() 
         {
