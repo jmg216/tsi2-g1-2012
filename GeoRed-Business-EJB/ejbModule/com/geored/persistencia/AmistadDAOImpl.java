@@ -33,12 +33,14 @@ public class AmistadDAOImpl extends GenericDAOBase<Amistad, AmistadDTO> implemen
 		
 		if(source.getUsuarioA() != null)
 		{
+			target.setId(source.getId());
 			target.setIdUsuarioA(source.getUsuarioA().getId());
 			target.setNombreUsuarioA(source.getUsuarioA().getNombre());
 		}
 		
 		if(source.getUsuarioB() != null)
 		{
+			target.setId(source.getId());
 			target.setIdUsuarioB(source.getUsuarioB().getId());
 			target.setNombreUsuarioB(source.getUsuarioB().getNombre());
 		}	
@@ -91,7 +93,13 @@ public class AmistadDAOImpl extends GenericDAOBase<Amistad, AmistadDTO> implemen
 	        query.setParameter(1, idUsuarioA);        
 	        query.setParameter(2, idUsuarioB); 
 	        
-	        return (query.getSingleResult() != null);	        
+	        Amistad amistad = (Amistad) query.getSingleResult();
+	        
+	        if (toDTO)
+	        {
+	        	return toDto(amistad);
+	        }
+	        return amistad;	        
 		}
 		catch(Throwable e)
 		{

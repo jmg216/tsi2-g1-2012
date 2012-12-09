@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.EditText;
 
+import com.geored.dto.AmistadDTO;
 import com.geored.dto.MensajeAmistadDTO;
 import com.geored.frontoffice.activities.R;
 import com.geored.frontoffice.utiles.AlertaDialogManager;
@@ -21,6 +22,7 @@ public class ContactoChatActivity extends Activity
 {
 	private EditText messageText;
 	private EditText messageHistoryText;
+	private Long idContacto;
 	private UsuarioWS usuarioWS = FactoryWS.getInstancia().getUsuarioWS();
 	
 	@Override
@@ -35,9 +37,9 @@ public class ContactoChatActivity extends Activity
 		messageText.requestFocus();	
 		
 		Bundle extras = this.getIntent().getExtras();		
-		Long idContacto = extras.getLong("idContactoToChat");
+		idContacto = extras.getLong("idContactoToChat");
 		String nombreContacto = extras.getString("nombreContactoToChat");
-		String msg = extras.getString("msj");
+		String msg = extras.getString("msjChat");
 		
 		if (msg != null) 
 		{
@@ -60,7 +62,10 @@ public class ContactoChatActivity extends Activity
 			mensajeAmistadDTO.setIdRemitente(UtilesSeguridadAndroid.getUsuarioAutenticado(getApplicationContext()).getId());
 			mensajeAmistadDTO.setNombreRemitente(UtilesSeguridadAndroid.getUsuarioAutenticado(getApplicationContext()).getNombre());
 			mensajeAmistadDTO.setMensaje(mensaje.toString());
-			mensajeAmistadDTO.setIdAmistad((long) 1);
+			
+			Long idAmistad = extras.getLong("idAmistad");				
+			mensajeAmistadDTO.setIdAmistad(idAmistad);
+			
 			mensajeAmistadDTO.setFechaCreacion(new Date());
 			
 			appendToMessageHistory(mensajeAmistadDTO.getNombreRemitente(), mensaje.toString());
@@ -70,18 +75,19 @@ public class ContactoChatActivity extends Activity
 			{					
 				public void run() 
 				{
-					if (usuarioWS.enviarMensajeChat(mensajeAmistadDTO) == 0L)
-					{
+					usuarioWS.enviarMensajeChat(mensajeAmistadDTO);
+//					if (usuarioWS.enviarMensajeChat(mensajeAmistadDTO) == 0L)
+//					{
 						
 //						handler.post(new Runnable()
 //						{	
 //							public void run() 
 //							{
-								AlertaDialogManager.showAlertDialog(context, getResources().getString(R.string.chat), getResources().getString(R.string.errorEnvioMensaje), false);										
+								//AlertaDialogManager.showAlertDialog(context, getResources().getString(R.string.chat), getResources().getString(R.string.errorEnvioMensaje), false);										
 //							}
 							
 //						});
-					}
+//					}
 				}						
 			};
 			thread.start();

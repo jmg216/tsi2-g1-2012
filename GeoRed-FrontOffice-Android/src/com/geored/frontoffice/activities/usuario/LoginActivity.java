@@ -56,6 +56,10 @@ public class LoginActivity extends Activity implements OnClickListener  {
     	{
     		UtilesSeguridadAndroid.setUsuarioAutenticado(getApplicationContext(), usuarioDTO);	
     		
+    		usuarioDTO.setConectado(true);
+    		
+    		usuarioWS.actualizar(usuarioDTO);
+    		
 	    	Intent menuActivity = new Intent (this, MenuActivity.class);
 	    	startActivity(menuActivity);
     	}

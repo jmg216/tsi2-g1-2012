@@ -72,6 +72,8 @@ public class RegistroActivity extends Activity {
     	usuarioDTO.setEmail(email.getText().toString());
     	usuarioDTO.setPass(pass.getText().toString());
     	
+    	usuarioDTO.setConectado(true);
+    	
     	if (urlImagen.getText() != null)
     	{	
     		usuarioDTO.setUrlImagen(urlImagen.getText().toString());

@@ -11,4 +11,14 @@ public class ConstantesGenerales
 		public static final Long ID_SOLICITUD = 5L;
 	}
 	
+	/**
+	 * 	Codigo para saber si el mensaje que se va a enviar
+	 *	por gcm de tipo NotificacionDTO o de tipo MensajeAmistadoDTO
+	 * */
+	public static class TiposCodigoMensaje
+	{
+		public static final String NOTIFICACION = "N";
+		public static final String CHAT = "C";
+	}
+	
 }

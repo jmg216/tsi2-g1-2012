@@ -33,7 +33,7 @@ public class AndroidGCMPushNotification
 	        String message = new Gson().toJson(notificacionDTO);
 	        
 	        //Marco como notificacion C: mensaje del chat, N: notificacion.
-	        message = "N" + message;
+	        message = ConstantesGenerales.TiposCodigoMensaje.NOTIFICACION + message;
 	        
 	        // Mensaje que contiene los datos que seran transmitidos.
 	        Message message1 = new Message.Builder()
@@ -61,7 +61,7 @@ public class AndroidGCMPushNotification
 	            else 
 	            {
 	                int error = result.getFailure();
-	                System.out.println("Broadcast failure: " + error);
+	                System.out.println("Error enviando notificaciones: " + error);
 	            }
 	             
 	        } 
@@ -72,7 +72,7 @@ public class AndroidGCMPushNotification
 	        return true;
 	}
 	
-	public static boolean enviarMensajeChatGCM (String collapseKey, String idRegGCM, MensajeAmistadDTO msjAmistadoDTO) throws NegocioException
+	public static boolean enviarMensajeChatGCM (String collapseKey, List<String> androidTargets, MensajeAmistadDTO msjAmistadoDTO) throws NegocioException
 	{			
 			//Instancia de com.android.gcm.server.Sender que realiza la transmision
 			//de los mensajes a Google Cloud Messaging Service.
@@ -81,8 +81,8 @@ public class AndroidGCMPushNotification
 	        
 	        String message = new Gson().toJson(msjAmistadoDTO);
 	        
-	        //Marco como mensaje al chat. C: mensaje del chat, N: notificacion.
-	        message = "C" + message;
+	        //Marco como mensaje de tipo MensajeAmistad.
+	        message = ConstantesGenerales.TiposCodigoMensaje.CHAT + message;
 	        
 	        // Mensaje que contiene los datos que seran transmitidos.
 	        Message message1 = new Message.Builder()
@@ -96,18 +96,21 @@ public class AndroidGCMPushNotification
 	        try 
 	        {
 	            //Envia el mensaje al usuario identificado con idRegGCM.
-	        	Result result = sender.send(message1, idRegGCM, 1);
+	        	MulticastResult result = sender.send(message1, androidTargets, 1);
 	             
 
-	        	String canonicalRegId = result.getCanonicalRegistrationId();
-	            if (!canonicalRegId.isEmpty())
+	            if (result.getResults() != null) 
 	            {
+	                int canonicalRegId = result.getCanonicalIds();
+	                if (canonicalRegId != 0) 
+	                {
 	                     
-	            }	        
+	                }
+	            } 
 	            else 
 	            {
-	                String error = result.getErrorCodeName();
-	                System.out.println("Broadcast failure: " + error);
+	                int error = result.getFailure();
+	                System.out.println("Error enviando mensaje chat: " + error);
 	            }
 	             
 	        } 
