@@ -40,6 +40,15 @@
             </intent-filter>
         </activity>
         
+        <activity 
+            android:name=".usuario.TematicaActivityReg"
+            android:label="@string/title_activity_registro">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        
 		<activity
             android:name=".menu.MenuActivity"
             android:label="@string/title_activity_menu">

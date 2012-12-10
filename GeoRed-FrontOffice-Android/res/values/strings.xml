@@ -19,7 +19,9 @@
 	<string name="perolataImagen">Ingrese la URL de su foto de Perfil</string>
 	<string name="perolataImagenBoton">Click Aqui para cargar Foto</string>
 	<string name="errorRegistrando">Error al registrar.</string>	
-		
+	
+	<string name="titulo_seleccion_tematicas">Seleccione las tematicas a las que desea suscribirse.</string>	
+	
 	<!-- Contactos -->
 	<string name="contactos">Contactos</string>	
 	<string name="enviar">Enviar</string>
