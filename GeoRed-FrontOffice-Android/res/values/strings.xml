@@ -43,7 +43,7 @@
 	<!-- Perfil -->
 	<string name="perfil">Perfil</string>
 	
-	<!-- Notificaciones -->
+	<!-- Notificaciones -->	
 	<string name="notificaciones">Notificaciones</string>
 	<string name="activar">Activar</string>
 	<string name="desactivar">Desactivar</string>
@@ -61,6 +61,7 @@
 	<!-- ERRORES y MENSAJES-->
 	<string name="error_registro">Ocurrió un error al procesar el registro. Intente mas tarde.</string>
 	<string name="error_login">Debes registrarte para utilizar esta aplicación. Registrate ahora!</string>
+	<string name="error_usuario_inexistente">El usuario no existe.</string>
 	<string name="cargando">Cargando&#8230;</string>
 	<string name="obteniendo_datos">Obteniendo datos&#8230;</string>
 	<string name="notificacionesYaActivadas">Las notificaciones ya se encuentran activas.</string>

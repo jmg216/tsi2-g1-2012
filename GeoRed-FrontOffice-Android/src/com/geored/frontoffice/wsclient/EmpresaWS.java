@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.geored.dto.EmpresaDTO;
-import com.geored.frontoffice.utiles.UtilesAndorid;
+import com.geored.frontoffice.utiles.UtilesAndroid;
 
 public class EmpresaWS
 {		
@@ -14,7 +14,7 @@ public class EmpresaWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("empresaDTO", empresaDTO);
 		
-		return (Long) WSProxyClient.call(UtilesAndorid.URL_WS_EMPRESA, "insertar", params, Long.class, null);
+		return (Long) WSProxyClient.call(UtilesAndroid.URL_WS_EMPRESA, "insertar", params, Long.class, null);
 	}
 	
 	public void actualizar(EmpresaDTO empresaDTO)
@@ -22,7 +22,7 @@ public class EmpresaWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("empresaDTO", empresaDTO);
 		
-    	WSProxyClient.call(UtilesAndorid.URL_WS_EMPRESA, "actualizar", params, null, null);		
+    	WSProxyClient.call(UtilesAndroid.URL_WS_EMPRESA, "actualizar", params, null, null);		
 	}
 	
 	public void eliminar(Long idEmpresa)
@@ -30,7 +30,7 @@ public class EmpresaWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("idEmpresa", idEmpresa);
 		
-    	WSProxyClient.call(UtilesAndorid.URL_WS_EMPRESA, "eliminar", params, null, null);			
+    	WSProxyClient.call(UtilesAndroid.URL_WS_EMPRESA, "eliminar", params, null, null);			
 	}
 	
 	public EmpresaDTO obtener(Long idEmpresa)
@@ -38,11 +38,11 @@ public class EmpresaWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("idEmpresa", idEmpresa);
 		
-		return (EmpresaDTO) WSProxyClient.call(UtilesAndorid.URL_WS_EMPRESA, "obtener", params, EmpresaDTO.class, null);
+		return (EmpresaDTO) WSProxyClient.call(UtilesAndroid.URL_WS_EMPRESA, "obtener", params, EmpresaDTO.class, null);
 	}
 	
 	public List<EmpresaDTO> obtenerListado()
 	{
-		return (List<EmpresaDTO>) WSProxyClient.call(UtilesAndorid.URL_WS_EMPRESA, "obtenerListado", null, List.class, EmpresaDTO.class);
+		return (List<EmpresaDTO>) WSProxyClient.call(UtilesAndroid.URL_WS_EMPRESA, "obtenerListado", null, List.class, EmpresaDTO.class);
 	}
 }

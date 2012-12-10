@@ -24,7 +24,7 @@ import android.widget.TextView;
 import com.geored.dto.SitioDTO;
 import com.geored.frontoffice.activities.R;
 import com.geored.frontoffice.activities.sitio.SitioDetalleActivity;
-import com.geored.frontoffice.utiles.UtilesAndorid;
+import com.geored.frontoffice.utiles.UtilesAndroid;
 import com.geored.frontoffice.wsclient.FactoryWS;
 import com.geored.frontoffice.wsclient.SitioWS;
 import com.google.android.maps.GeoPoint;
@@ -263,7 +263,7 @@ public class MapGeoRedActivity extends MapActivity
 				String lati2 = coordes2[0];
 				String longi2 = coordes2[1];
 
-				dist = UtilesAndorid.CalcularDistanciaCoordenadas(lati, longi, lati2, longi2);
+				dist = UtilesAndroid.CalcularDistanciaCoordenadas(lati, longi, lati2, longi2);
 				Double dKM = km.doubleValue();
 				if ((dist <= dKM) || (km == 0))
 				{
