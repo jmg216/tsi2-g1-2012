@@ -44,7 +44,7 @@ public class Usuario implements Serializable
 	private String urlImagen;
 	
 	@Column(name="CONECTADO")
-	private Boolean conectado;
+	private boolean conectado;
 	
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="usuario_tematica",

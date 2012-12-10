@@ -6,7 +6,7 @@ public class UsuarioDTO
 {
 	private Long id;
 	
-	private Boolean conectado;
+	private boolean conectado;
 	
 	private String email;
 	
