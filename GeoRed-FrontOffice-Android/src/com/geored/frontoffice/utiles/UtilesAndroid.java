@@ -9,11 +9,8 @@ import com.geored.dto.NotificacionDTO;
 public class UtilesAndroid 
 {
 	// Coleccion estatica de notificaciones y mensajes
-	public static List<NotificacionDTO> listaNotificaciones = new ArrayList<NotificacionDTO>();
-	
+	public static List<NotificacionDTO> listaNotificaciones = new ArrayList<NotificacionDTO>();	
 	public static List<MensajeAmistadDTO> listaMensajes = new ArrayList<MensajeAmistadDTO>();
-	
-	public static final double radioTierraKm = 6371;
 	
 	public static final String IP_PUERTO="10.0.2.2:8080";
 	
@@ -26,6 +23,8 @@ public class UtilesAndroid
 	public static final String URL_WS_GLOBAL  = "http://" + IP_PUERTO +"/GeoRed-Business-EJB/GlobalServiceImpl?wsdl";
 	public static final String URL_WS_COMPRA  = "http://" + IP_PUERTO +"/GeoRed-Business-EJB/CompraServiceImpl?wsdl";
 
+	
+	public static final double radioTierraKm = 6371;
 	
 	public static double CalcularDistanciaCoordenadas(String strLat1, String strLon1, String strLat2, String strLon2)
     {

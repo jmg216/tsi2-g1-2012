@@ -144,12 +144,12 @@ public class UsuarioServiceImpl implements UsuarioService
 			
 			return new Gson().toJson(idNotificacion);
 		}
-		else if(methodName.equals("obtenerListadoPorTipoYUsuarioDestino"))
+		else if(methodName.equals("obtenerListadoNotificacionesPorTipoYUsuarioDestino"))
 		{
 			Long idTipoNotificacion = (Long) params.getParam("idTipoNotificacion", Long.class);
 			Long idUsuarioDestino = (Long) params.getParam("idUsuarioDestino", Long.class);
 			
-			return new Gson().toJson(obtenerListadoPorTipoYUsuarioDestino(idTipoNotificacion, idUsuarioDestino));
+			return new Gson().toJson(obtenerListadoNotificacionesPorTipoYUsuarioDestino(idTipoNotificacion, idUsuarioDestino));
 		}
 		else if(methodName.equals("obtenerListadoConectados"))
 		{	
@@ -349,7 +349,7 @@ public class UsuarioServiceImpl implements UsuarioService
 		
 		androidTargets.add(usuarioDestinatarioDTO.getGcmRegId());
 		
-		AndroidGCMPushNotification.enviarMensajeChatGCM("10", androidTargets, mensajeAmistadDTO);
+		AndroidGCMPushNotification.enviarMensajeChatGCM(androidTargets, mensajeAmistadDTO);
 		
 		return mensajeAmistad.getId();
 	}
@@ -387,7 +387,7 @@ public class UsuarioServiceImpl implements UsuarioService
 		
 		androidTargets.add(usuarioDestino.getGcmRegId());
 		
-		AndroidGCMPushNotification.enviarNotificaciones("10", androidTargets, notificacionDTO);		
+		AndroidGCMPushNotification.enviarNotificaciones( androidTargets, notificacionDTO);		
 		
 		return notificacion.getId();
 	}
@@ -479,7 +479,7 @@ public class UsuarioServiceImpl implements UsuarioService
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod(operationName="obtenerListadoPorTipoYUsuarioDestino")
-	public List<NotificacionDTO> obtenerListadoPorTipoYUsuarioDestino(@WebParam(name="idTipoNotificacion") Long idTipoNotificacion, @WebParam(name="idUsuarioDestino") Long idUsuarioDestino) throws DaoException
+	public List<NotificacionDTO> obtenerListadoNotificacionesPorTipoYUsuarioDestino(@WebParam(name="idTipoNotificacion") Long idTipoNotificacion, @WebParam(name="idUsuarioDestino") Long idUsuarioDestino) throws DaoException
 	{
 		return notificacionDAO.obtenerListadoPorTipoYUsuarioDestino(idTipoNotificacion, idUsuarioDestino, true);
 	}
@@ -535,7 +535,7 @@ public class UsuarioServiceImpl implements UsuarioService
 				
 				androidTargets.add(usuarioDTO.getGcmRegId());
 				
-				AndroidGCMPushNotification.enviarNotificaciones("10", androidTargets, notificacionDAO.toDto(notificacion));
+				AndroidGCMPushNotification.enviarNotificaciones(androidTargets, notificacionDAO.toDto(notificacion));
 			}
 		}
 		
