@@ -518,7 +518,7 @@ insert into geored.check_in(ID, FECHA_CREACION, SITIO_FK, USUARIO_FK) values (10
 
 insert into geored.check_in(ID, FECHA_CREACION, SITIO_FK, USUARIO_FK) values (11, '2012-11-19', 15, 2);
 
-insert into geored.check_in(ID, FECHA_CREACION,SITIO_FK, USUARIO_FK) values (12, '2012-11-25', 11, 2);
+insert into geored.check_in(ID, FECHA_CREACION, SITIO_FK, USUARIO_FK) values (12, '2012-11-25', 11, 2);
 
 insert into geored.check_in(ID, FECHA_CREACION, SITIO_FK, USUARIO_FK) values (13, '2012-09-15', 11, 4);
 
