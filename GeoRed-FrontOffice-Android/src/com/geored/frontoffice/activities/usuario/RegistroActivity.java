@@ -16,6 +16,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -72,23 +73,25 @@ public class RegistroActivity extends Activity {
     	usuarioDTO.setEmail(email.getText().toString());
     	usuarioDTO.setPass(pass.getText().toString());
     	
-    	usuarioDTO.setConectado(true);
-    	
     	if (urlImagen.getText() != null)
     	{	
     		usuarioDTO.setUrlImagen(urlImagen.getText().toString());
     	}
-    	
+    	//en el boton "continuar registro" mandarlo para el activity de tematicas
+    	//pasar a la activity de tematicas el usuarioDTO (pre cargado) ,cergarle las tematicas que seleccione
+    	//insertar al nuevo usuario, si todo ok por ultimo retornar al menu del usuario
     	Long idUsuario = usuarioWS.insertar(usuarioDTO); 
         
+    	
+    	
+    	
     	//Si se registra correctamente lo redirecciona al menu, sino
     	//envia mensaje de error.
 		if(idUsuario != null)
 		{
-			usuarioDTO = usuarioWS.obtener(idUsuario);
-			UtilesSeguridadAndroid.setUsuarioAutenticado(getApplicationContext(), usuarioDTO);	
-	    	Intent menuActivity = new Intent (this, MenuActivity.class);
-	    	startActivity(menuActivity);
+			Intent i = new Intent(this, TematicaActivityReg.class );
+	        i.putExtra("idUsuario", idUsuario);	
+	        startActivity(i);
 		}	
 		else
 		{
