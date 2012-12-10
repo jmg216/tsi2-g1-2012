@@ -27,7 +27,7 @@ public class UtilesNegocio
 	
 	public static final double radioTierraKm = 6371;
 	
-	public static double CalcularDistanciaCoordenadas(String strLat1, String strLon1, String strLat2, String strLon2)
+	public static double calcularDistanciaCoordenadas(String strLat1, String strLon1, String strLat2, String strLon2)
     {
         double lat1 = Rad(Double.parseDouble(strLat1.replace(".", ",")));
         double lon1 = Rad(Double.parseDouble(strLon1.replace(".", ",")));

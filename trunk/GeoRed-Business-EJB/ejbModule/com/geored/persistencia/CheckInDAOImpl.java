@@ -18,7 +18,6 @@ public class CheckInDAOImpl extends GenericDAOBase<CheckIn, CheckInDTO> implemen
 	@Override
 	public void toEntity(CheckInDTO source, CheckIn target)
 	{		
-		target.setNombre(source.getNombre());
 		target.setFechaCreacion(new Timestamp(source.getFechaCreacion().getTime()));
 	}
 
@@ -26,7 +25,6 @@ public class CheckInDAOImpl extends GenericDAOBase<CheckIn, CheckInDTO> implemen
 	public void toDto(CheckIn source, CheckInDTO target)
 	{
 		target.setId(source.getId());
-		target.setNombre(source.getNombre());
 		target.setFechaCreacion(source.getFechaCreacion());
 		
 		if(source.getUsuario() != null)

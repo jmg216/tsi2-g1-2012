@@ -17,5 +17,7 @@ public interface UsuarioDAO extends GenericDAO<Usuario, UsuarioDTO>
 	
 	public Object obtenerUsuarioPorEmail(String email, boolean toDTO) throws NegocioException, DaoException;
 	
-	public List obtenerListadoConectados(boolean toDTO) throws DaoException;	
+	public List obtenerListadoConectados(boolean toDTO) throws DaoException;
+	
+	public List obtenerListadoPorTematica(Long[] idsTematicas, boolean toDTO) throws DaoException;
 }

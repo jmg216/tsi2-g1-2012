@@ -14,16 +14,25 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 
 import com.geored.dominio.Local;
+import com.geored.dominio.Notificacion;
 import com.geored.dominio.Oferta;
 import com.geored.dominio.Tematica;
+import com.geored.dominio.TipoNotificacion;
+import com.geored.dominio.Usuario;
 import com.geored.dto.OfertaDTO;
 import com.geored.dto.TematicaDTO;
 import com.geored.exceptions.DaoException;
 import com.geored.exceptions.NegocioException;
 import com.geored.persistencia.LocalDAO;
+import com.geored.persistencia.NotificacionDAO;
 import com.geored.persistencia.OfertaDAO;
 import com.geored.persistencia.TematicaDAO;
+import com.geored.persistencia.TipoNotificacionDAO;
+import com.geored.persistencia.UsuarioDAO;
+import com.geored.utiles.AndroidGCMPushNotification;
+import com.geored.utiles.ConstantesGenerales;
 import com.geored.utiles.JsonParamsMap;
+import com.geored.utiles.UtilesNegocio;
 import com.google.gson.Gson;
 
 @Stateless
@@ -39,6 +48,15 @@ public class OfertaServiceImpl implements OfertaService
 	
 	@EJB
 	private TematicaDAO tematicaDAO;
+	
+	@EJB
+	private UsuarioDAO usuarioDAO;
+	
+	@EJB
+	private NotificacionDAO notificacionDAO;
+	
+	@EJB
+	private TipoNotificacionDAO tipoNotificacionDAO;
 	
 	@WebMethod(operationName="androidInvocation")
 	public String androidInvocation(@WebParam(name="methodName") String methodName, @WebParam(name="methodParams") String methodParams) throws NegocioException, DaoException
@@ -100,6 +118,44 @@ public class OfertaServiceImpl implements OfertaService
 		asociarTematicas(ofertaDTO, ofertaEntity);
 		
 		ofertaDAO.insertar(ofertaEntity);
+		
+		/* 
+		 * Notifico a los usuarios con las mismas tematicas que la oferta
+		 */
+		List<Long> idsTematicas = new ArrayList<Long>();
+		for(Tematica tematica : ofertaEntity.getListaTematicas())
+		{
+			idsTematicas.add(tematica.getId());
+		}
+		
+		List<Usuario> listadoUsuariosConTematicas = usuarioDAO.obtenerListadoPorTematica(idsTematicas.toArray(new Long[idsTematicas.size()]), false);
+		
+		for(Usuario usuario : listadoUsuariosConTematicas)
+		{			
+			Notificacion notificacion = new Notificacion();
+			
+			notificacion.setDescripcion("Se ha creado una oferta nueva");
+			
+			notificacion.setLeida(false);
+			
+			notificacion.setTipoNotificacion((TipoNotificacion) tipoNotificacionDAO.obtener(ConstantesGenerales.TiposNotificacion.ID_NUEVA_OFERTA, false));
+			
+			notificacion.setUsuarioDestino(usuario);
+			
+			notificacion.setMetadataNotif(ofertaEntity.getId().toString() + ";" + ofertaEntity.getLocal().getUbicacionGeografica());
+			
+			notificacionDAO.insertar(notificacion);
+			
+			// Si el usaurio destino tiene el gcm reg id envio al movil
+			if(!UtilesNegocio.isNullOrEmpty(usuario.getGcmRegId()))
+			{
+				List<String> androidTargets = new ArrayList<String>();
+				
+				androidTargets.add(usuario.getGcmRegId());
+				
+				AndroidGCMPushNotification.enviarNotificaciones("10", androidTargets, notificacionDAO.toDto(notificacion));
+			}
+		}
 		
 		return ofertaEntity.getId();
 	}

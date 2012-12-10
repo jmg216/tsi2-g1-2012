@@ -33,6 +33,8 @@ public interface UsuarioService
 	public UsuarioDTO obtenerPorEmailYPass(String email, String pass) throws NegocioException, DaoException;
 	
 	// OPERACIONES CON CHECK-INS
+	public Long insertarCheckIn(CheckInDTO checkInDTO) throws NegocioException, DaoException;
+	
 	public List<CheckInDTO> obtenerListadoCheckIns() throws DaoException;
 	
 	// OPERACIONES MENSAJES Y NOTIFICACIONES

@@ -14,8 +14,10 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 
 import com.geored.dominio.Amistad;
+import com.geored.dominio.CheckIn;
 import com.geored.dominio.MensajeAmistad;
 import com.geored.dominio.Notificacion;
+import com.geored.dominio.Sitio;
 import com.geored.dominio.Tematica;
 import com.geored.dominio.TipoNotificacion;
 import com.geored.dominio.Usuario;
@@ -31,11 +33,14 @@ import com.geored.persistencia.AmistadDAO;
 import com.geored.persistencia.CheckInDAO;
 import com.geored.persistencia.MensajeAmistadDAO;
 import com.geored.persistencia.NotificacionDAO;
+import com.geored.persistencia.SitioDAO;
 import com.geored.persistencia.TematicaDAO;
 import com.geored.persistencia.TipoNotificacionDAO;
 import com.geored.persistencia.UsuarioDAO;
 import com.geored.utiles.AndroidGCMPushNotification;
+import com.geored.utiles.ConstantesGenerales;
 import com.geored.utiles.JsonParamsMap;
+import com.geored.utiles.UtilesNegocio;
 import com.google.gson.Gson;
 
 @Stateless
@@ -63,6 +68,9 @@ public class UsuarioServiceImpl implements UsuarioService
 	
 	@EJB
 	private TematicaDAO tematicaDAO;
+	
+	@EJB
+	private SitioDAO sitioDAO;
 	
 	@WebMethod(operationName="androidInvocation")
 	public String androidInvocation(@WebParam(name="methodName") String methodName, @WebParam(name="methodParams") String methodParams) throws NegocioException, DaoException
@@ -109,6 +117,12 @@ public class UsuarioServiceImpl implements UsuarioService
 			UsuarioDTO usuarioDTO = obtenerPorEmailYPass(email, pass);
 			
 			return new Gson().toJson(usuarioDTO);
+		}
+		else if(methodName.equals("insertarCheckin"))
+		{
+			CheckInDTO checkInDTO = (CheckInDTO) params.getParam("checkInDTO", CheckInDTO.class);
+			
+			return new Gson().toJson(insertarCheckIn(checkInDTO));
 		}
 		else if(methodName.equals("obtenerListadoCheckIns"))
 		{
@@ -463,6 +477,63 @@ public class UsuarioServiceImpl implements UsuarioService
 	public List<NotificacionDTO> obtenerListadoPorTipoYUsuarioDestino(@WebParam(name="idTipoNotificacion") Long idTipoNotificacion, @WebParam(name="idUsuarioDestino") Long idUsuarioDestino) throws DaoException
 	{
 		return notificacionDAO.obtenerListadoPorTipoYUsuarioDestino(idTipoNotificacion, idUsuarioDestino, true);
-	}	
+	}
+
+	@Override
+	public Long insertarCheckIn(CheckInDTO checkInDTO) throws NegocioException, DaoException
+	{
+		CheckIn checkInEntity = checkInDAO.toEntity(checkInDTO);
 		
+		Sitio sitio = (Sitio) sitioDAO.obtener(checkInDTO.getIdSitio(), false);
+		
+		if(sitio == null)
+		{
+			throw new NegocioException("Sitio no encontrado");
+		}
+		
+		Usuario usuarioCheckIn = (Usuario) usuarioDAO.obtener(checkInDTO.getIdUsuario(), false);
+		
+		if(usuarioCheckIn == null)
+		{
+			throw new NegocioException("Usuario no encontrado");
+		}
+ 		
+		checkInEntity.setSitio(sitio);
+		
+		checkInEntity.setUsuario(usuarioCheckIn);
+		
+		checkInDAO.insertar(checkInEntity);
+		
+		// Notifico a mis amigos hice checkin
+		List<UsuarioDTO> listadoAmigosDTO = obtenerListadoAmigos(usuarioCheckIn.getId(), false);
+		
+		for(UsuarioDTO usuarioDTO : listadoAmigosDTO)
+		{
+			Notificacion notificacion = new Notificacion();
+			
+			notificacion.setDescripcion(usuarioCheckIn.getNombre() + " ha hecho checkin en " + sitio.getNombre());
+			
+			notificacion.setLeida(false);
+			
+			notificacion.setTipoNotificacion((TipoNotificacion) tipoNotificacionDAO.obtener(ConstantesGenerales.TiposNotificacion.ID_CHECKIN_AMIGO, false));
+			
+			notificacion.setUsuarioDestino((Usuario) usuarioDAO.obtener(usuarioDTO.getId(), false));
+			
+			notificacion.setMetadataNotif(usuarioDTO.getId().toString() + ";" + sitio.getId().toString());
+			
+			notificacionDAO.insertar(notificacion);
+			
+			// Si el usaurio destino tiene el gcm reg id envio al movil
+			if(!UtilesNegocio.isNullOrEmpty(usuarioDTO.getGcmRegId()))
+			{
+				List<String> androidTargets = new ArrayList<String>();
+				
+				androidTargets.add(usuarioDTO.getGcmRegId());
+				
+				AndroidGCMPushNotification.enviarNotificaciones("10", androidTargets, notificacionDAO.toDto(notificacion));
+			}
+		}
+		
+		return checkInEntity.getId();
+	}			
 }
