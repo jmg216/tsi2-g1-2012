@@ -496,27 +496,27 @@ insert into geored.usuario_tematica (TEMATICA_FK, USUARIO_FK) values (7, 4); /* 
 
 /*CheckIns*/
 
-insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (1, '2012-09-22', 'Gym Astro' ,  1, 3);
+insert into geored.check_in(ID, FECHA_CREACION, SITIO_FK, USUARIO_FK) values (1, '2012-09-22', 1, 3);
 
-insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (2, '2012-11-11', 'Plaza Seregni' , 3, 1);
+insert into geored.check_in(ID, FECHA_CREACION, SITIO_FK, USUARIO_FK) values (2, '2012-11-11', 3, 1);
 
-insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (3, '2012-07-01', 'Biblioteca Nacional' , 5, 4);
+insert into geored.check_in(ID, FECHA_CREACION, SITIO_FK, USUARIO_FK) values (3, '2012-07-01', 5, 4);
 
-insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (4, '2012-12-15', 'Palacion Legislativo' , 6, 2);
+insert into geored.check_in(ID, FECHA_CREACION, SITIO_FK, USUARIO_FK) values (4, '2012-12-15', 6, 2);
 
-insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (5, '2012-11-15', 'Parque Batlle', 9, 4);
+insert into geored.check_in(ID, FECHA_CREACION, SITIO_FK, USUARIO_FK) values (5, '2012-11-15', 9, 4);
 
-insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (6, '2012-12-22', 'Parque Lecocq', 16, 4);
+insert into geored.check_in(ID, FECHA_CREACION, SITIO_FK, USUARIO_FK) values (6, '2012-12-22', 16, 4);
 
-insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (7, '2012-12-01', 'Colonia del Sacramento', 20, 4);
+insert into geored.check_in(ID, FECHA_CREACION, SITIO_FK, USUARIO_FK) values (7, '2012-12-01', 20, 4);
 
-insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (8, '2012-11-07', 'Quebrada de los Cuervos', 19, 4);
+insert into geored.check_in(ID, FECHA_CREACION, SITIO_FK, USUARIO_FK) values (8, '2012-11-07', 19, 4);
 
-insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (9, '2012-12-13', 'Quebrada de los Cuervos', 19, 2);
+insert into geored.check_in(ID, FECHA_CREACION, SITIO_FK, USUARIO_FK) values (9, '2012-12-13', 19, 2);
 
-insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (10, '2012-12-14', 'Parque de Vacaciones UTE-Antel', 18, 2);
+insert into geored.check_in(ID, FECHA_CREACION, SITIO_FK, USUARIO_FK) values (10, '2012-12-14', 18, 2);
 
-insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (11, '2012-11-19', 'Hipodromo de Maroñas', 15, 2);
+insert into geored.check_in(ID, FECHA_CREACION, SITIO_FK, USUARIO_FK) values (11, '2012-11-19', 15, 2);
 
 insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (12, '2012-11-25', 'Facultad de Ingenieria', 11, 2);
 
@@ -526,13 +526,13 @@ insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) va
 
 insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (15, '2012-12-13', 'Plaza Independencia', 12, 2);
 
-insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (16, '2012-04-22', 'Parque Lecocq', 16, 1);
+insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (16, '2012-12-22', 'Parque Lecocq', 16, 1);
 
-insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (17, '2012-06-06', 'Facultad de Ingenieria', 11, 1);
+insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (17, '2012-12-06', 'Facultad de Ingenieria', 11, 1);
 
-insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (18, '2012-03-05', 'Parque Rodo', 4, 1);
+insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (18, '2012-11-05', 'Parque Rodo', 4, 1);
 
-insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (19, '2012-10-18', 'Plaza Indenpendencia', 12, 1);
+insert into geored.check_in(ID, FECHA_CREACION, NOMBRE, SITIO_FK, USUARIO_FK) values (19, '2012-12-18', 'Plaza Indenpendencia', 12, 1);
 
 /* Eventos*/
 insert into geored.evento (ID, DESCRIPCION, FECHA_FIN, FECHA_INICIO, NOMBRE, UBICACION_GEOGRAFICA)
