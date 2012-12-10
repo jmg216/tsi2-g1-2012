@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="match_parent"
+	  android:layout_height="match_parent"
+	  android:background="@drawable/gradient_bg_hover"
+	  android:orientation="vertical" >
+
+
+    <TextView 
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="20dp"
+	        android:text="@string/titulo_seleccion_tematicas"
+	        android:typeface="sans"
+	        android:textColor="@color/azul"/>
+    
+    <Button
+			android:id="@+id/registro"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_marginTop="30dp"
+		    android:text="@string/registro"
+		    android:onClick="registroUsuario"/>
+    
+	<ListView
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:id="@android:id/list"	    
+	    android:dividerHeight="1dp"
+	    android:divider="#b5b5b5" />
+	
+</LinearLayout>
