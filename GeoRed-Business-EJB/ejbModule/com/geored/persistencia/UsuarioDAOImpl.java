@@ -34,7 +34,6 @@ public class UsuarioDAOImpl extends GenericDAOBase<Usuario, UsuarioDTO> implemen
 		target.setConectado(source.getConectado());
 		target.setNombre(source.getNombre());
 		target.setGcmRegId(source.getGcmRegId());
-		target.setUbicacionActual(source.getUbicacionActual());
 		target.setUrlImagen(source.getUrlImagen());
 	}
 
@@ -44,7 +43,6 @@ public class UsuarioDAOImpl extends GenericDAOBase<Usuario, UsuarioDTO> implemen
 		target.setId(source.getId());
 		target.setEmail(source.getEmail());
 		target.setConectado(source.getConectado());
-		target.setUbicacionActual(source.getUbicacionActual());
 		target.setPass(source.getPass());
 		target.setNombre(source.getNombre());
 		target.setGcmRegId(source.getGcmRegId());
@@ -112,6 +110,29 @@ public class UsuarioDAOImpl extends GenericDAOBase<Usuario, UsuarioDTO> implemen
 		{
 			Query query = em.createQuery("select u from com.geored.dominio.Usuario u where u.conectado = 1");        
 	        
+	        List listaUsuarios = query.getResultList();
+	        
+	        if(toDTO)
+	        {
+	             return toDtoList(listaUsuarios);
+	        }
+	       
+	        return listaUsuarios;
+		}
+		catch(Throwable e)
+		{
+			throw new DaoException(e.getMessage());		
+		}
+	}
+
+	@Override
+	public List obtenerListadoPorTematica(Long[] idsTematicas, boolean toDTO) throws DaoException
+	{
+		try
+		{
+			Query query = em.createQuery("select u from com.geored.dominio.Usuario u where u.listaTematicas.id in (?1) ");        	        
+			query.setParameter(1, idsTematicas);
+			
 	        List listaUsuarios = query.getResultList();
 	        
 	        if(toDTO)

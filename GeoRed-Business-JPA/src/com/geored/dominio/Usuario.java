@@ -43,9 +43,6 @@ public class Usuario implements Serializable
 	@Column(name="URL_IMAGEN")
 	private String urlImagen;
 	
-	@Column(name="UBICACION_ACTUAL")
-	private String ubicacionActual;
-	
 	@Column(name="CONECTADO")
 	private Boolean conectado;
 	
@@ -71,16 +68,6 @@ public class Usuario implements Serializable
 		this.id = id;
 	}
 	
-	public String getUbicacionActual() 
-	{
-		return ubicacionActual;
-	}
-
-	public void setUbicacionActual(String ubicacionActual) 
-	{
-		this.ubicacionActual = ubicacionActual;
-	}
-
 	public Boolean getConectado() 
 	{
 		return conectado;

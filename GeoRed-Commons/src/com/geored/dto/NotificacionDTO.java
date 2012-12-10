@@ -6,9 +6,9 @@ public class NotificacionDTO
 	
 	private String descripcion;
 	
-	private boolean leida;
+	private String metadataNotif;
 	
-	private String idObjeto;
+	private boolean leida;
 	
 	private Long idUsuarioDestino;
 	
@@ -88,13 +88,13 @@ public class NotificacionDTO
 		this.nombreTipoNotificacion = nombreTipoNotificacion;
 	}
 
-	public String getIdObjeto()
+	public String getMetadataNotif()
 	{
-		return idObjeto;
+		return metadataNotif;
 	}
 
-	public void setIdObjeto(String idObjeto)
+	public void setMetadataNotif(String metadataNotif)
 	{
-		this.idObjeto = idObjeto;
+		this.metadataNotif = metadataNotif;
 	}
 }

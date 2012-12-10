@@ -27,9 +27,6 @@ public class CheckIn implements Serializable
 	@Column(name="ID", nullable=false)
 	private Long id;
 	
-	@Column(name="NOMBRE", nullable=false)
-	private String nombre;
-	
 	@Column(name="FECHA_CREACION", nullable=false)
 	private Timestamp fechaCreacion;
 	
@@ -49,16 +46,6 @@ public class CheckIn implements Serializable
 	public void setId(Long id)
 	{
 		this.id = id;
-	}
-
-	public String getNombre()
-	{
-		return nombre;
-	}
-
-	public void setNombre(String nombre)
-	{
-		this.nombre = nombre;
 	}
 
 	public Usuario getUsuario()

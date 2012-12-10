@@ -22,7 +22,7 @@ public class NotificacionDAOImpl extends GenericDAOBase<Notificacion, Notificaci
 	{
 		target.setDescripcion(source.getDescripcion());
 		target.setLeida(source.isLeida());	
-		target.setIdObjeto(source.getIdObjeto());
+		target.setMetadataNotif(source.getMetadataNotif());
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class NotificacionDAOImpl extends GenericDAOBase<Notificacion, Notificaci
 		target.setId(source.getId());
 		target.setDescripcion(source.getDescripcion());
 		target.setLeida(source.isLeida());
-		target.setIdObjeto(source.getIdObjeto());
+		target.setMetadataNotif(source.getMetadataNotif());
 		
 		if(source.getUsuarioDestino() != null)
 		{

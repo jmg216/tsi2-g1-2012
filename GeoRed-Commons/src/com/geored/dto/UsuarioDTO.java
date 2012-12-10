@@ -18,8 +18,6 @@ public class UsuarioDTO
 	
 	private String gcmRegId;
 	
-	private String ubicacionActual;
-	
 	private List<TematicaDTO> listaTematicasDTO;
 	
 	public Long getId()
@@ -90,16 +88,6 @@ public class UsuarioDTO
 	public void setGcmRegId(String gcmRegId) 
 	{
 		this.gcmRegId = gcmRegId;
-	}
-	
-	public String getUbicacionActual() 
-	{
-		return ubicacionActual;
-	}
-
-	public void setUbicacionActual(String ubicacionActual) 
-	{
-		this.ubicacionActual = ubicacionActual;
 	}
 
 	public List<TematicaDTO> getListaTematicasDTO()

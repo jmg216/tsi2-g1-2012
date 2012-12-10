@@ -29,11 +29,11 @@ public class Notificacion implements Serializable
 	@Column(name = "DESCRIPCION", nullable = false)
 	private String descripcion;
 
+	@Column(name = "METADATA_NOTIF", nullable = false)
+	private String metadataNotif;
+	
 	@Column(name = "LEIDA", nullable = false)
 	private boolean leida;
-
-	@Column(name = "ID_OBJETO", nullable = false)
-	private String idObjeto;
 
 	@JoinColumn(name = "USUARIO_DESTINO_FK", nullable = false)
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -73,14 +73,14 @@ public class Notificacion implements Serializable
 		this.leida = leida;
 	}
 
-	public String getIdObjeto()
+	public String getMetadataNotif()
 	{
-		return idObjeto;
+		return metadataNotif;
 	}
 
-	public void setIdObjeto(String idObjeto)
+	public void setMetadataNotif(String metadataNotif)
 	{
-		this.idObjeto = idObjeto;
+		this.metadataNotif = metadataNotif;
 	}
 
 	public Usuario getUsuarioDestino()

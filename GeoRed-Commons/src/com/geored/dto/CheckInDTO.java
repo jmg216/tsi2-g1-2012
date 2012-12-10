@@ -6,8 +6,6 @@ public class CheckInDTO
 {
 	private Long id;
 	
-	private String nombre;
-	
 	private Date fechaCreacion;
 
 	private Long idUsuario;
@@ -26,16 +24,6 @@ public class CheckInDTO
 	public void setId(Long id)
 	{
 		this.id = id;
-	}
-
-	public String getNombre()
-	{
-		return nombre;
-	}
-
-	public void setNombre(String nombre)
-	{
-		this.nombre = nombre;
 	}
 
 	public Long getIdUsuario()
