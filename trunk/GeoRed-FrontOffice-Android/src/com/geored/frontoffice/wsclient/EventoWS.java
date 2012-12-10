@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.geored.dto.EventoDTO;
-import com.geored.frontoffice.utiles.UtilesAndorid;
+import com.geored.frontoffice.utiles.UtilesAndroid;
 
 public class EventoWS 
 {
@@ -14,7 +14,7 @@ public class EventoWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("eventoDTO", eventoDTO);
 		
-		return (Long) WSProxyClient.call(UtilesAndorid.URL_WS_EVENTO, "insertar", params, Long.class, null);
+		return (Long) WSProxyClient.call(UtilesAndroid.URL_WS_EVENTO, "insertar", params, Long.class, null);
 	}
 	
 	public void actualizar(EventoDTO eventoDTO)
@@ -22,7 +22,7 @@ public class EventoWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("eventoDTO", eventoDTO);
 		
-    	WSProxyClient.call(UtilesAndorid.URL_WS_EVENTO, "actualizar", params, null, null);		
+    	WSProxyClient.call(UtilesAndroid.URL_WS_EVENTO, "actualizar", params, null, null);		
 	}
 	
 	public void eliminar(Long idEvento)
@@ -30,7 +30,7 @@ public class EventoWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("idEvento", idEvento);
 		
-    	WSProxyClient.call(UtilesAndorid.URL_WS_EVENTO, "eliminar", params, null, null);			
+    	WSProxyClient.call(UtilesAndroid.URL_WS_EVENTO, "eliminar", params, null, null);			
 	}
 	
 	public EventoDTO obtener(Long idEvento)
@@ -38,11 +38,11 @@ public class EventoWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("idEvento", idEvento);
 		
-		return (EventoDTO) WSProxyClient.call(UtilesAndorid.URL_WS_EVENTO, "obtener", params, EventoDTO.class, null);
+		return (EventoDTO) WSProxyClient.call(UtilesAndroid.URL_WS_EVENTO, "obtener", params, EventoDTO.class, null);
 	}
 	
 	public List<EventoDTO> obtenerListado()
 	{
-		return (List<EventoDTO>) WSProxyClient.call(UtilesAndorid.URL_WS_EVENTO, "obtenerListado", null, List.class, EventoDTO.class);
+		return (List<EventoDTO>) WSProxyClient.call(UtilesAndroid.URL_WS_EVENTO, "obtenerListado", null, List.class, EventoDTO.class);
 	}
 }

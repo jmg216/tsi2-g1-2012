@@ -1,61 +1,75 @@
 package com.geored.frontoffice.activities.notificacion;
 
-import com.geored.frontoffice.activities.GCMIntentService;
-import com.geored.frontoffice.activities.R;
-import com.geored.frontoffice.utiles.AlertaDialogManager;
-import com.google.android.gcm.GCMRegistrar;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
-import android.content.res.Resources;
+import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import com.geored.dto.NotificacionDTO;
+import com.geored.frontoffice.activities.R;
+import com.geored.frontoffice.utiles.UtilesAndroid;
 
 public class NotificacionesActivity extends Activity
 {
-	private static final String TAG = "RegistroActivity";
-	
-	//private Resources res = getResources();
+	private static final String TAG = "NotificacionesActivity";
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) 
     {
     	super.onCreate(savedInstanceState);
-    	setContentView(R.layout.activity_notificaciones);        
-    }
-    
-    /**
-     * Invocado al momento de activar notificaciones en el tab Notificaciones.
-     * */
-    public void activarNotificaciones (View v)
-    {    	
-    	if (GCMRegistrar.isRegistered(this))
-    	{
-    		AlertaDialogManager.showAlertDialog(this, getResources().getString(R.string.notificaciones), getResources().getString(R.string.notificacionesYaActivadas), true);
-    	}
-    	else
-    	{
-        	//Registro la aplicacion en GCM
-        	GCMIntentService.registerGCMService(this);   
-        	AlertaDialogManager.showAlertDialog(this, getResources().getString(R.string.notificaciones), getResources().getString(R.string.notificacionesActivadas), true);
-    	}
-    }
-    
-    /**
-     * Invocado al momento desactivar las notificaciones en el tab Notificaciones.
-     * */
-    public void desactivarNotificaciones(View v)
-    {
-    	if (GCMRegistrar.isRegistered(this))
-    	{
-    		GCMIntentService.desregistrarGCMService(this);
-    		AlertaDialogManager.showAlertDialog(this, getResources().getString(R.string.notificaciones), getResources().getString(R.string.notificacionesDesactivadas), true);
-    	}
-    	else
-    	{
-    		AlertaDialogManager.showAlertDialog(this, getResources().getString(R.string.notificaciones), getResources().getString(R.string.notificacionesNoActivas), false);
+    	 
+    	setContentView(R.layout.activity_notificaciones);
+    	
+    	final List<NotificacionDTO> listaNotificacionesDTO = UtilesAndroid.listaNotificaciones;
+    	
+    	// Si no hay notificaciones muestro un label indicandolo
+    	if(listaNotificacionesDTO.isEmpty())
+    	{    	
+    		TextView txtMensajeSinNotificaciones = new TextView(this);
+    		
+    		txtMensajeSinNotificaciones.setText("No hay notificaciones");
+    		
+    		this.addContentView(txtMensajeSinNotificaciones, null);
     	}
     	
+    	// Si no muestro la lista 
+    	else
+    	{
+    		ListView listaNotificacionesView = new ListView(this);
+        	
+        	listaNotificacionesView.setAdapter(new ArrayAdapter<NotificacionDTO>(this, R.layout.row_contact_list, listaNotificacionesDTO)
+        	{        	
+        		@Override
+        		public View getView(int position, View convertView, ViewGroup parent)
+        		{
+        			View v = convertView;
+        			
+        			if (convertView == null)
+        			{
+        				LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        				v = inflater.inflate(R.layout.row_contact_list, null);
+        			}
+
+        			NotificacionDTO notificacionDTO = listaNotificacionesDTO.get(position);
+
+        			if (notificacionDTO != null)
+        			{
+        				TextView rowDetalleNotificacion = (TextView) v.findViewById(R.id.rowDetalleNotificacion);
+        				
+        				rowDetalleNotificacion.setText(notificacionDTO.getDescripcion());
+        			}
+
+        			return v;
+        		}
+        	});
+    	}
     }
 }

@@ -51,11 +51,12 @@ public class ContactoChatActivity extends Activity
 	
 	public void enviarMensaje(View view)
 	{
-		CharSequence mensaje;
-		mensaje = messageText.getText();
-//		final Handler handler = new Handler();
+		CharSequence mensaje = messageText.getText();;
+
 		final Context context = this.getApplicationContext();
+		
 		Bundle extras = this.getIntent().getExtras();
+		
 		if (mensaje.length() > 0) 
 		{
 			final MensajeAmistadDTO mensajeAmistadDTO = new MensajeAmistadDTO();
@@ -71,27 +72,16 @@ public class ContactoChatActivity extends Activity
 			appendToMessageHistory(mensajeAmistadDTO.getNombreRemitente(), mensaje.toString());
 						
 			messageText.setText("");
-			Thread thread = new Thread()
-			{					
-				public void run() 
-				{
-					usuarioWS.enviarMensajeChat(mensajeAmistadDTO);
-//					if (usuarioWS.enviarMensajeChat(mensajeAmistadDTO) == 0L)
-//					{
-						
-//						handler.post(new Runnable()
-//						{	
-//							public void run() 
-//							{
-								//AlertaDialogManager.showAlertDialog(context, getResources().getString(R.string.chat), getResources().getString(R.string.errorEnvioMensaje), false);										
-//							}
-							
-//						});
-//					}
-				}						
-			};
-			thread.start();
-								
+			
+			usuarioWS.enviarMensajeChat(mensajeAmistadDTO);				
+			
+//			new Thread()
+//			{					
+//				public void run() 
+//				{
+//					usuarioWS.enviarMensajeChat(mensajeAmistadDTO);
+//				}						
+//			}.start();			
 		}		
 	}
 	

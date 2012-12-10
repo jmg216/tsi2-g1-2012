@@ -10,7 +10,7 @@ import android.util.Log;
 import com.geored.dto.MensajeAmistadDTO;
 import com.geored.dto.NotificacionDTO;
 import com.geored.dto.UsuarioDTO;
-import com.geored.frontoffice.activities.contacto.ContactoChatActivity;
+import com.geored.frontoffice.utiles.UtilesAndroid;
 import com.geored.frontoffice.utiles.UtilesSeguridadAndroid;
 import com.geored.frontoffice.wsclient.FactoryWS;
 import com.geored.frontoffice.wsclient.UsuarioWS;
@@ -30,6 +30,16 @@ public class GCMIntentService extends GCMBaseIntentService
 		Log.d("GCM_Red", UtilesSeguridadAndroid.ID_SENDER_GCM);
 	}
 
+	public static String obtenerGCMRegID(Context context)
+	{
+		if (checkIsGCMServiceAvailable(context)) 
+        {                    
+	        return GCMRegistrar.getRegistrationId(context);
+        }
+		
+		return "";
+	}
+	
 	/**
 	 * Metodo para registrar la aplicacion en GCM.
 	 * */
@@ -116,7 +126,6 @@ public class GCMIntentService extends GCMBaseIntentService
 	{
 		Log.d(TAG, "REGISTRATION: Error -> " + errorId);
 	}
-	
 
 	/**
 	 * Se llamará cada vez que se reciba un nuevo mensaje desde el servidor de GCM.
@@ -132,40 +141,50 @@ public class GCMIntentService extends GCMBaseIntentService
 		 
 		 Gson gson = new Gson();  
 		 
-		 //TODO Resolver como diferenciar si el mensaje en de chat o de una notificacion.
 		 if (codigoTipo.equals(ConstantesGenerales.TiposCodigoMensaje.CHAT))
 		 {
-			 MensajeAmistadDTO mensajeAmistadDTO= gson.fromJson(gsonMessage, MensajeAmistadDTO.class);
+			 MensajeAmistadDTO mensajeAmistadDTO = gson.fromJson(gsonMessage, MensajeAmistadDTO.class);
 			 
-			 sendGCMIntentMensajeAmistad(context, mensajeAmistadDTO);
-		 }
-		 
-		 if (codigoTipo.equals(ConstantesGenerales.TiposCodigoMensaje.NOTIFICACION))
+			 handleGCMIntentMensajeAmistad(context, mensajeAmistadDTO);
+		 }		 
+		 else if (codigoTipo.equals(ConstantesGenerales.TiposCodigoMensaje.NOTIFICACION))
 		 {
 			 NotificacionDTO notificacionDTO = gson.fromJson(gsonMessage, NotificacionDTO.class);
-			 sendGCMIntentNotificacion(context, notificacionDTO);
+			 
+			 handleGCMIntentNotificacion(context, notificacionDTO);
 		 }		 		
 	}
 	
-    private void sendGCMIntentNotificacion(Context ctx, NotificacionDTO notificacion) 
-    {
-        
+    private void handleGCMIntentNotificacion(Context ctx, NotificacionDTO notificacion) 
+    {       
         Intent broadcastIntent = new Intent();
-        broadcastIntent.setAction("GCM_RECEIVED_ACTION");         
-        broadcastIntent.putExtra("msjNotificacion", notificacion.getDescripcion());       
+        
+        broadcastIntent.setAction("GCM_RECEIVED_ACTION");
+        
+        broadcastIntent.putExtra("msjNotificacion", notificacion.getDescripcion());
+        
         ctx.sendBroadcast(broadcastIntent);
-        mostrarNotificacion(ctx, notificacion.getDescripcion());         
+        
+        mostrarNotificacion(ctx, "Ha recibodo una notificación.");   
+        
+        // La agrego al listado general de notificaciones
+        UtilesAndroid.listaNotificaciones.add(notificacion);
     }		
 	
-    private void sendGCMIntentMensajeAmistad(Context ctx, MensajeAmistadDTO mensajeAmistad) 
-    {
-        
+    private void handleGCMIntentMensajeAmistad(Context ctx, MensajeAmistadDTO mensajeAmistad) 
+    {        
         Intent broadcastIntent = new Intent();
-        broadcastIntent.setAction("GCM_RECEIVED_ACTION");         
-        broadcastIntent.putExtra("msjChat", mensajeAmistad.getMensaje());       
+        
+        broadcastIntent.setAction("GCM_RECEIVED_ACTION");
+        
+        broadcastIntent.putExtra("msjChat", mensajeAmistad.getMensaje());
+        
         ctx.sendBroadcast(broadcastIntent);
-        getApplicationContext();
-        mostrarNotificacion(ctx, mensajeAmistad.getMensaje());         
+        
+        mostrarNotificacion(ctx, "Ha recibido un mensaje.");  
+        
+        // La agrego al listado general de mensajes
+        UtilesAndroid.listaMensajes.add(mensajeAmistad);
     }	
 
 	/**
@@ -195,32 +214,28 @@ public class GCMIntentService extends GCMBaseIntentService
 	}		
     
     /**
-     * Metodo para mostrar notificaciones. Modificarlo.
+     * Metodo para mostrar las notificaciones en la barra del movil.
      * */
-	private static void mostrarNotificacion(Context context, String msg)
-	{
-		
+	private static void mostrarNotificacion(Context context, String msgTitle)
+	{		
 	    //Obtenemos una referencia al servicio de notificaciones
 	    String ns = Context.NOTIFICATION_SERVICE;
+	    
 	    NotificationManager notManager = (NotificationManager) context.getSystemService(ns);
 	 
 	    //Configuramos la notificación
 	    int icono = android.R.drawable.stat_sys_warning;
-	    CharSequence textoEstado = "Alerta!";
-	    long hora = System.currentTimeMillis();
 	 
-	    Notification notif = new Notification(icono, textoEstado, hora);
+	    Notification notif = new Notification(icono, "GEORED", System.currentTimeMillis());
 	 
 	    //Configuramos el Intent
 	    Context contexto = context.getApplicationContext();
-	    CharSequence titulo = "Nuevo Mensaje";
-	    CharSequence descripcion = msg;
 	 
 	    Intent notIntent = new Intent(contexto, GCMIntentService.class);
 	 
 	    PendingIntent contIntent = PendingIntent.getActivity(contexto, 0, notIntent, 0);
 	 
-	    notif.setLatestEventInfo(contexto, titulo, descripcion, contIntent);
+	    notif.setLatestEventInfo(contexto, msgTitle, "", contIntent);
 	 
 	    //AutoCancel: cuando se pulsa la notificaión ésta desaparece
 	    notif.flags |= Notification.FLAG_AUTO_CANCEL;

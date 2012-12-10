@@ -1,7 +1,18 @@
 package com.geored.frontoffice.utiles;
 
-public class UtilesAndorid 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.geored.dto.MensajeAmistadDTO;
+import com.geored.dto.NotificacionDTO;
+
+public class UtilesAndroid 
 {
+	// Coleccion estatica de notificaciones y mensajes
+	public static List<NotificacionDTO> listaNotificaciones = new ArrayList<NotificacionDTO>();
+	
+	public static List<MensajeAmistadDTO> listaMensajes = new ArrayList<MensajeAmistadDTO>();
+	
 	public static final double radioTierraKm = 6371;
 	
 	public static final String IP_PUERTO="10.0.2.2:8080";
@@ -41,6 +52,4 @@ public class UtilesAndorid
     {
 		return x * (Math.PI / 180);
     }
-
-	
 }
