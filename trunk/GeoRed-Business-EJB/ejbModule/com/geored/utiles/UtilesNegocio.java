@@ -24,7 +24,6 @@ public class UtilesNegocio
 	
 	public static final String API_KEY_GCM = "AIzaSyA-sjjWHPR2JIHEipdGAFKH8rLcK25Od1A";
 	
-	
 	public static final double radioTierraKm = 6371;
 	
 	public static double calcularDistanciaCoordenadas(String strLat1, String strLon1, String strLat2, String strLon2)

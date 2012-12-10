@@ -51,7 +51,21 @@ public class NotificacionDAOImpl extends GenericDAOBase<Notificacion, Notificaci
 	{
 		try
 		{
-			Query query = em.createQuery("select n from com.geored.dominio.Notificacion n where n.tipoNotificacion.id = ?1 and n.usuarioDestino.id = ?2");        
+			StringBuilder sbQuery = new StringBuilder("select n from com.geored.dominio.Notificacion n where n.usuarioDestino.id = ?1");			
+			
+			if(idTipoNotificacion != null)
+			{
+				sbQuery.append(" and n.tipoNotificacion.id = ?2 ");
+			}
+			
+			Query query = em.createQuery(sbQuery.toString());
+			
+	        query.setParameter(1, idUsuarioDestino);
+			
+	        if(idTipoNotificacion != null)
+	        {
+	        	query.setParameter(2, idTipoNotificacion);
+	        }
 	        
 	        List listaNotificaciones = query.getResultList();
 	        

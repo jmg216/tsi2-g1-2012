@@ -8,13 +8,13 @@ import com.geored.dto.NotificacionDTO;
 import com.geored.exceptions.NegocioException;
 import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.MulticastResult;
-import com.google.android.gcm.server.Result;
 import com.google.android.gcm.server.Sender;
 import com.google.gson.Gson;
 
 public class AndroidGCMPushNotification
 {
-
+	private static final String GCM_COLLAPSE_KEY = "10";
+	
 	/**
 	 * Metodo utilizado para enviar las notificaciones al cliente. collapsKey:
 	 * utilizada para acumular los mensajes en cola con igual collapseKey. por
@@ -24,7 +24,7 @@ public class AndroidGCMPushNotification
 	 * @throws NegocioException
 	 * @throws IOException
 	 * */
-	public static boolean enviarNotificaciones(String collapseKey, List<String> androidTargets, NotificacionDTO notificacionDTO) throws NegocioException
+	public static boolean enviarNotificaciones(List<String> androidTargets, NotificacionDTO notificacionDTO) throws NegocioException
 	{
 		// Instancia de com.android.gcm.server.Sender que realiza la transmision
 		// de los mensajes a Google Cloud Messaging Service.
@@ -37,9 +37,7 @@ public class AndroidGCMPushNotification
 		message = ConstantesGenerales.TiposCodigoMensaje.NOTIFICACION + message;
 
 		// Mensaje que contiene los datos que seran transmitidos.
-		Message message1 = new Message.Builder()
-
-		.collapseKey(collapseKey).timeToLive(30).delayWhileIdle(true).addData("message", message).build();
+		Message message1 = new Message.Builder().collapseKey(GCM_COLLAPSE_KEY).timeToLive(30).delayWhileIdle(true).addData("message", message).build();
 
 		try
 		{
@@ -48,27 +46,20 @@ public class AndroidGCMPushNotification
 			// generados al momento de activar las notificaciones.
 			MulticastResult result = sender.send(message1, androidTargets, 1);
 
-			if (result.getResults() != null)
-			{
-				int canonicalRegId = result.getCanonicalIds();
-				if (canonicalRegId != 0)
-				{
-
-				}
-			} else
-			{
-				int error = result.getFailure();
-				System.out.println("Error enviando notificaciones: " + error);
+			if (result.getResults() == null)			
+			{			
+				System.out.println("Error enviando notificaciones: " + result.getFailure());
 			}
 
-		} catch (Exception e)
+		} 
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
 		return true;
 	}
 
-	public static boolean enviarMensajeChatGCM(String collapseKey, List<String> androidTargets, MensajeAmistadDTO msjAmistadoDTO) throws NegocioException
+	public static boolean enviarMensajeChatGCM(List<String> androidTargets, MensajeAmistadDTO msjAmistadoDTO) throws NegocioException
 	{
 		// Instancia de com.android.gcm.server.Sender que realiza la transmision
 		// de los mensajes a Google Cloud Messaging Service.
@@ -81,29 +72,20 @@ public class AndroidGCMPushNotification
 		message = ConstantesGenerales.TiposCodigoMensaje.CHAT + message;
 
 		// Mensaje que contiene los datos que seran transmitidos.
-		Message message1 = new Message.Builder()
-
-		.collapseKey(collapseKey).timeToLive(30).delayWhileIdle(true).addData("message", message).build();
+		Message message1 = new Message.Builder().collapseKey(GCM_COLLAPSE_KEY).timeToLive(30).delayWhileIdle(true).addData("message", message).build();
 
 		try
 		{
 			// Envia el mensaje al usuario identificado con idRegGCM.
 			MulticastResult result = sender.send(message1, androidTargets, 1);
 
-			if (result.getResults() != null)
+			if (result.getResults() == null)
 			{
-				int canonicalRegId = result.getCanonicalIds();
-				if (canonicalRegId != 0)
-				{
-
-				}
-			} else
-			{
-				int error = result.getFailure();
-				System.out.println("Error enviando mensaje chat: " + error);
+				System.out.println("Error enviando mensaje chat: " + result.getFailure());
 			}
 
-		} catch (Exception e)
+		} 
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}

@@ -139,7 +139,7 @@ public class EventoServiceImpl implements EventoService
 				
 				androidTargets.add(usuario.getGcmRegId());
 				
-				AndroidGCMPushNotification.enviarNotificaciones("10", androidTargets, notificacionDAO.toDto(notificacion));
+				AndroidGCMPushNotification.enviarNotificaciones(androidTargets, notificacionDAO.toDto(notificacion));
 			}
 		}
 		
