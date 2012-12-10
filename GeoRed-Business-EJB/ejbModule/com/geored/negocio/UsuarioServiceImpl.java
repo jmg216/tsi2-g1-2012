@@ -336,16 +336,18 @@ public class UsuarioServiceImpl implements UsuarioService
 		
 		mensajeAmistad.setRemitente(remitente);
 		
-		mensajeAmistad = mensajeAmistadDAO.insertar(mensajeAmistad);
+		mensajeAmistadDAO.insertar(mensajeAmistad);
 		
+		// Envio el mensaje al movil
 		mensajeAmistadDTO = mensajeAmistadDAO.toDto(mensajeAmistad);
 		
-		Long idDestinatario = amistad.getUsuarioA().getId();
+		Long idDestinatario = amistad.getUsuarioA().getId().equals(remitente.getId()) ? amistad.getUsuarioB().getId() : amistad.getUsuarioA().getId();
 		
-		UsuarioDTO usuario = obtener(idDestinatario);
+		UsuarioDTO usuarioDestinatarioDTO = obtener(idDestinatario);
 		
 		List<String> androidTargets = new ArrayList<String>();
-		androidTargets.add(usuario.getGcmRegId());
+		
+		androidTargets.add(usuarioDestinatarioDTO.getGcmRegId());
 		
 		AndroidGCMPushNotification.enviarMensajeChatGCM("10", androidTargets, mensajeAmistadDTO);
 		
@@ -378,10 +380,13 @@ public class UsuarioServiceImpl implements UsuarioService
 		
 		notificacionDAO.insertar(notificacion);
 		
+		// Envio la notificacion al movil
 		notificacionDTO.setId(notificacion.getId());
 		
 		List<String> androidTargets = new ArrayList<String>();
+		
 		androidTargets.add(usuarioDestino.getGcmRegId());
+		
 		AndroidGCMPushNotification.enviarNotificaciones("10", androidTargets, notificacionDTO);		
 		
 		return notificacion.getId();
