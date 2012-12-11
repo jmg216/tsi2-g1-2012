@@ -1,6 +1,6 @@
-/*BACKOFFICE*/
+ï»¿/*BACKOFFICE*/
 /* Tipos Administradores*/
-insert into geored.tipo_administrador (ID, NOMBRE) values (1, 'Aplicación');
+insert into geored.tipo_administrador (ID, NOMBRE) values (1, 'AplicaciÃ³n');
 
 insert into geored.tipo_administrador (ID, NOMBRE) values (2, 'Empresa');
 
@@ -22,13 +22,13 @@ insert into geored.empresa (ID, DESCRIPCION, FECHA_CREACION, NOMBRE, URL_IMAGEN,
 values (1, 'Empresa de cosmeticos', '2012-12-22', 'Beauty', 'http://3.bp.blogspot.com/_jJXpVP_ML4I/SwL_OT1Nx6I/AAAAAAAAABw/OW8tlgJeN2U/S660/beauty.jpg', 2);
 
 insert into geored.empresa (ID, DESCRIPCION, FECHA_CREACION, NOMBRE, URL_IMAGEN,  ADMINISTRADOR_FK)
-values (2, 'La pizza del mondo es un clásico de este restaurante de minutas y comida rápida. Y tiene de todo: jamón, tomate en rodajas, huevo, morrón, palmitos y salsa golf.', '2012-12-22', 'Il Mondo della Pizza', 'http://profile.ak.fbcdn.net/hprofile-ak-prn1/27535_133395436676362_7639_n.jpg', 3);
+values (2, 'La pizza del mondo es un clÃ¡sico de este restaurante de minutas y comida rÃ¡pida. Y tiene de todo: jamÃ³n, tomate en rodajas, huevo, morrÃ³n, palmitos y salsa golf.', '2012-12-22', 'Il Mondo della Pizza', 'http://profile.ak.fbcdn.net/hprofile-ak-prn1/27535_133395436676362_7639_n.jpg', 3);
 
 insert into geored.empresa (ID, DESCRIPCION, FECHA_CREACION, NOMBRE, URL_IMAGEN,  ADMINISTRADOR_FK)
 values (3, ' Cadena de hoteles.', '2012-12-22', 'Days Inn', 'http://www.polticor.com/Clientes/days_inn.jpg', 4);
 
 insert into geored.empresa (ID, DESCRIPCION, FECHA_CREACION, NOMBRE, URL_IMAGEN,  ADMINISTRADOR_FK)
-values(4, 'Contamos con un Resto-Pub donde podes disfrutar de nuestro delicioso menú con variedad de opciones y nuestra exclusiva carta de vinos.','2012-12-7','El Barzon', 'http://www.elbarzon.com.uy/wp-content/uploads/2010/09/elpub-300x198.jpg', 2);
+values(4, 'Contamos con un Resto-Pub donde podes disfrutar de nuestro delicioso menÃº con variedad de opciones y nuestra exclusiva carta de vinos.','2012-12-7','El Barzon', 'http://www.elbarzon.com.uy/wp-content/uploads/2010/09/elpub-300x198.jpg', 2);
 
 insert into geored.empresa (ID, DESCRIPCION, FECHA_CREACION, NOMBRE, URL_IMAGEN,  ADMINISTRADOR_FK)
 values(5,'Indumentaria Unisex', '2012-12-7', 'Levis', 'http://www.blog.tendasesores.com/wp-content/uploads/2011/08/levis_historia12.jpg', 3);
@@ -46,31 +46,31 @@ insert into geored.empresa (ID, DESCRIPCION, FECHA_CREACION, NOMBRE, URL_IMAGEN,
 values(9, 'La empresa de comunicacion de los uruguayos.','2012-12-7', 'Antel', 'http://lh4.ggpht.com/_r5yemL8Ppv8/TPRLtw0M1KI/AAAAAAAAPtI/qs5yGsM82rA/Logo%20Antel%5B5%5D.jpg',2);
 
 insert into geored.empresa (ID, DESCRIPCION, FECHA_CREACION, NOMBRE, URL_IMAGEN,  ADMINISTRADOR_FK)
-values(10, 'El Itaú es un banco que cuenta con varias sucursales en Montevideo y el Interior, en las que puede solicitar préstamos y obtener más información.', '2012-12-7', 'Itau', 'http://www.polticor.com/Clientes/banco-itau.jpg', 3);
+values(10, 'El ItaÃº es un banco que cuenta con varias sucursales en Montevideo y el Interior, en las que puede solicitar prÃ©stamos y obtener mÃ¡s informaciÃ³n.', '2012-12-7', 'Itau', 'http://www.polticor.com/Clientes/banco-itau.jpg', 3);
 
 insert into geored.empresa (ID, DESCRIPCION, FECHA_CREACION, NOMBRE, URL_IMAGEN,  ADMINISTRADOR_FK)
-values(11, 'Brinda una vasta gama de productos, acepta pedidos en línea y realiza envíos a domicilio.' ,'2012-12-7','Tata', 'http://www.polticor.com/Clientes/prom-tata01.gif', 4);
+values(11, 'Brinda una vasta gama de productos, acepta pedidos en lÃ­nea y realiza envÃ­os a domicilio.' ,'2012-12-7','Tata', 'http://www.polticor.com/Clientes/prom-tata01.gif', 4);
 
 insert into geored.empresa (ID, DESCRIPCION, FECHA_CREACION, NOMBRE, URL_IMAGEN,  ADMINISTRADOR_FK)
 values(12, 'San Roque brinda un servicio integral e innovador en salud y belleza.' ,'2012-12-7', 'San Roque' , 'http://www.puntacarretasweb.com.uy/wp-content/uploads/2012/07/san-roque1.jpg', 2);
 
 insert into geored.empresa (ID, DESCRIPCION, FECHA_CREACION, NOMBRE, URL_IMAGEN,  ADMINISTRADOR_FK)
-values(13, 'Un mundo con musical del uruguay y del mundo. Vende instrumentos musicales, accesorios, libros de música, partituras, entre otros productos.', '2012-12-7', 'Palacio de la Musica', 'http://a3.ec-images.myspacecdn.com/profile01/116/27468969b39d4fec8b2b93b9dc023452/p.jpg', 3);
+values(13, 'Un mundo con musical del uruguay y del mundo. Vende instrumentos musicales, accesorios, libros de mÃºsica, partituras, entre otros productos.', '2012-12-7', 'Palacio de la Musica', 'http://a3.ec-images.myspacecdn.com/profile01/116/27468969b39d4fec8b2b93b9dc023452/p.jpg', 3);
 
 insert into geored.empresa (ID, DESCRIPCION, FECHA_CREACION, NOMBRE, URL_IMAGEN,  ADMINISTRADOR_FK)
-values(14, 'Red de cobranza y pagos, con locales en todo el país.', '2012-12-7', 'Abitab', 'http://www.conciertoproducciones.com/web/images/stories/logo_abitab_giros.jpg',4);
+values(14, 'Red de cobranza y pagos, con locales en todo el paÃ­s.', '2012-12-7', 'Abitab', 'http://www.conciertoproducciones.com/web/images/stories/logo_abitab_giros.jpg',4);
 
 
 /*Locales de Beauty*/
 insert into geored.local (ID, DIRECCION, NOMBRE, UBICACION_GEOGRAFICA, EMPRESA_FK) 
-values (1, '18 de Julio 922 esq. Convención, Montevideo', 'Local Centro' , '-34.905326, -56.185323', 2);
+values (1, '18 de Julio 922 esq. ConvenciÃ³n, Montevideo', 'Local Centro' , '-34.905326, -56.185323', 2);
 
 /*Locales de Ill Mondo de la Pizza*/
 insert into geored.local (ID, DIRECCION, NOMBRE, UBICACION_GEOGRAFICA, EMPRESA_FK) 
 values (2, '21 de Setiembre 2816 esq. Ellauri, Montevideo', 'Local Pocitos' , '-34.918839,-56.156144', 2);
 
 insert into geored.local (ID, DIRECCION, NOMBRE, UBICACION_GEOGRAFICA, EMPRESA_FK) 
-values (3, '8 de Octubre 3401 esq. Bv. Batlle y Ordoñez, Montevideo', 'Local Union' , '-34.87896,-56.147776', 2);
+values (3, '8 de Octubre 3401 esq. Bv. Batlle y OrdoÃ±ez, Montevideo', 'Local Union' , '-34.87896,-56.147776', 2);
 
 insert into geored.local (ID, DIRECCION, NOMBRE, UBICACION_GEOGRAFICA, EMPRESA_FK) 
 values (4, 'Francisco Vidal 722, Montevideo', 'Local Pocitos', '-34.91847,-56.149774', 1);
@@ -116,7 +116,7 @@ insert into geored.local (ID, DIRECCION, NOMBRE, UBICACION_GEOGRAFICA, EMPRESA_F
 values (15, 'Avenida Italia 5820', 'Local Punta Gorda', '-34.88322,-56.081775', 7);
 
 insert into geored.local (ID, DIRECCION, NOMBRE, UBICACION_GEOGRAFICA, EMPRESA_FK)
-values (16, 'José Batlle Ordoñez 3770', 'Local Joanico', '-34.853115,-56.181253', 7);
+values (16, 'JosÃ© Batlle OrdoÃ±ez 3770', 'Local Joanico', '-34.853115,-56.181253', 7);
 
 insert into geored.local (ID, DIRECCION, NOMBRE, UBICACION_GEOGRAFICA, EMPRESA_FK) 
 values (17, 'Gral. L. Seregni Km 45', 'Local Atlantida', '-34.743869,-55.60741', 7);
@@ -150,11 +150,11 @@ insert into geored.local (ID, DIRECCION, NOMBRE, UBICACION_GEOGRAFICA, EMPRESA_F
 values (26, 'Avenida Gral. Flores, Montevideo', 'Local Aguada', '-34.891273,-56.193171', 8);
 
 insert into geored.local (ID, DIRECCION, NOMBRE, UBICACION_GEOGRAFICA, EMPRESA_FK) 
-values (27, 'Avenida Dr. Luis A. de Herrera 2803, Montevideo', 'Local Larrañaga', '-34.877816,-56.156586', 8);
+values (27, 'Avenida Dr. Luis A. de Herrera 2803, Montevideo', 'Local LarraÃ±aga', '-34.877816,-56.156586', 8);
 
 /*Antel*/
 insert into geored.local (ID, DIRECCION, NOMBRE, UBICACION_GEOGRAFICA, EMPRESA_FK)
-values (28, 'F. García Cortinas y Jose Luis Zorrilla de San Martin', 'Punta Carretas, Montevideo', '-34.924399,-56.160031',9);
+values (28, 'F. GarcÃ­a Cortinas y Jose Luis Zorrilla de San Martin', 'Punta Carretas, Montevideo', '-34.924399,-56.160031',9);
 
 insert into geored.local (ID, DIRECCION, NOMBRE, UBICACION_GEOGRAFICA, EMPRESA_FK) 
 values (29, 'San Jose y Paraguay, Montevideo' , 'Local Centro' , '-34.906865,-56.192248' , 9);
@@ -166,7 +166,7 @@ insert into geored.local (ID, DIRECCION, NOMBRE, UBICACION_GEOGRAFICA, EMPRESA_F
 values (31, 'Treinta y Tres entre 25 de Mayo y Rincon, Montevideo' , 'Antel Telecentro' , '-34.906205,-56.205393' , 9);
 
 insert into geored.local (ID, DIRECCION, NOMBRE, UBICACION_GEOGRAFICA, EMPRESA_FK) 
-values (32, 'Avenida General José Gervasio Artigas' , 'Local Las Piedras' , '-34.723555,-56.215887' , 9);
+values (32, 'Avenida General JosÃ© Gervasio Artigas' , 'Local Las Piedras' , '-34.723555,-56.215887' , 9);
 
 /*Itau*/
 insert into geored.local (ID, DIRECCION, NOMBRE, UBICACION_GEOGRAFICA, EMPRESA_FK) 
@@ -193,7 +193,7 @@ insert into geored.local (ID, DIRECCION, NOMBRE, UBICACION_GEOGRAFICA, EMPRESA_F
 values (39, 'Avda. Dr. Carlos Maria Ramirez 1490, Montevideo', 'Local Cerro', '-34.873134,-56.247064',12);
 
 insert into geored.local (ID, DIRECCION, NOMBRE, UBICACION_GEOGRAFICA, EMPRESA_FK)
-values (40, 'José Ellauri 350, Montevideo', 'Local Punta Carretas Shopping', '-34.923977,-56.159498', 12);
+values (40, 'JosÃ© Ellauri 350, Montevideo', 'Local Punta Carretas Shopping', '-34.923977,-56.159498', 12);
 
 /*Palacio de la musica*/
 insert into geored.local (ID, DIRECCION, NOMBRE, UBICACION_GEOGRAFICA, EMPRESA_FK) 
@@ -222,9 +222,9 @@ insert into geored.local (ID, DIRECCION, NOMBRE, UBICACION_GEOGRAFICA, EMPRESA_F
 values (49, 'Andes 1288, Montevideo', 'Local Ciudad Vieja', '-34.907754,-56.197865', 14);
 
 insert into geored.local (ID, DIRECCION, NOMBRE, UBICACION_GEOGRAFICA, EMPRESA_FK) 
-values (50, 'Paysandú 1341, Montevideo', 'Local Centro 19-25', '-34.9017,-56.187565', 14);
+values (50, 'PaysandÃº 1341, Montevideo', 'Local Centro 19-25', '-34.9017,-56.187565', 14);
 
-/*Sitio de interés*/
+/*Sitio de interÃ©s*/
 insert into geored.sitio (ID, DESCRIPCION, NOMBRE, UBICACION_GEOGRAFICA, URL_IMAGEN) 
 values (1, 'Buen lugar para hacer ejercicio', 'Gym Astro', '-34.883611, -56.181944', 'http://theawkwardpint.files.wordpress.com/2012/05/93_1.jpeg');
 
@@ -235,10 +235,10 @@ insert into geored.sitio (ID, DESCRIPCION, NOMBRE, UBICACION_GEOGRAFICA, URL_IMA
 values (3, 'Para pasar la tarde', 'Plaza Seregni', '-34.896843,-56.171982', 'http://www.infocasas.com.uy/sitio/repo/img/plaza_seregni.jpeg');
 
 insert into geored.sitio (ID, DESCRIPCION, NOMBRE, UBICACION_GEOGRAFICA, URL_IMAGEN) 
-values (4, 'Parque de juegos', 'Parque Rodó', '-34.913068,-56.1684', 'http://www.enlacesuruguayos.com/prodo1.jpg');
+values (4, 'Parque de juegos', 'Parque RodÃ³', '-34.913068,-56.1684', 'http://www.enlacesuruguayos.com/prodo1.jpg');
 
 insert into geored.sitio (ID, DESCRIPCION, NOMBRE, UBICACION_GEOGRAFICA, URL_IMAGEN) 
-values (5, 'Biblioteca pública', 'Biblioteca Nacional', '-34.902809,-56.177884', 'http://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Biblioteca_Nacional_de_Uruguay_-_fachada.JPG/300px-Biblioteca_Nacional_de_Uruguay_-_fachada.JPG');
+values (5, 'Biblioteca pÃºblica', 'Biblioteca Nacional', '-34.902809,-56.177884', 'http://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Biblioteca_Nacional_de_Uruguay_-_fachada.JPG/300px-Biblioteca_Nacional_de_Uruguay_-_fachada.JPG');
 
 insert into geored.sitio (ID, DESCRIPCION, NOMBRE, UBICACION_GEOGRAFICA, URL_IMAGEN) 
 values (6, 'Monumento nacional', 'Palacio Legislativo', '-34.891194,-56.187197', 'http://www.generalflores.com/imagenes/palacio/8379.jpg');
@@ -247,7 +247,7 @@ insert into geored.sitio (ID, DESCRIPCION, NOMBRE, UBICACION_GEOGRAFICA, URL_IMA
 values (7, 'Integrate de la Universidad de la Republica.', 'Faultad de Quimica', '-34.888589,-56.185373', 'http://www.vincealongi.com/montevideo/photos/Mvc-5900s.jpg');
 
 insert into geored.sitio (ID, DESCRIPCION, NOMBRE, UBICACION_GEOGRAFICA, URL_IMAGEN) 
-values (8, 'Central Termoelectrica', 'Central Termoelectrica Jose Batlle y Ordoñez', '-34.884382,-56.197778','http://woices.s3.amazonaws.com/audio_photos/26559/89ee6e1b.jpg');
+values (8, 'Central Termoelectrica', 'Central Termoelectrica Jose Batlle y OrdoÃ±ez', '-34.884382,-56.197778','http://woices.s3.amazonaws.com/audio_photos/26559/89ee6e1b.jpg');
 
 insert into geored.sitio (ID, DESCRIPCION, NOMBRE, UBICACION_GEOGRAFICA, URL_IMAGEN)
 values (9, 'Lugar ideal para pasear, hacer caminatas o ejercicio y disfrutar del aire puro.', 'Parque Batlle', '-34.894414,-56.155464','http://www.reduruguaya.com/images/montevideo/Parque-Batlle-entrada.jpg');
@@ -268,10 +268,10 @@ insert into geored.sitio (ID, DESCRIPCION, NOMBRE, UBICACION_GEOGRAFICA, URL_IMA
 values (14, 'Los cuernos de Battle.', 'Monumento a Batlle Berres', '-34.869472,-56.167735','http://mw2.google.com/mw-panoramio/photos/medium/17550985.jpg');
 
 insert into geored.sitio (ID, DESCRIPCION, NOMBRE, UBICACION_GEOGRAFICA, URL_IMAGEN) 
-values (15, 'Primer Hipodromo del Uruguay.', 'Hipodromo de Maroñas', '-34.838833,-56.143895','http://municipiof.montevideo.gub.uy/system/files/imagecache/articulo_completa/hip.-maronas10_0.jpg');
+values (15, 'Primer Hipodromo del Uruguay.', 'Hipodromo de MaroÃ±as', '-34.838833,-56.143895','http://municipiof.montevideo.gub.uy/system/files/imagecache/articulo_completa/hip.-maronas10_0.jpg');
 
 insert into geored.sitio (ID, DESCRIPCION, NOMBRE, UBICACION_GEOGRAFICA, URL_IMAGEN) 
-values (16, 'Parque zoológico y centro de conservación de especies animales y vegetales.', 'Parque Lecocq', '-34.792237,-56.33517','http://www.uruguayeduca.edu.uy/UserFiles/P0001/Image/2009/AndrsHirigoyen/parque-lecocq.jpg');
+values (16, 'Parque zoolÃ³gico y centro de conservaciÃ³n de especies animales y vegetales.', 'Parque Lecocq', '-34.792237,-56.33517','http://www.uruguayeduca.edu.uy/UserFiles/P0001/Image/2009/AndrsHirigoyen/parque-lecocq.jpg');
 
 insert into geored.sitio (ID, DESCRIPCION, NOMBRE, UBICACION_GEOGRAFICA, URL_IMAGEN)
 values (17, 'Aereopuerto internacional, Montevideo.', 'Aereopuerto Internacional de Carrasco', '-34.836632,-56.031698','http://eldiario.com.uy/wp-content/uploads/2011/07/aeropuerto-montevideo2.jpg');
@@ -358,66 +358,66 @@ insert into geored.sitio_tematica (TEMATICA_FK, SITIO_FK) values (3, 19);
 insert into geored.sitio_tematica (TEMATICA_FK, SITIO_FK) values (3, 20);
 
 /*FRONTOFFICE*/
-/* Usuarios de la aplicación. Para la defensa probar con usuarios Marcelo y Juan*/
+/* Usuarios de la aplicaciÃ³n. Para la defensa probar con usuarios Marcelo y Juan*/
 insert into geored.usuario (ID, CONECTADO, EMAIL, NOMBRE, PASS, URL_IMAGEN) 
-values (1, true, 'lavarece@gmail.com', 'Vanessa Revetria', 'vanessa', 'https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-ash4/405360_10151190370950526_1747813305_n.jpg');
-
-insert into geored.usuario (ID, CONECTADO, EMAIL, NOMBRE, PASS, URL_IMAGEN) 
-values (2, true, 'juanma.miraballes@gmail.com', 'Juan Miraballes', 'juan', 'https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-snc7/399982_285605288159727_192778982_n.jpg');
+values (1, true, 'lavarece@gmail.com', 'Vanessa Revetria', 'f8032d5cae3de20fcec887f395ec9a6a', 'https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-ash4/405360_10151190370950526_1747813305_n.jpg');
 
 insert into geored.usuario (ID, CONECTADO, EMAIL, NOMBRE, PASS, URL_IMAGEN) 
-values (3, true, 'maxi.silveraf@gmail.com', 'Maximiliano silvera', 'maxi', 'https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-ash3/576335_3810865271033_638128563_n.jpg');
+values (2, true, 'juanma.miraballes@gmail.com', 'Juan Miraballes', 'f8032d5cae3de20fcec887f395ec9a6a', 'https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-snc7/399982_285605288159727_192778982_n.jpg');
 
 insert into geored.usuario (ID, CONECTADO, EMAIL, NOMBRE, PASS, URL_IMAGEN) 
-values (4, false,'marcelobasan09@gmail.com', 'Marcelo Basan', 'marcelo', 'https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-ash4/431186_3072919616909_1477253359_n.jpg');
+values (3, true, 'maxi.silveraf@gmail.com', 'Maximiliano silvera', 'f8032d5cae3de20fcec887f395ec9a6a', 'https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-ash3/576335_3810865271033_638128563_n.jpg');
 
 insert into geored.usuario (ID, CONECTADO, EMAIL, NOMBRE, PASS, URL_IMAGEN) 
-values (5, false, 'jvrdom@gmail.com', 'Javier Dominguez', 'javier', 'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-prn1/s480x480/542861_10151281688040851_465206331_n.jpg');
-
-insert into geored.usuario (ID, CONECTADO, EMAIL, NOMBRE, PASS, URL_IMAGEN)
-values (6, false, 'andrea.geoplanet@gmail.com', 'Andrea Aravena', 'andrea', 'http://mouriz.files.wordpress.com/2010/02/cristina-aced.jpg?w=630');
-
-insert into geored.usuario (ID, CONECTADO, EMAIL, NOMBRE, PASS, URL_IMAGEN)
-values (7, false, 'elizabetharmstrong39@gmail.com', 'Elizabeth Amstrong', 'elizabeth', 'http://www.juventudrebelde.cu/file/img/fotografia/2010/12/10380-fotografia-g.jpg');
+values (4, false,'marcelobasan09@gmail.com', 'Marcelo Basan', 'f8032d5cae3de20fcec887f395ec9a6a', 'https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-ash4/431186_3072919616909_1477253359_n.jpg');
 
 insert into geored.usuario (ID, CONECTADO, EMAIL, NOMBRE, PASS, URL_IMAGEN) 
-values (8, false, 'carlosarteaga.pef@gmail.com', 'Carlos Arteaga', 'carlos', 'http://elorbe.com/archivos/2011/03/En-2010-m%C3%A1s-de-800-mil-personas-incorporadas-a-un-empleo.jpg');
+values (5, false, 'jvrdom@gmail.com', 'Javier Dominguez', 'f8032d5cae3de20fcec887f395ec9a6a', 'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-prn1/s480x480/542861_10151281688040851_465206331_n.jpg');
 
 insert into geored.usuario (ID, CONECTADO, EMAIL, NOMBRE, PASS, URL_IMAGEN)
-values (9, false, 'oscar.brito@gmail.com', 'Oscar Brito', 'oscar', 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS2z-_v1tswMl9TSACwyoBZcFLamE27S5waKZBoAMDvPmH2hpen');
+values (6, false, 'andrea.geoplanet@gmail.com', 'Andrea Aravena', 'f8032d5cae3de20fcec887f395ec9a6a', 'http://mouriz.files.wordpress.com/2010/02/cristina-aced.jpg?w=630');
+
+insert into geored.usuario (ID, CONECTADO, EMAIL, NOMBRE, PASS, URL_IMAGEN)
+values (7, false, 'elizabetharmstrong39@gmail.com', 'Elizabeth Amstrong', 'f8032d5cae3de20fcec887f395ec9a6a', 'http://www.juventudrebelde.cu/file/img/fotografia/2010/12/10380-fotografia-g.jpg');
 
 insert into geored.usuario (ID, CONECTADO, EMAIL, NOMBRE, PASS, URL_IMAGEN) 
-values (10, false, 'carlaramosc@gmail.com', 'Carla Ramos', 'carla', 'http://cdn.enelbrasero.com/wp-content/uploads/2010/10/Taylor-Swift-gana-caso-contra-16-personas-vendiendo-mercanc%C3%ADa-falsificada-558x558.jpg');
+values (8, false, 'carlosarteaga.pef@gmail.com', 'Carlos Arteaga', 'f8032d5cae3de20fcec887f395ec9a6a', 'http://elorbe.com/archivos/2011/03/En-2010-m%C3%A1s-de-800-mil-personas-incorporadas-a-un-empleo.jpg');
 
 insert into geored.usuario (ID, CONECTADO, EMAIL, NOMBRE, PASS, URL_IMAGEN)
-values (11, false, 'verorossic@gmail.com', 'Veronica Rossi', 'veronica', 'http://cdn.20minutos.es/img/2006/03/07/371969.jpg');
-
-insert into geored.usuario (ID, CONECTADO, EMAIL, NOMBRE, PASS, URL_IMAGEN)
-values (12, false, 'victorvalenzuelal@gmail.com', 'Victor Valenzuela', 'victor', 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTFwNTgd2BXxkPof_WEbGaLczqTetmP7-T_Su2dQPEdEAhWoGPdUg');
-
-insert into geored.usuario (ID, CONECTADO, EMAIL, NOMBRE, PASS, URL_IMAGEN)
-values (13, true, 'andrea.cardozo@gmail.com', 'Andrea Cardozo', 'andrea', 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTJq7geogKdWp4Hv3RJD6sGOMho6owXQKUJvsCKQ9ckn3ifCPyz');
+values (9, false, 'oscar.brito@gmail.com', 'Oscar Brito', 'f8032d5cae3de20fcec887f395ec9a6a', 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS2z-_v1tswMl9TSACwyoBZcFLamE27S5waKZBoAMDvPmH2hpen');
 
 insert into geored.usuario (ID, CONECTADO, EMAIL, NOMBRE, PASS, URL_IMAGEN) 
-values (14, true, 'victoriasansone@gmail.com', 'Victoria Sansone' , 'victoria' , 'http://cdn.vanidades.taconeras.net/files/2010/10/mujeres-felices.jpeg');
+values (10, false, 'carlaramosc@gmail.com', 'Carla Ramos', 'f8032d5cae3de20fcec887f395ec9a6a', 'http://cdn.enelbrasero.com/wp-content/uploads/2010/10/Taylor-Swift-gana-caso-contra-16-personas-vendiendo-mercanc%C3%ADa-falsificada-558x558.jpg');
 
 insert into geored.usuario (ID, CONECTADO, EMAIL, NOMBRE, PASS, URL_IMAGEN)
-values (15, false, 'camila.diaz@gmail.com', 'Camila Diaz', 'camila', 'http://www.imagencr.com/imagenes/catalogo/mujeres/mujeres07.jpg');
+values (11, false, 'verorossic@gmail.com', 'Veronica Rossi', 'f8032d5cae3de20fcec887f395ec9a6a', 'http://cdn.20minutos.es/img/2006/03/07/371969.jpg');
 
 insert into geored.usuario (ID, CONECTADO, EMAIL, NOMBRE, PASS, URL_IMAGEN)
-values (16, false, 'pablopereyra@gmail.com', 'Pablo Pereyra', 'pablo', 'http://3.bp.blogspot.com/-BKqLbGzomLA/Tui4vmV1G-I/AAAAAAAADvY/r2h2PmJpqSg/s320/pictures_of_dreadlock_hairstyles_6.jpg');
+values (12, false, 'victorvalenzuelal@gmail.com', 'Victor Valenzuela', 'f8032d5cae3de20fcec887f395ec9a6a', 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTFwNTgd2BXxkPof_WEbGaLczqTetmP7-T_Su2dQPEdEAhWoGPdUg');
 
 insert into geored.usuario (ID, CONECTADO, EMAIL, NOMBRE, PASS, URL_IMAGEN)
-values (17, true, 'leonardogonzalez@gmail.com', 'Leonardo Gonzalez', 'leonardo' , 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRjj0FTgA7J-cDUVZi9onbceHfs1uGqNWYDIqsTSPb2-A_2nAb6eQ');
-
-insert into geored.usuario (ID, CONECTADO, EMAIL, NOMBRE, PASS, URL_IMAGEN)
-values (18, false, 'eduardorocha@gmail.com', 'Eduardo Rocha', 'eduardo', 'http://4.bp.blogspot.com/_NVzPnvvYuLg/S63ZuIqshCI/AAAAAAAACCQ/AxnXs6JDvIY/s1600/adolescencia+sue%C3%B1o.jpg');
+values (13, true, 'andrea.cardozo@gmail.com', 'Andrea Cardozo', 'f8032d5cae3de20fcec887f395ec9a6a', 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTJq7geogKdWp4Hv3RJD6sGOMho6owXQKUJvsCKQ9ckn3ifCPyz');
 
 insert into geored.usuario (ID, CONECTADO, EMAIL, NOMBRE, PASS, URL_IMAGEN) 
-values (19, true, 'leticia.andrada@gmail.com', 'Leticia Andrada', 'leticia', 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSRn83HyMjGst-DC1VtUTmPix_GGXCR7tJzCWKu0Bb0qIASt_-n');
+values (14, true, 'victoriasansone@gmail.com', 'Victoria Sansone' , 'f8032d5cae3de20fcec887f395ec9a6a' , 'http://cdn.vanidades.taconeras.net/files/2010/10/mujeres-felices.jpeg');
 
 insert into geored.usuario (ID, CONECTADO, EMAIL, NOMBRE, PASS, URL_IMAGEN)
-values (20, false, 'luciaterra@gmail.com', 'Lucia Terra', 'lucia', 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTm-1Ob0JkYH-Xnc3cVR12u5d7uS5YQiMWdO_T0ESYfUq3_r8kp');
+values (15, false, 'camila.diaz@gmail.com', 'Camila Diaz', 'f8032d5cae3de20fcec887f395ec9a6a', 'http://www.imagencr.com/imagenes/catalogo/mujeres/mujeres07.jpg');
+
+insert into geored.usuario (ID, CONECTADO, EMAIL, NOMBRE, PASS, URL_IMAGEN)
+values (16, false, 'pablopereyra@gmail.com', 'Pablo Pereyra', 'f8032d5cae3de20fcec887f395ec9a6a', 'http://3.bp.blogspot.com/-BKqLbGzomLA/Tui4vmV1G-I/AAAAAAAADvY/r2h2PmJpqSg/s320/pictures_of_dreadlock_hairstyles_6.jpg');
+
+insert into geored.usuario (ID, CONECTADO, EMAIL, NOMBRE, PASS, URL_IMAGEN)
+values (17, true, 'leonardogonzalez@gmail.com', 'Leonardo Gonzalez', 'f8032d5cae3de20fcec887f395ec9a6a' , 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRjj0FTgA7J-cDUVZi9onbceHfs1uGqNWYDIqsTSPb2-A_2nAb6eQ');
+
+insert into geored.usuario (ID, CONECTADO, EMAIL, NOMBRE, PASS, URL_IMAGEN)
+values (18, false, 'eduardorocha@gmail.com', 'Eduardo Rocha', 'f8032d5cae3de20fcec887f395ec9a6a', 'http://4.bp.blogspot.com/_NVzPnvvYuLg/S63ZuIqshCI/AAAAAAAACCQ/AxnXs6JDvIY/s1600/adolescencia+sue%C3%B1o.jpg');
+
+insert into geored.usuario (ID, CONECTADO, EMAIL, NOMBRE, PASS, URL_IMAGEN) 
+values (19, true, 'leticia.andrada@gmail.com', 'Leticia Andrada', 'f8032d5cae3de20fcec887f395ec9a6a', 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSRn83HyMjGst-DC1VtUTmPix_GGXCR7tJzCWKu0Bb0qIASt_-n');
+
+insert into geored.usuario (ID, CONECTADO, EMAIL, NOMBRE, PASS, URL_IMAGEN)
+values (20, false, 'luciaterra@gmail.com', 'Lucia Terra', 'f8032d5cae3de20fcec887f395ec9a6a', 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTm-1Ob0JkYH-Xnc3cVR12u5d7uS5YQiMWdO_T0ESYfUq3_r8kp');
 
 /*Ingreso amistades*/
 insert into geored.amistad (ID, USUARIO_A_FK, USUARIO_B_FK) values (1, 1, 2);
@@ -596,7 +596,7 @@ insert into geored.oferta(ID, COSTO, DESCRIPCION, FECHA_FIN, FECHA_INICIO, NOMBR
 values (2, 8080.19, 'Modelo JBP0605, Incluye 5 cuerpos de medidas standard : 12" /13" /14" / 16"/ 22"', '2012-12-30', '2012-12-15', 'Bateria Power Beat Completa', 'http://www.palaciodelamusica.com.uy/mvdcommerce/imgUpload/jbp0605_g.jpg', 42);
 
 insert into geored.oferta(ID, COSTO, DESCRIPCION, FECHA_FIN, FECHA_INICIO, NOMBRE, URL_IMAGEN, LOCAL_FK)
-values (3, 4029.27, 'Modelo FT6418L, Fina terminación en baño dorado', '2012-12-30', '2012-12-15', 'Trompeta Memphis', 'http://www.palaciodelamusica.com.uy/mvdcommerce/imgUpload/ft6418l_g.jpg', 41);
+values (3, 4029.27, 'Modelo FT6418L, Fina terminaciÃ³n en baÃ±o dorado', '2012-12-30', '2012-12-15', 'Trompeta Memphis', 'http://www.palaciodelamusica.com.uy/mvdcommerce/imgUpload/ft6418l_g.jpg', 41);
 
 insert into geored.oferta(ID, COSTO, DESCRIPCION, FECHA_FIN, FECHA_INICIO, NOMBRE, URL_IMAGEN, LOCAL_FK)
 values (4, 4029.27, 'Modelo JBP0605, Incluye 5 cuerpos de medidas standard : 12" /13" /14" / 16"/ 22"', '2012-12-30', '2012-12-15', 'Trompeta Memphis', 'http://www.palaciodelamusica.com.uy/mvdcommerce/imgUpload/ft6418l_g.jpg', 42);
