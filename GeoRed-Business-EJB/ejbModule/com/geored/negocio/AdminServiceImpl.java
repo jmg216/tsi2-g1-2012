@@ -34,7 +34,7 @@ public class AdminServiceImpl implements AdminService
 	@EJB
 	private TipoAdministradorDAO tipoAdministradorDAO;
 	
-	@WebMethod(operationName="androidInvocation")
+	@WebMethod
 	public String androidInvocation(@WebParam(name="methodName") String methodName, @WebParam(name="methodParams") String methodParams) throws NegocioException, DaoException
 	{		
 		JsonParamsMap params = new JsonParamsMap(methodParams);
@@ -174,7 +174,8 @@ public class AdminServiceImpl implements AdminService
 		return administradorDAO.obtenerListado(true);		
 	}
 
-	@Override
+	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+	@WebMethod
 	public AdministradorDTO obtenerAdminPorEmailYPass(@WebParam(name="email") String email, @WebParam(name="pass") String pass) throws NegocioException, DaoException
 	{
 		AdministradorDTO adminDTO = (AdministradorDTO) administradorDAO.obtenerAdminPorEmailYPass(email, pass, true);
@@ -187,7 +188,8 @@ public class AdminServiceImpl implements AdminService
 		return adminDTO;
 	}
 
-	@Override
+	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+	@WebMethod
 	public List<AdministradorDTO> obtenerListadoPorTipo(@WebParam(name="idTipoAdmin") Long idTipoAdmin) throws DaoException
 	{
 		return administradorDAO.obtenerListadoPorTipo(idTipoAdmin, true);

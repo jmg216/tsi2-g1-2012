@@ -15,7 +15,6 @@ import javax.jws.WebService;
 
 import com.geored.dominio.Evento;
 import com.geored.dominio.Tematica;
-import com.geored.dominio.TipoNotificacion;
 import com.geored.dominio.Usuario;
 import com.geored.dto.EventoDTO;
 import com.geored.dto.NotificacionDTO;
@@ -53,7 +52,7 @@ public class EventoServiceImpl implements EventoService
 	@EJB
 	private TipoNotificacionDAO tipoNotificacionDAO;
 	
-	@WebMethod(operationName="androidInvocation")
+	@WebMethod
 	public String androidInvocation(@WebParam(name="methodName") String methodName, @WebParam(name="methodParams") String methodParams) throws NegocioException, DaoException
 	{		
 		JsonParamsMap params = new JsonParamsMap(methodParams);
