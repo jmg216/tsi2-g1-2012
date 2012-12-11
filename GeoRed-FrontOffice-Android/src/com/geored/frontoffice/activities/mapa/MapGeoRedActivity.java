@@ -263,7 +263,7 @@ public class MapGeoRedActivity extends MapActivity
 				String lati2 = coordes2[0];
 				String longi2 = coordes2[1];
 
-				dist = UtilesAndroid.CalcularDistanciaCoordenadas(lati, longi, lati2, longi2);
+				dist = UtilesAndroid.calcularDistanciaCoordenadas(lati, longi, lati2, longi2);
 				Double dKM = km.doubleValue();
 				if ((dist <= dKM) || (km == 0))
 				{

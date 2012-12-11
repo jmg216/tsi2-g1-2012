@@ -28,9 +28,9 @@ public class NotificacionesActivity extends Activity
     	 
     	setContentView(R.layout.activity_notificaciones);
     	
-    	final List<NotificacionDTO> listaNotificacionesDTO = UtilesAndroid.listaNotificaciones;
+    	final List<NotificacionDTO> listaNotificacionesDTO = new ArrayList<NotificacionDTO>(UtilesAndroid.listaNotificaciones);
     	
-    	// Si no hay notificaciones muestro un label indicandolo
+    	// Si no hay notificaciones muestro un label
     	if(listaNotificacionesDTO.isEmpty())
     	{    	
     		TextView txtMensajeSinNotificaciones = new TextView(this);

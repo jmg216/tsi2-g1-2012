@@ -82,19 +82,22 @@ public class ContactoDetalleActivity extends Activity
 		} 
 		else
 		{
+			UsuarioDTO usuarioAutenticado = UtilesSeguridadAndroid.getUsuarioAutenticado(this);
+			
 			// Enviar notificacion de amistad, en idObjeto se pone el id del solicitante, en idUsuDestino a quien s le solicita
-			TipoNotificacionDTO tipoNotificacion = globalWS.obtenerTipoNotificacionPorId(TiposNotificacion.ID_SOLICITUD_AMISTAD);
+			NotificacionDTO notificacionDTO = new NotificacionDTO();
 
-			NotificacionDTO notificacion = new NotificacionDTO();
+			notificacionDTO.setIdTipoNotificacion(TiposNotificacion.ID_SOLICITUD_AMISTAD);			
+			
+			notificacionDTO.setIdUsuarioDestino(usuarioDTO.getId());
+			
+			notificacionDTO.setMetadataNotif(usuarioAutenticado.getId().toString());
+			
+			notificacionDTO.setDescripcion(usuarioAutenticado.getNombre() + " quiere ser su amigo.");
+			
+			notificacionDTO.setLeida(false);
 
-			notificacion.setIdTipoNotificacion(tipoNotificacion.getId());
-			notificacion.setNombreTipoNotificacion(tipoNotificacion.getNombre());
-			notificacion.setIdUsuarioDestino(usuarioDTO.getId());
-			notificacion.setDescripcion("Notificacion Solicitud amistad");
-			// notificacion.set)(UtilesSeguridadAndroid.getUsuarioAutenticado(getApplicationContext()).getId());
-
-			usuarioWS.enviarNotificacion(notificacion);
-
+			usuarioWS.enviarNotificacion(notificacionDTO);
 		}
 	}
 

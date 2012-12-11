@@ -136,6 +136,14 @@ public class UsuarioServiceImpl implements UsuarioService
 			
 			return new Gson().toJson(idMensaje);
 		}
+		else if(methodName.equals("insertarNotificacion"))
+		{
+			NotificacionDTO notificacionDTO = (NotificacionDTO) params.getParam("notificacionDTO", NotificacionDTO.class);
+			
+			Long idNotificacion = insertarNotificacion(notificacionDTO);
+			
+			return new Gson().toJson(idNotificacion);
+		}
 		else if(methodName.equals("enviarNotificacion"))
 		{
 			NotificacionDTO notificacionDTO = (NotificacionDTO) params.getParam("notificacionDTO", NotificacionDTO.class);
@@ -358,38 +366,25 @@ public class UsuarioServiceImpl implements UsuarioService
 	@WebMethod(operationName="enviarNotificacion")
 	public Long enviarNotificacion(@WebParam(name="notificacionDTO") NotificacionDTO notificacionDTO) throws NegocioException, DaoException
 	{
-		Notificacion notificacion = notificacionDAO.toEntity(notificacionDTO);
-		
-		TipoNotificacion tipoNotificacion = (TipoNotificacion) tipoNotificacionDAO.obtener(notificacionDTO.getIdTipoNotificacion(), false);
-		
-		if(tipoNotificacion == null)
-		{
-			throw new NegocioException("Tipo de notificacion no encontrada");
-		}
-		
 		Usuario usuarioDestino = (Usuario) usuarioDAO.obtener(notificacionDTO.getIdUsuarioDestino(), false);
 		
-		if(usuarioDestino == null)
+		if(!UtilesNegocio.isNullOrEmpty(usuarioDestino.getGcmRegId()))
 		{
-			throw new NegocioException("Usuario no encontrado");
+			// Inserto la notificacion en la BD
+			notificacionDTO.setId(insertarNotificacion(notificacionDTO));
+			
+			// Envio la notificacion al movil		
+			List<String> androidTargets = new ArrayList<String>();
+			
+			androidTargets.add(usuarioDestino.getGcmRegId());
+			
+			AndroidGCMPushNotification.enviarNotificaciones(androidTargets, notificacionDTO);		
+			
+			return notificacionDTO.getId();
 		}
-		
-		notificacion.setTipoNotificacion(tipoNotificacion);
-		
-		notificacion.setUsuarioDestino(usuarioDestino);
-		
-		notificacionDAO.insertar(notificacion);
-		
-		// Envio la notificacion al movil
-		notificacionDTO.setId(notificacion.getId());
-		
-		List<String> androidTargets = new ArrayList<String>();
-		
-		androidTargets.add(usuarioDestino.getGcmRegId());
-		
-		AndroidGCMPushNotification.enviarNotificaciones( androidTargets, notificacionDTO);		
-		
-		return notificacion.getId();
+
+
+		return null;
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
@@ -514,31 +509,58 @@ public class UsuarioServiceImpl implements UsuarioService
 		
 		for(UsuarioDTO usuarioDTO : listadoAmigosDTO)
 		{
-			Notificacion notificacion = new Notificacion();
-			
-			notificacion.setDescripcion(usuarioCheckIn.getNombre() + " ha hecho checkin en " + sitio.getNombre());
-			
-			notificacion.setLeida(false);
-			
-			notificacion.setTipoNotificacion((TipoNotificacion) tipoNotificacionDAO.obtener(ConstantesGenerales.TiposNotificacion.ID_CHECKIN_AMIGO, false));
-			
-			notificacion.setUsuarioDestino((Usuario) usuarioDAO.obtener(usuarioDTO.getId(), false));
-			
-			notificacion.setMetadataNotif(usuarioDTO.getId().toString() + ";" + sitio.getId().toString());
-			
-			notificacionDAO.insertar(notificacion);
-			
 			// Si el usaurio destino tiene el gcm reg id envio al movil
 			if(!UtilesNegocio.isNullOrEmpty(usuarioDTO.getGcmRegId()))
 			{
+				NotificacionDTO notificacionDTO = new NotificacionDTO();
+				
+				notificacionDTO.setDescripcion(usuarioCheckIn.getNombre() + " ha hecho checkin en " + sitio.getNombre());
+				
+				notificacionDTO.setLeida(false);
+				
+				notificacionDTO.setIdTipoNotificacion(ConstantesGenerales.TiposNotificacion.ID_CHECKIN_AMIGO);
+				
+				notificacionDTO.setIdUsuarioDestino(usuarioDTO.getId());
+				
+				notificacionDTO.setMetadataNotif(usuarioDTO.getId().toString() + ";" + sitio.getUbicacionGeografica());
+			
+				// Envio a GCM
 				List<String> androidTargets = new ArrayList<String>();
 				
 				androidTargets.add(usuarioDTO.getGcmRegId());
 				
-				AndroidGCMPushNotification.enviarNotificaciones(androidTargets, notificacionDAO.toDto(notificacion));
+				AndroidGCMPushNotification.enviarNotificaciones(androidTargets, notificacionDTO);
 			}
 		}
 		
 		return checkInEntity.getId();
+	}
+
+	@Override
+	public Long insertarNotificacion(NotificacionDTO notificacionDTO) throws NegocioException, DaoException
+	{
+		Notificacion notificacion = notificacionDAO.toEntity(notificacionDTO);
+		
+		TipoNotificacion tipoNotificacion = (TipoNotificacion) tipoNotificacionDAO.obtener(notificacionDTO.getIdTipoNotificacion(), false);
+		
+		if(tipoNotificacion == null)
+		{
+			throw new NegocioException("Tipo de notificacion no encontrada");
+		}
+		
+		Usuario usuarioDestino = (Usuario) usuarioDAO.obtener(notificacionDTO.getIdUsuarioDestino(), false);
+		
+		if(usuarioDestino == null)
+		{
+			throw new NegocioException("Usuario no encontrado");
+		}
+		
+		notificacion.setTipoNotificacion(tipoNotificacion);
+		
+		notificacion.setUsuarioDestino(usuarioDestino);
+		
+		notificacionDAO.insertar(notificacion);
+		
+		return notificacion.getId();
 	}			
 }

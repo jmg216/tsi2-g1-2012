@@ -18,6 +18,7 @@ import com.geored.dominio.Sitio;
 import com.geored.dominio.Tematica;
 import com.geored.dominio.TipoNotificacion;
 import com.geored.dominio.Usuario;
+import com.geored.dto.NotificacionDTO;
 import com.geored.dto.SitioDTO;
 import com.geored.dto.TematicaDTO;
 import com.geored.exceptions.DaoException;
@@ -118,28 +119,27 @@ public class SitioServiceImpl implements SitioService
 		
 		for(Usuario usuario : listadoUsuariosConTematicas)
 		{		
-			Notificacion notificacion = new Notificacion();
-			
-			notificacion.setDescripcion("Se ha creado una sitio nuevo");
-			
-			notificacion.setLeida(false);
-			
-			notificacion.setTipoNotificacion((TipoNotificacion) tipoNotificacionDAO.obtener(ConstantesGenerales.TiposNotificacion.ID_NUEVA_OFERTA, false));
-			
-			notificacion.setUsuarioDestino(usuario);
-			
-			notificacion.setMetadataNotif(sitioEntity.getId().toString() + ";" + sitioEntity.getUbicacionGeografica());
-			
-			notificacionDAO.insertar(notificacion);
-			
 			// Si el usaurio destino tiene el gcm reg id envio al movil
 			if(!UtilesNegocio.isNullOrEmpty(usuario.getGcmRegId()))
 			{
+				NotificacionDTO notificacionDTO = new NotificacionDTO();
+				
+				notificacionDTO.setDescripcion("Se ha creado una sitio nuevo");
+				
+				notificacionDTO.setLeida(false);
+				
+				notificacionDTO.setIdTipoNotificacion(ConstantesGenerales.TiposNotificacion.ID_NUEVA_OFERTA);
+				
+				notificacionDTO.setIdUsuarioDestino(usuario.getId());
+				
+				notificacionDTO.setMetadataNotif(sitioEntity.getId().toString() + ";" + sitioEntity.getUbicacionGeografica());
+				
+				// Notifico a GCM
 				List<String> androidTargets = new ArrayList<String>();
 				
 				androidTargets.add(usuario.getGcmRegId());
 				
-				AndroidGCMPushNotification.enviarNotificaciones(androidTargets, notificacionDAO.toDto(notificacion));
+				AndroidGCMPushNotification.enviarNotificaciones(androidTargets, notificacionDTO);
 			}
 		}
 		
