@@ -26,6 +26,7 @@ public class WSProxyClient
 	/**
      * Metodo que invoca los WebServices del Backend.
      * ListType sera distino de null, si returnType == java.util.List.class
+	 * @throws Exception 
      * */
     public static Object call(String urlWS, String methodName, Map<String, Object> params, Type returnType, Type listReturnType)
     {

@@ -38,6 +38,8 @@ public interface UsuarioService
 	public List<CheckInDTO> obtenerListadoCheckIns() throws DaoException;
 	
 	// OPERACIONES MENSAJES Y NOTIFICACIONES
+	public Long insertarNotificacion(NotificacionDTO notificacionDTO) throws NegocioException, DaoException;
+	
 	public Long enviarMensajeChat(MensajeAmistadDTO mensajeAmistadDTO) throws NegocioException, DaoException;
 	
 	public Long enviarNotificacion(NotificacionDTO notificacionDTO) throws NegocioException, DaoException;

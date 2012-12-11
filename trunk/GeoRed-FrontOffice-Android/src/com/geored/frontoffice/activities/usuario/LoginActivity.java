@@ -52,8 +52,19 @@ public class LoginActivity extends Activity implements OnClickListener
 
 		// Encripto la pass
 		pass = UtilesSeguridadAndroid.encriptarMD5(pass);
-
-		UsuarioDTO usuarioDTO = usuarioWS.obtenerPorEmailYPass(email, pass);
+		
+		txtEmail.setText(UtilesAndroid.URL_WS_USUARIO);
+		
+		UsuarioDTO usuarioDTO = null; 
+		
+		try
+		{
+			usuarioDTO = usuarioWS.obtenerPorEmailYPass(email, pass);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 
 		if (usuarioDTO != null)
 		{
@@ -72,7 +83,8 @@ public class LoginActivity extends Activity implements OnClickListener
 				{
 					usuarioDTO.setGcmRegId(regId);
 				}
-			} else
+			} 
+			else
 			{
 				// Registro la aplicacion en GCM
 				GCMIntentService.registerGCMService(this);
@@ -87,6 +99,9 @@ public class LoginActivity extends Activity implements OnClickListener
 			{
 				UtilesAndroid.listaNotificaciones.add(notificacionDTO);
 			}
+			
+			// Inicio la localizacion
+			UtilesAndroid.iniciarLocalizacion(this);
 			
 			Intent menuActivity = new Intent(this, MenuActivity.class);
 			startActivity(menuActivity);

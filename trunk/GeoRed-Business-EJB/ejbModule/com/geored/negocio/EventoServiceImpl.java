@@ -14,11 +14,11 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 
 import com.geored.dominio.Evento;
-import com.geored.dominio.Notificacion;
 import com.geored.dominio.Tematica;
 import com.geored.dominio.TipoNotificacion;
 import com.geored.dominio.Usuario;
 import com.geored.dto.EventoDTO;
+import com.geored.dto.NotificacionDTO;
 import com.geored.dto.TematicaDTO;
 import com.geored.exceptions.DaoException;
 import com.geored.exceptions.NegocioException;
@@ -118,28 +118,27 @@ public class EventoServiceImpl implements EventoService
 		
 		for(Usuario usuario : listadoUsuariosConTematicas)
 		{		
-			Notificacion notificacion = new Notificacion();
-			
-			notificacion.setDescripcion("Se ha creado una evento nuevo");
-			
-			notificacion.setLeida(false);
-			
-			notificacion.setTipoNotificacion((TipoNotificacion) tipoNotificacionDAO.obtener(ConstantesGenerales.TiposNotificacion.ID_NUEVA_OFERTA, false));
-			
-			notificacion.setUsuarioDestino(usuario);
-			
-			notificacion.setMetadataNotif(eventoEntity.getId().toString() + ";" + eventoEntity.getUbicacionGeografica());
-			
-			notificacionDAO.insertar(notificacion);
-			
 			// Si el usaurio destino tiene el gcm reg id envio al movil
 			if(!UtilesNegocio.isNullOrEmpty(usuario.getGcmRegId()))
 			{
+				NotificacionDTO notificacionDTO = new NotificacionDTO();
+				
+				notificacionDTO.setDescripcion("Se ha creado una evento nuevo");
+				
+				notificacionDTO.setLeida(false);
+				
+				notificacionDTO.setIdTipoNotificacion(ConstantesGenerales.TiposNotificacion.ID_NUEVA_OFERTA);
+				
+				notificacionDTO.setIdUsuarioDestino(usuario.getId());
+				
+				notificacionDTO.setMetadataNotif(eventoEntity.getId().toString() + ";" + eventoEntity.getUbicacionGeografica());
+				
+				// Envio a GCM
 				List<String> androidTargets = new ArrayList<String>();
 				
 				androidTargets.add(usuario.getGcmRegId());
 				
-				AndroidGCMPushNotification.enviarNotificaciones(androidTargets, notificacionDAO.toDto(notificacion));
+				AndroidGCMPushNotification.enviarNotificaciones(androidTargets, notificacionDTO);
 			}
 		}
 		

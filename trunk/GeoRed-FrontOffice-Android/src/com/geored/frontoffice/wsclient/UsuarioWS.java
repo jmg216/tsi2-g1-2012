@@ -106,4 +106,12 @@ public class UsuarioWS
 		
     	return (List<NotificacionDTO>) WSProxyClient.call(UtilesAndroid.URL_WS_USUARIO, "obtenerListadoNotificacionesPorTipoYUsuarioDestino", params, null, null);
 	}
+	
+	public Long insertarNotificacion(NotificacionDTO notificacionDTO)
+	{
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("notificacionDTO", notificacionDTO);
+		
+    	return (Long) WSProxyClient.call(UtilesAndroid.URL_WS_USUARIO, "insertarNotificacion", params, null, null);
+	}
 }
