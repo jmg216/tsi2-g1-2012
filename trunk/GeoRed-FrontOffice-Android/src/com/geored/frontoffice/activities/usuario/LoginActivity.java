@@ -94,7 +94,7 @@ public class LoginActivity extends Activity implements OnClickListener
 			usuarioWS.actualizar(usuarioDTO);
 
 			// Obtengo las notificaciones del usuario
-			List<NotificacionDTO> listaNotificacionesUsuario = usuarioWS.obtenerListadoNotificacionesPorTipoYUsuarioDestino(null, usuarioDTO.getId());
+			List<NotificacionDTO> listaNotificacionesUsuario = usuarioWS.obtenerNotifsPorTipoYUsuarioDestino(null, usuarioDTO.getId());
 			for(NotificacionDTO notificacionDTO : listaNotificacionesUsuario)
 			{
 				UtilesAndroid.listaNotificaciones.add(notificacionDTO);

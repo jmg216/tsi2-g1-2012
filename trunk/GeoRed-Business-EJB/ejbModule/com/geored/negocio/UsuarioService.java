@@ -44,7 +44,7 @@ public interface UsuarioService
 	
 	public Long enviarNotificacion(NotificacionDTO notificacionDTO) throws NegocioException, DaoException;
 	
-	public List<NotificacionDTO> obtenerListadoNotificacionesPorTipoYUsuarioDestino(Long idTipoNotificacion, Long idUsuarioDestino) throws DaoException;
+	public List<NotificacionDTO> obtenerNotifsPorTipoYUsuarioDestino(Long idTipoNotificacion, Long idUsuarioDestino) throws DaoException;
 	
 	// OPERACIONES CON AMISTADES
 	public List<UsuarioDTO> obtenerListadoAmigos(Long idUsuario, boolean soloConectados) throws DaoException;

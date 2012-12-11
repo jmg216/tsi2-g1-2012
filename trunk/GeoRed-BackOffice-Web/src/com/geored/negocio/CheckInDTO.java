@@ -16,8 +16,6 @@ public class CheckInDTO  implements java.io.Serializable {
 
     private java.lang.Long idUsuario;
 
-    private java.lang.String nombre;
-
     private java.lang.String nombreSitio;
 
     private java.lang.String nombreUsuario;
@@ -30,14 +28,12 @@ public class CheckInDTO  implements java.io.Serializable {
            java.lang.Long id,
            java.lang.Long idSitio,
            java.lang.Long idUsuario,
-           java.lang.String nombre,
            java.lang.String nombreSitio,
            java.lang.String nombreUsuario) {
            this.fechaCreacion = fechaCreacion;
            this.id = id;
            this.idSitio = idSitio;
            this.idUsuario = idUsuario;
-           this.nombre = nombre;
            this.nombreSitio = nombreSitio;
            this.nombreUsuario = nombreUsuario;
     }
@@ -124,26 +120,6 @@ public class CheckInDTO  implements java.io.Serializable {
 
 
     /**
-     * Gets the nombre value for this CheckInDTO.
-     * 
-     * @return nombre
-     */
-    public java.lang.String getNombre() {
-        return nombre;
-    }
-
-
-    /**
-     * Sets the nombre value for this CheckInDTO.
-     * 
-     * @param nombre
-     */
-    public void setNombre(java.lang.String nombre) {
-        this.nombre = nombre;
-    }
-
-
-    /**
      * Gets the nombreSitio value for this CheckInDTO.
      * 
      * @return nombreSitio
@@ -206,9 +182,6 @@ public class CheckInDTO  implements java.io.Serializable {
             ((this.idUsuario==null && other.getIdUsuario()==null) || 
              (this.idUsuario!=null &&
               this.idUsuario.equals(other.getIdUsuario()))) &&
-            ((this.nombre==null && other.getNombre()==null) || 
-             (this.nombre!=null &&
-              this.nombre.equals(other.getNombre()))) &&
             ((this.nombreSitio==null && other.getNombreSitio()==null) || 
              (this.nombreSitio!=null &&
               this.nombreSitio.equals(other.getNombreSitio()))) &&
@@ -237,9 +210,6 @@ public class CheckInDTO  implements java.io.Serializable {
         }
         if (getIdUsuario() != null) {
             _hashCode += getIdUsuario().hashCode();
-        }
-        if (getNombre() != null) {
-            _hashCode += getNombre().hashCode();
         }
         if (getNombreSitio() != null) {
             _hashCode += getNombreSitio().hashCode();
@@ -282,13 +252,6 @@ public class CheckInDTO  implements java.io.Serializable {
         elemField.setFieldName("idUsuario");
         elemField.setXmlName(new javax.xml.namespace.QName("", "idUsuario"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
-        elemField.setMinOccurs(0);
-        elemField.setNillable(false);
-        typeDesc.addFieldDesc(elemField);
-        elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("nombre");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "nombre"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);

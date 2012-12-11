@@ -152,12 +152,12 @@ public class UsuarioServiceImpl implements UsuarioService
 			
 			return new Gson().toJson(idNotificacion);
 		}
-		else if(methodName.equals("obtenerListadoNotificacionesPorTipoYUsuarioDestino"))
+		else if(methodName.equals("obtenerNotifsPorTipoYUsuarioDestino"))
 		{
 			Long idTipoNotificacion = (Long) params.getParam("idTipoNotificacion", Long.class);
 			Long idUsuarioDestino = (Long) params.getParam("idUsuarioDestino", Long.class);
 			
-			return new Gson().toJson(obtenerListadoNotificacionesPorTipoYUsuarioDestino(idTipoNotificacion, idUsuarioDestino));
+			return new Gson().toJson(obtenerNotifsPorTipoYUsuarioDestino(idTipoNotificacion, idUsuarioDestino));
 		}
 		else if(methodName.equals("obtenerListadoConectados"))
 		{	
@@ -474,14 +474,14 @@ public class UsuarioServiceImpl implements UsuarioService
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
-	public List<NotificacionDTO> obtenerListadoNotificacionesPorTipoYUsuarioDestino(@WebParam(name="idTipoNotificacion") Long idTipoNotificacion, @WebParam(name="idUsuarioDestino") Long idUsuarioDestino) throws DaoException
+	public List<NotificacionDTO> obtenerNotifsPorTipoYUsuarioDestino(@WebParam(name="idTipoNotificacion") Long idTipoNotificacion, @WebParam(name="idUsuarioDestino") Long idUsuarioDestino) throws DaoException
 	{
 		return notificacionDAO.obtenerListadoPorTipoYUsuarioDestino(idTipoNotificacion, idUsuarioDestino, true);
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
-	public Long insertarCheckIn(CheckInDTO checkInDTO) throws NegocioException, DaoException
+	public Long insertarCheckIn(@WebParam(name="checkInDTO") CheckInDTO checkInDTO) throws NegocioException, DaoException
 	{
 		CheckIn checkInEntity = checkInDAO.toEntity(checkInDTO);
 		
@@ -539,7 +539,7 @@ public class UsuarioServiceImpl implements UsuarioService
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@WebMethod
-	public Long insertarNotificacion(NotificacionDTO notificacionDTO) throws NegocioException, DaoException
+	public Long insertarNotificacion(@WebParam(name="notificacionDTO") NotificacionDTO notificacionDTO) throws NegocioException, DaoException
 	{
 		Notificacion notificacion = notificacionDAO.toEntity(notificacionDTO);
 		

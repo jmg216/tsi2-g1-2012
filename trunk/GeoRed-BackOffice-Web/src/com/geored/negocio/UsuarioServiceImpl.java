@@ -12,6 +12,8 @@ public interface UsuarioServiceImpl extends java.rmi.Remote {
     public java.lang.String androidInvocation(java.lang.String methodName, java.lang.String methodParams) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
     public java.lang.Long enviarMensajeChat(com.geored.negocio.MensajeAmistadDTO mensajeAmistadDTO) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
     public com.geored.negocio.CheckInDTO[] obtenerListadoCheckIns() throws java.rmi.RemoteException, com.geored.negocio.DaoException;
+    public java.lang.Long insertarCheckIn(com.geored.negocio.CheckInDTO checkInDTO) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
+    public com.geored.negocio.NotificacionDTO[] obtenerNotifsPorTipoYUsuarioDestino(java.lang.Long idTipoNotificacion, java.lang.Long idUsuarioDestino) throws java.rmi.RemoteException, com.geored.negocio.DaoException;
     public void actualizar(com.geored.negocio.UsuarioDTO usuarioDTO) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
     public com.geored.negocio.UsuarioDTO[] obtenerListado() throws java.rmi.RemoteException, com.geored.negocio.DaoException;
     public com.geored.negocio.UsuarioDTO obtenerPorEmailYPass(java.lang.String email, java.lang.String pass) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
@@ -22,5 +24,6 @@ public interface UsuarioServiceImpl extends java.rmi.Remote {
     public com.geored.negocio.UsuarioDTO obtener(java.lang.Long idUsuario) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
     public java.lang.Long enviarNotificacion(com.geored.negocio.NotificacionDTO notificacionDTO) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
     public java.lang.Long insertarAmistad(com.geored.negocio.AmistadDTO amistadDTO) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
+    public java.lang.Long insertarNotificacion(com.geored.negocio.NotificacionDTO notificacionDTO) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException;
     public com.geored.negocio.UsuarioDTO[] obtenerListadoConectados() throws java.rmi.RemoteException, com.geored.negocio.DaoException;
 }

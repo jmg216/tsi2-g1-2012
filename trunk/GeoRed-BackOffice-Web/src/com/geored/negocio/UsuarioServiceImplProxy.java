@@ -68,6 +68,18 @@ public class UsuarioServiceImplProxy implements com.geored.negocio.UsuarioServic
     return usuarioServiceImpl.obtenerListadoCheckIns();
   }
   
+  public java.lang.Long insertarCheckIn(com.geored.negocio.CheckInDTO checkInDTO) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+    if (usuarioServiceImpl == null)
+      _initUsuarioServiceImplProxy();
+    return usuarioServiceImpl.insertarCheckIn(checkInDTO);
+  }
+  
+  public com.geored.negocio.NotificacionDTO[] obtenerNotifsPorTipoYUsuarioDestino(java.lang.Long idTipoNotificacion, java.lang.Long idUsuarioDestino) throws java.rmi.RemoteException, com.geored.negocio.DaoException{
+    if (usuarioServiceImpl == null)
+      _initUsuarioServiceImplProxy();
+    return usuarioServiceImpl.obtenerNotifsPorTipoYUsuarioDestino(idTipoNotificacion, idUsuarioDestino);
+  }
+  
   public void actualizar(com.geored.negocio.UsuarioDTO usuarioDTO) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
     if (usuarioServiceImpl == null)
       _initUsuarioServiceImplProxy();
@@ -126,6 +138,12 @@ public class UsuarioServiceImplProxy implements com.geored.negocio.UsuarioServic
     if (usuarioServiceImpl == null)
       _initUsuarioServiceImplProxy();
     return usuarioServiceImpl.insertarAmistad(amistadDTO);
+  }
+  
+  public java.lang.Long insertarNotificacion(com.geored.negocio.NotificacionDTO notificacionDTO) throws java.rmi.RemoteException, com.geored.negocio.NegocioException, com.geored.negocio.DaoException{
+    if (usuarioServiceImpl == null)
+      _initUsuarioServiceImplProxy();
+    return usuarioServiceImpl.insertarNotificacion(notificacionDTO);
   }
   
   public com.geored.negocio.UsuarioDTO[] obtenerListadoConectados() throws java.rmi.RemoteException, com.geored.negocio.DaoException{
