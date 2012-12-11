@@ -2,8 +2,10 @@ package com.geored.frontoffice.activities.contacto;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -46,6 +48,7 @@ public class ContactoDetalleActivity extends Activity
 		TextView ta = (TextView) this.findViewById(R.id.amistad);
 		ImageView it = (ImageView) this.findViewById(R.id.foto_perfil_contacto);
 		ImageButton ia = (ImageButton) this.findViewById(R.id.addRemoveAdmistad);
+		Button botonChat = (Button) this.findViewById(R.id.boton_chat);	
 
 		tt.setText(usuarioDTO.getNombre());
 		bt.setText(usuarioDTO.getEmail());
@@ -54,7 +57,8 @@ public class ContactoDetalleActivity extends Activity
 		if (!usuarioDTO.getUrlImagen().contains("http"))
 		{
 			it.setImageResource(R.drawable.contact);
-		} else
+		} 
+		else
 		{
 			it.setImageBitmap(BitMapImageConverter.getImageBitmap(usuarioDTO.getUrlImagen()));
 		}
@@ -65,11 +69,14 @@ public class ContactoDetalleActivity extends Activity
 		if (amistadDTO != null)
 		{
 			ta.setText(getResources().getString(R.string.eliminarContacto));
-			ia.setImageResource(R.drawable.minus_icon);
-		} else
+			ia.setImageResource(R.drawable.minus_icon);			
+			botonChat.setVisibility(View.VISIBLE);
+		} 
+		else
 		{
 			ta.setText(getResources().getString(R.string.agregarContacto));
-			ia.setImageResource(R.drawable.plus_icon);
+			ia.setImageResource(R.drawable.plus_icon);			
+			botonChat.setVisibility(View.INVISIBLE);
 		}
 	}
 

@@ -23,7 +23,8 @@
         android:layout_weight="1"
         android:gravity="top"
         android:scrollbars="vertical"
-        android:scrollbarSize="10dp"/> 
+        android:scrollbarSize="10dp"
+        android:textSize="9sp"/> 
         
     <LinearLayout 
         android:orientation="horizontal"
@@ -36,7 +37,8 @@
 			    android:layout_width="227dp"
 			    android:layout_height="match_parent"
 			    android:gravity="top"
-			    android:inputType="none" />
+			    android:inputType="none" 
+			    android:textSize="12sp"/>
 		      			 		  
 		    <Button 
 		        android:id="@+id/enviarButton"

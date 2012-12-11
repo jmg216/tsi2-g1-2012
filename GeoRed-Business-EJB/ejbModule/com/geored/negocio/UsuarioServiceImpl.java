@@ -144,6 +144,12 @@ public class UsuarioServiceImpl implements UsuarioService
 			
 			return new Gson().toJson(idNotificacion);
 		}
+		else if(methodName.equals("aceptarNotificacion"))
+		{
+			Long idNotificacion = (Long) params.getParam("idNotificacion", Long.class);
+			
+			aceptarNotificacion(idNotificacion);
+		}
 		else if(methodName.equals("enviarNotificacion"))
 		{
 			NotificacionDTO notificacionDTO = (NotificacionDTO) params.getParam("notificacionDTO", NotificacionDTO.class);
@@ -479,7 +485,7 @@ public class UsuarioServiceImpl implements UsuarioService
 		return notificacionDAO.obtenerListadoPorTipoYUsuarioDestino(idTipoNotificacion, idUsuarioDestino, true);
 	}
 
-	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
 	public Long insertarCheckIn(@WebParam(name="checkInDTO") CheckInDTO checkInDTO) throws NegocioException, DaoException
 	{
@@ -537,7 +543,7 @@ public class UsuarioServiceImpl implements UsuarioService
 		return checkInEntity.getId();
 	}
 
-	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@WebMethod
 	public Long insertarNotificacion(@WebParam(name="notificacionDTO") NotificacionDTO notificacionDTO) throws NegocioException, DaoException
 	{
@@ -564,5 +570,40 @@ public class UsuarioServiceImpl implements UsuarioService
 		notificacionDAO.insertar(notificacion);
 		
 		return notificacion.getId();
+	}
+
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	@WebMethod
+	public void aceptarNotificacion(Long idNotificacion) throws NegocioException, DaoException
+	{
+		Notificacion notificacionEntity = (Notificacion) notificacionDAO.obtener(idNotificacion, false);
+		
+		if(notificacionEntity == null)
+		{
+			throw new NegocioException("Notificacion no encontrada");
+		}
+		
+		if(notificacionEntity.getTipoNotificacion().getId().equals(ConstantesGenerales.TiposNotificacion.ID_SOLICITUD_AMISTAD))
+		{
+			Amistad amistadEntity = new Amistad();
+			
+			Usuario usuarioA = (Usuario) usuarioDAO.obtener(Long.valueOf(notificacionEntity.getMetadataNotif()), false);
+			
+			if(usuarioA == null)
+			{
+				throw new NegocioException("Usuario no encontrado");
+			}
+			
+			amistadEntity.setUsuarioA(usuarioA);
+			
+			amistadEntity.setUsuarioB(notificacionEntity.getUsuarioDestino());
+			
+			amistadDAO.insertar(amistadEntity);
+		}
+		
+		notificacionEntity.setLeida(true);
+		
+		notificacionDAO.actualizar(notificacionEntity);
+		
 	}			
 }

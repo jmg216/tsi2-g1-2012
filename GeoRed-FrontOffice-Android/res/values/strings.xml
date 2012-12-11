@@ -47,6 +47,8 @@
 	<string name="notificaciones">Notificaciones</string>
 	<string name="activar">Activar</string>
 	<string name="desactivar">Desactivar</string>
+	<string name="aceptar_amistad">Aceptar</string>
+	<string name="rechazar_amistad">Rechazar</string>
 	
 	<!-- Mapa -->
 	<string name="mapa">Mapa</string>

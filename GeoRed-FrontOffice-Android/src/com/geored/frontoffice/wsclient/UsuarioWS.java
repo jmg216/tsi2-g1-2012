@@ -88,6 +88,8 @@ public class UsuarioWS
 	{
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("idAmistad", idAmistad);
+		
+		WSProxyClient.call(UtilesAndroid.URL_WS_USUARIO, "eliminarAmistad", params, null, null);
 	}
 	
 	public Long enviarNotificacion(NotificacionDTO notificacionDTO)
@@ -95,7 +97,7 @@ public class UsuarioWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("notificacionDTO", notificacionDTO);
 		
-    	return (Long) WSProxyClient.call(UtilesAndroid.URL_WS_USUARIO, "enviarNotificacion", params, null, null);			
+    	return (Long) WSProxyClient.call(UtilesAndroid.URL_WS_USUARIO, "enviarNotificacion", params, Long.class, null);			
 	}
 	
 	public List<NotificacionDTO> obtenerNotifsPorTipoYUsuarioDestino(Long idTipoNotificacion, Long idUsuarioDestino)		
@@ -104,7 +106,7 @@ public class UsuarioWS
 		params.put("idTipoNotificacion", idTipoNotificacion);
 		params.put("idUsuarioDestino", idUsuarioDestino);
 		
-    	return (List<NotificacionDTO>) WSProxyClient.call(UtilesAndroid.URL_WS_USUARIO, "obtenerNotifsPorTipoYUsuarioDestino", params, null, null);
+    	return (List<NotificacionDTO>) WSProxyClient.call(UtilesAndroid.URL_WS_USUARIO, "obtenerNotifsPorTipoYUsuarioDestino", params, List.class, NotificacionDTO.class);
 	}
 	
 	public Long insertarNotificacion(NotificacionDTO notificacionDTO)
@@ -112,6 +114,14 @@ public class UsuarioWS
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("notificacionDTO", notificacionDTO);
 		
-    	return (Long) WSProxyClient.call(UtilesAndroid.URL_WS_USUARIO, "insertarNotificacion", params, null, null);
+    	return (Long) WSProxyClient.call(UtilesAndroid.URL_WS_USUARIO, "insertarNotificacion", params, Long.class, null);
+	}
+	
+	public void aceptarNotificacion(Long idNotificacion)
+	{
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("idNotificacion", idNotificacion);
+		
+    	WSProxyClient.call(UtilesAndroid.URL_WS_USUARIO, "aceptarNotificacion", params, null, null);
 	}
 }

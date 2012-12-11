@@ -122,11 +122,11 @@ public class EventoServiceImpl implements EventoService
 			{
 				NotificacionDTO notificacionDTO = new NotificacionDTO();
 				
-				notificacionDTO.setDescripcion("Se ha creado una evento nuevo");
+				notificacionDTO.setDescripcion("Se ha creado un evento nuevo");
 				
 				notificacionDTO.setLeida(false);
 				
-				notificacionDTO.setIdTipoNotificacion(ConstantesGenerales.TiposNotificacion.ID_NUEVA_OFERTA);
+				notificacionDTO.setIdTipoNotificacion(ConstantesGenerales.TiposNotificacion.ID_NUEVO_EVENTO);
 				
 				notificacionDTO.setIdUsuarioDestino(usuario.getId());
 				

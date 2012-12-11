@@ -90,7 +90,8 @@
 	             android:ellipsize="start"
 	             android:onClick="abrirChat"
 	             android:text="@string/chat"
-	             android:typeface="sans" />
+	             android:typeface="sans"
+	             android:visibility="invisible" />
 			
 		</LinearLayout>
      

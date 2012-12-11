@@ -188,6 +188,14 @@ public class GCMIntentService extends GCMBaseIntentService
                 mostrarGCMMessage(ctx, "Ha recibido una notificación.", notificacionDTO.getDescripcion());
     		}
     	}   
+    	else if(notificacionDTO.getIdTipoNotificacion().equals(ConstantesGenerales.TiposNotificacion.ID_SOLICITUD_AMISTAD))
+    	{
+    		// Almaceno la notificacion en la lista global
+        	UtilesAndroid.listaNotificaciones.add(notificacionDTO);
+            
+        	// Muestro una notificacion en la barra del movil
+            mostrarGCMMessage(ctx, "Ha recibido una notificación.", notificacionDTO.getDescripcion());
+    	}
     }		
 	
     private void handleGCMIntentMensajeAmistad(Context ctx, MensajeAmistadDTO mensajeAmistadDTO) 
