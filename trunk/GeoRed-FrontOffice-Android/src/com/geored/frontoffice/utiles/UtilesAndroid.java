@@ -24,7 +24,7 @@ public class UtilesAndroid
 	
 	// WebServices Endpoints
 	public static final String HOST_WS="10.0.2.2:8080";
-//	public static final String HOST_WS="192.168.1.112:8080";
+//	public static final String HOST_WS="10.17.32.10:8080";
 	
 	public static final String URL_WS_USUARIO = "http://" + HOST_WS +"/GeoRed-Business-EJB/UsuarioServiceImpl?wsdl";
 	public static final String URL_WS_SITIO   = "http://" + HOST_WS +"/GeoRed-Business-EJB/SitioServiceImpl?wsdl";

@@ -47,9 +47,6 @@ public class LoginActivity extends Activity implements OnClickListener
 		String email = txtEmail.getText().toString();
 		String pass = txtPass.getText().toString();
 
-		email = "maxi.silveraf@gmail.com";
-		pass = "usuario";
-
 		// Encripto la pass
 		pass = UtilesSeguridadAndroid.encriptarMD5(pass);
 		
