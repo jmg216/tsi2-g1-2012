@@ -18,6 +18,8 @@ public class NotificacionDTO  implements java.io.Serializable {
 
     private boolean leida;
 
+    private java.lang.String metadataNotif;
+
     private java.lang.String nombreTipoNotificacion;
 
     private java.lang.String nombreUsuarioDestino;
@@ -31,6 +33,7 @@ public class NotificacionDTO  implements java.io.Serializable {
            java.lang.Long idTipoNotificacion,
            java.lang.Long idUsuarioDestino,
            boolean leida,
+           java.lang.String metadataNotif,
            java.lang.String nombreTipoNotificacion,
            java.lang.String nombreUsuarioDestino) {
            this.descripcion = descripcion;
@@ -38,6 +41,7 @@ public class NotificacionDTO  implements java.io.Serializable {
            this.idTipoNotificacion = idTipoNotificacion;
            this.idUsuarioDestino = idUsuarioDestino;
            this.leida = leida;
+           this.metadataNotif = metadataNotif;
            this.nombreTipoNotificacion = nombreTipoNotificacion;
            this.nombreUsuarioDestino = nombreUsuarioDestino;
     }
@@ -144,6 +148,26 @@ public class NotificacionDTO  implements java.io.Serializable {
 
 
     /**
+     * Gets the metadataNotif value for this NotificacionDTO.
+     * 
+     * @return metadataNotif
+     */
+    public java.lang.String getMetadataNotif() {
+        return metadataNotif;
+    }
+
+
+    /**
+     * Sets the metadataNotif value for this NotificacionDTO.
+     * 
+     * @param metadataNotif
+     */
+    public void setMetadataNotif(java.lang.String metadataNotif) {
+        this.metadataNotif = metadataNotif;
+    }
+
+
+    /**
      * Gets the nombreTipoNotificacion value for this NotificacionDTO.
      * 
      * @return nombreTipoNotificacion
@@ -207,6 +231,9 @@ public class NotificacionDTO  implements java.io.Serializable {
              (this.idUsuarioDestino!=null &&
               this.idUsuarioDestino.equals(other.getIdUsuarioDestino()))) &&
             this.leida == other.isLeida() &&
+            ((this.metadataNotif==null && other.getMetadataNotif()==null) || 
+             (this.metadataNotif!=null &&
+              this.metadataNotif.equals(other.getMetadataNotif()))) &&
             ((this.nombreTipoNotificacion==null && other.getNombreTipoNotificacion()==null) || 
              (this.nombreTipoNotificacion!=null &&
               this.nombreTipoNotificacion.equals(other.getNombreTipoNotificacion()))) &&
@@ -237,6 +264,9 @@ public class NotificacionDTO  implements java.io.Serializable {
             _hashCode += getIdUsuarioDestino().hashCode();
         }
         _hashCode += (isLeida() ? Boolean.TRUE : Boolean.FALSE).hashCode();
+        if (getMetadataNotif() != null) {
+            _hashCode += getMetadataNotif().hashCode();
+        }
         if (getNombreTipoNotificacion() != null) {
             _hashCode += getNombreTipoNotificacion().hashCode();
         }
@@ -285,6 +315,13 @@ public class NotificacionDTO  implements java.io.Serializable {
         elemField.setFieldName("leida");
         elemField.setXmlName(new javax.xml.namespace.QName("", "leida"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("metadataNotif");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "metadataNotif"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();

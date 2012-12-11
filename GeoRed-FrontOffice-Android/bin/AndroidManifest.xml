@@ -1,0 +1,118 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.geored.frontoffice.activities"
+    android:versionCode="1"
+    android:versionName="1.0">
+
+    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="10" />
+
+	<uses-permission android:name="android.permission.INTERNET" /> 
+	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
+	<uses-permission android:name="android.permission.WAKE_LOCK" />  
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />     
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+    
+    <permission android:name="com.geored.frontoffice.activities.permission.C2D_MESSAGE" 
+        android:protectionLevel="signature" />	  
+        
+	<uses-permission android:name="com.geored.frontoffice.activities.permission.C2D_MESSAGE" /> 
+	<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />	            
+		
+    <application android:label="@string/app_name"
+        android:icon="@drawable/georeduy_v1"
+        android:theme="@style/CustomTheme">
+        <activity
+            android:name=".usuario.LoginActivity"
+            android:label="@string/title_activity_main" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name=".usuario.RegistroActivity"
+            android:label="@string/title_activity_registro">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        
+        <activity 
+            android:name=".usuario.TematicaActivityReg"
+            android:label="@string/title_activity_registro">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        
+		<activity
+            android:name=".menu.MenuActivity"
+            android:label="@string/title_activity_menu">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        
+	    <activity android:name=".contacto.ContactoActivity"
+	              android:label="@string/app_name" 
+	              android:theme="@android:style/Theme.NoTitleBar">
+	    </activity>
+	    
+	    <activity android:name=".contacto.ContactoDetalleActivity"
+	              android:label="@string/app_name" 
+	              android:theme="@style/CustomTheme">
+	    </activity>	 	    
+	    
+	    <activity android:name=".contacto.ContactoChatActivity"></activity>
+	    
+	    <activity android:name=".contacto.ContactoGroupActivity"></activity>	    
+	    	    	    	
+	    <activity android:name=".sitio.SitioActivity"
+	              android:label="@string/app_name" 
+	              android:theme="@android:style/Theme.NoTitleBar">
+	    </activity>
+	    
+	    <activity android:name=".sitio.SitioDetalleActivity"
+	              android:label="@string/app_name" 
+	              android:theme="@style/CustomTheme">
+	    </activity>	    
+	    
+	    <activity android:name=".sitio.SitioGroupActivity"></activity>
+	
+	    <activity android:name=".notificacion.NotificacionesActivity"
+	              android:label="@string/app_name" 
+	              android:theme="@android:style/Theme.NoTitleBar">
+	    </activity>
+	
+	    <activity android:name=".usuario.PerfilActivity"
+	              android:label="@string/app_name" 
+	              android:theme="@android:style/Theme.NoTitleBar">
+	    </activity> 
+	    
+	    <activity android:name=".mapa.MapGeoRedActivity"
+	              android:label="@string/app_name" 
+	              android:theme="@android:style/Theme.NoTitleBar">
+	    </activity> 
+	    	    
+	    <uses-library android:name="com.google.android.maps" />
+	    
+		<receiver android:name="com.google.android.gcm.GCMBroadcastReceiver" 
+		    	  android:permission="com.google.android.c2dm.permission.SEND" >
+		  <intent-filter>
+		    <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+			<action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+		 	<action android:name="com.google.android.c2dm.intent.REGISTER" />
+		    <category android:name="com.geored.frontoffice.activities" />
+		  </intent-filter>
+		</receiver>	
+			    
+	    <service android:name=".GCMIntentService"/>
+ 
+    </application>
+    
+</manifest>
