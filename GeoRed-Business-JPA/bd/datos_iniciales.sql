@@ -1,4 +1,4 @@
-﻿/*BACKOFFICE*/
+/*BACKOFFICE*/
 /* Tipos Administradores*/
 insert into geored.tipo_administrador (ID, NOMBRE) values (1, 'Aplicación');
 
@@ -551,7 +551,7 @@ insert into geored.evento (ID, DESCRIPCION, FECHA_FIN, FECHA_INICIO, NOMBRE, UBI
 values (5, 'Festival de Jazz, Punta del Este 2013', '2013-01-06', '2013-01-03', 'Festival de Jazz', '-34.948498,-54.933596');
 
 insert into geored.evento (ID, DESCRIPCION, FECHA_FIN, FECHA_INICIO, NOMBRE, UBICACION_GEOGRAFICA)
-values (6, 'Fiesta popular, Barrios Sur y Palermo', '2013-02-05', '2013-02-03', 'Desfile de Llamadas', '');
+values (6, 'Fiesta popular, Barrios Sur y Palermo', '2013-02-05', '2013-02-03', 'Desfile de Llamadas', '-34.911133,-56.184518');
 
 insert into geored.evento (ID, DESCRIPCION, FECHA_FIN, FECHA_INICIO, NOMBRE, UBICACION_GEOGRAFICA)
 values (7, 'Carnaval inspirado en el carnaval de Rio de Janeiro', '2013-02-15', '2013-02-09', 'Carnaval Artigas', '-30.404009,-56.469022');
