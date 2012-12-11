@@ -53,18 +53,7 @@ public class LoginActivity extends Activity implements OnClickListener
 		// Encripto la pass
 		pass = UtilesSeguridadAndroid.encriptarMD5(pass);
 		
-		txtEmail.setText(UtilesAndroid.URL_WS_USUARIO);
-		
-		UsuarioDTO usuarioDTO = null; 
-		
-		try
-		{
-			usuarioDTO = usuarioWS.obtenerPorEmailYPass(email, pass);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
+		UsuarioDTO usuarioDTO = usuarioWS.obtenerPorEmailYPass(email, pass);
 
 		if (usuarioDTO != null)
 		{
@@ -88,20 +77,25 @@ public class LoginActivity extends Activity implements OnClickListener
 			{
 				// Registro la aplicacion en GCM
 				GCMIntentService.registerGCMService(this);
-				AlertaDialogManager.showAlertDialog(this, getResources().getString(R.string.notificaciones), getResources().getString(R.string.notificacionesActivadas), true);
 			}
-
-			usuarioWS.actualizar(usuarioDTO);
 
 			// Obtengo las notificaciones del usuario
 			List<NotificacionDTO> listaNotificacionesUsuario = usuarioWS.obtenerNotifsPorTipoYUsuarioDestino(null, usuarioDTO.getId());
-			for(NotificacionDTO notificacionDTO : listaNotificacionesUsuario)
+			if(listaNotificacionesUsuario != null)
 			{
-				UtilesAndroid.listaNotificaciones.add(notificacionDTO);
+				for(NotificacionDTO notificacionDTO : listaNotificacionesUsuario)
+				{
+					if(!notificacionDTO.isLeida())
+					{
+						UtilesAndroid.listaNotificaciones.add(notificacionDTO);
+					}					
+				}
 			}
 			
 			// Inicio la localizacion
 			UtilesAndroid.iniciarLocalizacion(this);
+			
+			usuarioWS.actualizar(usuarioDTO);
 			
 			Intent menuActivity = new Intent(this, MenuActivity.class);
 			startActivity(menuActivity);

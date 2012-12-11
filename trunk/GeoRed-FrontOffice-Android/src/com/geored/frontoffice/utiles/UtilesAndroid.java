@@ -23,8 +23,8 @@ public class UtilesAndroid
 	public static List<MensajeAmistadDTO> listaMensajes = new ArrayList<MensajeAmistadDTO>();
 	
 	// WebServices Endpoints
-//	public static final String IP_PUERTO="10.0.2.2:8080";
-	public static final String HOST_WS="192.168.1.112:8080";
+	public static final String HOST_WS="10.0.2.2:8080";
+//	public static final String HOST_WS="192.168.1.112:8080";
 	
 	public static final String URL_WS_USUARIO = "http://" + HOST_WS +"/GeoRed-Business-EJB/UsuarioServiceImpl?wsdl";
 	public static final String URL_WS_SITIO   = "http://" + HOST_WS +"/GeoRed-Business-EJB/SitioServiceImpl?wsdl";
@@ -86,11 +86,13 @@ public class UtilesAndroid
 		LocationListener locationListener = new LocationListener()
 		{
 			public void onStatusChanged(String provider, int status, Bundle extras)
-			{				
+			{	
+				System.out.print("El estado de localicacion cambio");
 			}
 
 			public void onProviderEnabled(String provider)
 			{
+				System.out.print("Proveedor localizacion (" + provider +") activado");
 			}
 
 			public void onProviderDisabled(String provider)
@@ -103,6 +105,6 @@ public class UtilesAndroid
 				ubicacionActual = location;
 			}
 		};
-		locationManager.requestLocationUpdates(provider, (5 * 60 * 1000), 0, locationListener);
+		locationManager.requestLocationUpdates(provider, (1 * 60 * 1000), 0, locationListener);
 	}
 }

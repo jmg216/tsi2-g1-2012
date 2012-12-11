@@ -124,11 +124,11 @@ public class SitioServiceImpl implements SitioService
 			{
 				NotificacionDTO notificacionDTO = new NotificacionDTO();
 				
-				notificacionDTO.setDescripcion("Se ha creado una sitio nuevo");
+				notificacionDTO.setDescripcion("Se ha creado un sitio nuevo");
 				
 				notificacionDTO.setLeida(false);
 				
-				notificacionDTO.setIdTipoNotificacion(ConstantesGenerales.TiposNotificacion.ID_NUEVA_OFERTA);
+				notificacionDTO.setIdTipoNotificacion(ConstantesGenerales.TiposNotificacion.ID_NUEVO_SITIO);
 				
 				notificacionDTO.setIdUsuarioDestino(usuario.getId());
 				
