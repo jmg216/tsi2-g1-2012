@@ -7,7 +7,7 @@
     android:padding="6dip">
     
     <CheckBox 
-        android:id="@+id/checkBox1"
+        android:id="@+id/chkTematica"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -17,9 +17,9 @@
     	android:id="@+id/code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/checkBox1"
-        android:layout_alignBottom="@+id/checkBox1"
-        android:layout_toRightOf="@+id/checkBox1"
+        android:layout_alignBaseline="@+id/chkTematica"
+        android:layout_alignBottom="@+id/chkTematica"
+        android:layout_toRightOf="@+id/chkTematica"
         android:textColor="@color/negro"
-        android:text="rctvgybhj"/>
+        android:text="Checkbox"/>
 </RelativeLayout>
