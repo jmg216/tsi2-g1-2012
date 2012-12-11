@@ -126,11 +126,11 @@ public class UsuarioDAOImpl extends GenericDAOBase<Usuario, UsuarioDTO> implemen
 	}
 
 	@Override
-	public List obtenerListadoPorTematica(Long[] idsTematicas, boolean toDTO) throws DaoException
+	public List obtenerListadoPorTematica(List<Long> idsTematicas, boolean toDTO) throws DaoException
 	{
 		try
 		{
-			Query query = em.createQuery("select u from com.geored.dominio.Usuario u where u.listaTematicas.id in (?1) ");        	        
+			Query query = em.createQuery("select u from com.geored.dominio.Usuario u left join u.listaTematicas tematica where tematica.id in (?1) ");        	        
 			query.setParameter(1, idsTematicas);
 			
 	        List listaUsuarios = query.getResultList();

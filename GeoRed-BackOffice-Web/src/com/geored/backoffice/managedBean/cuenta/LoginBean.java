@@ -22,7 +22,7 @@ public class LoginBean extends BaseBean implements Serializable
 	
 	private static final String TO_SELECCION_EMPRESA = "to_seleccion_empresa";
 	
-	private String email = "admin@geored.com";
+	private String email;
 	private String pass;
 	
 	public LoginBean()

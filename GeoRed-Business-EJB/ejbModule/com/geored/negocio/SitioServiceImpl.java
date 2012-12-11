@@ -115,7 +115,7 @@ public class SitioServiceImpl implements SitioService
 			idsTematicas.add(tematica.getId());
 		}
 		
-		List<Usuario> listadoUsuariosConTematicas = usuarioDAO.obtenerListadoPorTematica(idsTematicas.toArray(new Long[idsTematicas.size()]), false);
+		List<Usuario> listadoUsuariosConTematicas = usuarioDAO.obtenerListadoPorTematica(idsTematicas, false);
 		
 		for(Usuario usuario : listadoUsuariosConTematicas)
 		{		
