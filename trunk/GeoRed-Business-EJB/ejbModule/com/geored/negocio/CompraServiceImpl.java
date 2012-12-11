@@ -38,7 +38,7 @@ public class CompraServiceImpl implements CompraService
 	@EJB
 	private OfertaDAO ofertaDAO;
 	
-	@WebMethod(operationName="androidInvocation")
+	@WebMethod
 	public String androidInvocation(@WebParam(name="methodName") String methodName, @WebParam(name="methodParams") String methodParams) throws NegocioException, DaoException
 	{		
 		JsonParamsMap params = new JsonParamsMap(methodParams);

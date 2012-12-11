@@ -72,7 +72,7 @@ public class UsuarioServiceImpl implements UsuarioService
 	@EJB
 	private SitioDAO sitioDAO;
 	
-	@WebMethod(operationName="androidInvocation")
+	@WebMethod
 	public String androidInvocation(@WebParam(name="methodName") String methodName, @WebParam(name="methodParams") String methodParams) throws NegocioException, DaoException
 	{		
 		JsonParamsMap params = new JsonParamsMap(methodParams);
@@ -194,7 +194,7 @@ public class UsuarioServiceImpl implements UsuarioService
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	@WebMethod(operationName="insertar")
+	@WebMethod
 	public Long insertar(@WebParam(name="usuarioDTO") UsuarioDTO usuarioDTO) throws NegocioException, DaoException
 	{
 		if(usuarioDAO.obtenerUsuarioPorEmail(usuarioDTO.getEmail(), false) != null)
@@ -212,7 +212,7 @@ public class UsuarioServiceImpl implements UsuarioService
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	@WebMethod(operationName="actualizar")
+	@WebMethod
 	public void actualizar(@WebParam(name="usuarioDTO") UsuarioDTO usuarioDTO) throws NegocioException, DaoException
 	{
 		Usuario usuarioEntity = (Usuario) usuarioDAO.obtenerUsuarioPorEmail(usuarioDTO.getEmail(), false); 
@@ -265,7 +265,7 @@ public class UsuarioServiceImpl implements UsuarioService
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	@WebMethod(operationName="eliminar") 
+	@WebMethod
 	public void eliminar(@WebParam(name="idUsuario") Long idUsuario) throws NegocioException, DaoException
 	{
 		Usuario usuarioEntity = (Usuario) usuarioDAO.obtener(idUsuario, false);
@@ -279,7 +279,7 @@ public class UsuarioServiceImpl implements UsuarioService
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
-	@WebMethod(operationName="obtener")
+	@WebMethod
 	public UsuarioDTO obtener(@WebParam(name="idUsuario") Long idUsuario) throws NegocioException, DaoException
 	{
 		UsuarioDTO usuarioDTO = (UsuarioDTO) usuarioDAO.obtener(idUsuario, true);
@@ -293,14 +293,14 @@ public class UsuarioServiceImpl implements UsuarioService
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
-	@WebMethod(operationName="obtenerListado")
+	@WebMethod
 	public List<UsuarioDTO> obtenerListado() throws DaoException
 	{
 		return usuarioDAO.obtenerListado(true);
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
-	@WebMethod(operationName="obtenerPorEmailYPass")
+	@WebMethod
 	public UsuarioDTO obtenerPorEmailYPass(@WebParam(name="email") String email, @WebParam(name="pass") String pass) throws NegocioException, DaoException
 	{
 		UsuarioDTO usuarioDTO = (UsuarioDTO) usuarioDAO.obtenerUsuarioPorEmailYPass(email, pass, true);
@@ -314,14 +314,14 @@ public class UsuarioServiceImpl implements UsuarioService
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
-	@WebMethod(operationName="obtenerListadoCheckIns")
+	@WebMethod
 	public List<CheckInDTO> obtenerListadoCheckIns() throws DaoException
 	{
 		return checkInDAO.obtenerListado(true);
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
-	@WebMethod(operationName="enviarMensajeChat")
+	@WebMethod
 	public Long enviarMensajeChat(@WebParam(name="mensajeAmistadDTO") MensajeAmistadDTO mensajeAmistadDTO) throws NegocioException, DaoException
 	{
 		MensajeAmistad mensajeAmistad = mensajeAmistadDAO.toEntity(mensajeAmistadDTO);
@@ -363,7 +363,7 @@ public class UsuarioServiceImpl implements UsuarioService
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
-	@WebMethod(operationName="enviarNotificacion")
+	@WebMethod
 	public Long enviarNotificacion(@WebParam(name="notificacionDTO") NotificacionDTO notificacionDTO) throws NegocioException, DaoException
 	{
 		Usuario usuarioDestino = (Usuario) usuarioDAO.obtener(notificacionDTO.getIdUsuarioDestino(), false);
@@ -388,14 +388,14 @@ public class UsuarioServiceImpl implements UsuarioService
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
-	@WebMethod(operationName="obtenerListadoConectados")
+	@WebMethod
 	public List<UsuarioDTO> obtenerListadoConectados() throws DaoException
 	{
 		return usuarioDAO.obtenerListadoConectados(true);
 	}
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
-	@WebMethod(operationName="obtenerListadoAmigos")
+	@WebMethod
 	public List<UsuarioDTO> obtenerListadoAmigos(@WebParam(name="idUsuario") Long idUsuario, @WebParam(name="soloConectados") boolean soloConectados) throws DaoException
 	{
 		List<UsuarioDTO> usuariosDTOamigos = new ArrayList<>();
@@ -421,7 +421,7 @@ public class UsuarioServiceImpl implements UsuarioService
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
-	@WebMethod(operationName="obtenerAmistadPorUsuarios")
+	@WebMethod
 	public AmistadDTO obtenerAmistadPorUsuarios(@WebParam(name="idUsuarioA") Long idUsuarioA, @WebParam(name="idUsuarioB") Long idUsuarioB) throws NegocioException, DaoException
 	{		
 		AmistadDTO amistadDTO = (AmistadDTO) amistadDAO.obtenerAmistadPorUsuarios(idUsuarioA, idUsuarioB, true);
@@ -435,7 +435,7 @@ public class UsuarioServiceImpl implements UsuarioService
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	@WebMethod(operationName="insertarAmistad")
+	@WebMethod
 	public Long insertarAmistad(@WebParam(name="amistadDTO") AmistadDTO amistadDTO) throws NegocioException, DaoException
 	{
 		Amistad amistad = amistadDAO.toEntity(amistadDTO);
@@ -459,7 +459,7 @@ public class UsuarioServiceImpl implements UsuarioService
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	@WebMethod(operationName="eliminarAmistad")
+	@WebMethod
 	public void eliminarAmistad(@WebParam(name="idAmistad") Long idAmistad) throws NegocioException, DaoException
 	{
 		Amistad amistad = (Amistad) amistadDAO.obtener(idAmistad, false);
@@ -473,13 +473,14 @@ public class UsuarioServiceImpl implements UsuarioService
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	@WebMethod(operationName="obtenerListadoPorTipoYUsuarioDestino")
+	@WebMethod
 	public List<NotificacionDTO> obtenerListadoNotificacionesPorTipoYUsuarioDestino(@WebParam(name="idTipoNotificacion") Long idTipoNotificacion, @WebParam(name="idUsuarioDestino") Long idUsuarioDestino) throws DaoException
 	{
 		return notificacionDAO.obtenerListadoPorTipoYUsuarioDestino(idTipoNotificacion, idUsuarioDestino, true);
 	}
 
-	@Override
+	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+	@WebMethod
 	public Long insertarCheckIn(CheckInDTO checkInDTO) throws NegocioException, DaoException
 	{
 		CheckIn checkInEntity = checkInDAO.toEntity(checkInDTO);
@@ -536,7 +537,8 @@ public class UsuarioServiceImpl implements UsuarioService
 		return checkInEntity.getId();
 	}
 
-	@Override
+	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+	@WebMethod
 	public Long insertarNotificacion(NotificacionDTO notificacionDTO) throws NegocioException, DaoException
 	{
 		Notificacion notificacion = notificacionDAO.toEntity(notificacionDTO);
